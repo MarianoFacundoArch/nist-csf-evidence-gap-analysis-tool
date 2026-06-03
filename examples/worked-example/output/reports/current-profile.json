@@ -1,0 +1,2783 @@
+{
+  "schemaVersion": "1.0",
+  "profileType": "Current",
+  "framework": "NIST CSF 2.0",
+  "frameworkVersion": "CSF 2.0",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "tool": {
+    "name": "nist-csf-evidence-gap-analysis-tool",
+    "version": "0.1.0"
+  },
+  "disclaimer": "AI-assisted draft. Guiding principle: AI proposes, a human validates. Coverage judgments above \"none\" are anchored to quotes verified verbatim against the source evidence. CSF 2.0 Subcategory text is in the public domain (source: NIST CPRT).",
+  "csfSource": "NIST CPRT — CSF 2.0 Core (public domain).",
+  "providers": {
+    "embeddings": "mock",
+    "llm": "mock"
+  },
+  "strict": false,
+  "summary": {
+    "totalSubcategories": 106,
+    "byCoverage": {
+      "none": 54,
+      "partial": 42,
+      "substantial": 6,
+      "full": 4
+    },
+    "gaps": 96,
+    "reviewed": 106,
+    "unreviewed": 0,
+    "stale": 0,
+    "overridden": 2,
+    "downgradedByVerifier": 1
+  },
+  "subcategories": [
+    {
+      "subcategory_id": "GV.OC-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "The organizational mission is understood and informs cybersecurity risk management",
+      "coverage": "none",
+      "confidence": 0,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": "Accepted: the AI quote could not be verified verbatim and was removed by the tool; manual evidence check pending.",
+      "reviewer": "reviewer@example.org",
+      "rationale": "[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] The organization appears to link its mission to cybersecurity risk decisions through a formal annual review.",
+      "verifier_action": "downgraded_to_none_no_valid_quote",
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 0,
+        "downgraded": true
+      }
+    },
+    {
+      "subcategory_id": "GV.OC-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered",
+      "coverage": "substantial",
+      "confidence": 0.52,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": "substantial",
+      "reviewer_notes": "Reviewer override: out-of-band records (ticketing system) confirm this is operating; raising from partial.",
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.4382083607203491,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OC-03",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OC-04",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+      "coverage": "partial",
+      "confidence": 0.52,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.4249103029204403,
+          "quote": "Roles and Responsibilities\n\nThe following cybersecurity roles, responsibilities, and authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OC-05",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Outcomes, capabilities, and services that the organization depends on are understood and communicated",
+      "coverage": "partial",
+      "confidence": 0.71,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": "partial",
+      "reviewer_notes": "Reviewer override: evidence reads as intent more than sustained operation; lowering pending dated records.",
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.5065172793517063,
+          "quote": "Roles and Responsibilities\n\nThe following cybersecurity roles, responsibilities, and authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Risk management objectives are established and agreed to by organizational stakeholders",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.33041357985378017,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Risk appetite and risk tolerance statements are established, communicated, and maintained",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.39374961466411973,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-03",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Cybersecurity risk management activities and outcomes are included in enterprise risk management processes",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.32405946403741837,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-04",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Strategic direction that describes appropriate risk response options is established and communicated",
+      "coverage": "partial",
+      "confidence": 0.52,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.22990025112579637,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-05",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Lines of communication across the organization are established for cybersecurity risks, including risks from suppliers and other third parties",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.3921467408618242,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-06",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.4003708757419475,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RM-07",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Risk Management Strategy (GV.RM)",
+      "outcome": "Strategic opportunities (i.e., positive risks) are characterized and are included in organizational cybersecurity risk discussions",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.22242826536982174,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RR-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Roles, Responsibilities, and Authorities (GV.RR)",
+      "outcome": "Organizational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.3887965941645102,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RR-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Roles, Responsibilities, and Authorities (GV.RR)",
+      "outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "coverage": "full",
+      "confidence": 0.85,
+      "review_status": "reviewed",
+      "ai_coverage": "full",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.45749571546912193,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RR-03",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Roles, Responsibilities, and Authorities (GV.RR)",
+      "outcome": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.40756956467206873,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.RR-04",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Roles, Responsibilities, and Authorities (GV.RR)",
+      "outcome": "Cybersecurity is included in human resources practices",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.PO-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Policy (GV.PO)",
+      "outcome": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
+      "coverage": "full",
+      "confidence": 0.85,
+      "review_status": "reviewed",
+      "ai_coverage": "full",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.5599496495250793,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.PO-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Policy (GV.PO)",
+      "outcome": "Policy for managing cybersecurity risks is reviewed, updated, communicated, and enforced to reflect changes in requirements, threats, technology, and organizational mission",
+      "coverage": "substantial",
+      "confidence": 0.72,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.4912027442948157,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OV-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Oversight (GV.OV)",
+      "outcome": "Cybersecurity risk management strategy outcomes are reviewed to inform and adjust strategy and direction",
+      "coverage": "substantial",
+      "confidence": 0.71,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.33287702136583386,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OV-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Oversight (GV.OV)",
+      "outcome": "The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
+      "coverage": "substantial",
+      "confidence": 0.71,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.3621841073036194,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.OV-03",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Oversight (GV.OV)",
+      "outcome": "Organizational cybersecurity risk management performance is evaluated and reviewed for adjustments needed",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.23376623252225714,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.3498557106715674,
+          "quote": "authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive leadership.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+      "coverage": "substantial",
+      "confidence": 0.69,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.5183219195609676,
+          "quote": "Roles and Responsibilities\n\nThe following cybersecurity roles, responsibilities, and authorities are\nestablished and communicated across the organization:\n\n- The Chief Information Security Officer (CISO) is accountable for the\n cybersecurity program and reports quarterly to executive",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-03",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes",
+      "coverage": "partial",
+      "confidence": 0.5,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.28318273426068385,
+          "quote": "Risk Management\n\nCybersecurity risks are discussed at the monthly Security Committee meeting.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-04",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Suppliers are known and prioritized by criticality",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-05",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-06",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-07",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-08",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Relevant suppliers and other third parties are included in incident planning, response, and recovery activities",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.4073091223835945,
+          "quote": "Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-09",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle",
+      "coverage": "partial",
+      "confidence": 0.5,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.3393660105394165,
+          "quote": "Identities and credentials are managed throughout their lifecycle by\nthe IT team: accounts are provisioned through a ticketed request, credentials\nare issued only after manager approval, and accounts are disabled within 24\nhours of an employee's departure.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "GV.SC-10",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
+      "outcome": "Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-01",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Inventories of hardware managed by the organization are maintained",
+      "coverage": "full",
+      "confidence": 0.85,
+      "review_status": "reviewed",
+      "ai_coverage": "full",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "asset-inventory-procedure.docx",
+          "page": null,
+          "score": 0.4430388083538117,
+          "quote": "Northwind Analytics - Asset Management Procedure\n\n(Fictitious document for demonstration purposes only.)\n\nHardware Inventory\n\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-02",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Inventories of software, services, and systems managed by the organization are maintained",
+      "coverage": "full",
+      "confidence": 0.85,
+      "review_status": "reviewed",
+      "ai_coverage": "full",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "asset-inventory-procedure.docx",
+          "page": null,
+          "score": 0.39918616202849977,
+          "quote": "Northwind Analytics - Asset Management Procedure\n\n(Fictitious document for demonstration purposes only.)\n\nHardware Inventory\n\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-03",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "asset-inventory-procedure.docx",
+          "page": null,
+          "score": 0.2896000782421758,
+          "quote": "Northwind Analytics - Asset Management Procedure\n\n(Fictitious document for demonstration purposes only.)\n\nHardware Inventory\n\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-04",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Inventories of services provided by suppliers are maintained",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-05",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Assets are prioritized based on classification, criticality, resources, and impact on the mission",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-07",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Inventories of data and corresponding metadata for designated data types are maintained",
+      "coverage": "substantial",
+      "confidence": 0.71,
+      "review_status": "reviewed",
+      "ai_coverage": "substantial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "asset-inventory-procedure.docx",
+          "page": null,
+          "score": 0.2500781639819427,
+          "quote": "Northwind Analytics - Asset Management Procedure\n\n(Fictitious document for demonstration purposes only.)\n\nHardware Inventory\n\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.AM-08",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Systems, hardware, software, services, and data are managed throughout their life cycles",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "asset-inventory-procedure.docx",
+          "page": null,
+          "score": 0.2602896032686619,
+          "quote": "Northwind Analytics - Asset Management Procedure\n\n(Fictitious document for demonstration purposes only.)\n\nHardware Inventory\n\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-01",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Vulnerabilities in assets are identified, validated, and recorded",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-02",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Cyber threat intelligence is received from information sharing forums and sources",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-03",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Internal and external threats to the organization are identified and recorded",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-04",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-05",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-06",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-07",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-08",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-09",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "The authenticity and integrity of hardware and software are assessed prior to acquisition and use",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.RA-10",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Risk Assessment (ID.RA)",
+      "outcome": "Critical suppliers are assessed prior to acquisition",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.IM-01",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Improvement (ID.IM)",
+      "outcome": "Improvements are identified from evaluations",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.IM-02",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Improvement (ID.IM)",
+      "outcome": "Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.26843773426698014,
+          "quote": "Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.IM-03",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Improvement (ID.IM)",
+      "outcome": "Improvements are identified from execution of operational processes, procedures, and activities",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "ID.IM-04",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Improvement (ID.IM)",
+      "outcome": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+      "coverage": "partial",
+      "confidence": 0.5,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.36430834984004346,
+          "quote": "Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+      "coverage": "partial",
+      "confidence": 0.57,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.5014213004170331,
+          "quote": "Identities and credentials are managed throughout their lifecycle by\nthe IT team: accounts are provisioned through a ticketed request, credentials\nare issued only after manager approval, and accounts are disabled within 24\nhours of an employee's departure.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-02",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Identities are proofed and bound to credentials based on the context of interactions",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.3485507183811887,
+          "quote": "Identities and credentials are managed throughout their lifecycle by\nthe IT team: accounts are provisioned through a ticketed request, credentials\nare issued only after manager approval, and accounts are disabled within 24\nhours of an employee's departure.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-03",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Users, services, and hardware are authenticated",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-04",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Identity assertions are protected, conveyed, and verified",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-05",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+      "coverage": "partial",
+      "confidence": 0.62,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.6127441879264417,
+          "quote": "Access Permissions and Authorization\n\nAccess permissions, entitlements, and authorizations are defined in this policy,\nmanaged through role-based access control (RBAC), and enforced by our identity\nprovider.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AA-06",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+      "outcome": "Physical access to assets is managed, monitored, and enforced commensurate with risk",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.3485507089568669,
+          "quote": "Access Permissions and Authorization\n\nAccess permissions, entitlements, and authorizations are defined in this policy,\nmanaged through role-based access control (RBAC), and enforced by our identity\nprovider.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AT-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Awareness and Training (PR.AT)",
+      "outcome": "Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind",
+      "coverage": "partial",
+      "confidence": 0.51,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.3659965748488392,
+          "quote": "These responsibilities are documented in role descriptions, communicated to\nstaff, and the CISO confirms that they are understood during annual training.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.AT-02",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Awareness and Training (PR.AT)",
+      "outcome": "Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind",
+      "coverage": "partial",
+      "confidence": 0.5,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.32283200157242575,
+          "quote": "These responsibilities are documented in role descriptions, communicated to\nstaff, and the CISO confirms that they are understood during annual training.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.DS-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Data Security (PR.DS)",
+      "outcome": "The confidentiality, integrity, and availability of data-at-rest are protected",
+      "coverage": "partial",
+      "confidence": 0.55,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.41637282072622006,
+          "quote": "Our\nmission is to protect the confidentiality and integrity of client data, and the\nleadership team recognizes that this mission depends on effective cybersecurity.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.DS-02",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Data Security (PR.DS)",
+      "outcome": "The confidentiality, integrity, and availability of data-in-transit are protected",
+      "coverage": "partial",
+      "confidence": 0.55,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.43073050471337115,
+          "quote": "Our\nmission is to protect the confidentiality and integrity of client data, and the\nleadership team recognizes that this mission depends on effective cybersecurity.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.DS-10",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Data Security (PR.DS)",
+      "outcome": "The confidentiality, integrity, and availability of data-in-use are protected",
+      "coverage": "partial",
+      "confidence": 0.57,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.43073050471337115,
+          "quote": "Our\nmission is to protect the confidentiality and integrity of client data, and the\nleadership team recognizes that this mission depends on effective cybersecurity.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.DS-11",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Data Security (PR.DS)",
+      "outcome": "Backups of data are created, protected, maintained, and tested",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Configuration management practices are established and applied",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-02",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Software is maintained, replaced, and removed commensurate with risk",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-03",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Hardware is maintained, replaced, and removed commensurate with risk",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-04",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Log records are generated and made available for continuous monitoring",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-05",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Installation and execution of unauthorized software are prevented",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.PS-06",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Platform Security (PR.PS)",
+      "outcome": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
+      "coverage": "partial",
+      "confidence": 0.51,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "access-control-standard.md",
+          "page": null,
+          "score": 0.23472626183538825,
+          "quote": "Identities and credentials are managed throughout their lifecycle by\nthe IT team: accounts are provisioned through a ticketed request, credentials\nare issued only after manager approval, and accounts are disabled within 24\nhours of an employee's departure.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.IR-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Technology Infrastructure Resilience (PR.IR)",
+      "outcome": "Networks and environments are protected from unauthorized logical access and usage",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.IR-02",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Technology Infrastructure Resilience (PR.IR)",
+      "outcome": "The organization's technology assets are protected from environmental threats",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.IR-03",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Technology Infrastructure Resilience (PR.IR)",
+      "outcome": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "PR.IR-04",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Technology Infrastructure Resilience (PR.IR)",
+      "outcome": "Adequate resource capacity to ensure availability is maintained",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.CM-01",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Continuous Monitoring (DE.CM)",
+      "outcome": "Networks and network services are monitored to find potentially adverse events",
+      "coverage": "partial",
+      "confidence": 0.62,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.3585685721531251,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.CM-02",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Continuous Monitoring (DE.CM)",
+      "outcome": "The physical environment is monitored to find potentially adverse events",
+      "coverage": "partial",
+      "confidence": 0.56,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.33407653592550357,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.CM-03",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Continuous Monitoring (DE.CM)",
+      "outcome": "Personnel activity and technology usage are monitored to find potentially adverse events",
+      "coverage": "partial",
+      "confidence": 0.54,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.2564112928921629,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.CM-06",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Continuous Monitoring (DE.CM)",
+      "outcome": "External service provider activities and services are monitored to find potentially adverse events",
+      "coverage": "partial",
+      "confidence": 0.57,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.27277235127466826,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.CM-09",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Continuous Monitoring (DE.CM)",
+      "outcome": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
+      "coverage": "partial",
+      "confidence": 0.52,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.2291746130021055,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-02",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "Potentially adverse events are analyzed to better understand associated activities",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.15748519919768555,
+          "quote": "Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-03",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "Information is correlated from multiple sources",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-04",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "The estimated impact and scope of adverse events are understood",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-06",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "Information on adverse events is provided to authorized staff and tools",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-07",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "Cyber threat intelligence and other contextual information are integrated into the analysis",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "DE.AE-08",
+      "function": "DETECT",
+      "function_id": "DE",
+      "category": "Adverse Event Analysis (DE.AE)",
+      "outcome": "Incidents are declared when adverse events meet the defined incident criteria",
+      "coverage": "partial",
+      "confidence": 0.62,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.5687964506769245,
+          "quote": "Incidents are declared by the on-call lead when adverse events meet the documented incident criteria.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MA-01",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Management (RS.MA)",
+      "outcome": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
+      "coverage": "partial",
+      "confidence": 0.62,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.6642111366025065,
+          "quote": "Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MA-02",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Management (RS.MA)",
+      "outcome": "Incident reports are triaged and validated",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MA-03",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Management (RS.MA)",
+      "outcome": "Incidents are categorized and prioritized",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MA-04",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Management (RS.MA)",
+      "outcome": "Incidents are escalated or elevated as needed",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MA-05",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Management (RS.MA)",
+      "outcome": "The criteria for initiating incident recovery are applied",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.AN-03",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Analysis (RS.AN)",
+      "outcome": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.AN-06",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Analysis (RS.AN)",
+      "outcome": "Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.AN-07",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Analysis (RS.AN)",
+      "outcome": "Incident data and metadata are collected, and their integrity and provenance are preserved",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.AN-08",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Analysis (RS.AN)",
+      "outcome": "An incident's magnitude is estimated and validated",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.CO-02",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Response Reporting and Communication (RS.CO)",
+      "outcome": "Internal and external stakeholders are notified of incidents",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.CO-03",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Response Reporting and Communication (RS.CO)",
+      "outcome": "Information is shared with designated internal and external stakeholders",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MI-01",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Mitigation (RS.MI)",
+      "outcome": "Incidents are contained",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RS.MI-02",
+      "function": "RESPOND",
+      "function_id": "RS",
+      "category": "Incident Mitigation (RS.MI)",
+      "outcome": "Incidents are eradicated",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-01",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
+      "coverage": "partial",
+      "confidence": 0.62,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.6992342720356723,
+          "quote": "Recovery Once recovery is initiated from the incident response process, systems are restored from the most recent verified backups.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-02",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "Recovery actions are selected, scoped, prioritized, and performed",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-03",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "The integrity of backups and other restoration assets is verified before using them for restoration",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-04",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "Critical mission functions and cybersecurity risk management are considered to establish post-incident operational norms",
+      "coverage": "partial",
+      "confidence": 0.52,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "information-security-policy.md",
+          "page": null,
+          "score": 0.2532586356933504,
+          "quote": "Information Security Policy\n\nThis Information Security Policy for managing cybersecurity risks is established\nbased on our organizational context and business priorities, and is approved by\nthe Chief Executive Officer.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-05",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 2,
+          "score": 0.39036001109480534,
+          "quote": "Recovery Once recovery is initiated from the incident response process, systems are restored from the most recent verified backups.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.RP-06",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "The end of incident recovery is declared based on criteria, and incident-related documentation is completed",
+      "coverage": "partial",
+      "confidence": 0.53,
+      "review_status": "reviewed",
+      "ai_coverage": "partial",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "verifier_action": null,
+      "evidence": [
+        {
+          "source_file": "incident-response-plan.pdf",
+          "page": 1,
+          "score": 0.48126668448738674,
+          "quote": "Incidents are declared by the on-call lead when adverse events meet the documented incident criteria.",
+          "verified": true
+        }
+      ],
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.CO-03",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Communication (RC.CO)",
+      "outcome": "Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    },
+    {
+      "subcategory_id": "RC.CO-04",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Communication (RC.CO)",
+      "outcome": "Public updates on incident recovery are shared using approved methods and messaging",
+      "coverage": "none",
+      "confidence": 0.3,
+      "review_status": "reviewed",
+      "ai_coverage": "none",
+      "human_coverage": null,
+      "reviewer_notes": null,
+      "reviewer": "reviewer@example.org",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "verifier_action": null,
+      "evidence": [],
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "downgraded": false
+      }
+    }
+  ]
+}

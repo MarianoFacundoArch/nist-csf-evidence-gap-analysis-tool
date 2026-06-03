@@ -1,0 +1,63 @@
+{
+  "name": "nist-csf-evidence-gap-analysis-tool",
+  "version": "0.1.0",
+  "description": "Free, open-source tool to build a NIST CSF 2.0 Current Profile: AI-assisted, human-validated evidence and gap analysis across all 106 CSF 2.0 Subcategory outcomes.",
+  "license": "MIT",
+  "author": "Mariano Facundo Scigliano <mfacundo94@gmail.com>",
+  "type": "module",
+  "keywords": [
+    "nist",
+    "csf",
+    "csf-2.0",
+    "cybersecurity-framework",
+    "gap-analysis",
+    "current-profile",
+    "compliance",
+    "rag",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=20.10"
+  },
+  "bin": {
+    "csf-tool": "bin/csf-tool.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "data/",
+    "scripts/",
+    "examples/",
+    "docs/",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "AUTHORS",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    ".env.example"
+  ],
+  "scripts": {
+    "start": "node bin/csf-tool.js",
+    "init": "node bin/csf-tool.js init",
+    "ingest": "node bin/csf-tool.js ingest",
+    "analyze": "node bin/csf-tool.js analyze",
+    "review": "node bin/csf-tool.js review",
+    "report": "node bin/csf-tool.js report",
+    "all": "node bin/csf-tool.js all",
+    "example": "node scripts/build-example.js",
+    "make-sample-pdf": "node scripts/make-sample-pdf.js",
+    "build-csf-core": "node scripts/build-csf-core.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "ajv": "^8.17.1"
+  },
+  "optionalDependencies": {
+    "@huggingface/transformers": "^3.0.0",
+    "mammoth": "^1.8.0",
+    "openai": "^4.67.3",
+    "pdfjs-dist": "^4.7.76"
+  }
+}

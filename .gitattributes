@@ -1,0 +1,10 @@
+# Normalize line endings for text files on checkin; check out with LF.
+* text=auto eol=lf
+
+# Binary sample documents — never apply line-ending or text conversion.
+*.docx binary
+*.pdf  binary
+
+# The evidence-map CSV is written with CRLF + a UTF-8 BOM by design (RFC-4180 /
+# Excel compatibility); treat it as binary so git leaves it byte-for-byte.
+*.csv -text

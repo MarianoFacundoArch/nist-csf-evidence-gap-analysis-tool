@@ -1,0 +1,34 @@
+{
+  "docsPath": "examples/sample-docs",
+  "workDir": "examples/worked-example/output",
+  "csfCorePath": "data/csf-core.json",
+  "chunk": {
+    "size": 1200,
+    "overlap": 200
+  },
+  "embeddings": {
+    "provider": "mock",
+    "model": "mock"
+  },
+  "llm": {
+    "provider": "mock",
+    "model": "mock"
+  },
+  "retrieval": {
+    "topK": 6
+  },
+  "analysis": {
+    "confidenceThreshold": 0.6,
+    "critique": false,
+    "strict": false
+  },
+  "review": {
+    "showAll": true
+  },
+  "report": {
+    "evidenceQuoteMaxChars": 300
+  },
+  "identity": "reviewer@example.org",
+  "fixedNow": "2026-01-01T00:00:00.000Z",
+  "logLevel": "warn"
+}

@@ -1,0 +1,245 @@
+﻿subcategory_id,function,category,coverage,confidence,review_status,source_file,page,similarity,quote,quote_verified,rationale
+GV.OC-01,GOVERN,Organizational Context (GV.OC),none,0,reviewed,,,,,,[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] The organization appears to link its mission to cybersecurity risk decisions through a formal annual review.
+GV.OC-02,GOVERN,Organizational Context (GV.OC),substantial,0.52,reviewed,information-security-policy.md,,0.4382083607203491,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.OC-03,GOVERN,Organizational Context (GV.OC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.OC-04,GOVERN,Organizational Context (GV.OC),partial,0.52,reviewed,information-security-policy.md,,0.4249103029204403,"Roles and Responsibilities
+
+The following cybersecurity roles, responsibilities, and authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.OC-05,GOVERN,Organizational Context (GV.OC),partial,0.71,reviewed,information-security-policy.md,,0.5065172793517063,"Roles and Responsibilities
+
+The following cybersecurity roles, responsibilities, and authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-01,GOVERN,Risk Management Strategy (GV.RM),partial,0.54,reviewed,information-security-policy.md,,0.33041357985378017,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-02,GOVERN,Risk Management Strategy (GV.RM),partial,0.54,reviewed,information-security-policy.md,,0.39374961466411973,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-03,GOVERN,Risk Management Strategy (GV.RM),partial,0.53,reviewed,information-security-policy.md,,0.32405946403741837,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-04,GOVERN,Risk Management Strategy (GV.RM),partial,0.52,reviewed,information-security-policy.md,,0.22990025112579637,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-05,GOVERN,Risk Management Strategy (GV.RM),partial,0.53,reviewed,information-security-policy.md,,0.3921467408618242,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-06,GOVERN,Risk Management Strategy (GV.RM),partial,0.53,reviewed,information-security-policy.md,,0.4003708757419475,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RM-07,GOVERN,Risk Management Strategy (GV.RM),partial,0.53,reviewed,information-security-policy.md,,0.22242826536982174,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RR-01,GOVERN,"Roles, Responsibilities, and Authorities (GV.RR)",partial,0.53,reviewed,information-security-policy.md,,0.3887965941645102,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RR-02,GOVERN,"Roles, Responsibilities, and Authorities (GV.RR)",full,0.85,reviewed,information-security-policy.md,,0.45749571546912193,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RR-03,GOVERN,"Roles, Responsibilities, and Authorities (GV.RR)",partial,0.53,reviewed,information-security-policy.md,,0.40756956467206873,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.RR-04,GOVERN,"Roles, Responsibilities, and Authorities (GV.RR)",none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.PO-01,GOVERN,Policy (GV.PO),full,0.85,reviewed,information-security-policy.md,,0.5599496495250793,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.PO-02,GOVERN,Policy (GV.PO),substantial,0.72,reviewed,information-security-policy.md,,0.4912027442948157,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.OV-01,GOVERN,Oversight (GV.OV),substantial,0.71,reviewed,information-security-policy.md,,0.33287702136583386,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.OV-02,GOVERN,Oversight (GV.OV),substantial,0.71,reviewed,information-security-policy.md,,0.3621841073036194,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.OV-03,GOVERN,Oversight (GV.OV),partial,0.54,reviewed,information-security-policy.md,,0.23376623252225714,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.SC-01,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),partial,0.54,reviewed,information-security-policy.md,,0.3498557106715674,"authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive leadership.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.SC-02,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),substantial,0.69,reviewed,information-security-policy.md,,0.5183219195609676,"Roles and Responsibilities
+
+The following cybersecurity roles, responsibilities, and authorities are
+established and communicated across the organization:
+
+- The Chief Information Security Officer (CISO) is accountable for the
+ cybersecurity program and reports quarterly to executive",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.SC-03,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),partial,0.5,reviewed,information-security-policy.md,,0.28318273426068385,"Risk Management
+
+Cybersecurity risks are discussed at the monthly Security Committee meeting.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.SC-04,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.SC-05,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.SC-06,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.SC-07,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+GV.SC-08,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),partial,0.54,reviewed,incident-response-plan.pdf,1,0.4073091223835945,"Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""incident-response-plan.pdf"". Flagged for human confirmation of operational evidence."
+GV.SC-09,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),partial,0.5,reviewed,access-control-standard.md,,0.3393660105394165,"Identities and credentials are managed throughout their lifecycle by
+the IT team: accounts are provisioned through a ticketed request, credentials
+are issued only after manager approval, and accounts are disabled within 24
+hours of an employee's departure.",yes,"The evidence in ""access-control-standard.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+GV.SC-10,GOVERN,Cybersecurity Supply Chain Risk Management (GV.SC),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.AM-01,IDENTIFY,Asset Management (ID.AM),full,0.85,reviewed,asset-inventory-procedure.docx,,0.4430388083538117,"Northwind Analytics - Asset Management Procedure
+
+(Fictitious document for demonstration purposes only.)
+
+Hardware Inventory
+
+Inventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",yes,"The evidence in ""asset-inventory-procedure.docx"" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+ID.AM-02,IDENTIFY,Asset Management (ID.AM),full,0.85,reviewed,asset-inventory-procedure.docx,,0.39918616202849977,"Northwind Analytics - Asset Management Procedure
+
+(Fictitious document for demonstration purposes only.)
+
+Hardware Inventory
+
+Inventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",yes,"The evidence in ""asset-inventory-procedure.docx"" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+ID.AM-03,IDENTIFY,Asset Management (ID.AM),partial,0.53,reviewed,asset-inventory-procedure.docx,,0.2896000782421758,"Northwind Analytics - Asset Management Procedure
+
+(Fictitious document for demonstration purposes only.)
+
+Hardware Inventory
+
+Inventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",yes,"The evidence in ""asset-inventory-procedure.docx"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+ID.AM-04,IDENTIFY,Asset Management (ID.AM),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.AM-05,IDENTIFY,Asset Management (ID.AM),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.AM-07,IDENTIFY,Asset Management (ID.AM),substantial,0.71,reviewed,asset-inventory-procedure.docx,,0.2500781639819427,"Northwind Analytics - Asset Management Procedure
+
+(Fictitious document for demonstration purposes only.)
+
+Hardware Inventory
+
+Inventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",yes,"The evidence in ""asset-inventory-procedure.docx"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+ID.AM-08,IDENTIFY,Asset Management (ID.AM),partial,0.54,reviewed,asset-inventory-procedure.docx,,0.2602896032686619,"Northwind Analytics - Asset Management Procedure
+
+(Fictitious document for demonstration purposes only.)
+
+Hardware Inventory
+
+Inventories of hardware managed by the organization are maintained in our configuration management database (CMDB).",yes,"The evidence in ""asset-inventory-procedure.docx"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+ID.RA-01,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-02,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-03,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-04,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-05,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-06,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-07,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-08,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-09,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.RA-10,IDENTIFY,Risk Assessment (ID.RA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.IM-01,IDENTIFY,Improvement (ID.IM),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.IM-02,IDENTIFY,Improvement (ID.IM),partial,0.54,reviewed,incident-response-plan.pdf,1,0.26843773426698014,"Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""incident-response-plan.pdf"". Flagged for human confirmation of operational evidence."
+ID.IM-03,IDENTIFY,Improvement (ID.IM),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+ID.IM-04,IDENTIFY,Improvement (ID.IM),partial,0.5,reviewed,incident-response-plan.pdf,1,0.36430834984004346,"Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""incident-response-plan.pdf"". Flagged for human confirmation of operational evidence."
+PR.AA-01,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",partial,0.57,reviewed,access-control-standard.md,,0.5014213004170331,"Identities and credentials are managed throughout their lifecycle by
+the IT team: accounts are provisioned through a ticketed request, credentials
+are issued only after manager approval, and accounts are disabled within 24
+hours of an employee's departure.",yes,"The evidence in ""access-control-standard.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.AA-02,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",partial,0.54,reviewed,access-control-standard.md,,0.3485507183811887,"Identities and credentials are managed throughout their lifecycle by
+the IT team: accounts are provisioned through a ticketed request, credentials
+are issued only after manager approval, and accounts are disabled within 24
+hours of an employee's departure.",yes,"The evidence in ""access-control-standard.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.AA-03,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.AA-04,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.AA-05,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",partial,0.62,reviewed,access-control-standard.md,,0.6127441879264417,"Access Permissions and Authorization
+
+Access permissions, entitlements, and authorizations are defined in this policy,
+managed through role-based access control (RBAC), and enforced by our identity
+provider.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""access-control-standard.md"". Flagged for human confirmation of operational evidence."
+PR.AA-06,PROTECT,"Identity Management, Authentication, and Access Control (PR.AA)",partial,0.53,reviewed,access-control-standard.md,,0.3485507089568669,"Access Permissions and Authorization
+
+Access permissions, entitlements, and authorizations are defined in this policy,
+managed through role-based access control (RBAC), and enforced by our identity
+provider.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""access-control-standard.md"". Flagged for human confirmation of operational evidence."
+PR.AT-01,PROTECT,Awareness and Training (PR.AT),partial,0.51,reviewed,information-security-policy.md,,0.3659965748488392,"These responsibilities are documented in role descriptions, communicated to
+staff, and the CISO confirms that they are understood during annual training.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.AT-02,PROTECT,Awareness and Training (PR.AT),partial,0.5,reviewed,information-security-policy.md,,0.32283200157242575,"These responsibilities are documented in role descriptions, communicated to
+staff, and the CISO confirms that they are understood during annual training.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.DS-01,PROTECT,Data Security (PR.DS),partial,0.55,reviewed,information-security-policy.md,,0.41637282072622006,"Our
+mission is to protect the confidentiality and integrity of client data, and the
+leadership team recognizes that this mission depends on effective cybersecurity.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.DS-02,PROTECT,Data Security (PR.DS),partial,0.55,reviewed,information-security-policy.md,,0.43073050471337115,"Our
+mission is to protect the confidentiality and integrity of client data, and the
+leadership team recognizes that this mission depends on effective cybersecurity.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.DS-10,PROTECT,Data Security (PR.DS),partial,0.57,reviewed,information-security-policy.md,,0.43073050471337115,"Our
+mission is to protect the confidentiality and integrity of client data, and the
+leadership team recognizes that this mission depends on effective cybersecurity.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.DS-11,PROTECT,Data Security (PR.DS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-01,PROTECT,Platform Security (PR.PS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-02,PROTECT,Platform Security (PR.PS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-03,PROTECT,Platform Security (PR.PS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-04,PROTECT,Platform Security (PR.PS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-05,PROTECT,Platform Security (PR.PS),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.PS-06,PROTECT,Platform Security (PR.PS),partial,0.51,reviewed,access-control-standard.md,,0.23472626183538825,"Identities and credentials are managed throughout their lifecycle by
+the IT team: accounts are provisioned through a ticketed request, credentials
+are issued only after manager approval, and accounts are disabled within 24
+hours of an employee's departure.",yes,"The evidence in ""access-control-standard.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+PR.IR-01,PROTECT,Technology Infrastructure Resilience (PR.IR),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.IR-02,PROTECT,Technology Infrastructure Resilience (PR.IR),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.IR-03,PROTECT,Technology Infrastructure Resilience (PR.IR),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+PR.IR-04,PROTECT,Technology Infrastructure Resilience (PR.IR),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+DE.CM-01,DETECT,Continuous Monitoring (DE.CM),partial,0.62,reviewed,incident-response-plan.pdf,2,0.3585685721531251,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.CM-02,DETECT,Continuous Monitoring (DE.CM),partial,0.56,reviewed,incident-response-plan.pdf,2,0.33407653592550357,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.CM-03,DETECT,Continuous Monitoring (DE.CM),partial,0.54,reviewed,incident-response-plan.pdf,2,0.2564112928921629,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.CM-06,DETECT,Continuous Monitoring (DE.CM),partial,0.57,reviewed,incident-response-plan.pdf,2,0.27277235127466826,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.CM-09,DETECT,Continuous Monitoring (DE.CM),partial,0.52,reviewed,incident-response-plan.pdf,2,0.2291746130021055,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.AE-02,DETECT,Adverse Event Analysis (DE.AE),partial,0.53,reviewed,incident-response-plan.pdf,2,0.15748519919768555,Network Monitoring The Security Operations Center monitors networks and network services and reviews intrusion detection system alerts to find potentially adverse events.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+DE.AE-03,DETECT,Adverse Event Analysis (DE.AE),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+DE.AE-04,DETECT,Adverse Event Analysis (DE.AE),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+DE.AE-06,DETECT,Adverse Event Analysis (DE.AE),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+DE.AE-07,DETECT,Adverse Event Analysis (DE.AE),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+DE.AE-08,DETECT,Adverse Event Analysis (DE.AE),partial,0.62,reviewed,incident-response-plan.pdf,1,0.5687964506769245,Incidents are declared by the on-call lead when adverse events meet the documented incident criteria.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+RS.MA-01,RESPOND,Incident Management (RS.MA),partial,0.62,reviewed,incident-response-plan.pdf,1,0.6642111366025065,"Northwind Analytics - Incident Response Plan (Fictitious document for demonstration purposes only.) When an incident is declared, the incident response plan is executed in coordination with relevant third parties, including our managed security provider, affected clients, and, where required, regulators.",yes,"The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in ""incident-response-plan.pdf"". Flagged for human confirmation of operational evidence."
+RS.MA-02,RESPOND,Incident Management (RS.MA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.MA-03,RESPOND,Incident Management (RS.MA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.MA-04,RESPOND,Incident Management (RS.MA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.MA-05,RESPOND,Incident Management (RS.MA),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.AN-03,RESPOND,Incident Analysis (RS.AN),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.AN-06,RESPOND,Incident Analysis (RS.AN),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.AN-07,RESPOND,Incident Analysis (RS.AN),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.AN-08,RESPOND,Incident Analysis (RS.AN),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.CO-02,RESPOND,Incident Response Reporting and Communication (RS.CO),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.CO-03,RESPOND,Incident Response Reporting and Communication (RS.CO),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.MI-01,RESPOND,Incident Mitigation (RS.MI),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RS.MI-02,RESPOND,Incident Mitigation (RS.MI),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RC.RP-01,RECOVER,Incident Recovery Plan Execution (RC.RP),partial,0.62,reviewed,incident-response-plan.pdf,2,0.6992342720356723,"Recovery Once recovery is initiated from the incident response process, systems are restored from the most recent verified backups.",yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+RC.RP-02,RECOVER,Incident Recovery Plan Execution (RC.RP),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RC.RP-03,RECOVER,Incident Recovery Plan Execution (RC.RP),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RC.RP-04,RECOVER,Incident Recovery Plan Execution (RC.RP),partial,0.52,reviewed,information-security-policy.md,,0.2532586356933504,"Information Security Policy
+
+This Information Security Policy for managing cybersecurity risks is established
+based on our organizational context and business priorities, and is approved by
+the Chief Executive Officer.",yes,"The evidence in ""information-security-policy.md"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+RC.RP-05,RECOVER,Incident Recovery Plan Execution (RC.RP),partial,0.53,reviewed,incident-response-plan.pdf,2,0.39036001109480534,"Recovery Once recovery is initiated from the incident response process, systems are restored from the most recent verified backups.",yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+RC.RP-06,RECOVER,Incident Recovery Plan Execution (RC.RP),partial,0.53,reviewed,incident-response-plan.pdf,1,0.48126668448738674,Incidents are declared by the on-call lead when adverse events meet the documented incident criteria.,yes,"The evidence in ""incident-response-plan.pdf"" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness."
+RC.CO-03,RECOVER,Incident Recovery Communication (RC.CO),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+RC.CO-04,RECOVER,Incident Recovery Communication (RC.CO),none,0.3,reviewed,,,,,,The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.

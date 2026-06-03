@@ -1,0 +1,36 @@
+NIST CSF 2.0 AI-Assisted Evidence & Gap Analysis Tool
+NOTICE
+
+This product is licensed under the MIT License (see LICENSE). It is free and
+open source, and may be used by anyone without charge.
+
+-------------------------------------------------------------------------------
+CSF 2.0 Core data (data/csf-core.json)
+-------------------------------------------------------------------------------
+The NIST Cybersecurity Framework (CSF) 2.0 and its Core (Functions, Categories,
+and Subcategory outcome statements) are works of the U.S. Government and are in
+the public domain. The data file shipped here was generated from the official
+machine-readable export of the NIST Cybersecurity and Privacy Reference Tool
+(CPRT): https://csrc.nist.gov/projects/cprt
+
+The generation is reproducible from the official source with:
+    npm run build-csf-core
+See scripts/build-csf-core.js for the exact extraction (it keeps the 22 CSF 2.0
+Categories and drops withdrawn CSF v1.1 entries and "[Withdrawn]" placeholders,
+yielding the 106 live Subcategory outcomes).
+
+-------------------------------------------------------------------------------
+Third-party software
+-------------------------------------------------------------------------------
+This tool keeps a minimal dependency surface. Required: "ajv" (MIT) and
+"@clack/prompts" (MIT). Optional, lazily loaded only when the corresponding
+provider or file type is used: "openai" (Apache-2.0), "@huggingface/transformers"
+(Apache-2.0), "mammoth" (BSD-2-Clause), "pdfjs-dist" (Apache-2.0). Each remains
+the property of its respective authors and is used under its own license.
+
+-------------------------------------------------------------------------------
+AI-generated content
+-------------------------------------------------------------------------------
+Coverage judgments produced by this tool are AI-generated PROPOSALS. They are
+not authoritative until validated by a human reviewer (see the "review" step and
+the README). The tool is provided "as is", without warranty of any kind.

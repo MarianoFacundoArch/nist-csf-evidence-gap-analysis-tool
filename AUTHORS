@@ -1,0 +1,19 @@
+NIST CSF 2.0 AI-Assisted Evidence & Gap Analysis Tool
+======================================================
+
+This is a free, open-source project.
+
+Maintainer
+----------
+- Mariano Facundo Scigliano <mfacundo94@gmail.com>
+
+Contributors
+------------
+This project welcomes contributions. Add yourself here (alphabetically) in the
+pull request that includes your first contribution. See CONTRIBUTING.md.
+
+Acknowledgements
+----------------
+- The U.S. National Institute of Standards and Technology (NIST) for publishing
+  the Cybersecurity Framework (CSF) 2.0 and the Cybersecurity and Privacy
+  Reference Tool (CPRT). The CSF 2.0 Core text used here is in the public domain.

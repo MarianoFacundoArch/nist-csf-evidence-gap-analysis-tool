@@ -1,0 +1,9 @@
+Northwind Analytics - Internal Note on Data Handling
+(Fictitious document for demonstration purposes only.)
+
+Sensitive data should be handled carefully by everyone at the company. Please be
+thoughtful about where you store client information and avoid sharing it with
+people who do not need it.
+
+We intend to write a full data protection standard at some point. For now, use
+good judgment.

@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Secrets — never commit real API keys. (.env.example IS committed.)
+.env
+.env.*
+!.env.example
+
+# Per-user configuration (scaffold your own with `csf-tool init`). Committing it
+# would pin one user's provider/model/path choices for everyone.
+csf-tool.config.json
+
+# Default working/output directory produced by the tool at runtime.
+# NOTE: examples/worked-example/output is committed on purpose (it is the
+# pre-generated worked example), so we only ignore the top-level ./output.
+/output/
+
+# Worked-example intermediates are large and fully regenerable via
+# `npm run example`; we commit only the deliverables (reports/), the curated
+# reviews.json, and config.json.
+examples/worked-example/output/index.json
+examples/worked-example/output/assessments.json
+examples/worked-example/output/meta.json
+
+# Atomic-write temp files left behind only if a run is interrupted mid-write.
+*.tmp-*
+
+# npm pack output
+*.tgz
+
+# OS / editor noise
+.DS_Store
+*.log
+.vscode/
+.idea/
+*.swp
