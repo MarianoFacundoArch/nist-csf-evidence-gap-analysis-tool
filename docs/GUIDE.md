@@ -74,9 +74,10 @@ in config or via flags.
   model in config (`llm.model`, `embeddings.model`). The OpenAI provider adapts
   automatically to model-family differences (e.g. the GPT-5 family), so you can
   point it at a current model and it will work.
-- **Offline:** install [Ollama](https://ollama.com), `ollama pull <model>` (e.g.
-  `llama3.2`), then add `--local`. The on-device embedding model downloads and
-  caches on first use. Larger local models give more useful coverage; very small
+- **Offline:** install [Ollama](https://ollama.com), start it with `ollama serve`,
+  `ollama pull <model>` (e.g. `llama3.2`), then add `--local`. The on-device
+  embedding model downloads and caches on first use. Larger local models give more
+  useful coverage; very small
   ones tend to answer `none` to almost everything.
 
 ## 4. Walkthrough A — try it offline in 1 minute (no key)
@@ -129,8 +130,9 @@ copy under `examples/worked-example/output/reports/`, regenerable any time with
    node bin/csf-tool.js analyze
    ```
 
-   `analyze` calls the model once per Subcategory; with a cloud model this takes
-   a few minutes for all 106. It is resumable.
+   `analyze` reads the index that `ingest` saved, so it doesn't need `--docs`. It
+   calls the model once per Subcategory; with a cloud model this takes a few
+   minutes for all 106. It is resumable.
 
 4. Review and report (Sections 7–8):
 

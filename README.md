@@ -12,7 +12,9 @@ businesses, hospitals, schools, utilities, and local governments cause serious
 economic and public harm. To help organizations manage this risk, the U.S.
 government's National Institute of Standards and Technology (NIST) publishes the
 Cybersecurity Framework (CSF) 2.0 — a common, widely used national standard that
-defines 106 cybersecurity outcomes an organization should achieve.
+defines 106 cybersecurity outcomes an organization should achieve. (An "outcome"
+is a concrete result the organization should be able to demonstrate — for
+example, keeping an up-to-date inventory of its hardware.)
 
 In practice, the evidence of how an organization actually protects itself is
 spread across dozens or hundreds of documents — security policies, procedures,
@@ -26,12 +28,13 @@ This project addresses that obstacle. It automatically reviews an organization's
 own documents against all 106 outcomes defined by NIST CSF 2.0, locates the
 supporting evidence and the gaps, and produces a clear report — accelerating work
 that is laborious even for experienced security specialists. Because it is free,
-open to everyone, and can run entirely on the user's own computer (so sensitive
-documents never leave the premises), it makes producing a rigorous, evidence-based
-CSF 2.0 Current Profile practical for any organization, and a faster, more
-consistent process for the specialists who perform it. Broader, more consistent adoption
-of a common cybersecurity baseline strengthens the resilience of the wider
-economy and of critical public services.
+open to everyone, and can run entirely on the user's own computer, sensitive
+documents never have to leave the premises. This makes it practical for any
+organization to produce a rigorous, evidence-based picture of where it stands
+today against the standard — what the framework calls a "Current Profile" — and
+makes the work faster and more consistent for the specialists who perform it.
+Broader, more consistent adoption of a common cybersecurity baseline strengthens
+the resilience of the wider economy and of critical public services.
 
 To keep its results trustworthy, the tool never lets the AI have the final word:
 every finding must be supported by an exact quote from the organization's own
@@ -124,6 +127,9 @@ node bin/csf-tool.js all \
 Then open `./output/reports/gap-analysis.md`. A committed reference copy lives in
 `examples/worked-example/`, regenerable byte-for-byte with `npm run example`.
 
+(`--accept-all` auto-accepts every AI proposal so the demo runs unattended; a
+real assessment uses the human review step instead — see [Usage](#usage).)
+
 ## Usage
 
 There are two ways to drive the tool, and they share the **same** underlying code.
@@ -160,12 +166,14 @@ reasoning happen.
 - **Reasoning LLM:** `openai` (cloud), `ollama` (a fully-local model on your own
   machine), or `mock`.
 
-The default is cloud-first (set `OPENAI_API_KEY` in `.env`). Pass **`--local`** to
-force a fully offline run (on-device embeddings + a local Ollama model); no
-document or prompt ever leaves the machine. Model names are configurable; if you
-leave a model unset, each provider resolves a sensible default of its own, and the
-OpenAI provider adapts automatically across model generations (e.g. the GPT-5
-family's parameter conventions).
+The default is cloud-first (set `OPENAI_API_KEY` in `.env`). Pass **`--local`** for
+a fully offline run (on-device embeddings + a local Ollama model); no document or
+prompt ever leaves the machine. The offline path requires [Ollama](https://ollama.com):
+install it, start it with `ollama serve`, and pull a model first (e.g.
+`ollama pull llama3.2`). Model names are configurable; if you leave a model unset,
+each provider resolves a sensible default of its own, and the OpenAI provider
+adapts automatically across model generations (e.g. the GPT-5 family's parameter
+conventions).
 
 ## Outputs
 
