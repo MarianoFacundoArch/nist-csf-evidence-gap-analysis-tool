@@ -95,8 +95,8 @@ weaker evidence than records showing it actually happens.
 Requires **Node.js >= 20.10**.
 
 ```bash
-git clone <repo-url>
-cd nist-csf-evidence-tool
+git clone https://github.com/MarianoFacundoArch/nist-csf-evidence-gap-analysis-tool.git
+cd nist-csf-evidence-gap-analysis-tool
 npm install
 ```
 

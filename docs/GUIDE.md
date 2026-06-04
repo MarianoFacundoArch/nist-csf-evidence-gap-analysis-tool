@@ -46,8 +46,8 @@ ingest  →  analyze  →  review  →  report
 Requires Node.js >= 20.10.
 
 ```bash
-git clone <repo-url>
-cd nist-csf-evidence-tool
+git clone https://github.com/MarianoFacundoArch/nist-csf-evidence-gap-analysis-tool.git
+cd nist-csf-evidence-gap-analysis-tool
 npm install
 ```
 
