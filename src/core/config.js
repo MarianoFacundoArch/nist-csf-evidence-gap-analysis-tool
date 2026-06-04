@@ -81,6 +81,27 @@ export async function loadConfig(cliOverrides = {}, { warn = () => {} } = {}) {
     config.llm.provider = 'ollama';
   }
 
+  // 6) A model pinned in the config file belongs to the provider it was written
+  // for. If the effective provider differs from the file's provider (because
+  // --local or --embed-provider/--llm-provider switched it) and the user did NOT
+  // pass an explicit model flag, drop that model so the active provider resolves
+  // its OWN default — otherwise e.g. a cloud "text-embedding-3-large" would be
+  // handed to the on-device embedder, which cannot load it.
+  if (
+    fileConfig?.embeddings?.model &&
+    config.embeddings.provider !== fileConfig?.embeddings?.provider &&
+    cliOverrides.embeddings?.model == null
+  ) {
+    config.embeddings.model = null;
+  }
+  if (
+    fileConfig?.llm?.model &&
+    config.llm.provider !== fileConfig?.llm?.provider &&
+    cliOverrides.llm?.model == null
+  ) {
+    config.llm.model = null;
+  }
+
   return { config, configPath };
 }
 
