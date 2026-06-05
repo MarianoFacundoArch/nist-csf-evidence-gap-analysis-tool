@@ -11,7 +11,11 @@
 import { ProviderError } from '../core/errors.js';
 
 function host() {
-  return (process.env.OLLAMA_HOST || 'http://127.0.0.1:11434').replace(/\/$/, '');
+  // Accept OLLAMA_HOST with or without a scheme — Ollama's own convention is a
+  // bare "host:port" (e.g. 127.0.0.1:11434), which fetch() cannot use directly.
+  let h = process.env.OLLAMA_HOST || 'http://127.0.0.1:11434';
+  if (!/^https?:\/\//i.test(h)) h = `http://${h}`;
+  return h.replace(/\/$/, '');
 }
 
 export async function createLlm(config, logger) {
