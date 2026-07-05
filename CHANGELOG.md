@@ -4,6 +4,47 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] — Target Profile, remediation plan, dashboard
+
+This release completes the CSF 2.0 Organizational Profile cycle: the tool now
+covers Current Profile → Target Profile → prioritized action plan, and adds a
+self-contained visual dashboard.
+
+### Added
+- **`target` stage** (interactive editor + `--target-default` / `--target-import`
+  flags): declare a Target Profile — baseline goal for every outcome, sparse
+  overrides per Function/Category/Subcategory (most specific wins),
+  `not-applicable` scoping with notes, and remediation priorities at any
+  granularity. Stored as human-owned, schema-validated state in
+  `<work-dir>/target.json`; no AI is involved in any target decision.
+- **`remediation-plan.md`** deliverable: every unmet target as one ranked list
+  (priority first, then distance from the goal), each item carrying the official
+  NIST CSF 2.0 Implementation Examples as suggested actions — quoted verbatim
+  from the CPRT export, so recommendations are grounded in NIST text the same
+  way evidence quotes are grounded in source documents.
+- **`target-profile.json`** deliverable: the machine-readable Target Profile
+  (current vs target, gap, priority, scoping per Subcategory), companion to
+  `current-profile.json`.
+- **`dashboard.html`** deliverable: a fully self-contained interactive dashboard
+  (inline data/styles/script; zero network access) with coverage-by-Function and
+  current-vs-target charts (validated colorblind-safe ordinal ramp, light/dark
+  themes, per-chart table view), review-status tiles, top remediation
+  priorities, and a filterable explorer of all 106 outcomes with their verified
+  quotes. Untrusted document text is rendered via `textContent` only.
+- `gap-analysis.md` gains a Current-vs-Target summary when a target exists;
+  stale target deliverables are removed when the target profile is deleted.
+- `data/csf-core.json` now carries the official NIST Implementation Examples for
+  each of the 106 Subcategories (363 examples), extracted from the same CPRT
+  workbook; the schema accepts (and the loader passes through) the new optional
+  `implementationExamples` field.
+- Tests for target resolution/cascades, gap math, plan ordering, the new
+  renderers, dashboard self-containment/escaping, and the completeness of the
+  shipped CSF core data.
+
+### Fixed
+- `build-csf-core` uses the CPRT download endpoint without the former
+  `?olirids=all` parameter, which the NIST service now rejects (HTTP 500).
+
 ## [0.1.0] — Initial release
 
 First public release.

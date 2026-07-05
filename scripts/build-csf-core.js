@@ -13,7 +13,9 @@
  *   3. Parses the "CSF 2.0" worksheet, keeping only the 22 official CSF 2.0
  *      Categories (the workbook also lists withdrawn CSF v1.1 categories for
  *      migration reference) and dropping "[Withdrawn: ...]" placeholder rows.
- *   4. Writes the 106 live Subcategory outcomes to data/csf-core.json.
+ *   4. Writes the 106 live Subcategory outcomes — each with its official NIST
+ *      Implementation Examples (the workbook's "Implementation Examples"
+ *      column, one "Ex N:" entry per example) — to data/csf-core.json.
  *
  * Requirements: network access and the `unzip` utility (preinstalled on macOS
  * and most Linux). Run from the repo root: `node scripts/build-csf-core.js`.
@@ -25,7 +27,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const EXPORT_URL = 'https://csrc.nist.gov/extensions/nudp/services/json/csf/download?olirids=all';
+// NOTE: no query parameters — the service's former `?olirids=all` parameter now
+// returns HTTP 500 (the parameterless export is the one CPRT itself serves).
+const EXPORT_URL = 'https://csrc.nist.gov/extensions/nudp/services/json/csf/download';
 const OUT_PATH = fileURLToPath(new URL('../data/csf-core.json', import.meta.url));
 
 // The 22 official CSF 2.0 Categories. Anything else in the workbook is a
@@ -49,6 +53,28 @@ function decodeXml(raw) {
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
     .replace(/&amp;/g, '&');
+}
+
+/**
+ * Parse the "Implementation Examples" cell of one Subcategory row. The cell
+ * holds one example per line, each prefixed with a marker like "Ex1:". Returns
+ * the clean example texts in order (marker stripped, whitespace normalized).
+ * Splitting on the markers themselves (not on newlines) keeps a wrapped
+ * multi-line example intact and survives line breaks being lost in
+ * shared-string decoding; a newline split is the marker-less fallback.
+ */
+function parseExamples(cell) {
+  if (!cell) return [];
+  const text = String(cell).trim();
+  if (!text || /^\[Withdrawn/i.test(text)) return [];
+  const clean = (s) => s.replace(/\s+/g, ' ').trim();
+  if (/\bEx\d+\s*:/.test(text)) {
+    return text
+      .split(/(?=\bEx\d+\s*:)/)
+      .map((s) => clean(s.replace(/^Ex\d+\s*:\s*/, '')))
+      .filter(Boolean);
+  }
+  return text.split(/\n+/).map(clean).filter(Boolean);
 }
 
 /** Parse an .xlsx worksheet into rows: [{ COL: text }]. Handles self-closing cells. */
@@ -120,6 +146,7 @@ async function main() {
             category: `${catName[curCat]} (${curCat})`,
             id: m[1],
             outcome: m[2].trim(),
+            implementationExamples: parseExamples(r.D),
           });
         }
       }
@@ -128,10 +155,17 @@ async function main() {
     if (subs.length !== 106) {
       throw new Error(`Expected 106 subcategories, got ${subs.length}. CPRT export format may have changed; review the parser.`);
     }
+    const missingExamples = subs.filter((s) => s.implementationExamples.length === 0);
+    if (missingExamples.length > 0) {
+      throw new Error(
+        `${missingExamples.length} subcategories have no Implementation Examples ` +
+          `(${missingExamples.slice(0, 5).map((s) => s.id).join(', ')}…). CPRT export format may have changed; review the parser.`,
+      );
+    }
 
     const out = {
       _comment:
-        'Complete NIST Cybersecurity Framework (CSF) 2.0 Core: all 106 Subcategory outcomes across 6 Functions and 22 Categories. The CSF 2.0 Core text is in the public domain, sourced from the NIST CPRT (Cybersecurity and Privacy Reference Tool, https://csrc.nist.gov/projects/cprt). Regenerate with scripts/build-csf-core.js.',
+        'Complete NIST Cybersecurity Framework (CSF) 2.0 Core: all 106 Subcategory outcomes across 6 Functions and 22 Categories, each with its official NIST Implementation Examples. The CSF 2.0 Core text and Implementation Examples are in the public domain, sourced from the NIST CPRT (Cybersecurity and Privacy Reference Tool, https://csrc.nist.gov/projects/cprt). Implementation Examples are illustrative, not exhaustive, and are not a baseline of required actions. Regenerate with scripts/build-csf-core.js.',
       frameworkVersion: 'CSF 2.0',
       source: 'NIST CPRT — The NIST Cybersecurity Framework (CSF) 2.0 (Final)',
       sample: false,

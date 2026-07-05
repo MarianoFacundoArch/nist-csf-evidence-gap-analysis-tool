@@ -83,6 +83,11 @@ export const configSchema = {
     fixedNow: { type: ['string', 'null'] },
     acceptAll: { type: 'boolean' },
     force: { type: 'boolean' },
+    targetDefault: {
+      type: ['string', 'null'],
+      enum: ['none', 'partial', 'substantial', 'full', null],
+    },
+    targetImport: { type: ['string', 'null'] },
     local: { type: 'boolean' },
     logLevel: { type: 'string', enum: ['debug', 'info', 'warn', 'error', 'quiet'] },
   },

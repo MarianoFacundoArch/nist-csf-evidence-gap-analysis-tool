@@ -1,146 +1,312 @@
 {
-  "_comment": "Complete NIST Cybersecurity Framework (CSF) 2.0 Core: all 106 Subcategory outcomes across 6 Functions and 22 Categories, each with its official NIST Implementation Examples. The CSF 2.0 Core text and Implementation Examples are in the public domain, sourced from the NIST CPRT (Cybersecurity and Privacy Reference Tool, https://csrc.nist.gov/projects/cprt). Implementation Examples are illustrative, not exhaustive, and are not a baseline of required actions. Regenerate with scripts/build-csf-core.js.",
+  "schemaVersion": "1.0",
+  "profileType": "Target",
+  "framework": "NIST CSF 2.0",
   "frameworkVersion": "CSF 2.0",
-  "source": "NIST CPRT — The NIST Cybersecurity Framework (CSF) 2.0 (Final)",
-  "sample": false,
-  "functions": [
-    {
-      "id": "GV",
-      "name": "GOVERN"
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "tool": {
+    "name": "nist-csf-evidence-gap-analysis-tool",
+    "version": "0.2.0"
+  },
+  "disclaimer": "Organizational Target Profile — companion to current-profile.json. Targets, priorities, and not-applicable scoping are human decisions recorded in the target profile file; no AI makes them. implementation_examples are the official NIST CSF 2.0 Implementation Examples (public domain, source: NIST CPRT) — illustrative, not exhaustive.",
+  "baseline": "substantial",
+  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.",
+  "review": {
+    "reviewed": 106,
+    "unreviewed": 0,
+    "stale": 0
+  },
+  "summary": {
+    "total": 106,
+    "applicable": 105,
+    "notApplicable": 1,
+    "met": 10,
+    "unmet": 95,
+    "pctMet": 10,
+    "unmetByPriority": {
+      "high": 9,
+      "medium": 78,
+      "low": 8
     },
-    {
-      "id": "ID",
-      "name": "IDENTIFY"
-    },
-    {
-      "id": "PR",
-      "name": "PROTECT"
-    },
-    {
-      "id": "DE",
-      "name": "DETECT"
-    },
-    {
-      "id": "RS",
-      "name": "RESPOND"
-    },
-    {
-      "id": "RC",
-      "name": "RECOVER"
-    }
-  ],
+    "byFunction": [
+      {
+        "function": "GOVERN",
+        "total": 31,
+        "applicable": 31,
+        "met": 7,
+        "unmet": 24,
+        "notApplicable": 0,
+        "pctMet": 23
+      },
+      {
+        "function": "IDENTIFY",
+        "total": 21,
+        "applicable": 21,
+        "met": 3,
+        "unmet": 18,
+        "notApplicable": 0,
+        "pctMet": 14
+      },
+      {
+        "function": "PROTECT",
+        "total": 22,
+        "applicable": 21,
+        "met": 0,
+        "unmet": 21,
+        "notApplicable": 1,
+        "pctMet": 0
+      },
+      {
+        "function": "DETECT",
+        "total": 11,
+        "applicable": 11,
+        "met": 0,
+        "unmet": 11,
+        "notApplicable": 0,
+        "pctMet": 0
+      },
+      {
+        "function": "RESPOND",
+        "total": 13,
+        "applicable": 13,
+        "met": 0,
+        "unmet": 13,
+        "notApplicable": 0,
+        "pctMet": 0
+      },
+      {
+        "function": "RECOVER",
+        "total": 8,
+        "applicable": 8,
+        "met": 0,
+        "unmet": 8,
+        "notApplicable": 0,
+        "pctMet": 0
+      }
+    ]
+  },
   "subcategories": [
     {
+      "subcategory_id": "GV.OC-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-01",
       "outcome": "The organizational mission is understood and informs cybersecurity risk management",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] The organization appears to link its mission to cybersecurity risk decisions through a formal annual review.",
+      "note": null,
+      "implementation_examples": [
         "Share the organization's mission (e.g., through vision and mission statements, marketing, and service strategies) to provide a basis for identifying risks that may impede that mission"
       ]
     },
     {
+      "subcategory_id": "GV.OC-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-02",
       "outcome": "Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Identify relevant internal stakeholders and their cybersecurity-related expectations (e.g., performance and risk expectations of officers, directors, and advisors; cultural expectations of employees)",
         "Identify relevant external stakeholders and their cybersecurity-related expectations (e.g., privacy expectations of customers, business expectations of partnerships, compliance expectations of regulators, ethics expectations of society)"
       ]
     },
     {
+      "subcategory_id": "GV.OC-03",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-03",
       "outcome": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Determine a process to track and manage legal and regulatory requirements regarding protection of individuals' information (e.g., Health Insurance Portability and Accountability Act, California Consumer Privacy Act, General Data Protection Regulation)",
         "Determine a process to track and manage contractual requirements for cybersecurity management of supplier, customer, and partner information",
         "Align the organization's cybersecurity strategy with legal, regulatory, and contractual requirements"
       ]
     },
     {
+      "subcategory_id": "GV.OC-04",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-04",
       "outcome": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Establish criteria for determining the criticality of capabilities and services as viewed by internal and external stakeholders",
         "Determine (e.g., from a business impact analysis) assets and business operations that are vital to achieving mission objectives and the potential impact of a loss (or partial loss) of such operations",
         "Establish and communicate resilience objectives (e.g., recovery time objectives) for delivering critical capabilities and services in various operating states (e.g., under attack, during recovery, normal operation)"
       ]
     },
     {
+      "subcategory_id": "GV.OC-05",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-05",
       "outcome": "Outcomes, capabilities, and services that the organization depends on are understood and communicated",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Create an inventory of the organization's dependencies on external resources (e.g., facilities, cloud-based hosting providers) and their relationships to organizational assets and business functions",
         "Identify and document external dependencies that are potential points of failure for the organization's critical capabilities and services, and share that information with appropriate personnel"
       ]
     },
     {
+      "subcategory_id": "GV.RM-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-01",
       "outcome": "Risk management objectives are established and agreed to by organizational stakeholders",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Update near-term and long-term cybersecurity risk management objectives as part of annual strategic planning and when major changes occur",
         "Establish measurable objectives for cybersecurity risk management (e.g., manage the quality of user training, ensure adequate risk protection for industrial control systems)",
         "Senior leaders agree about cybersecurity objectives and use them for measuring and managing risk and performance"
       ]
     },
     {
+      "subcategory_id": "GV.RM-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-02",
       "outcome": "Risk appetite and risk tolerance statements are established, communicated, and maintained",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Determine and communicate risk appetite statements that convey expectations about the appropriate level of risk for the organization",
         "Translate risk appetite statements into specific, measurable, and broadly understandable risk tolerance statements",
         "Refine organizational objectives and risk appetite periodically based on known risk exposure and residual risk"
       ]
     },
     {
+      "subcategory_id": "GV.RM-03",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-03",
       "outcome": "Cybersecurity risk management activities and outcomes are included in enterprise risk management processes",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Aggregate and manage cybersecurity risks alongside other enterprise risks (e.g., compliance, financial, operational, regulatory, reputational, safety)",
         "Include cybersecurity risk managers in enterprise risk management planning",
         "Establish criteria for escalating cybersecurity risks within enterprise risk management"
       ]
     },
     {
+      "subcategory_id": "GV.RM-04",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-04",
       "outcome": "Strategic direction that describes appropriate risk response options is established and communicated",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Specify criteria for accepting and avoiding cybersecurity risk for various classifications of data",
         "Determine whether to purchase cybersecurity insurance",
         "Document conditions under which shared responsibility models are acceptable (e.g., outsourcing certain cybersecurity functions, having a third party perform financial transactions on behalf of the organization, using public cloud-based services)"
       ]
     },
     {
+      "subcategory_id": "GV.RM-05",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-05",
       "outcome": "Lines of communication across the organization are established for cybersecurity risks, including risks from suppliers and other third parties",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Determine how to update senior executives, directors, and management on the organization's cybersecurity posture at agreed-upon intervals",
         "Identify how all departments across the organization - such as management, operations, internal auditors, legal, acquisition, physical security, and HR - will communicate with each other about cybersecurity risks"
       ]
     },
     {
+      "subcategory_id": "GV.RM-06",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-06",
       "outcome": "A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Establish criteria for using a quantitative approach to cybersecurity risk analysis, and specify probability and exposure formulas",
         "Create and use templates (e.g., a risk register) to document cybersecurity risk information (e.g., risk description, exposure, treatment, and ownership)",
         "Establish criteria for risk prioritization at the appropriate levels within the enterprise",
@@ -148,22 +314,42 @@
       ]
     },
     {
+      "subcategory_id": "GV.RM-07",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Risk Management Strategy (GV.RM)",
-      "id": "GV.RM-07",
       "outcome": "Strategic opportunities (i.e., positive risks) are characterized and are included in organizational cybersecurity risk discussions",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Define and communicate guidance and methods for identifying opportunities and including them in risk discussions (e.g., strengths, weaknesses, opportunities, and threats [SWOT] analysis)",
         "Identify stretch goals and document them",
         "Calculate, document, and prioritize positive risks alongside negative risks"
       ]
     },
     {
+      "subcategory_id": "GV.RR-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Roles, Responsibilities, and Authorities (GV.RR)",
-      "id": "GV.RR-01",
       "outcome": "Organizational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Leaders (e.g., directors) agree on their roles and responsibilities in developing, implementing, and assessing the organization's cybersecurity strategy",
         "Share leaders' expectations regarding a secure and ethical culture, especially when current events present the opportunity to highlight positive or negative examples of cybersecurity risk management",
         "Leaders direct the CISO to maintain a comprehensive cybersecurity risk strategy and review and update it at least annually and after major events",
@@ -171,11 +357,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.RR-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Roles, Responsibilities, and Authorities (GV.RR)",
-      "id": "GV.RR-02",
       "outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
-      "implementationExamples": [
+      "current_coverage": "full",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Document risk management roles and responsibilities in policy",
         "Document who is responsible and accountable for cybersecurity risk management activities and how those teams and individuals are to be consulted and informed",
         "Include cybersecurity responsibilities and performance requirements in personnel descriptions",
@@ -184,22 +380,42 @@
       ]
     },
     {
+      "subcategory_id": "GV.RR-03",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Roles, Responsibilities, and Authorities (GV.RR)",
-      "id": "GV.RR-03",
       "outcome": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Conduct periodic management reviews to ensure that those given cybersecurity risk management responsibilities have the necessary authority",
         "Identify resource allocation and investment in line with risk tolerance and response",
         "Provide adequate and sufficient people, process, and technical resources to support the cybersecurity strategy"
       ]
     },
     {
+      "subcategory_id": "GV.RR-04",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Roles, Responsibilities, and Authorities (GV.RR)",
-      "id": "GV.RR-04",
       "outcome": "Cybersecurity is included in human resources practices",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Integrate cybersecurity risk management considerations into human resources processes (e.g., personnel screening, onboarding, change notification, offboarding)",
         "Consider cybersecurity knowledge to be a positive factor in hiring, training, and retention decisions",
         "Conduct background checks prior to onboarding new personnel for sensitive roles, and periodically repeat background checks for personnel with such roles",
@@ -207,11 +423,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.PO-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Policy (GV.PO)",
-      "id": "GV.PO-01",
       "outcome": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
-      "implementationExamples": [
+      "current_coverage": "full",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Create, disseminate, and maintain an understandable, usable risk management policy with statements of management intent, expectations, and direction",
         "Periodically review policy and supporting processes and procedures to ensure that they align with risk management strategy objectives and priorities, as well as the high-level direction of the cybersecurity policy",
         "Require approval from senior management on policy",
@@ -220,11 +446,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.PO-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Policy (GV.PO)",
-      "id": "GV.PO-02",
       "outcome": "Policy for managing cybersecurity risks is reviewed, updated, communicated, and enforced to reflect changes in requirements, threats, technology, and organizational mission",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Update policy based on periodic reviews of cybersecurity risk management results to ensure that policy and supporting processes and procedures adequately maintain risk at an acceptable level",
         "Provide a timeline for reviewing changes to the organization's risk environment (e.g., changes in risk or in the organization's mission objectives), and communicate recommended policy updates",
         "Update policy to reflect changes in legal and regulatory requirements",
@@ -232,43 +468,83 @@
       ]
     },
     {
+      "subcategory_id": "GV.OV-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Oversight (GV.OV)",
-      "id": "GV.OV-01",
       "outcome": "Cybersecurity risk management strategy outcomes are reviewed to inform and adjust strategy and direction",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Measure how well the risk management strategy and risk results have helped leaders make decisions and achieve organizational objectives",
         "Examine whether cybersecurity risk strategies that impede operations or innovation should be adjusted"
       ]
     },
     {
+      "subcategory_id": "GV.OV-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Oversight (GV.OV)",
-      "id": "GV.OV-02",
       "outcome": "The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Review audit findings to confirm whether the existing cybersecurity strategy has ensured compliance with internal and external requirements",
         "Review the performance oversight of those in cybersecurity-related roles to determine whether policy changes are necessary",
         "Review strategy in light of cybersecurity incidents"
       ]
     },
     {
+      "subcategory_id": "GV.OV-03",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Oversight (GV.OV)",
-      "id": "GV.OV-03",
       "outcome": "Organizational cybersecurity risk management performance is evaluated and reviewed for adjustments needed",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Review key performance indicators (KPIs) to ensure that organization-wide policies and procedures achieve objectives",
         "Review key risk indicators (KRIs) to identify risks the organization faces, including likelihood and potential impact",
         "Collect and communicate metrics on cybersecurity risk management with senior leadership"
       ]
     },
     {
+      "subcategory_id": "GV.SC-01",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-01",
       "outcome": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Establish a strategy that expresses the objectives of the cybersecurity supply chain risk management program",
         "Develop the cybersecurity supply chain risk management program, including a plan (with milestones), policies, and procedures that guide implementation and improvement of the program, and share the policies and procedures with the organizational stakeholders",
         "Develop and implement program processes based on the strategy, objectives, policies, and procedures that are agreed upon and performed by the organizational stakeholders",
@@ -276,11 +552,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-02",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-02",
       "outcome": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Identify one or more specific roles or positions that will be responsible and accountable for planning, resourcing, and executing cybersecurity supply chain risk management activities",
         "Document cybersecurity supply chain risk management roles and responsibilities in policy",
         "Create responsibility matrixes to document who will be responsible and accountable for cybersecurity supply chain risk management activities and how those teams and individuals will be consulted and informed",
@@ -292,11 +578,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-03",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-03",
       "outcome": "Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Identify areas of alignment and overlap with cybersecurity and enterprise risk management",
         "Establish integrated control sets for cybersecurity risk management and cybersecurity supply chain risk management",
         "Integrate cybersecurity supply chain risk management into improvement processes",
@@ -304,21 +600,41 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-04",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-04",
       "outcome": "Suppliers are known and prioritized by criticality",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Develop criteria for supplier criticality based on, for example, the sensitivity of data processed or possessed by suppliers, the degree of access to the organization's systems, and the importance of the products or services to the organization's mission",
         "Keep a record of all suppliers, and prioritize suppliers based on the criticality criteria"
       ]
     },
     {
+      "subcategory_id": "GV.SC-05",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-05",
       "outcome": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Establish security requirements for suppliers, products, and services commensurate with their criticality level and potential impact if compromised",
         "Include all cybersecurity and supply chain requirements that third parties must follow and how compliance with the requirements may be verified in default contractual language",
         "Define the rules and protocols for information sharing between the organization and its suppliers and sub-tier suppliers in agreements",
@@ -332,11 +648,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-06",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-06",
       "outcome": "Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Perform thorough due diligence on prospective suppliers that is consistent with procurement planning and commensurate with the level of risk, criticality, and complexity of each supplier relationship",
         "Assess the suitability of the technology and cybersecurity capabilities and the risk management practices of prospective suppliers",
         "Conduct supplier risk assessments against business and applicable cybersecurity requirements",
@@ -344,11 +670,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-07",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-07",
       "outcome": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Adjust assessment formats and frequencies based on the third party's reputation and the criticality of the products or services they provide",
         "Evaluate third parties' evidence of compliance with contractual cybersecurity requirements, such as self-attestations, warranties, certifications, and other artifacts",
         "Monitor critical suppliers to ensure that they are fulfilling their security obligations throughout the supplier relationship lifecycle using a variety of methods and techniques, such as inspections, audits, tests, or other forms of evaluation",
@@ -357,11 +693,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-08",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-08",
       "outcome": "Relevant suppliers and other third parties are included in incident planning, response, and recovery activities",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "note": null,
+      "implementation_examples": [
         "Define and use rules and protocols for reporting incident response and recovery activities and the status between the organization and its suppliers",
         "Identify and document the roles and responsibilities of the organization and its suppliers for incident response",
         "Include critical suppliers in incident response exercises and simulations",
@@ -370,11 +716,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-09",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-09",
       "outcome": "Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Policies and procedures require provenance records for all acquired technology products and services",
         "Periodically provide risk reporting to leaders about how acquired components are proven to be untampered and authentic",
         "Communicate regularly among cybersecurity risk managers and operations personnel about the need to acquire software patches, updates, and upgrades only from authenticated and trustworthy software providers",
@@ -383,11 +739,21 @@
       ]
     },
     {
+      "subcategory_id": "GV.SC-10",
       "function": "GOVERN",
+      "function_id": "GV",
       "category": "Cybersecurity Supply Chain Risk Management (GV.SC)",
-      "id": "GV.SC-10",
       "outcome": "Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Establish processes for terminating critical relationships under both normal and adverse circumstances",
         "Define and implement plans for component end-of-life maintenance support and obsolescence",
         "Verify that supplier access to organization resources is deactivated promptly when it is no longer needed",
@@ -398,32 +764,62 @@
       ]
     },
     {
+      "subcategory_id": "ID.AM-01",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-01",
       "outcome": "Inventories of hardware managed by the organization are maintained",
-      "implementationExamples": [
+      "current_coverage": "full",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Maintain inventories for all types of hardware, including IT, IoT, OT, and mobile devices",
         "Constantly monitor networks to detect new hardware and automatically update inventories"
       ]
     },
     {
+      "subcategory_id": "ID.AM-02",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-02",
       "outcome": "Inventories of software, services, and systems managed by the organization are maintained",
-      "implementationExamples": [
+      "current_coverage": "full",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Maintain inventories for all types of software and services, including commercial-off-the-shelf, open-source, custom applications, API services, and cloud-based applications and services",
         "Constantly monitor all platforms, including containers and virtual machines, for software and service inventory changes",
         "Maintain an inventory of the organization's systems"
       ]
     },
     {
+      "subcategory_id": "ID.AM-03",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-03",
       "outcome": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Maintain baselines of communication and data flows within the organization's wired and wireless networks",
         "Maintain baselines of communication and data flows between the organization and third parties",
         "Maintain baselines of communication and data flows for the organization's infrastructure-as-a-service (IaaS) usage",
@@ -431,32 +827,62 @@
       ]
     },
     {
+      "subcategory_id": "ID.AM-04",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-04",
       "outcome": "Inventories of services provided by suppliers are maintained",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Inventory all external services used by the organization, including third-party infrastructure-as-a-service (IaaS), platform-as-a-service (PaaS), and software-as-a-service (SaaS) offerings; APIs; and other externally hosted application services",
         "Update the inventory when a new external service is going to be utilized to ensure adequate cybersecurity risk management monitoring of the organization's use of that service"
       ]
     },
     {
+      "subcategory_id": "ID.AM-05",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-05",
       "outcome": "Assets are prioritized based on classification, criticality, resources, and impact on the mission",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Define criteria for prioritizing each class of assets",
         "Apply the prioritization criteria to assets",
         "Track the asset priorities and update them periodically or when significant changes to the organization occur"
       ]
     },
     {
+      "subcategory_id": "ID.AM-07",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-07",
       "outcome": "Inventories of data and corresponding metadata for designated data types are maintained",
-      "implementationExamples": [
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Maintain a list of the designated data types of interest (e.g., personally identifiable information, protected health information, financial account numbers, organization intellectual property, operational technology data)",
         "Continuously discover and analyze ad hoc data to identify new instances of designated data types",
         "Assign data classifications to designated data types through tags or labels",
@@ -464,11 +890,21 @@
       ]
     },
     {
+      "subcategory_id": "ID.AM-08",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Asset Management (ID.AM)",
-      "id": "ID.AM-08",
       "outcome": "Systems, hardware, software, services, and data are managed throughout their life cycles",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Integrate cybersecurity considerations throughout the life cycles of systems, hardware, software, and services",
         "Integrate cybersecurity considerations into product life cycles",
         "Identify unofficial uses of technology to meet mission objectives (i.e., shadow IT)",
@@ -481,11 +917,21 @@
       ]
     },
     {
+      "subcategory_id": "ID.RA-01",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-01",
       "outcome": "Vulnerabilities in assets are identified, validated, and recorded",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Use vulnerability management technologies to identify unpatched and misconfigured software",
         "Assess network and system architectures for design and implementation weaknesses that affect cybersecurity",
         "Review, analyze, or test organization-developed software to identify design, coding, and default configuration vulnerabilities",
@@ -495,54 +941,104 @@
       ]
     },
     {
+      "subcategory_id": "ID.RA-02",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-02",
       "outcome": "Cyber threat intelligence is received from information sharing forums and sources",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Configure cybersecurity tools and technologies with detection or response capabilities to securely ingest cyber threat intelligence feeds",
         "Receive and review advisories from reputable third parties on current threat actors and their tactics, techniques, and procedures (TTPs)",
         "Monitor sources of cyber threat intelligence for information on the types of vulnerabilities that emerging technologies may have"
       ]
     },
     {
+      "subcategory_id": "ID.RA-03",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-03",
       "outcome": "Internal and external threats to the organization are identified and recorded",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Use cyber threat intelligence to maintain awareness of the types of threat actors likely to target the organization and the TTPs they are likely to use",
         "Perform threat hunting to look for signs of threat actors within the environment",
         "Implement processes for identifying internal threat actors"
       ]
     },
     {
+      "subcategory_id": "ID.RA-04",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-04",
       "outcome": "Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Business leaders and cybersecurity risk management practitioners work together to estimate the likelihood and impact of risk scenarios and record them in risk registers",
         "Enumerate the potential business impacts of unauthorized access to the organization's communications, systems, and data processed in or by those systems",
         "Account for the potential impacts of cascading failures for systems of systems"
       ]
     },
     {
+      "subcategory_id": "ID.RA-05",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-05",
       "outcome": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Develop threat models to better understand risks to the data and identify appropriate risk responses",
         "Prioritize cybersecurity resource allocations and investments based on estimated likelihoods and impacts"
       ]
     },
     {
+      "subcategory_id": "ID.RA-06",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-06",
       "outcome": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Apply the vulnerability management plan's criteria for deciding whether to accept, transfer, mitigate, or avoid risk",
         "Apply the vulnerability management plan's criteria for selecting compensating controls to mitigate risk",
         "Track the progress of risk response implementation (e.g., plan of action and milestones [POA&M], risk register, risk detail report)",
@@ -551,11 +1047,21 @@
       ]
     },
     {
+      "subcategory_id": "ID.RA-07",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-07",
       "outcome": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Implement and follow procedures for the formal documentation, review, testing, and approval of proposed changes and requested exceptions",
         "Document the possible risks of making or not making each proposed change, and provide guidance on rolling back changes",
         "Document the risks related to each requested exception and the plan for responding to those risks",
@@ -563,50 +1069,100 @@
       ]
     },
     {
+      "subcategory_id": "ID.RA-08",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-08",
       "outcome": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Conduct vulnerability information sharing between the organization and its suppliers following the rules and protocols defined in contracts",
         "Assign responsibilities and verify the execution of procedures for processing, analyzing the impact of, and responding to cybersecurity threat, vulnerability, or incident disclosures by suppliers, customers, partners, and government cybersecurity organizations"
       ]
     },
     {
+      "subcategory_id": "ID.RA-09",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-09",
       "outcome": "The authenticity and integrity of hardware and software are assessed prior to acquisition and use",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Assess the authenticity and cybersecurity of critical technology products and services prior to acquisition and use"
       ]
     },
     {
+      "subcategory_id": "ID.RA-10",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Risk Assessment (ID.RA)",
-      "id": "ID.RA-10",
       "outcome": "Critical suppliers are assessed prior to acquisition",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Conduct supplier risk assessments against business and applicable cybersecurity requirements, including the supply chain"
       ]
     },
     {
+      "subcategory_id": "ID.IM-01",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Improvement (ID.IM)",
-      "id": "ID.IM-01",
       "outcome": "Improvements are identified from evaluations",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Perform self-assessments of critical services that take current threats and TTPs into consideration",
         "Invest in third-party assessments or independent audits of the effectiveness of the organization's cybersecurity program to identify areas that need improvement",
         "Constantly evaluate compliance with selected cybersecurity requirements through automated means"
       ]
     },
     {
+      "subcategory_id": "ID.IM-02",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Improvement (ID.IM)",
-      "id": "ID.IM-02",
       "outcome": "Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "note": null,
+      "implementation_examples": [
         "Identify improvements for future incident response activities based on findings from incident response assessments (e.g., tabletop exercises and simulations, tests, internal reviews, independent audits)",
         "Identify improvements for future business continuity, disaster recovery, and incident response activities based on exercises performed in coordination with critical service providers and product suppliers",
         "Involve internal stakeholders (e.g., senior executives, legal department, HR) in security tests and exercises as appropriate",
@@ -616,22 +1172,42 @@
       ]
     },
     {
+      "subcategory_id": "ID.IM-03",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Improvement (ID.IM)",
-      "id": "ID.IM-03",
       "outcome": "Improvements are identified from execution of operational processes, procedures, and activities",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Conduct collaborative lessons learned sessions with suppliers",
         "Annually review cybersecurity policies, processes, and procedures to take lessons learned into account",
         "Use metrics to assess operational cybersecurity performance over time"
       ]
     },
     {
+      "subcategory_id": "ID.IM-04",
       "function": "IDENTIFY",
+      "function_id": "ID",
       "category": "Improvement (ID.IM)",
-      "id": "ID.IM-04",
       "outcome": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "note": null,
+      "implementation_examples": [
         "Establish contingency plans (e.g., incident response, business continuity, disaster recovery) for responding to and recovering from adverse events that can interfere with operations, expose confidential information, or otherwise endanger the organization's mission and viability",
         "Include contact and communication information, processes for handling common scenarios, and criteria for prioritization, escalation, and elevation in all contingency plans",
         "Create a vulnerability management plan to identify and assess all types of vulnerabilities and to prioritize, test, and implement risk responses",
@@ -640,11 +1216,21 @@
       ]
     },
     {
+      "subcategory_id": "PR.AA-01",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-01",
       "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "full",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Initiate requests for new access or additional access for employees, contractors, and others, and track, review, and fulfill the requests, with permission from system or data owners when needed",
         "Issue, manage, and revoke cryptographic certificates and identity tokens, cryptographic keys (i.e., key management), and other credentials",
         "Select a unique identifier for each device from immutable hardware characteristics or an identifier securely provisioned to the device",
@@ -652,21 +1238,41 @@
       ]
     },
     {
+      "subcategory_id": "PR.AA-02",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-02",
       "outcome": "Identities are proofed and bound to credentials based on the context of interactions",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "full",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Verify a person's claimed identity at enrollment time using government-issued identity credentials (e.g., passport, visa, driver's license)",
         "Issue a different credential for each person (i.e., no credential sharing)"
       ]
     },
     {
+      "subcategory_id": "PR.AA-03",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-03",
       "outcome": "Users, services, and hardware are authenticated",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "full",
+      "priority": "high",
+      "gap": 3,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Require multifactor authentication",
         "Enforce policies for the minimum strength of passwords, PINs, and similar authenticators",
         "Periodically reauthenticate users, services, and hardware based on risk (e.g., in zero trust architectures)",
@@ -674,22 +1280,42 @@
       ]
     },
     {
+      "subcategory_id": "PR.AA-04",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-04",
       "outcome": "Identity assertions are protected, conveyed, and verified",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "full",
+      "priority": "high",
+      "gap": 3,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Protect identity assertions that are used to convey authentication and user information through single sign-on systems",
         "Protect identity assertions that are used to convey authentication and user information between federated systems",
         "Implement standards-based approaches for identity assertions in all contexts, and follow all guidance for the generation (e.g., data models, metadata), protection (e.g., digital signing, encryption), and verification (e.g., signature validation) of identity assertions"
       ]
     },
     {
+      "subcategory_id": "PR.AA-05",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-05",
       "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "full",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
+      "note": null,
+      "implementation_examples": [
         "Review logical and physical access privileges periodically and whenever someone changes roles or leaves the organization, and promptly rescind privileges that are no longer needed",
         "Take attributes of the requester and the requested resource into account for authorization decisions (e.g., geolocation, day/time, requester endpoint's cyber health)",
         "Restrict access and privileges to the minimum necessary (e.g., zero trust architecture)",
@@ -697,22 +1323,42 @@
       ]
     },
     {
+      "subcategory_id": "PR.AA-06",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Identity Management, Authentication, and Access Control (PR.AA)",
-      "id": "PR.AA-06",
       "outcome": "Physical access to assets is managed, monitored, and enforced commensurate with risk",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "not-applicable",
+      "priority": null,
+      "gap": 0,
+      "met": false,
+      "not_applicable": true,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
+      "note": "Fully remote organization; no physical facilities beyond a registered address.",
+      "implementation_examples": [
         "Use security guards, security cameras, locked entrances, alarm systems, and other physical controls to monitor facilities and restrict access",
         "Employ additional physical security controls for areas that contain high-risk assets",
         "Escort guests, vendors, and other third parties within areas that contain business-critical assets"
       ]
     },
     {
+      "subcategory_id": "PR.AT-01",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Awareness and Training (PR.AT)",
-      "id": "PR.AT-01",
       "outcome": "Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Provide basic cybersecurity awareness and training to employees, contractors, partners, suppliers, and all other users of the organization's non-public resources",
         "Train personnel to recognize social engineering attempts and other common attacks, report attacks and suspicious activity, comply with acceptable use policies, and perform basic cyber hygiene tasks (e.g., patching software, choosing passwords, protecting credentials)",
         "Explain the consequences of cybersecurity policy violations, both to individual users and the organization as a whole",
@@ -721,11 +1367,21 @@
       ]
     },
     {
+      "subcategory_id": "PR.AT-02",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Awareness and Training (PR.AT)",
-      "id": "PR.AT-02",
       "outcome": "Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Identify the specialized roles within the organization that require additional cybersecurity training, such as physical and cybersecurity personnel, finance personnel, senior leadership, and anyone with access to business-critical data",
         "Provide role-based cybersecurity awareness and training to all those in specialized roles, including contractors, partners, suppliers, and other third parties",
         "Periodically assess or test users on their understanding of cybersecurity practices for their specialized roles",
@@ -733,11 +1389,21 @@
       ]
     },
     {
+      "subcategory_id": "PR.DS-01",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Data Security (PR.DS)",
-      "id": "PR.DS-01",
       "outcome": "The confidentiality, integrity, and availability of data-at-rest are protected",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of stored data in files, databases, virtual machine disk images, container images, and other resources",
         "Use full disk encryption to protect data stored on user endpoints",
         "Confirm the integrity of software by validating signatures",
@@ -746,11 +1412,21 @@
       ]
     },
     {
+      "subcategory_id": "PR.DS-02",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Data Security (PR.DS)",
-      "id": "PR.DS-02",
       "outcome": "The confidentiality, integrity, and availability of data-in-transit are protected",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of network communications",
         "Automatically encrypt or block outbound emails and other communications that contain sensitive data, depending on the data classification",
         "Block access to personal email, file sharing, file storage services, and other personal communications applications and services from organizational systems and networks",
@@ -758,21 +1434,41 @@
       ]
     },
     {
+      "subcategory_id": "PR.DS-10",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Data Security (PR.DS)",
-      "id": "PR.DS-10",
       "outcome": "The confidentiality, integrity, and availability of data-in-use are protected",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Remove data that must remain confidential (e.g., from processors and memory) as soon as it is no longer needed",
         "Protect data in use from access by other users and processes of the same platform"
       ]
     },
     {
+      "subcategory_id": "PR.DS-11",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Data Security (PR.DS)",
-      "id": "PR.DS-11",
       "outcome": "Backups of data are created, protected, maintained, and tested",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Continuously back up critical data in near-real-time, and back up other data frequently at agreed-upon schedules",
         "Test backups and restores for all types of data sources at least annually",
         "Securely store some backups offline and offsite so that an incident or disaster will not damage them",
@@ -780,22 +1476,42 @@
       ]
     },
     {
+      "subcategory_id": "PR.PS-01",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-01",
       "outcome": "Configuration management practices are established and applied",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Establish, test, deploy, and maintain hardened baselines that enforce the organization's cybersecurity policies and provide only essential capabilities (i.e., principle of least functionality)",
         "Review all default configuration settings that may potentially impact cybersecurity when installing or upgrading software",
         "Monitor implemented software for deviations from approved baselines"
       ]
     },
     {
+      "subcategory_id": "PR.PS-02",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-02",
       "outcome": "Software is maintained, replaced, and removed commensurate with risk",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Perform routine and emergency patching within the timeframes specified in the vulnerability management plan",
         "Update container images, and deploy new container instances to replace rather than update existing instances",
         "Replace end-of-life software and service versions with supported, maintained versions",
@@ -805,33 +1521,63 @@
       ]
     },
     {
+      "subcategory_id": "PR.PS-03",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-03",
       "outcome": "Hardware is maintained, replaced, and removed commensurate with risk",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Replace hardware when it lacks needed security capabilities or when it cannot support software with needed security capabilities",
         "Define and implement plans for hardware end-of-life maintenance support and obsolescence",
         "Perform hardware disposal in a secure, responsible, and auditable manner"
       ]
     },
     {
+      "subcategory_id": "PR.PS-04",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-04",
       "outcome": "Log records are generated and made available for continuous monitoring",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Configure all operating systems, applications, and services (including cloud-based services) to generate log records",
         "Configure log generators to securely share their logs with the organization's logging infrastructure systems and services",
         "Configure log generators to record the data needed by zero-trust architectures"
       ]
     },
     {
+      "subcategory_id": "PR.PS-05",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-05",
       "outcome": "Installation and execution of unauthorized software are prevented",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "When risk warrants it, restrict software execution to permitted products only or deny the execution of prohibited and unauthorized software",
         "Verify the source of new software and the software's integrity before installing it",
         "Configure platforms to use only approved DNS services that block access to known malicious domains",
@@ -839,22 +1585,42 @@
       ]
     },
     {
+      "subcategory_id": "PR.PS-06",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Platform Security (PR.PS)",
-      "id": "PR.PS-06",
       "outcome": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Protect all components of organization-developed software from tampering and unauthorized access",
         "Secure all software produced by the organization, with minimal vulnerabilities in their releases",
         "Maintain the software used in production environments, and securely dispose of software once it is no longer needed"
       ]
     },
     {
+      "subcategory_id": "PR.IR-01",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Technology Infrastructure Resilience (PR.IR)",
-      "id": "PR.IR-01",
       "outcome": "Networks and environments are protected from unauthorized logical access and usage",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Logically segment organization networks and cloud-based platforms according to trust boundaries and platform types (e.g., IT, IoT, OT, mobile, guests), and permit required communications only between segments",
         "Logically segment organization networks from external networks, and permit only necessary communications to enter the organization's networks from the external networks",
         "Implement zero trust architectures to restrict network access to each resource to the minimum necessary",
@@ -862,42 +1628,82 @@
       ]
     },
     {
+      "subcategory_id": "PR.IR-02",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Technology Infrastructure Resilience (PR.IR)",
-      "id": "PR.IR-02",
       "outcome": "The organization's technology assets are protected from environmental threats",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Protect organizational equipment from known environmental threats, such as flooding, fire, wind, and excessive heat and humidity",
         "Include protection from environmental threats and provisions for adequate operating infrastructure in requirements for service providers that operate systems on the organization's behalf"
       ]
     },
     {
+      "subcategory_id": "PR.IR-03",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Technology Infrastructure Resilience (PR.IR)",
-      "id": "PR.IR-03",
       "outcome": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Avoid single points of failure in systems and infrastructure",
         "Use load balancing to increase capacity and improve reliability",
         "Use high-availability components like redundant storage and power supplies to improve system reliability"
       ]
     },
     {
+      "subcategory_id": "PR.IR-04",
       "function": "PROTECT",
+      "function_id": "PR",
       "category": "Technology Infrastructure Resilience (PR.IR)",
-      "id": "PR.IR-04",
       "outcome": "Adequate resource capacity to ensure availability is maintained",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Monitor usage of storage, power, compute, network bandwidth, and other resources",
         "Forecast future needs, and scale resources accordingly"
       ]
     },
     {
+      "subcategory_id": "DE.CM-01",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Continuous Monitoring (DE.CM)",
-      "id": "DE.CM-01",
       "outcome": "Networks and network services are monitored to find potentially adverse events",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Monitor DNS, BGP, and other network services for adverse events",
         "Monitor wired and wireless networks for connections from unauthorized endpoints",
         "Monitor facilities for unauthorized or rogue wireless networks",
@@ -906,11 +1712,21 @@
       ]
     },
     {
+      "subcategory_id": "DE.CM-02",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Continuous Monitoring (DE.CM)",
-      "id": "DE.CM-02",
       "outcome": "The physical environment is monitored to find potentially adverse events",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Monitor logs from physical access control systems (e.g., badge readers) to find unusual access patterns (e.g., deviations from the norm) and failed access attempts",
         "Review and monitor physical access records (e.g., from visitor registration, sign-in sheets)",
         "Monitor physical access controls (e.g., locks, latches, hinge pins, alarms) for signs of tampering",
@@ -918,32 +1734,62 @@
       ]
     },
     {
+      "subcategory_id": "DE.CM-03",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Continuous Monitoring (DE.CM)",
-      "id": "DE.CM-03",
       "outcome": "Personnel activity and technology usage are monitored to find potentially adverse events",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Use behavior analytics software to detect anomalous user activity to mitigate insider threats",
         "Monitor logs from logical access control systems to find unusual access patterns and failed access attempts",
         "Continuously monitor deception technology, including user accounts, for any usage"
       ]
     },
     {
+      "subcategory_id": "DE.CM-06",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Continuous Monitoring (DE.CM)",
-      "id": "DE.CM-06",
       "outcome": "External service provider activities and services are monitored to find potentially adverse events",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Monitor remote and onsite administration and maintenance activities that external providers perform on organizational systems",
         "Monitor activity from cloud-based services, internet service providers, and other service providers for deviations from expected behavior"
       ]
     },
     {
+      "subcategory_id": "DE.CM-09",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Continuous Monitoring (DE.CM)",
-      "id": "DE.CM-09",
       "outcome": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Monitor email, web, file sharing, collaboration services, and other common attack vectors to detect malware, phishing, data leaks and exfiltration, and other adverse events",
         "Monitor authentication attempts to identify attacks against credentials and unauthorized credential reuse",
         "Monitor software configurations for deviations from security baselines",
@@ -952,11 +1798,21 @@
       ]
     },
     {
+      "subcategory_id": "DE.AE-02",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-02",
       "outcome": "Potentially adverse events are analyzed to better understand associated activities",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Use security information and event management (SIEM) or other tools to continuously monitor log events for known malicious and suspicious activity",
         "Utilize up-to-date cyber threat intelligence in log analysis tools to improve detection accuracy and characterize threat actors, their methods, and indicators of compromise",
         "Regularly conduct manual reviews of log events for technologies that cannot be sufficiently monitored through automation",
@@ -964,32 +1820,62 @@
       ]
     },
     {
+      "subcategory_id": "DE.AE-03",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-03",
       "outcome": "Information is correlated from multiple sources",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Constantly transfer log data generated by other sources to a relatively small number of log servers",
         "Use event correlation technology (e.g., SIEM) to collect information captured by multiple sources",
         "Utilize cyber threat intelligence to help correlate events among log sources"
       ]
     },
     {
+      "subcategory_id": "DE.AE-04",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-04",
       "outcome": "The estimated impact and scope of adverse events are understood",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Use SIEMs or other tools to estimate impact and scope, and review and refine the estimates",
         "A person creates their own estimates of impact and scope"
       ]
     },
     {
+      "subcategory_id": "DE.AE-06",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-06",
       "outcome": "Information on adverse events is provided to authorized staff and tools",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Use cybersecurity software to generate alerts and provide them to the security operations center (SOC), incident responders, and incident response tools",
         "Incident responders and other authorized personnel can access log analysis findings at all times",
         "Automatically create and assign tickets in the organization's ticketing system when certain types of alerts occur",
@@ -997,32 +1883,62 @@
       ]
     },
     {
+      "subcategory_id": "DE.AE-07",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-07",
       "outcome": "Cyber threat intelligence and other contextual information are integrated into the analysis",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Securely provide cyber threat intelligence feeds to detection technologies, processes, and personnel",
         "Securely provide information from asset inventories to detection technologies, processes, and personnel",
         "Rapidly acquire and analyze vulnerability disclosures for the organization's technologies from suppliers, vendors, and third-party security advisories"
       ]
     },
     {
+      "subcategory_id": "DE.AE-08",
       "function": "DETECT",
+      "function_id": "DE",
       "category": "Adverse Event Analysis (DE.AE)",
-      "id": "DE.AE-08",
       "outcome": "Incidents are declared when adverse events meet the defined incident criteria",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Apply incident criteria to known and assumed characteristics of activity in order to determine whether an incident should be declared",
         "Take known false positives into account when applying incident criteria"
       ]
     },
     {
+      "subcategory_id": "RS.MA-01",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Management (RS.MA)",
-      "id": "RS.MA-01",
       "outcome": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
+      "note": null,
+      "implementation_examples": [
         "Detection technologies automatically report confirmed incidents",
         "Request incident response assistance from the organization's incident response outsourcer",
         "Designate an incident lead for each incident",
@@ -1030,52 +1946,102 @@
       ]
     },
     {
+      "subcategory_id": "RS.MA-02",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Management (RS.MA)",
-      "id": "RS.MA-02",
       "outcome": "Incident reports are triaged and validated",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Preliminarily review incident reports to confirm that they are cybersecurity-related and necessitate incident response activities",
         "Apply criteria to estimate the severity of an incident"
       ]
     },
     {
+      "subcategory_id": "RS.MA-03",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Management (RS.MA)",
-      "id": "RS.MA-03",
       "outcome": "Incidents are categorized and prioritized",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Further review and categorize incidents based on the type of incident (e.g., data breach, ransomware, DDoS, account compromise)",
         "Prioritize incidents based on their scope, likely impact, and time-critical nature",
         "Select incident response strategies for active incidents by balancing the need to quickly recover from an incident with the need to observe the attacker or conduct a more thorough investigation"
       ]
     },
     {
+      "subcategory_id": "RS.MA-04",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Management (RS.MA)",
-      "id": "RS.MA-04",
       "outcome": "Incidents are escalated or elevated as needed",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Track and validate the status of all ongoing incidents",
         "Coordinate incident escalation or elevation with designated internal and external stakeholders"
       ]
     },
     {
+      "subcategory_id": "RS.MA-05",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Management (RS.MA)",
-      "id": "RS.MA-05",
       "outcome": "The criteria for initiating incident recovery are applied",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Apply incident recovery criteria to known and assumed characteristics of the incident to determine whether incident recovery processes should be initiated",
         "Take the possible operational disruption of incident recovery activities into account"
       ]
     },
     {
+      "subcategory_id": "RS.AN-03",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Analysis (RS.AN)",
-      "id": "RS.AN-03",
       "outcome": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Determine the sequence of events that occurred during the incident and which assets and resources were involved in each event",
         "Attempt to determine what vulnerabilities, threats, and threat actors were directly or indirectly involved in the incident",
         "Analyze the incident to find the underlying, systemic root causes",
@@ -1083,51 +2049,101 @@
       ]
     },
     {
+      "subcategory_id": "RS.AN-06",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Analysis (RS.AN)",
-      "id": "RS.AN-06",
       "outcome": "Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Require each incident responder and others (e.g., system administrators, cybersecurity engineers) who perform incident response tasks to record their actions and make the record immutable",
         "Require the incident lead to document the incident in detail and be responsible for preserving the integrity of the documentation and the sources of all information being reported"
       ]
     },
     {
+      "subcategory_id": "RS.AN-07",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Analysis (RS.AN)",
-      "id": "RS.AN-07",
       "outcome": "Incident data and metadata are collected, and their integrity and provenance are preserved",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Collect, preserve, and safeguard the integrity of all pertinent incident data and metadata (e.g., data source, date/time of collection) based on evidence preservation and chain-of-custody procedures"
       ]
     },
     {
+      "subcategory_id": "RS.AN-08",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Analysis (RS.AN)",
-      "id": "RS.AN-08",
       "outcome": "An incident's magnitude is estimated and validated",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Review other potential targets of the incident to search for indicators of compromise and evidence of persistence",
         "Automatically run tools on targets to look for indicators of compromise and evidence of persistence"
       ]
     },
     {
+      "subcategory_id": "RS.CO-02",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Response Reporting and Communication (RS.CO)",
-      "id": "RS.CO-02",
       "outcome": "Internal and external stakeholders are notified of incidents",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Follow the organization's breach notification procedures after discovering a data breach incident, including notifying affected customers",
         "Notify business partners and customers of incidents in accordance with contractual requirements",
         "Notify law enforcement agencies and regulatory bodies of incidents based on criteria in the incident response plan and management approval"
       ]
     },
     {
+      "subcategory_id": "RS.CO-03",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Response Reporting and Communication (RS.CO)",
-      "id": "RS.CO-03",
       "outcome": "Information is shared with designated internal and external stakeholders",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Securely share information consistent with response plans and information sharing agreements",
         "Voluntarily share information about an attacker's observed TTPs, with all sensitive data removed, with an Information Sharing and Analysis Center (ISAC)",
         "Notify HR when malicious insider activity occurs",
@@ -1137,11 +2153,21 @@
       ]
     },
     {
+      "subcategory_id": "RS.MI-01",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Mitigation (RS.MI)",
-      "id": "RS.MI-01",
       "outcome": "Incidents are contained",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Cybersecurity technologies (e.g., antivirus software) and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform containment actions",
         "Allow incident responders to manually select and perform containment actions",
         "Allow a third party (e.g., internet service provider, managed security service provider) to perform containment actions on behalf of the organization",
@@ -1149,82 +2175,162 @@
       ]
     },
     {
+      "subcategory_id": "RS.MI-02",
       "function": "RESPOND",
+      "function_id": "RS",
       "category": "Incident Mitigation (RS.MI)",
-      "id": "RS.MI-02",
       "outcome": "Incidents are eradicated",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Cybersecurity technologies and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform eradication actions",
         "Allow incident responders to manually select and perform eradication actions",
         "Allow a third party (e.g., managed security service provider) to perform eradication actions on behalf of the organization"
       ]
     },
     {
+      "subcategory_id": "RC.RP-01",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-01",
       "outcome": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Begin recovery procedures during or after incident response processes",
         "Make all individuals with recovery responsibilities aware of the plans for recovery and the authorizations required to implement each aspect of the plans"
       ]
     },
     {
+      "subcategory_id": "RC.RP-02",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-02",
       "outcome": "Recovery actions are selected, scoped, prioritized, and performed",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Select recovery actions based on the criteria defined in the incident response plan and available resources",
         "Change planned recovery actions based on a reassessment of organizational needs and resources"
       ]
     },
     {
+      "subcategory_id": "RC.RP-03",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-03",
       "outcome": "The integrity of backups and other restoration assets is verified before using them for restoration",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Check restoration assets for indicators of compromise, file corruption, and other integrity issues before use"
       ]
     },
     {
+      "subcategory_id": "RC.RP-04",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-04",
       "outcome": "Critical mission functions and cybersecurity risk management are considered to establish post-incident operational norms",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Use business impact and system categorization records (including service delivery objectives) to validate that essential services are restored in the appropriate order",
         "Work with system owners to confirm the successful restoration of systems and the return to normal operations",
         "Monitor the performance of restored systems to verify the adequacy of the restoration"
       ]
     },
     {
+      "subcategory_id": "RC.RP-05",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-05",
       "outcome": "The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Check restored assets for indicators of compromise and remediation of root causes of the incident before production use",
         "Verify the correctness and adequacy of the restoration actions taken before putting a restored system online"
       ]
     },
     {
+      "subcategory_id": "RC.RP-06",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Plan Execution (RC.RP)",
-      "id": "RC.RP-06",
       "outcome": "The end of incident recovery is declared based on criteria, and incident-related documentation is completed",
-      "implementationExamples": [
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
+      "note": null,
+      "implementation_examples": [
         "Prepare an after-action report that documents the incident itself, the response and recovery actions taken, and lessons learned",
         "Declare the end of incident recovery once the criteria are met"
       ]
     },
     {
+      "subcategory_id": "RC.CO-03",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Communication (RC.CO)",
-      "id": "RC.CO-03",
       "outcome": "Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Securely share recovery information, including restoration progress, consistent with response plans and information sharing agreements",
         "Regularly update senior leadership on recovery status and restoration progress for major incidents",
         "Follow the rules and protocols defined in contracts for incident information sharing between the organization and its suppliers",
@@ -1232,11 +2338,21 @@
       ]
     },
     {
+      "subcategory_id": "RC.CO-04",
       "function": "RECOVER",
+      "function_id": "RC",
       "category": "Incident Recovery Communication (RC.CO)",
-      "id": "RC.CO-04",
       "outcome": "Public updates on incident recovery are shared using approved methods and messaging",
-      "implementationExamples": [
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
+      "note": null,
+      "implementation_examples": [
         "Follow the organization's breach notification procedures for recovering from a data breach incident",
         "Explain the steps being taken to recover from the incident and to prevent a recurrence"
       ]

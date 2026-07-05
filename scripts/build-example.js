@@ -5,10 +5,12 @@
  * It runs the REAL pipeline (ingest -> analyze) against the bundled sample
  * documents using the deterministic MOCK providers, then writes a curated set
  * of human review decisions (accept all, plus two illustrative overrides and a
- * note on the verifier-downgraded item), and finally renders the three
- * deliverables. Because the mock providers are deterministic and timestamps are
- * pinned, re-running this reproduces byte-identical output — so anyone can
- * regenerate the example offline with no API key (`npm run example`).
+ * note on the verifier-downgraded item) and an illustrative Target Profile,
+ * and finally renders every deliverable — current profile, gap analysis,
+ * evidence map, dashboard, target profile, and remediation plan. Because the
+ * mock providers are deterministic and timestamps are pinned, re-running this
+ * reproduces byte-identical output — so anyone can regenerate the example
+ * offline with no API key (`npm run example`).
  *
  * This is also where the fabricated-quote safeguard is visible end-to-end: the
  * mock fabricates a quote for GV.OC-01, the verifier downgrades it to "none",
@@ -96,6 +98,23 @@ async function main() {
     reviews[sub.id] = base;
   }
   await writeJsonAtomic(ctx.paths.reviews, reviews);
+
+  // An illustrative Target Profile (human-owned, like the reviews): substantial
+  // baseline, identity & access raised to "full", one outcome scoped out. It
+  // exists so the committed example exercises the target-side deliverables.
+  await writeJsonAtomic(ctx.paths.target, {
+    schemaVersion: '1.0',
+    createdAt: FIXED_NOW,
+    updatedAt: FIXED_NOW,
+    description:
+      'Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.',
+    default: 'substantial',
+    functions: {},
+    categories: { 'PR.AA': 'full' },
+    subcategories: { 'PR.AA-06': 'not-applicable' },
+    priorities: { 'PR.AA': 'high', 'GV.OC': 'high', RC: 'low' },
+    notes: { 'PR.AA-06': 'Fully remote organization; no physical facilities beyond a registered address.' },
+  });
 
   const result = await report(ctx);
   // eslint-disable-next-line no-console

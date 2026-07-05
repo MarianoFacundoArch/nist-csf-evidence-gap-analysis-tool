@@ -39,6 +39,12 @@ export const csfSchema = {
           category: { type: 'string', minLength: 1 },
           id: { type: 'string', minLength: 1 },
           outcome: { type: 'string', minLength: 1 },
+          // Official NIST Implementation Examples for the outcome (optional so
+          // older/custom exports without them still validate).
+          implementationExamples: {
+            type: 'array',
+            items: { type: 'string', minLength: 1 },
+          },
         },
       },
     },

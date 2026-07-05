@@ -10,5 +10,6 @@ export { init } from './init.js';
 export { ingest } from './ingest.js';
 export { analyze } from './analyze.js';
 export { review } from './review.js';
+export { target } from './target.js';
 export { report } from './report.js';
 export { runAll } from './runAll.js';

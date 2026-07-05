@@ -8,16 +8,18 @@ open source, and may be used by anyone without charge.
 CSF 2.0 Core data (data/csf-core.json)
 -------------------------------------------------------------------------------
 The NIST Cybersecurity Framework (CSF) 2.0 and its Core (Functions, Categories,
-and Subcategory outcome statements) are works of the U.S. Government and are in
-the public domain. The data file shipped here was generated from the official
-machine-readable export of the NIST Cybersecurity and Privacy Reference Tool
-(CPRT): https://csrc.nist.gov/projects/cprt
+Subcategory outcome statements, and Implementation Examples) are works of the
+U.S. Government and are in the public domain. The data file shipped here was
+generated from the official machine-readable export of the NIST Cybersecurity
+and Privacy Reference Tool (CPRT): https://csrc.nist.gov/projects/cprt
 
 The generation is reproducible from the official source with:
     npm run build-csf-core
 See scripts/build-csf-core.js for the exact extraction (it keeps the 22 CSF 2.0
 Categories and drops withdrawn CSF v1.1 entries and "[Withdrawn]" placeholders,
-yielding the 106 live Subcategory outcomes).
+yielding the 106 live Subcategory outcomes, each with its official NIST
+Implementation Examples). Per NIST, Implementation Examples are illustrative and
+not exhaustive; they are not a baseline of required actions.
 
 -------------------------------------------------------------------------------
 Third-party software

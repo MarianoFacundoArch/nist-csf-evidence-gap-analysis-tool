@@ -21,6 +21,7 @@ const validate = ajv.compile(csfSchema);
  *   functions: Array<{id:string,name:string}>,
  *   functionName: (id:string)=>string,
  *   subcategories: Array<{function:string,category:string,id:string,outcome:string,
+ *     implementationExamples?:string[],
  *     functionId:string,categoryId:string,functionName:string}>
  * }>}
  */

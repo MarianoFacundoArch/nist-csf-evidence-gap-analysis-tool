@@ -5,6 +5,14 @@ existing security practices meet the United States' national cybersecurity
 standard — the NIST Cybersecurity Framework (CSF) 2.0 — and shows exactly where
 the gaps are.
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/dashboard-dark.png">
+    <img src="docs/images/dashboard-light.png" alt="The self-contained assessment dashboard: coverage tiles, review status, and coverage-by-Function charts" width="920">
+  </picture>
+</p>
+<p align="center"><em>One of the deliverables: <code>dashboard.html</code> — a single self-contained file (no server, no network) with the whole assessment: coverage, review status, current-vs-target, and every outcome's verified evidence.</em></p>
+
 ## Purpose and significance
 
 Cybersecurity is a recognized national priority in the United States: attacks on
@@ -70,8 +78,15 @@ ISO 27001 documentation, internal procedures). It then:
    evidence shows the outcome is actually achieved.
 3. **Review** — a human-in-the-loop step where you accept, override, or annotate
    each AI judgment alongside its supporting evidence.
-4. **Reports** — turns the reviewed assessments into a Current Profile (JSON), a
-   gap-analysis report (Markdown), and an evidence map (CSV).
+4. **Target** (optional) — you declare a Target Profile: the goal coverage for
+   every outcome (with per-Function/Category/Subcategory overrides), remediation
+   priorities, and outcomes that are out of scope. Targets are human decisions;
+   no AI is involved.
+5. **Reports** — turns the reviewed assessments into a Current Profile (JSON), a
+   gap-analysis report (Markdown), an evidence map (CSV), and a self-contained
+   HTML dashboard — plus, when a target exists, a Target Profile (JSON) and a
+   **prioritized remediation plan** whose suggested actions are NIST's own CSF
+   2.0 Implementation Examples, quoted verbatim.
 
 For a full step-by-step walkthrough, see the **[Usage Guide](docs/GUIDE.md)**.
 
@@ -124,7 +139,8 @@ node bin/csf-tool.js all \
   --work-dir ./output --accept-all
 ```
 
-Then open `./output/reports/gap-analysis.md`. A committed reference copy lives in
+Then open `./output/reports/gap-analysis.md` — and `./output/reports/dashboard.html`
+in a browser for the interactive view. A committed reference copy lives in
 `examples/worked-example/`, regenerable byte-for-byte with `npm run example`.
 
 (`--accept-all` auto-accepts every AI proposal so the demo runs unattended; a
@@ -147,9 +163,15 @@ node bin/csf-tool.js init       # scaffold a config file, .env, and working dir
 node bin/csf-tool.js ingest     # parse + chunk + embed + index your documents
 node bin/csf-tool.js analyze    # AI coverage judgments for all 106 Subcategories
 node bin/csf-tool.js review     # human-in-the-loop validation
-node bin/csf-tool.js report     # generate the three deliverables
+node bin/csf-tool.js target     # define the Target Profile (goals + priorities)
+node bin/csf-tool.js report     # generate the deliverables
 node bin/csf-tool.js all        # run the whole pipeline end-to-end
 ```
+
+The `target` stage is interactive in a terminal; for scripted runs use
+`--target-default <level>` (set the baseline goal) or `--target-import <path>`
+(bring your own spec, e.g. one derived from a NIST Community Profile), or edit
+`<work-dir>/target.json` by hand — it is plain, validated JSON.
 
 Each stage persists its output, so you can stop after any stage and resume later.
 `analyze` is resumable — already-assessed items are skipped unless their inputs
@@ -184,9 +206,34 @@ Written to `<work-dir>/reports/`:
   (`none` / `partial` / `substantial` / `full`), confidence, evidence quotes, the
   AI vs. human values, and review status.
 - **`gap-analysis.md`** — a human-readable report grouped by Function, with a
-  coverage summary and **gaps listed first**.
+  coverage summary and **gaps listed first** (plus a Current-vs-Target section
+  when a target profile exists).
 - **`evidence-map.csv`** — links each Subcategory to its source files and verbatim
   quotes (RFC-4180 quoting, with spreadsheet formula-injection protection).
+- **`dashboard.html`** — a self-contained interactive dashboard (open it with a
+  double click; works offline — no CDN, fonts, or network of any kind). Coverage
+  charts, review status, and a filterable explorer of all 106 outcomes with
+  their verified quotes; light and dark themes; every chart has a table view.
+
+When a target profile exists, two more deliverables complete the CSF 2.0
+Organizational Profile pair:
+
+- **`target-profile.json`** — the machine-readable Target Profile: current vs
+  target coverage, gap size, priority, and scoping per Subcategory.
+- **`remediation-plan.md`** — the prioritized action plan connecting the two
+  profiles: unmet targets ranked by your priorities and distance from the goal,
+  each with NIST's official Implementation Examples as suggested actions
+  (verbatim, public domain — the tool never invents recommendations).
+
+<p align="center">
+  <img src="docs/images/dashboard-target.png" alt="Current vs Target chart and the top remediation priorities, ranked by human-set priority and distance from the goal" width="920">
+</p>
+<p align="center"><em>Current vs Target and the ranked remediation queue — priorities and targets are yours; the ordering is deterministic.</em></p>
+
+<p align="center">
+  <img src="docs/images/dashboard-explorer.png" alt="The subcategory explorer with a row expanded: assessment rationale, verified evidence quotes with their source files, and NIST Implementation Examples as suggested actions" width="920">
+</p>
+<p align="center"><em>Every outcome, drill-down included: the AI's rationale, the quotes verified verbatim against your documents, and NIST's own suggested actions.</em></p>
 
 Example excerpt from a gap-analysis report:
 
@@ -214,10 +261,16 @@ Example excerpt from a gap-analysis report:
   Core — all 6 Functions, 22 Categories, and 106 Subcategories — and produces a
   Current Profile, the artifact CSF 2.0 recommends for understanding current
   cybersecurity posture.
-- **Accurate by construction.** The Subcategory text is taken verbatim from the
-  official NIST CPRT export (reproducible with `npm run build-csf-core`), every
-  AI coverage claim must be backed by a quote that is verified verbatim against
-  the source evidence in code, and nothing is final until a human validates it.
+- **The full Organizational Profile cycle.** CSF 2.0 frames an Organizational
+  Profile as a Current Profile *and* a Target Profile, compared to produce an
+  action plan. The tool covers the whole loop: assess → review → set targets →
+  prioritized remediation plan, with the plan's suggested actions drawn verbatim
+  from NIST's own CSF 2.0 Implementation Examples.
+- **Accurate by construction.** The Subcategory text and Implementation Examples
+  are taken verbatim from the official NIST CPRT export (reproducible with
+  `npm run build-csf-core`), every AI coverage claim must be backed by a quote
+  that is verified verbatim against the source evidence in code, and nothing is
+  final until a human validates it.
 - **Free and reusable.** MIT licensed; runs fully offline if desired; no account,
   subscription, or paid service is required to use it.
 
@@ -255,9 +308,11 @@ reference. Key fields: `csfCorePath`, `docsPath`, `workDir`, `chunk.size`/`overl
 ## Data source (CPRT)
 
 `data/csf-core.json` contains the complete CSF 2.0 Core — all 106 Subcategory
-outcomes across 6 Functions and 22 Categories — generated from the official NIST
-Cybersecurity and Privacy Reference Tool (CPRT) export. The CSF 2.0 Core text is
-in the public domain. Regenerate it from source (requires network and `unzip`):
+outcomes across 6 Functions and 22 Categories, each with its official NIST
+Implementation Examples (the remediation plan's suggested actions) — generated
+from the official NIST Cybersecurity and Privacy Reference Tool (CPRT) export.
+The CSF 2.0 Core text and Implementation Examples are in the public domain.
+Regenerate it from source (requires network and `unzip`):
 
 ```bash
 npm run build-csf-core

@@ -80,6 +80,12 @@ export function defaultConfig() {
     // exists. Normally set per-run via --force.
     force: false,
 
+    // Per-run inputs for the `target` stage (via --target-default /
+    // --target-import). The target profile itself is workDir state
+    // (<workDir>/target.json), not configuration.
+    targetDefault: null,
+    targetImport: null,
+
     // Master offline switch (also via --local). Applied AFTER merge: forces
     // local-transformers embeddings + ollama LLM regardless of other settings.
     local: false,

@@ -12,6 +12,7 @@ import { ingest } from './ingest.js';
 import { analyze } from './analyze.js';
 import { review } from './review.js';
 import { report } from './report.js';
+import { fileExists } from '../util/fsx.js';
 
 export async function runAll(ctx) {
   ctx.logger.info('Running the full pipeline: ingest → analyze → review → report');
@@ -24,6 +25,14 @@ export async function runAll(ctx) {
     ctx.logger.warn(
       'Skipping interactive review (non-interactive session). The report will mark items UNREVIEWED. ' +
         'Run `csf-tool review` to validate them, or re-run with --accept-all.',
+    );
+  }
+
+  // The target stage is optional and human-owned; `all` never creates one, it
+  // just points at it. When a target exists, `report` picks it up automatically.
+  if (!(await fileExists(ctx.paths.target))) {
+    ctx.logger.info(
+      'No target profile set — the report will omit the remediation plan. Run `csf-tool target` to define one.',
     );
   }
 

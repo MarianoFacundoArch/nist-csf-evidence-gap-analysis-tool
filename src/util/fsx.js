@@ -11,7 +11,7 @@
  *    later resume. rename() is atomic on the same filesystem.
  */
 
-import { readFile, writeFile, rename, mkdir, access, readdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, rename, mkdir, access, readdir, stat, rm } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { dirname, join } from 'node:path';
 
@@ -59,6 +59,15 @@ export async function writeFileAtomic(path, contents) {
 export async function writeJsonAtomic(path, value) {
   // 2-space indent + trailing newline => diff-friendly committed artifacts.
   await writeFileAtomic(path, JSON.stringify(value, null, 2) + '\n');
+}
+
+/**
+ * Remove a file if present; no-op when absent. Used to clear a stale generated
+ * deliverable whose precondition went away (e.g. target reports after the
+ * target profile was deleted) so an old artifact can't be mistaken for current.
+ */
+export async function removeIfExists(path) {
+  await rm(path, { force: true });
 }
 
 export { readdir, stat, join };

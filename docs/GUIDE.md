@@ -13,11 +13,12 @@ the deliverables. If you just want the short version, see the Quick start in the
 5. [Walkthrough B — assess your own documents](#5-walkthrough-b--assess-your-own-documents)
 6. [The interactive menu](#6-the-interactive-menu)
 7. [Reviewing the AI's judgments (the important part)](#7-reviewing-the-ais-judgments-the-important-part)
-8. [Reading the outputs](#8-reading-the-outputs)
-9. [Strict mode and resuming](#9-strict-mode-and-resuming)
-10. [Use the full framework / your own CSF export](#10-use-the-full-framework--your-own-csf-export)
-11. [Configuration reference](#11-configuration-reference)
-12. [Troubleshooting](#12-troubleshooting)
+8. [The Target Profile and the remediation plan](#8-the-target-profile-and-the-remediation-plan)
+9. [Reading the outputs](#9-reading-the-outputs)
+10. [Strict mode and resuming](#10-strict-mode-and-resuming)
+11. [Use the full framework / your own CSF export](#11-use-the-full-framework--your-own-csf-export)
+12. [Configuration reference](#12-configuration-reference)
+13. [Troubleshooting](#13-troubleshooting)
 
 ---
 
@@ -32,14 +33,20 @@ relevant pieces of your documents and asks an AI to judge coverage **using only
 that retrieved evidence**. The AI's answer is a *proposal*: it is checked in code
 (every quote must really exist in the evidence) and then validated by you.
 
-Four stages, each saved to disk so you can stop and resume:
+Four stages — plus an optional fifth — each saved to disk so you can stop and
+resume:
 
 ```
-ingest  →  analyze  →  review  →  report
-(parse,    (AI judges    (you       (Current Profile JSON,
- chunk,     coverage      accept/     gap report MD,
- embed)     per item)     override)   evidence map CSV)
+ingest  →  analyze  →  review  →  [target]  →  report
+(parse,    (AI judges    (you        (you set     (Current Profile, gap report,
+ chunk,     coverage      accept/     goals +      evidence map, dashboard —
+ embed)     per item)     override)   priorities)  + target profile & remediation plan)
 ```
+
+The optional `target` stage declares where you *want* to be (a **Target
+Profile**); with one in place, the report also produces a prioritized
+remediation plan that connects the two — which is exactly the Organizational
+Profile workflow CSF 2.0 describes.
 
 ## 2. Install
 
@@ -103,9 +110,10 @@ Analyze complete: 106 assessed, 0 reused, 0 fallback. ... flagged for review.
 Report written to ./output/reports
 ```
 
-Open `./output/reports/gap-analysis.md`. You can also see a committed reference
-copy under `examples/worked-example/output/reports/`, regenerable any time with
-`npm run example`.
+Open `./output/reports/gap-analysis.md` — and `./output/reports/dashboard.html`
+in a browser for the interactive view. You can also see a committed reference
+copy under `examples/worked-example/output/reports/` (including the target-side
+deliverables), regenerable any time with `npm run example`.
 
 > `--accept-all` bulk-accepts the AI proposals so the run is non-interactive.
 > For a real assessment you review interactively instead (Section 7).
@@ -178,9 +186,55 @@ Your decisions are stored separately from the AI assessments, so re-running
 `analyze` never overwrites them. If a later `analyze` changes an item you already
 reviewed, that review is marked **STALE** so you can re-confirm.
 
-## 8. Reading the outputs
+## 8. The Target Profile and the remediation plan
 
-All three are written to `<work-dir>/reports/`:
+A Current Profile tells you where you are. CSF 2.0's real payoff comes from
+comparing it against a **Target Profile** — where you've decided you want to be —
+and working the gap as a plan. The `target` stage records those decisions:
+
+```bash
+node bin/csf-tool.js target
+```
+
+In a terminal this opens an editor where you can:
+
+- set a **baseline** goal for every outcome (default: `substantial`),
+- **override** any Function, Category, or Subcategory (most specific wins —
+  e.g. baseline `substantial`, but all of `PR.AA` to `full`),
+- mark an outcome **not-applicable** with a note (e.g. no OT systems — it is
+  excluded from the met/unmet numbers and listed separately),
+- set **remediation priorities** (`high` / `medium` / `low`) at any granularity,
+- **preview** the resolved targets against your current assessment before saving.
+
+Everything here is a *human* decision — no AI is involved in targets, priorities,
+or scoping. The spec is saved to `<work-dir>/target.json` (human-owned, like your
+reviews: re-running `analyze` never touches it) and it's plain, validated JSON you
+can also edit by hand or keep in version control:
+
+```json
+{
+  "default": "substantial",
+  "categories": { "PR.AA": "full" },
+  "subcategories": { "PR.AA-06": "not-applicable" },
+  "priorities": { "PR.AA": "high", "RC": "low" },
+  "notes": { "PR.AA-06": "Fully remote organization; no physical facilities." }
+}
+```
+
+For scripted runs: `--target-default <level>` sets the baseline, and
+`--target-import <path>` replaces the spec with a file of the same shape (e.g.
+derived from a NIST Community Profile).
+
+With a target in place, `report` additionally produces `target-profile.json` and
+**`remediation-plan.md`** — every unmet target as one ranked list (your priority
+first, then distance from the goal), each item showing the outcome, the
+assessment rationale, and **NIST's official CSF 2.0 Implementation Examples** as
+suggested actions, quoted verbatim from the CPRT export. The tool never invents
+recommendations, the same way it never accepts an unverifiable evidence quote.
+
+## 9. Reading the outputs
+
+Everything is written to `<work-dir>/reports/`:
 
 - **`current-profile.json`** — the machine-readable Current Profile, aligned with
   the CSF 2.0 Organizational Profile concept. One entry per Subcategory with the
@@ -197,12 +251,29 @@ All three are written to `<work-dir>/reports/`:
   Opens cleanly in a spreadsheet (RFC-4180 quoting; spreadsheet formula-injection
   is neutralized).
 
+- **`dashboard.html`** — the same picture as an interactive page: open it with a
+  double click (no server, no network — everything is inline, so nothing about
+  your assessment leaves the machine). Coverage by Function, review progress,
+  current-vs-target when a target exists, and a searchable, filterable explorer
+  of every outcome with its verified quotes. Light/dark themes; each chart has a
+  "view as table" twin.
+
+When a target profile exists (Section 8), two more files appear:
+
+- **`target-profile.json`** — the machine-readable Target Profile: per
+  Subcategory, current vs target coverage, gap size, priority, scoping, and the
+  NIST implementation examples.
+
+- **`remediation-plan.md`** — the prioritized action plan (the artifact you take
+  to planning): overview, current-vs-target by Function, then every unmet target
+  ranked, with NIST's example actions under each.
+
 Coverage levels mean: **none** (not demonstrated), **partial** (addressed in part,
 or only as stated intent/policy), **substantial** (largely achieved in operation),
 **full** (clearly achieved in operation). Intent ("must"/"shall") is treated as
 weaker than records showing the outcome actually happens.
 
-## 9. Strict mode and resuming
+## 10. Strict mode and resuming
 
 - **Strict mode** refuses to emit the final profile until every Subcategory is
   resolved by a human:
@@ -219,7 +290,7 @@ weaker than records showing the outcome actually happens.
   **not** force a full re-analyze. Change a relevant setting (e.g. `--top-k`) or
   pass `--force` to recompute.
 
-## 10. Use the full framework / your own CSF export
+## 11. Use the full framework / your own CSF export
 
 The tool ships with the complete 106-Subcategory CSF 2.0 Core in
 `data/csf-core.json`, generated from the official NIST CPRT export. To regenerate
@@ -238,12 +309,16 @@ like:
   "functions": [{ "id": "GV", "name": "GOVERN" }],
   "subcategories": [
     { "function": "GOVERN", "category": "Organizational Context (GV.OC)",
-      "id": "GV.OC-01", "outcome": "The organizational mission is understood ..." }
+      "id": "GV.OC-01", "outcome": "The organizational mission is understood ...",
+      "implementationExamples": ["Share the organization's mission ..."] }
   ]
 }
 ```
 
-## 11. Configuration reference
+`implementationExamples` is optional; when present, those texts become the
+remediation plan's suggested actions for that outcome.
+
+## 12. Configuration reference
 
 Precedence (low → high): built-in defaults < `csf-tool.config.json` < CLI flags.
 Secrets/endpoints come only from `.env`. Run `csf-tool init` to scaffold a config.
@@ -265,9 +340,11 @@ Secrets/endpoints come only from `.env`. Run `csf-tool init` to scaffold a confi
 Useful flags: `--docs`, `--work-dir`, `--csf-core`, `--top-k`, `--threshold`,
 `--embed-provider`, `--embed-model`, `--llm-provider`, `--llm-model`, `--local`,
 `--critique` / `--no-critique`, `--all`, `--accept-all`, `--strict`, `--force`,
-`--config`, `--verbose`, `--quiet`. Run `--help` for the full list.
+`--target-default`, `--target-import`, `--config`, `--verbose`, `--quiet`. Run
+`--help` for the full list. (The target profile itself is not configuration — it
+is assessment state, stored in `<work-dir>/target.json`; see Section 8.)
 
-## 12. Troubleshooting
+## 13. Troubleshooting
 
 - **"OPENAI_API_KEY is not set"** — add it to `.env`, or run with `--local`, or
   use `--embed-provider mock --llm-provider mock` to try the tool.

@@ -24,6 +24,8 @@ const OPTIONS = {
   'llm-model': { type: 'string' },
   identity: { type: 'string' },
   'fixed-now': { type: 'string' },
+  'target-default': { type: 'string' },
+  'target-import': { type: 'string' },
   strict: { type: 'boolean' },
   critique: { type: 'boolean' },
   'no-critique': { type: 'boolean' },
@@ -75,6 +77,8 @@ export function parseCliArgs(argv) {
   set('llm.model', values['llm-model']);
   set('identity', values.identity);
   set('fixedNow', values['fixed-now']);
+  set('targetDefault', values['target-default']);
+  set('targetImport', values['target-import']);
   if (values.strict) set('analysis.strict', true);
   if (values.critique) set('analysis.critique', true);
   if (values['no-critique']) set('analysis.critique', false);
@@ -106,7 +110,9 @@ COMMANDS
   ingest      Parse documents, chunk, embed, and build the local index
   analyze     Judge coverage of every CSF subcategory against the evidence
   review      Human-in-the-loop review of the AI's judgments
-  report      Generate the Current Profile, gap-analysis report, and evidence map
+  target      Define the Target Profile (goal coverage + priorities per outcome)
+  report      Generate the Current Profile, gap analysis, evidence map, dashboard,
+              and — when a target profile exists — the prioritized remediation plan
   all | run   Run the whole pipeline (ingest -> analyze -> review -> report)
 
 KEY OPTIONS
@@ -124,6 +130,9 @@ KEY OPTIONS
   --critique / --no-critique   Toggle the optional skeptical second pass
   --all                    Review every item (not just flagged ones)
   --accept-all             Non-interactive: accept the whole review queue
+  --target-default <lvl>   Set the target baseline for every subcategory
+                           (none | partial | substantial | full)
+  --target-import <path>   Replace the target profile with the given JSON file
   --strict                 Refuse to emit the profile until all items reviewed
   --force                  Recompute assessments even if cached
   --config <path>          Use a specific config file

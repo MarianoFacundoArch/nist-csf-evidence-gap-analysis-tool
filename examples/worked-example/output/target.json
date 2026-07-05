@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.",
+  "default": "substantial",
+  "functions": {},
+  "categories": {
+    "PR.AA": "full"
+  },
+  "subcategories": {
+    "PR.AA-06": "not-applicable"
+  },
+  "priorities": {
+    "PR.AA": "high",
+    "GV.OC": "high",
+    "RC": "low"
+  },
+  "notes": {
+    "PR.AA-06": "Fully remote organization; no physical facilities beyond a registered address."
+  }
+}

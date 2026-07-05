@@ -9,18 +9,7 @@
  */
 
 import { isGap } from '../engine/coverage.js';
-
-const FUNCTION_ORDER = ['GOVERN', 'IDENTIFY', 'PROTECT', 'DETECT', 'RESPOND', 'RECOVER'];
-
-function orderFunctions(entries) {
-  const names = [...new Set(entries.map((e) => e.function))];
-  names.sort((a, b) => {
-    const ia = FUNCTION_ORDER.indexOf(a);
-    const ib = FUNCTION_ORDER.indexOf(b);
-    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib) || a.localeCompare(b);
-  });
-  return names;
-}
+import { orderFunctions } from '../csf/order.js';
 
 function statusBadge(e) {
   const parts = [];
@@ -41,7 +30,7 @@ function evidenceLines(e, maxChars) {
   });
 }
 
-export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300 } = {}) {
+export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300, targetView = null } = {}) {
   const s = profile.summary;
   const entries = profile.subcategories;
   const out = [];
@@ -81,6 +70,27 @@ export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300 } = {})
     out.push(`| ${fn} | ${es.length} | ${c.none} | ${c.partial} | ${c.substantial} | ${c.full} | ${addressed}% |`);
   }
   out.push('');
+
+  // Current vs Target (only when a target profile exists).
+  if (targetView) {
+    const t = targetView.summary;
+    out.push('## Current vs Target');
+    out.push('');
+    out.push(
+      `Target baseline: **${targetView.baseline}**. Met **${t.met}/${t.applicable}** applicable outcomes ` +
+        `(${t.pctMet}%); unmet ${t.unmet} (high ${t.unmetByPriority.high}, medium ${t.unmetByPriority.medium}, ` +
+        `low ${t.unmetByPriority.low})${t.notApplicable ? `; out of scope ${t.notApplicable}` : ''}.`,
+    );
+    out.push('');
+    out.push('| Function | Applicable | Met | Unmet | Out of scope | % met |');
+    out.push('| --- | ---: | ---: | ---: | ---: | ---: |');
+    for (const f of t.byFunction) {
+      out.push(`| ${f.function} | ${f.applicable} | ${f.met} | ${f.unmet} | ${f.notApplicable} | ${f.pctMet}% |`);
+    }
+    out.push('');
+    out.push('See **remediation-plan.md** for the prioritized action plan that closes these gaps.');
+    out.push('');
+  }
 
   // Gaps first.
   out.push('## Gaps and partial coverage (address these first)');

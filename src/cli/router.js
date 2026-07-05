@@ -26,6 +26,7 @@ const COMMANDS = {
   ingest: actions.ingest,
   analyze: actions.analyze,
   review: actions.review,
+  target: actions.target,
   report: actions.report,
   all: actions.runAll,
   run: actions.runAll,

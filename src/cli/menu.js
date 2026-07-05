@@ -21,7 +21,8 @@ export async function startMenu(ctx) {
       { value: 'ingest', label: 'Ingest documents (parse + embed + index)' },
       { value: 'analyze', label: 'Analyze coverage (AI judgments)' },
       { value: 'review', label: 'Review AI judgments (human-in-the-loop)' },
-      { value: 'report', label: 'Generate reports (profile, gaps, evidence map)' },
+      { value: 'target', label: 'Set the target profile (goal coverage + priorities)' },
+      { value: 'report', label: 'Generate reports (profile, gaps, remediation plan, dashboard)' },
       { value: 'all', label: 'Run everything (ingest → analyze → review → report)' },
       { value: 'exit', label: 'Exit' },
     ]);

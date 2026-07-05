@@ -20,6 +20,8 @@ export async function init(ctx) {
   delete cfg.force;
   delete cfg.acceptAll;
   delete cfg.fixedNow;
+  delete cfg.targetDefault;
+  delete cfg.targetImport;
 
   if (await fileExists(configPath)) {
     logger.info(`Config already exists: ${configPath} (left unchanged).`);
@@ -40,5 +42,6 @@ export async function init(ctx) {
   logger.info(created.length ? `Created: ${created.join(', ')}` : 'Nothing to create — already initialized.');
   logger.info('Next: set "docsPath" in the config (or pass --docs), add any API key to .env, then run `csf-tool all`.');
   logger.info('For a fully offline run, install Ollama + a local model and use `--local`.');
+  logger.info('Optional: define a Target Profile with `csf-tool target` to get a prioritized remediation plan.');
   return { configPath, created };
 }

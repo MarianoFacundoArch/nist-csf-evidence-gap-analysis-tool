@@ -43,6 +43,9 @@ export class ProviderError extends AppError {}
 /** The CSF core data file is missing or malformed. */
 export class CsfDataError extends AppError {}
 
+/** The target-profile file (<work-dir>/target.json) is malformed. */
+export class TargetDataError extends AppError {}
+
 /**
  * Strict mode refused to emit the final profile because not every subcategory
  * has been resolved by a human reviewer. This is a deliberate stop, not a bug.

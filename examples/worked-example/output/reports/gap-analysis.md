@@ -24,6 +24,21 @@
 | RESPOND | 13 | 12 | 1 | 0 | 0 | 0% |
 | RECOVER | 8 | 4 | 4 | 0 | 0 | 0% |
 
+## Current vs Target
+
+Target baseline: **substantial**. Met **10/105** applicable outcomes (10%); unmet 95 (high 9, medium 78, low 8); out of scope 1.
+
+| Function | Applicable | Met | Unmet | Out of scope | % met |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| GOVERN | 31 | 7 | 24 | 0 | 23% |
+| IDENTIFY | 21 | 3 | 18 | 0 | 14% |
+| PROTECT | 21 | 0 | 21 | 1 | 0% |
+| DETECT | 11 | 0 | 11 | 0 | 0% |
+| RESPOND | 13 | 0 | 13 | 0 | 0% |
+| RECOVER | 8 | 0 | 8 | 0 | 0% |
+
+See **remediation-plan.md** for the prioritized action plan that closes these gaps.
+
 ## Gaps and partial coverage (address these first)
 
 ### GOVERN

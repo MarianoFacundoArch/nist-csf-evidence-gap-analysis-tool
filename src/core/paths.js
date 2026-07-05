@@ -22,10 +22,16 @@ export function resolvePaths(workDir) {
     assessments: join(root, 'assessments.json'),
     // REVIEW output: human decisions keyed by subcategory id (human-owned).
     reviews: join(root, 'reviews.json'),
-    // REPORT output: the three deliverables.
+    // TARGET output: the target-profile spec (human-owned, like reviews).
+    target: join(root, 'target.json'),
+    // REPORT output: the deliverables.
     reportsDir: reports,
     currentProfile: join(reports, 'current-profile.json'),
     gapReport: join(reports, 'gap-analysis.md'),
     evidenceMap: join(reports, 'evidence-map.csv'),
+    dashboard: join(reports, 'dashboard.html'),
+    // Emitted only when a target profile exists.
+    targetProfile: join(reports, 'target-profile.json'),
+    remediationPlan: join(reports, 'remediation-plan.md'),
   };
 }
