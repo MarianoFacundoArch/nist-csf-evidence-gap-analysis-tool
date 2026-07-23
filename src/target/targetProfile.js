@@ -184,6 +184,8 @@ export function buildTargetView(profile, spec, csf) {
   return {
     baseline: spec.default,
     description: spec.description ?? null,
+    createdAt: typeof spec.createdAt === 'string' ? spec.createdAt : null,
+    updatedAt: typeof spec.updatedAt === 'string' ? spec.updatedAt : null,
     summary: {
       total: entries.length,
       applicable: applicable.length,

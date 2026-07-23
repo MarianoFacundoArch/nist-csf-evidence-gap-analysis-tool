@@ -8,6 +8,8 @@ import { renderGapMarkdown } from '../src/report/gapMarkdown.js';
 import { renderDashboardHtml } from '../src/report/htmlDashboard.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
+const TARGET_CREATED = '2025-12-01T10:00:00.000Z';
+const TARGET_UPDATED = '2025-12-15T16:30:00.000Z';
 
 const CSF = {
   frameworkVersion: 'CSF 2.0',
@@ -61,6 +63,8 @@ function fixtures() {
   };
   const profile = buildProfile(CTX, { csf: CSF, assessments, reviews: {}, meta: {} });
   const spec = validateTargetSpec({
+    createdAt: TARGET_CREATED,
+    updatedAt: TARGET_UPDATED,
     default: 'substantial',
     categories: { 'PR.AA': 'full' },
     subcategories: { 'PR.AA-05': 'not-applicable' },
@@ -70,6 +74,34 @@ function fixtures() {
   const view = buildTargetView(profile, spec, CSF);
   return { profile, view };
 }
+
+test('current profile exposes snapshot activity from run metadata and human reviews', () => {
+  const assessments = {
+    'GV.OC-01': assessment('GV.OC-01', 'substantial'),
+    'GV.OC-02': assessment('GV.OC-02', 'none'),
+    'PR.AA-01': assessment('PR.AA-01', 'partial'),
+    'PR.AA-05': assessment('PR.AA-05', 'none'),
+  };
+  const reviews = {
+    'GV.OC-01': { reviewed_at: '2025-12-20T09:00:00.000Z' },
+    'PR.AA-01': { reviewed_at: '2025-12-22T14:45:00.000Z' },
+  };
+  const meta = {
+    ingested_at: '2025-12-18T08:00:00.000Z',
+    analyzed_at: '2025-12-19T12:30:00.000Z',
+    ingest_report: { parsed: 7, skipped: 1, failed: 2 },
+  };
+  const profile = buildProfile(CTX, { csf: CSF, assessments, reviews, meta });
+
+  assert.deepEqual(profile.activity, {
+    ingestedAt: meta.ingested_at,
+    analyzedAt: meta.analyzed_at,
+    lastReviewedAt: '2025-12-22T14:45:00.000Z',
+    reviewDecisions: 2,
+    analysis: { status: 'complete', assessed: 4, total: 4, reasons: [] },
+    documents: { parsed: 7, skipped: 1, failed: 2 },
+  });
+});
 
 test('remediation plan: prioritized, grounded in NIST examples, honest about review state', () => {
   const { profile, view } = fixtures();
@@ -116,6 +148,8 @@ test('target-profile.json mirrors the current profile envelope and carries the e
   assert.equal(t.frameworkVersion, 'CSF 2.0');
   assert.equal(t.generatedAt, NOW);
   assert.equal(t.baseline, 'substantial');
+  assert.equal(view.createdAt, TARGET_CREATED);
+  assert.equal(view.updatedAt, TARGET_UPDATED);
   assert.deepEqual(t.review, { reviewed: 0, unreviewed: 4, stale: 0 });
   assert.equal(t.subcategories.length, 4);
   const na = t.subcategories.find((e) => e.subcategory_id === 'PR.AA-05');
@@ -160,6 +194,19 @@ test('dashboard HTML is self-contained and escapes hostile document text', () =>
   assert.equal(data.profile.subcategories.length, 4);
   assert.deepEqual(data.planOrder, ['GV.OC-02', 'PR.AA-01']);
   assert.equal(data.target.baseline, 'substantial');
+  assert.equal(data.target.createdAt, TARGET_CREATED);
+  assert.equal(data.target.updatedAt, TARGET_UPDATED);
+  assert.match(html, /Assessment activity/);
+  assert.match(html, /Human overrides/);
+  assert.match(html, /Needs attention/);
+  assert.match(html, /Search outcomes, rationale, notes, sources, quotes/);
+  assert.match(html, /setAttribute\('datetime', iso\)/);
+  assert.match(html, /setAttribute\('aria-live','polite'\)/);
+  assert.match(html, /:root\[data-theme=dark\]\{\s*--page:#fff/);
+  assert.ok(!/\.innerHTML\s*=/.test(html));
+  const appScript = /<script>([\s\S]*?)<\/script>\s*<\/body>/.exec(html);
+  assert.ok(appScript, 'dashboard application script present');
+  assert.doesNotThrow(() => new Function(appScript[1]));
 });
 
 test('dashboard HTML renders without a target profile too', () => {

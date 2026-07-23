@@ -1,6 +1,6 @@
 {
   "name": "nist-csf-evidence-gap-analysis-tool",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Free, open-source tool for NIST CSF 2.0 Organizational Profiles: AI-assisted, human-validated evidence and gap analysis across all 106 Subcategory outcomes, plus Target Profiles, a prioritized remediation plan grounded in NIST Implementation Examples, and a self-contained dashboard.",
   "license": "MIT",
   "author": "Mariano Facundo Scigliano <mfacundo94@gmail.com>",
@@ -27,7 +27,11 @@
     "src/",
     "data/",
     "scripts/",
-    "examples/",
+    "examples/sample-docs/",
+    "examples/worked-example/config.json",
+    "examples/worked-example/output/reports/",
+    "examples/worked-example/output/reviews.json",
+    "examples/worked-example/output/target.json",
     "docs/",
     "README.md",
     "LICENSE",
@@ -39,6 +43,7 @@
   ],
   "scripts": {
     "start": "node bin/csf-tool.js",
+    "status": "node bin/csf-tool.js status",
     "init": "node bin/csf-tool.js init",
     "ingest": "node bin/csf-tool.js ingest",
     "analyze": "node bin/csf-tool.js analyze",

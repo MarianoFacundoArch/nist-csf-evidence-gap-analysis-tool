@@ -63,26 +63,26 @@ const CSS = `
   --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
   --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
   --cov-none:#86b6ef; --cov-partial:#3987e5; --cov-substantial:#1c5cab; --cov-full:#0d366b;
-  --accent:#2a78d6;
+  --accent:#246bc1; --accent-ink:#fff;
   --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
 }
 @media (prefers-color-scheme: dark){ :root{
   --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
   --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
   --cov-none:#184f95; --cov-partial:#2a78d6; --cov-substantial:#6da7ec; --cov-full:#b7d3f6;
-  --accent:#3987e5;
+  --accent:#3987e5; --accent-ink:#0b0b0b;
 }}
 :root[data-theme=light]{
   --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
   --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
   --cov-none:#86b6ef; --cov-partial:#3987e5; --cov-substantial:#1c5cab; --cov-full:#0d366b;
-  --accent:#2a78d6;
+  --accent:#246bc1; --accent-ink:#fff;
 }
 :root[data-theme=dark]{
   --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
   --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
   --cov-none:#184f95; --cov-partial:#2a78d6; --cov-substantial:#6da7ec; --cov-full:#b7d3f6;
-  --accent:#3987e5;
+  --accent:#3987e5; --accent-ink:#0b0b0b;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
@@ -102,11 +102,24 @@ button.ghost[aria-pressed=true]{color:var(--ink);border-color:var(--axis)}
   padding:10px 14px;margin:14px 0 0;font-size:13px;color:var(--ink2)}
 .banner .ic{flex:none;font-size:14px}
 .banner strong{color:var(--ink)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}
+.activity-card{padding:14px 16px;margin:14px 0 0}
+.activity-card .head{margin-bottom:10px}
+.activity-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.activity-item{min-width:0;background:var(--page);border:1px solid var(--border);
+  border-radius:8px;padding:9px 10px}
+.activity-top{display:flex;align-items:center;gap:6px;color:var(--ink2);font-size:12px}
+.activity-mark{font-weight:700;line-height:1}
+.activity-item.ok .activity-mark{color:var(--good)}
+.activity-item.attention .activity-mark{color:var(--serious)}
+.activity-item.optional .activity-mark{color:var(--muted)}
+.activity-when{display:block;color:var(--ink);font-size:12.5px;font-weight:600;margin-top:3px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.activity-meta{color:var(--ink2);font-size:11.5px;margin-top:1px;min-height:17px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0}
 .tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
 .tile .lbl{font-size:12.5px;color:var(--ink2)}
 .tile .val{font-size:30px;font-weight:600;margin:2px 0 0}
-.tile .ctx{font-size:12px;color:var(--muted);margin-top:2px}
+.tile .ctx{font-size:12px;color:var(--ink2);margin-top:2px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;
   padding:18px 20px;margin:0 0 16px;position:relative}
 .card h2{font-size:15px;font-weight:650;margin:0}
@@ -135,11 +148,19 @@ table.tbl td.n,table.tbl th.n{text-align:right;font-variant-numeric:tabular-nums
 .chip .dot{width:9px;height:9px;border-radius:3px;flex:none}
 .badge{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px;color:var(--ink2)}
 .badge .st{width:8px;height:8px;border-radius:50%;flex:none}
+.override-tag{display:inline-block;margin-left:6px;border:1px solid var(--border);border-radius:999px;
+  color:var(--ink2);font-size:10.5px;line-height:1.4;padding:1px 5px;vertical-align:1px}
+.quick-filters{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0 0 9px}
+.quick-filters .qlbl{color:var(--ink2);font-size:12px;margin-right:1px}
+button.filter-chip{background:var(--page);border:1px solid var(--border);border-radius:999px;
+  color:var(--ink2);cursor:pointer;font:inherit;font-size:12px;padding:4px 9px}
+button.filter-chip:hover{color:var(--ink);border-color:var(--axis)}
+button.filter-chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
 .filters input[type=search],.filters select{background:var(--page);border:1px solid var(--border);
   border-radius:8px;color:var(--ink);font:inherit;font-size:12.5px;padding:6px 9px}
 .filters input[type=search]{flex:1 1 200px;min-width:160px}
-.filters .count{align-self:center;font-size:12px;color:var(--muted);margin-left:auto}
+.filters .count{align-self:center;font-size:12px;color:var(--ink2);margin-left:auto}
 tr.mrow{cursor:pointer}
 tr.mrow:hover td{background:color-mix(in srgb,var(--accent) 5%,transparent)}
 tr.mrow td .chev{display:inline-block;transition:transform .12s;color:var(--muted)}
@@ -158,8 +179,16 @@ ol.plan li{margin:7px 0}
 ol.plan .meta{color:var(--ink2)}
 ol.plan .o{color:var(--muted);font-size:12.5px;display:block}
 footer.foot{color:var(--muted);font-size:12px;margin-top:26px;line-height:1.6}
+@media (max-width:800px){ .activity-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:640px){ .tiles{grid-template-columns:repeat(2,1fr)} }
-@media print{ .filters,button.ghost{display:none} body{background:#fff} .card{break-inside:avoid} }
+@media print{
+  :root,:root[data-theme=light],:root[data-theme=dark]{
+    --page:#fff;--surface:#fff;--ink:#0b0b0b;--ink2:#52514e;--muted:#52514e;
+    --grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.16);
+  }
+  .filters,.quick-filters,button.ghost{display:none}
+  body{background:#fff}.card{break-inside:avoid}
+}
 `;
 
 /* -------------------------- client-side application ------------------------ */
@@ -197,6 +226,24 @@ function cssVar(name){
 }
 function pct(part, whole){ return whole ? Math.round(part / whole * 100) : 0; }
 function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+function timeNode(iso, fallback){
+  if (!iso) return el('span', null, fallback || 'Not recorded');
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return el('span', null, String(iso));
+  var label;
+  try {
+    label = d.toLocaleString(undefined, {
+      year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
+    });
+  } catch (e) {
+    label = d.toLocaleString();
+  }
+  var n = el('time', null, label);
+  n.setAttribute('datetime', iso);
+  n.setAttribute('title', iso);
+  n.setAttribute('aria-label', label + '; ISO timestamp ' + iso);
+  return n;
+}
 
 /* ------------------------------- header ---------------------------------- */
 var wrap = el('div','wrap');
@@ -209,7 +256,9 @@ var sub = el('p','sub');
 function subSpan(t){ sub.appendChild(el('span', null, t)); }
 function subSep(){ var s = el('span','sep','·'); sub.appendChild(s); }
 subSpan(P.framework + ' (' + P.frameworkVersion + ')');
-subSep(); subSpan('Generated ' + P.generatedAt);
+subSep();
+sub.appendChild(document.createTextNode('Generated '));
+sub.appendChild(timeNode(P.generatedAt, 'date unavailable'));
 subSep(); subSpan('embeddings: ' + P.providers.embeddings);
 subSep(); subSpan('reasoning: ' + P.providers.llm);
 if (P.tool && P.tool.name) { subSep(); subSpan(P.tool.name + ' v' + P.tool.version); }
@@ -251,6 +300,64 @@ if (S.unreviewed > 0 || S.stale > 0) {
   wrap.appendChild(bn);
 }
 
+/* ------------------------- activity / snapshot ---------------------------- */
+var A = P.activity || {};
+var activity = el('section','card activity-card');
+activity.setAttribute('aria-labelledby','activity-title');
+var activityHead = el('div','head');
+var activityHd = el('div');
+var activityTitle = el('h2', null, 'Assessment activity');
+activityTitle.id = 'activity-title';
+activityHd.appendChild(activityTitle);
+activityHd.appendChild(el('p','desc',
+  'Milestones captured in this self-contained snapshot. Regenerate the report to reflect later work.'));
+activityHead.appendChild(activityHd);
+activity.appendChild(activityHead);
+var activityGrid = el('div','activity-grid');
+function activityItem(label, iso, detail, state, emptyText){
+  var item = el('div','activity-item ' + state);
+  var topLine = el('div','activity-top');
+  var mark = el('span','activity-mark', state === 'ok' ? '✓' : state === 'attention' ? '!' : '·');
+  mark.setAttribute('aria-hidden','true');
+  topLine.appendChild(mark);
+  topLine.appendChild(el('span', null, label));
+  item.appendChild(topLine);
+  var when = el('div','activity-when');
+  when.appendChild(timeNode(iso, emptyText));
+  item.appendChild(when);
+  item.appendChild(el('div','activity-meta',detail));
+  activityGrid.appendChild(item);
+}
+var docDetail = A.documents
+  ? A.documents.parsed + ' parsed · ' + A.documents.skipped + ' skipped · ' + A.documents.failed + ' failed'
+  : 'Document counts unavailable';
+var documentState = A.ingestedAt
+  ? A.documents && A.documents.failed > 0 ? 'attention' : 'ok'
+  : 'optional';
+activityItem('Documents ingested', A.ingestedAt, docDetail, documentState, 'Not recorded');
+var analysisActivity = A.analysis || {};
+var analyzedCount = analysisActivity.assessed == null ? S.totalSubcategories : analysisActivity.assessed;
+var analyzedTotal = analysisActivity.total == null ? S.totalSubcategories : analysisActivity.total;
+var analysisDetail = analyzedCount + ' of ' + analyzedTotal + ' outcomes assessed';
+if (analysisActivity.reasons && analysisActivity.reasons.length) {
+  analysisDetail += ' · ' + analysisActivity.reasons.join(', ');
+}
+var analysisState = analysisActivity.status === 'complete'
+  ? 'ok'
+  : analyzedCount > 0 || A.analyzedAt ? 'attention' : 'optional';
+activityItem('Coverage analyzed', A.analyzedAt, analysisDetail,
+  analysisState, 'Not recorded');
+var reviewPending = S.unreviewed + S.stale;
+var reviewDetail = S.reviewed + ' current · ' + reviewPending + ' pending';
+activityItem('Human review', A.lastReviewedAt, reviewDetail,
+  reviewPending ? 'attention' : A.lastReviewedAt ? 'ok' : 'optional', 'No review recorded');
+var targetAt = T ? (T.updatedAt || T.createdAt) : null;
+activityItem('Target updated', targetAt,
+  T ? 'Baseline: ' + T.baseline : 'Optional stage', targetAt ? 'ok' : 'optional', T ? 'Date unavailable' : 'Not configured');
+activityItem('Snapshot generated', P.generatedAt, 'Offline, self-contained report', 'ok', 'Date unavailable');
+activity.appendChild(activityGrid);
+wrap.appendChild(activity);
+
 /* ------------------------------ stat tiles -------------------------------- */
 var tiles = el('div','tiles');
 function tile(label, value, ctx){
@@ -266,6 +373,7 @@ tile('Outcomes addressed', pct(addressed, S.totalSubcategories) + '%',
 tile('Gaps', String(S.gaps), 'none ' + S.byCoverage.none + ' · partial ' + S.byCoverage.partial);
 tile('Review progress', pct(S.reviewed, S.totalSubcategories) + '%',
   S.reviewed + ' reviewed · ' + S.unreviewed + ' unreviewed · ' + S.stale + ' stale');
+tile('Human overrides', String(S.overridden), 'AI judgments changed by a current human review');
 tile('Verifier downgrades', String(S.downgradedByVerifier), 'claims dropped for unverifiable quotes');
 if (T) tile('Target met', T.summary.pctMet + '%',
   T.summary.met + ' of ' + T.summary.applicable + ' applicable at target' +
@@ -583,10 +691,56 @@ xhd.appendChild(el('p','desc','Every assessed outcome with its verified evidence
 xhead.appendChild(xhd);
 xcard.appendChild(xhead);
 
+function quickMatches(mode, e){
+  var tgt = targetById[e.subcategory_id];
+  var gap = e.coverage === 'none' || e.coverage === 'partial';
+  var pendingReview = e.review_status === 'unreviewed' || e.review_status === 'stale';
+  var unmetTarget = !!(tgt && !tgt.not_applicable && !tgt.met);
+  if (mode === 'attention') return gap || pendingReview || unmetTarget;
+  if (mode === 'gaps') return gap;
+  if (mode === 'review') return pendingReview;
+  if (mode === 'unmet') return unmetTarget;
+  return true;
+}
+var quickMode = '';
+var quickButtons = [];
+var quickFilters = el('div','quick-filters');
+quickFilters.setAttribute('role','group');
+quickFilters.setAttribute('aria-label','Quick filters');
+quickFilters.appendChild(el('span','qlbl','Quick filters'));
+function addQuickFilter(mode, label){
+  var count = P.subcategories.filter(function(e){ return quickMatches(mode, e); }).length;
+  var b = el('button','filter-chip',label + ' · ' + count);
+  b.type = 'button';
+  b.setAttribute('aria-pressed','false');
+  b.setAttribute('aria-label',label + ', ' + count + ' outcomes');
+  b.addEventListener('click', function(){
+    quickMode = quickMode === mode ? '' : mode;
+    fCov.value = '';
+    fRev.value = '';
+    if (fTgt) fTgt.value = '';
+    updateQuickButtons();
+    renderTable();
+  });
+  quickButtons.push({ mode:mode, button:b });
+  quickFilters.appendChild(b);
+}
+function updateQuickButtons(){
+  quickButtons.forEach(function(item){
+    item.button.setAttribute('aria-pressed',String(item.mode === quickMode));
+  });
+}
+addQuickFilter('attention','Needs attention');
+addQuickFilter('gaps','Gaps');
+addQuickFilter('review','Review pending');
+if (T) addQuickFilter('unmet','Unmet target');
+xcard.appendChild(quickFilters);
+
 var filters = el('div','filters');
 var search = document.createElement('input');
 search.type = 'search';
-search.placeholder = 'Search id, outcome, category…';
+search.placeholder = 'Search outcomes, rationale, notes, sources, quotes…';
+search.setAttribute('aria-label','Search subcategories and evidence');
 filters.appendChild(search);
 function sel(labelText, opts){
   var s = document.createElement('select');
@@ -605,6 +759,9 @@ var fRev = sel('Review status', [['','All review states'],['reviewed','Reviewed'
 var fTgt = null;
 if (T) fTgt = sel('Target status', [['','All vs target'],['unmet','Unmet target'],['met','At/above target'],['na','Out of scope']]);
 var countLbl = el('span','count','');
+countLbl.setAttribute('role','status');
+countLbl.setAttribute('aria-live','polite');
+countLbl.setAttribute('aria-atomic','true');
 filters.appendChild(countLbl);
 xcard.appendChild(filters);
 
@@ -614,6 +771,22 @@ xcard.appendChild(tblWrap);
 
 var REV_COLOR = { reviewed:'--good', unreviewed:'--warning', stale:'--serious' };
 var REV_ICON = { reviewed:'✓', unreviewed:'⚠', stale:'⟳' };
+var searchIndex = {};
+P.subcategories.forEach(function(e){
+  var parts = [
+    e.subcategory_id, e.outcome, e.category, e.function, e.coverage, e.ai_coverage,
+    e.human_coverage, e.rationale, e.reviewer_notes, e.reviewer
+  ];
+  (e.evidence || []).forEach(function(ev){ parts.push(ev.source_file, ev.quote); });
+  var tgt = targetById[e.subcategory_id];
+  if (tgt) {
+    parts.push(tgt.target_coverage, tgt.priority, tgt.note);
+    (tgt.implementation_examples || []).forEach(function(ex){ parts.push(ex); });
+  }
+  searchIndex[e.subcategory_id] = parts.filter(function(value){
+    return value != null && value !== '';
+  }).join(' ').toLowerCase();
+});
 
 function coverageChip(cov){
   var c = el('span','chip');
@@ -638,6 +811,10 @@ function detailCell(e, t, cols){
   var box = el('div','det');
   box.appendChild(el('p','out', e.outcome));
   box.appendChild(el('p','rat', e.rationale));
+  if (e.human_coverage != null) {
+    box.appendChild(el('p','rat','Human override: AI proposed ' + e.ai_coverage +
+      '; reviewer set ' + e.human_coverage + (e.reviewer ? ' (' + e.reviewer + ')' : '') + '.'));
+  }
   if (e.reviewer_notes) box.appendChild(el('p','rat','Reviewer note: ' + e.reviewer_notes));
   if (t && t.note) box.appendChild(el('p','rat','Target note: ' + t.note));
 
@@ -667,6 +844,7 @@ function renderTable(){
   var q = search.value.trim().toLowerCase();
   var rows = P.subcategories.filter(function(e){
     if (fFn.value && e.function !== fFn.value) return false;
+    if (quickMode && !quickMatches(quickMode, e)) return false;
     if (fCov.value === 'gaps') { if (e.coverage !== 'none' && e.coverage !== 'partial') return false; }
     else if (fCov.value && e.coverage !== fCov.value) return false;
     if (fRev.value && e.review_status !== fRev.value) return false;
@@ -678,8 +856,7 @@ function renderTable(){
       if (fTgt.value === 'na' && !t.not_applicable) return false;
     }
     if (q) {
-      var hay = (e.subcategory_id + ' ' + e.outcome + ' ' + e.category + ' ' + e.function).toLowerCase();
-      if (hay.indexOf(q) < 0) return false;
+      if (searchIndex[e.subcategory_id].indexOf(q) < 0) return false;
     }
     return true;
   });
@@ -709,6 +886,12 @@ function renderTable(){
     r.appendChild(el('td', null, e.function));
     var covTd = document.createElement('td');
     covTd.appendChild(coverageChip(e.coverage));
+    if (e.human_coverage != null) {
+      var overrideTag = el('span','override-tag','human');
+      overrideTag.setAttribute('title','Human override: ' + e.ai_coverage + ' → ' + e.human_coverage);
+      overrideTag.setAttribute('aria-label','Human override from ' + e.ai_coverage + ' to ' + e.human_coverage);
+      covTd.appendChild(overrideTag);
+    }
     r.appendChild(covTd);
     r.appendChild(el('td','n', e.confidence.toFixed(2)));
     var revTd = document.createElement('td');
@@ -737,8 +920,14 @@ function renderTable(){
   });
   tblWrap.appendChild(t);
 }
-[search, fFn, fCov, fRev].concat(fTgt ? [fTgt] : []).forEach(function(ctl){
-  ctl.addEventListener('input', renderTable);
+search.addEventListener('input', renderTable);
+fFn.addEventListener('input', renderTable);
+[fCov, fRev].concat(fTgt ? [fTgt] : []).forEach(function(ctl){
+  ctl.addEventListener('input', function(){
+    quickMode = '';
+    updateQuickButtons();
+    renderTable();
+  });
 });
 renderTable();
 wrap.appendChild(xcard);

@@ -12,6 +12,10 @@ import { chunkDocument } from '../ingest/chunker.js';
 import { buildIndex, saveIndex } from '../store/vectorStore.js';
 import { writeJsonAtomic, readJsonSafe } from '../util/fsx.js';
 import { ConfigError } from '../core/errors.js';
+import { basename } from 'node:path';
+import { readFileSync } from 'node:fs';
+
+const pkg = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
 
 async function resolveDocsPath(ctx) {
   let docsPath = ctx.config.docsPath;
@@ -42,7 +46,11 @@ export async function ingest(ctx) {
 
   const report = { parsed: [], skipped: [], failed: [] };
   const allChunks = [];
-  for (const file of files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    if (shouldLogFileProgress(i, files.length)) {
+      logger.info(`Parsing ${i + 1}/${files.length} (${Math.round(((i + 1) / files.length) * 100)}%): ${basename(file)}`);
+    }
     try {
       const doc = await parseFile(file);
       const chunks = chunkDocument(doc, ctx.config.chunk);
@@ -83,7 +91,9 @@ export async function ingest(ctx) {
 
   // Persist run metadata (no secrets) for staleness detection + reporting.
   const meta = (await readJsonSafe(ctx.paths.meta, {})) ?? {};
-  meta.tool_version = index.created_at;
+  meta.tool_version = pkg.version;
+  meta.index_created_at = index.created_at;
+  meta.index_id = index.index_id ?? index.created_at;
   meta.embedder_id = embedder.id;
   meta.embedding_dim = dim;
   meta.chunk_params = ctx.config.chunk;
@@ -101,4 +111,10 @@ export async function ingest(ctx) {
     fileCount: files.length,
     report,
   };
+}
+
+function shouldLogFileProgress(index, total) {
+  if (total <= 20) return true;
+  const interval = Math.max(1, Math.ceil(total / 10));
+  return index === 0 || (index + 1) % interval === 0 || index + 1 === total;
 }

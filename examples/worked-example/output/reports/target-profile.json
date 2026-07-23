@@ -6,7 +6,7 @@
   "generatedAt": "2026-01-01T00:00:00.000Z",
   "tool": {
     "name": "nist-csf-evidence-gap-analysis-tool",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "disclaimer": "Organizational Target Profile — companion to current-profile.json. Targets, priorities, and not-applicable scoping are human decisions recorded in the target profile file; no AI makes them. implementation_examples are the official NIST CSF 2.0 Implementation Examples (public domain, source: NIST CPRT) — illustrative, not exhaustive.",
   "baseline": "substantial",

@@ -7,6 +7,7 @@
  */
 
 export { init } from './init.js';
+export { status } from './status.js';
 export { ingest } from './ingest.js';
 export { analyze } from './analyze.js';
 export { review } from './review.js';

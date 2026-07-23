@@ -11,11 +11,11 @@ the deliverables. If you just want the short version, see the Quick start in the
 3. [Choose how the AI runs (providers)](#3-choose-how-the-ai-runs-providers)
 4. [Walkthrough A — try it offline in 1 minute (no key)](#4-walkthrough-a--try-it-offline-in-1-minute-no-key)
 5. [Walkthrough B — assess your own documents](#5-walkthrough-b--assess-your-own-documents)
-6. [The interactive menu](#6-the-interactive-menu)
+6. [The interactive menu and assessment status](#6-the-interactive-menu-and-assessment-status)
 7. [Reviewing the AI's judgments (the important part)](#7-reviewing-the-ais-judgments-the-important-part)
 8. [The Target Profile and the remediation plan](#8-the-target-profile-and-the-remediation-plan)
 9. [Reading the outputs](#9-reading-the-outputs)
-10. [Strict mode and resuming](#10-strict-mode-and-resuming)
+10. [Strict mode, freshness, and resuming](#10-strict-mode-freshness-and-resuming)
 11. [Use the full framework / your own CSF export](#11-use-the-full-framework--your-own-csf-export)
 12. [Configuration reference](#12-configuration-reference)
 13. [Troubleshooting](#13-troubleshooting)
@@ -47,6 +47,10 @@ The optional `target` stage declares where you *want* to be (a **Target
 Profile**); with one in place, the report also produces a prioritized
 remediation plan that connects the two — which is exactly the Organizational
 Profile workflow CSF 2.0 describes.
+
+The read-only `status` command sits across this pipeline: it inspects the saved
+artifacts, reports what is complete or stale, and recommends the next command
+without running a provider or changing the assessment.
 
 ## 2. Install
 
@@ -115,6 +119,12 @@ in a browser for the interactive view. You can also see a committed reference
 copy under `examples/worked-example/output/reports/` (including the target-side
 deliverables), regenerable any time with `npm run example`.
 
+You can verify the saved state at any time:
+
+```bash
+node bin/csf-tool.js status --work-dir ./output
+```
+
 > `--accept-all` bulk-accepts the AI proposals so the run is non-interactive.
 > For a real assessment you review interactively instead (Section 7).
 
@@ -152,7 +162,7 @@ deliverables), regenerable any time with `npm run example`.
 For a fully offline run, append `--local` to every command (after `ollama pull`
 and `ollama serve`).
 
-## 6. The interactive menu
+## 6. The interactive menu and assessment status
 
 Run with **no command** to get a guided menu that walks you through each step and
 prompts for anything it needs (such as the documents path):
@@ -162,7 +172,40 @@ node bin/csf-tool.js
 ```
 
 The menu and the commands call the exact same logic — use whichever you prefer.
-(The menu requires an interactive terminal.)
+The menu also includes **Show assessment status**, the same read-only summary
+available directly from the command line:
+
+```bash
+node bin/csf-tool.js status
+# equivalent: npm run status
+```
+
+`status` inspects the selected working directory and summarizes:
+
+- **ingest** — the latest saved ingest activity and parse counts,
+- **analyze** — assessed count, reasoning provider, and latest activity,
+- **review** — valid, stale, and unreviewed counts plus the latest decision,
+- **target** — whether a Target Profile is configured, its baseline, and date,
+- **report** — missing/current/stale state, including newer upstream stages or a
+  saved input snapshot/deliverable set that no longer matches.
+
+It finishes with `Next: <command>` so an interrupted or older assessment has an
+obvious continuation point. It does not call the embedding or reasoning
+providers and does not modify the work directory. The menu itself requires an
+interactive terminal; the `status` command also works in scripts. When
+unreviewed outcomes are outside the default flagged-only queue, the
+recommendation uses `review --all` so they are not accidentally left unresolved.
+When the Current Profile is up to date but has no Target Profile, `target` is
+shown only as an optional next step; a fully current assessment needs no action.
+For a work directory created before v0.2.1, `status` marks the existing report
+stale once so `report` can seed the new exact input snapshot. This one-time
+regeneration enables detection of later hand edits with unchanged timestamps.
+
+During active work, the CLI gives useful context without flooding the terminal:
+ingest reports the current file and percentage (sampling progress for large
+folders), analysis reports every ten outcomes — cache hits included — with
+percentage, elapsed time, and an approximate ETA, and review shows the current position in its
+queue.
 
 ## 7. Reviewing the AI's judgments (the important part)
 
@@ -184,7 +227,9 @@ and the **verified** supporting quotes (with file and page). You can:
 
 Your decisions are stored separately from the AI assessments, so re-running
 `analyze` never overwrites them. If a later `analyze` changes an item you already
-reviewed, that review is marked **STALE** so you can re-confirm.
+reviewed, that review is marked **STALE** so you can re-confirm. `status` counts
+current and stale decisions separately and recommends `review` when
+re-confirmation is needed.
 
 ## 8. The Target Profile and the remediation plan
 
@@ -240,7 +285,10 @@ Everything is written to `<work-dir>/reports/`:
   the CSF 2.0 Organizational Profile concept. One entry per Subcategory with the
   effective `coverage` (`none` / `partial` / `substantial` / `full`),
   `confidence`, `review_status` (`reviewed` / `unreviewed` / `stale`), both the
-  AI and human values, the supporting `evidence`, and a `verification` summary.
+  AI and human values, the supporting `evidence`, a `verification` summary, and
+  an `activity` snapshot with `ingestedAt`, `analyzedAt`, `lastReviewedAt`,
+  `reviewDecisions`, analysis completeness/freshness, and parsed/skipped/failed
+  document counts.
 
 - **`gap-analysis.md`** — for people. A coverage summary and a per-Function table,
   then **gaps first** (what to address), then partial coverage with quotes, then
@@ -255,8 +303,18 @@ Everything is written to `<work-dir>/reports/`:
   double click (no server, no network — everything is inline, so nothing about
   your assessment leaves the machine). Coverage by Function, review progress,
   current-vs-target when a target exists, and a searchable, filterable explorer
-  of every outcome with its verified quotes. Light/dark themes; each chart has a
+  of every outcome with its verified quotes. It also shows a compact assessment
+  activity snapshot with readable dates; a Human overrides tile and inline
+  markers; and quick filters for everything needing attention, gaps, pending
+  reviews, and unmet targets. Search covers rationale, reviewer/target notes,
+  source filenames, evidence quotes, target details, and NIST Implementation
+  Examples as well as the outcome fields. Light/dark themes; each chart has a
   "view as table" twin.
+
+  The dashboard remains a generated, self-contained snapshot rather than a live
+  application. If `status` says the report is stale after newer ingest, analysis,
+  review, or target work, run `report` again to refresh the activity and results
+  shown there.
 
 When a target profile exists (Section 8), two more files appear:
 
@@ -273,7 +331,7 @@ or only as stated intent/policy), **substantial** (largely achieved in operation
 **full** (clearly achieved in operation). Intent ("must"/"shall") is treated as
 weaker than records showing the outcome actually happens.
 
-## 10. Strict mode and resuming
+## 10. Strict mode, freshness, and resuming
 
 - **Strict mode** refuses to emit the final profile until every Subcategory is
   resolved by a human:
@@ -285,10 +343,21 @@ weaker than records showing the outcome actually happens.
   If anything is unreviewed/stale it stops with a list of what's blocking — by
   design, not a crash.
 
+- **Freshness:** run `status` to distinguish a missing stage from an outdated
+  one. A human review becomes stale when the decision-relevant assessment it
+  validated changes, so it must be confirmed again. A generated report becomes
+  stale when later ingest, analysis, review, or target activity is saved after
+  that report, or when its saved review-state snapshot no longer matches the
+  current decisions even if timestamps are equal. Re-run `review` or `report` as
+  recommended; stale state is surfaced, never silently treated as current.
+  Reports created before v0.2.1 intentionally require one regeneration to seed
+  this exact freshness snapshot.
+
 - **Resume / re-run:** stages persist to the work directory. `analyze` skips
   items already done under identical inputs; re-ingesting the same documents does
   **not** force a full re-analyze. Change a relevant setting (e.g. `--top-k`) or
-  pass `--force` to recompute.
+  pass `--force` to recompute. Cached outcomes count toward the displayed
+  progress, so a resumed run does not appear stuck.
 
 ## 11. Use the full framework / your own CSF export
 

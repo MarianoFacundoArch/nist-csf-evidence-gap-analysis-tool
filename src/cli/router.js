@@ -23,6 +23,7 @@ const pkg = JSON.parse(readFileSync(new URL('../../package.json', import.meta.ur
 
 const COMMANDS = {
   init: actions.init,
+  status: actions.status,
   ingest: actions.ingest,
   analyze: actions.analyze,
   review: actions.review,

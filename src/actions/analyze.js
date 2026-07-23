@@ -48,6 +48,27 @@ export async function analyze(ctx) {
   let assessed = 0;
   let skipped = 0;
   let errors = 0;
+  const pendingTotal = csf.subcategories.filter((sub) => {
+    const existing = assessments[sub.id];
+    return !(existing && existing.engine_sig === engineSig && !config.force);
+  }).length;
+  const startedAt = Date.now();
+
+  const logProgress = (done, currentId) => {
+    if (done % 10 !== 0 && done !== total) return;
+    const elapsedMs = Date.now() - startedAt;
+    const completedPending = assessed + errors;
+    const etaMs = completedPending > 0
+      ? (elapsedMs / completedPending) * Math.max(0, pendingTotal - completedPending)
+      : 0;
+    const timing = elapsedMs >= 1000 && completedPending > 0
+      ? ` · elapsed ${formatDuration(elapsedMs)} · approx. ETA ${formatDuration(etaMs)}`
+      : '';
+    logger.info(
+      `  …${done}/${total} (${Math.round((done / total) * 100)}%) · ${currentId}` +
+        ` · assessed ${assessed}, reused ${skipped}, errors ${errors}${timing}`,
+    );
+  };
 
   // Embed all subcategory outcomes in ONE batch up front. This turns 106
   // separate embedding calls into a single provider request — a real cost/time
@@ -62,6 +83,7 @@ export async function analyze(ctx) {
     const existing = assessments[sub.id];
     if (existing && existing.engine_sig === engineSig && !config.force) {
       skipped++;
+      logProgress(i + 1, sub.id);
       continue; // resume: already done under identical inputs
     }
 
@@ -106,9 +128,7 @@ export async function analyze(ctx) {
 
     // Persist incrementally for resumability.
     await writeJsonAtomic(ctx.paths.assessments, assessments);
-    if ((i + 1) % 10 === 0 || i + 1 === total) {
-      logger.info(`  …${i + 1}/${total} (assessed ${assessed}, skipped ${skipped}, errors ${errors})`);
-    }
+    logProgress(i + 1, sub.id);
   }
 
   // Record provider ids in meta for the report header.
@@ -116,10 +136,19 @@ export async function analyze(ctx) {
   meta.llm_id = llm.id;
   meta.embedder_id = embedder.id;
   meta.engine_sig = engineSig;
+  meta.index_id = index.index_id ?? index.created_at;
+  meta.analyzed_index_id = index.index_id ?? index.created_at;
   meta.analyzed_at = ctx.now();
   await writeJsonAtomic(ctx.paths.meta, meta);
 
   const flagged = Object.values(assessments).filter((a) => a.needs_review).length;
   logger.info(`Analyze complete: ${assessed} assessed, ${skipped} reused, ${errors} fallback. ${flagged} flagged for review.`);
   return { assessmentsPath: ctx.paths.assessments, assessed, skipped, errors, flagged };
+}
+
+function formatDuration(ms) {
+  const totalSeconds = Math.max(0, Math.round(ms / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return minutes ? `${minutes}m ${String(seconds).padStart(2, '0')}s` : `${seconds}s`;
 }

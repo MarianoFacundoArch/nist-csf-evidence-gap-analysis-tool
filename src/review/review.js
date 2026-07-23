@@ -52,7 +52,9 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
 
   ui.info(`${queue.length} item(s) to review (${showAll ? 'review-all' : 'flagged/unresolved only'}).`);
 
-  for (const sub of queue) {
+  for (let queueIndex = 0; queueIndex < queue.length; queueIndex++) {
+    const sub = queue[queueIndex];
+    const position = queueIndex + 1;
     const a = assessments[sub.id] ?? syntheticNone(sub); // never crash on a gap
     const baseDecision = {
       subcategory_id: sub.id,
@@ -69,11 +71,14 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
       reviews[sub.id] = baseDecision;
       stats.reviewed++;
       await persist();
+      if (position % 10 === 0 || position === queue.length) {
+        ui.info(`Review progress: ${position}/${queue.length} (${Math.round((position / queue.length) * 100)}%).`);
+      }
       continue;
     }
 
-    presentItem(ui, sub, a);
-    const choice = await ui.select(`Decision for ${sub.id}`, [
+    presentItem(ui, sub, a, position, queue.length);
+    const choice = await ui.select(`Decision for ${sub.id} (${position}/${queue.length})`, [
       { value: 'accept', label: 'Accept the AI judgment' },
       { value: 'override', label: 'Override the coverage level' },
       { value: 'note', label: 'Accept, but add a note' },
@@ -113,7 +118,7 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
   return stats;
 }
 
-function presentItem(ui, sub, a) {
+function presentItem(ui, sub, a, position, total) {
   const lines = [
     `${sub.id} — ${sub.functionName} / ${sub.category}`,
     `Outcome: ${sub.outcome}`,
@@ -130,7 +135,7 @@ function presentItem(ui, sub, a) {
   } else {
     lines.push('', 'Verified evidence: (none)');
   }
-  ui.note(`Review ${sub.id}`, lines.join('\n'));
+  ui.note(`Review ${sub.id} · ${position}/${total}`, lines.join('\n'));
 }
 
 function syntheticNone(sub) {

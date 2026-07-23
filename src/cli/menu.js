@@ -18,6 +18,7 @@ export async function startMenu(ctx) {
   for (;;) {
     const choice = await ctx.ui.select('What would you like to do?', [
       { value: 'init', label: 'Initialize (config, .env, working dir)' },
+      { value: 'status', label: 'Show assessment status (progress + next action)' },
       { value: 'ingest', label: 'Ingest documents (parse + embed + index)' },
       { value: 'analyze', label: 'Analyze coverage (AI judgments)' },
       { value: 'review', label: 'Review AI judgments (human-in-the-loop)' },

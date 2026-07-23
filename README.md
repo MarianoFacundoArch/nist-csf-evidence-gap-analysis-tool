@@ -88,6 +88,10 @@ ISO 27001 documentation, internal procedures). It then:
    **prioritized remediation plan** whose suggested actions are NIST's own CSF
    2.0 Implementation Examples, quoted verbatim.
 
+At any point, the read-only **`status`** command summarizes the saved state of
+those stages, identifies stale reviews or reports, and tells you the next command
+to run.
+
 For a full step-by-step walkthrough, see the **[Usage Guide](docs/GUIDE.md)**.
 
 ## How it works
@@ -165,6 +169,7 @@ node bin/csf-tool.js analyze    # AI coverage judgments for all 106 Subcategorie
 node bin/csf-tool.js review     # human-in-the-loop validation
 node bin/csf-tool.js target     # define the Target Profile (goals + priorities)
 node bin/csf-tool.js report     # generate the deliverables
+node bin/csf-tool.js status     # inspect saved progress, freshness, and next step
 node bin/csf-tool.js all        # run the whole pipeline end-to-end
 ```
 
@@ -173,10 +178,31 @@ The `target` stage is interactive in a terminal; for scripted runs use
 (bring your own spec, e.g. one derived from a NIST Community Profile), or edit
 `<work-dir>/target.json` by hand — it is plain, validated JSON.
 
+Run `status` whenever you want a compact checkpoint without changing any
+assessment data:
+
+```bash
+node bin/csf-tool.js status
+```
+
+The equivalent package-script form is `npm run status -- --work-dir <path>`.
+It reports the state of ingest, analysis, review, target, and report generation;
+distinguishes current reviews from reviews made stale by a changed assessment;
+flags reports that predate newer ingest, analysis, review, or target activity
+(or whose saved input snapshot or deliverable set no longer matches); validates
+the hand-editable target; and ends with an actionable `Next: <command>`
+recommendation. The same view is available from the interactive menu.
+After upgrading a work directory created before v0.2.1, run the recommended
+`report` command once to seed its exact input snapshot; subsequent hand edits
+are then detected even when their timestamps are unchanged.
+
 Each stage persists its output, so you can stop after any stage and resume later.
 `analyze` is resumable — already-assessed items are skipped unless their inputs
-changed (or you pass `--force`). Run `--help` for all flags, and see the
-**[Usage Guide](docs/GUIDE.md)** for a detailed walkthrough.
+changed (or you pass `--force`). Long-running stages also report useful progress:
+ingest shows file position and percentage, analysis reports every ten outcomes
+(including cache hits) with elapsed time and an approximate ETA, and review shows its queue
+position. Run `--help` for all flags, and see the **[Usage
+Guide](docs/GUIDE.md)** for a detailed walkthrough.
 
 ## Providers, privacy, and offline mode
 
@@ -204,7 +230,8 @@ Written to `<work-dir>/reports/`:
 - **`current-profile.json`** — a machine-readable Current Profile aligned with the
   CSF 2.0 Organizational Profile concept: one entry per Subcategory with coverage
   (`none` / `partial` / `substantial` / `full`), confidence, evidence quotes, the
-  AI vs. human values, and review status.
+  AI vs. human values, review status, and the activity timestamps captured for
+  the assessment.
 - **`gap-analysis.md`** — a human-readable report grouped by Function, with a
   coverage summary and **gaps listed first** (plus a Current-vs-Target section
   when a target profile exists).
@@ -213,7 +240,13 @@ Written to `<work-dir>/reports/`:
 - **`dashboard.html`** — a self-contained interactive dashboard (open it with a
   double click; works offline — no CDN, fonts, or network of any kind). Coverage
   charts, review status, and a filterable explorer of all 106 outcomes with
-  their verified quotes; light and dark themes; every chart has a table view.
+  their verified quotes; an assessment-activity snapshot with human-readable
+  dates; quick filters for gaps, pending reviews, unmet targets, and everything
+  needing attention; visible human-override indicators; broader search across
+  rationale, notes, evidence, and suggested actions; light and dark themes;
+  every chart has a table view. Because it is a generated offline file, its
+  activity view is a snapshot as of report generation — run `report` again
+  after newer work.
 
 When a target profile exists, two more deliverables complete the CSF 2.0
 Organizational Profile pair:
@@ -299,7 +332,7 @@ The AI is constrained both by its prompt and, more importantly, by code:
 
 Precedence (low → high): built-in defaults < `csf-tool.config.json` < CLI flags.
 Secrets/endpoints come from `.env` only. Run `csf-tool init` to scaffold a config.
-See the [Usage Guide](docs/GUIDE.md#11-configuration-reference) for the full
+See the [Usage Guide](docs/GUIDE.md#12-configuration-reference) for the full
 reference. Key fields: `csfCorePath`, `docsPath`, `workDir`, `chunk.size`/`overlap`,
 `embeddings.provider`/`model`, `llm.provider`/`model`, `retrieval.topK`,
 `analysis.confidenceThreshold`, `analysis.critique`, `analysis.strict`,
@@ -319,7 +352,7 @@ npm run build-csf-core
 ```
 
 To use your own export, point `csfCorePath` at a JSON file with the same shape
-(see the [Usage Guide](docs/GUIDE.md#10-use-the-full-framework--your-own-csf-export)).
+(see the [Usage Guide](docs/GUIDE.md#11-use-the-full-framework--your-own-csf-export)).
 
 ## Limitations
 

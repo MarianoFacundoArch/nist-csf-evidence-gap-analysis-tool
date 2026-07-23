@@ -14,6 +14,7 @@
 import { readFileSync } from 'node:fs';
 import { reviewStatus, effectiveCoverage } from '../review/state.js';
 import { summarizeCoverage, isGap } from '../engine/coverage.js';
+import { buildAnalysisStage } from '../status/assessmentStatus.js';
 
 const pkg = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
 
@@ -23,6 +24,8 @@ const DISCLAIMER =
   'public domain (source: NIST CPRT).';
 
 export function buildProfile(ctx, { csf, assessments, reviews, meta }) {
+  const generatedAt = ctx.now();
+  const subcategoryIds = csf.subcategories.map((sub) => sub.id);
   const entries = csf.subcategories.map((sub) => {
     const a = assessments[sub.id] ?? syntheticNone(sub);
     const r = reviews[sub.id] ?? null;
@@ -64,7 +67,7 @@ export function buildProfile(ctx, { csf, assessments, reviews, meta }) {
     profileType: 'Current',
     framework: 'NIST CSF 2.0',
     frameworkVersion: csf.frameworkVersion,
-    generatedAt: ctx.now(),
+    generatedAt,
     tool: { name: pkg.name, version: pkg.version },
     disclaimer: DISCLAIMER,
     csfSource: csf.sample
@@ -74,6 +77,7 @@ export function buildProfile(ctx, { csf, assessments, reviews, meta }) {
       embeddings: meta?.embedder_id ?? ctx.config.embeddings.provider,
       llm: meta?.llm_id ?? ctx.config.llm.provider,
     },
+    activity: buildActivity(meta, reviews, assessments, subcategoryIds),
     strict: !!ctx.config.analysis.strict,
     summary: {
       totalSubcategories: entries.length,
@@ -87,6 +91,56 @@ export function buildProfile(ctx, { csf, assessments, reviews, meta }) {
     },
     subcategories: entries,
   };
+}
+
+function buildActivity(meta, reviews, assessments, subcategoryIds) {
+  const decisions = subcategoryIds.map((id) => reviews?.[id]).filter((r) => r && typeof r === 'object');
+  const analysis = buildAnalysisStage({ ids: subcategoryIds, meta, assessments });
+  return {
+    ingestedAt: timestampOrNull(meta?.ingested_at),
+    analyzedAt: timestampOrNull(analysis.at),
+    lastReviewedAt: latestTimestamp(decisions.map((r) => r.reviewed_at)),
+    reviewDecisions: decisions.length,
+    analysis: {
+      status: analysis.status,
+      assessed: analysis.assessed,
+      total: analysis.total,
+      reasons: analysis.reasons,
+    },
+    documents: documentSummary(meta?.ingest_report),
+  };
+}
+
+function documentSummary(report) {
+  if (!report || typeof report !== 'object') return null;
+  return {
+    parsed: nonNegativeCount(report.parsed),
+    skipped: nonNegativeCount(report.skipped),
+    failed: nonNegativeCount(report.failed),
+  };
+}
+
+function nonNegativeCount(value) {
+  return Number.isInteger(value) && value >= 0 ? value : 0;
+}
+
+function timestampOrNull(value) {
+  return typeof value === 'string' && value.trim() ? value : null;
+}
+
+function latestTimestamp(values) {
+  let latest = null;
+  let latestMs = -Infinity;
+  for (const value of values) {
+    const timestamp = timestampOrNull(value);
+    if (!timestamp) continue;
+    const ms = Date.parse(timestamp);
+    if (Number.isFinite(ms) && ms > latestMs) {
+      latest = timestamp;
+      latestMs = ms;
+    }
+  }
+  return latest;
 }
 
 function syntheticNone(sub) {

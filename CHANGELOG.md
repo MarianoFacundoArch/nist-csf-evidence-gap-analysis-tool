@@ -4,6 +4,40 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] — 2026-07-23
+
+### Added
+- **`status` command and interactive-menu action:** a read-only checkpoint across
+  ingest, analyze, review, target, and report state. It distinguishes current
+  human reviews from stale ones, detects reports superseded by newer upstream
+  activity, changed hand-edited inputs, mixed analysis engines, or missing
+  deliverables, and ends with an actionable `Next: <command>` recommendation.
+  An `npm run status` alias is included.
+- **Assessment activity in `dashboard.html`:** a compact snapshot of ingest,
+  analysis, review, target, and report timestamps, kept fully self-contained and
+  offline like the rest of the dashboard.
+- Dashboard quick filters for items needing attention, gaps, pending reviews,
+  and unmet targets; human-override indicators; and broader explorer search
+  across rationale, notes, evidence, target details, and suggested actions.
+
+### Changed
+- Long-running CLI work is easier to follow: ingest reports file position and
+  percentage, analysis reports every ten outcomes (including reused cache hits)
+  with percentage, elapsed time, and an approximate ETA, and review displays
+  its queue position.
+- Dashboard timestamps are formatted for people while retaining the precise
+  machine timestamp, and the summary now surfaces human override activity.
+
+### Fixed
+- Ingest metadata now records the actual tool version and keeps index creation
+  time in its own field instead of storing a timestamp as `tool_version`.
+- Status no longer treats a deleted evidence index as a completed ingest, and
+  pre-v0.2.1 reports are marked stale once to seed exact input fingerprints.
+- The npm package allowlist now excludes local example corpora and regenerable
+  worked-example intermediates while retaining the curated sample deliverables.
+- The lockfile now selects patched transitive releases of `fast-uri`,
+  `form-data`, `protobufjs`, and `tar`.
+
 ## [0.2.0] — Target Profile, remediation plan, dashboard
 
 This release completes the CSF 2.0 Organizational Profile cycle: the tool now

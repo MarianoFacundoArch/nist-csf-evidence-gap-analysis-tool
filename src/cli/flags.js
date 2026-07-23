@@ -107,6 +107,7 @@ USAGE
 
 COMMANDS
   init        Scaffold a config file, .env, and working directory
+  status      Show pipeline progress, report freshness, and the next action
   ingest      Parse documents, chunk, embed, and build the local index
   analyze     Judge coverage of every CSF subcategory against the evidence
   review      Human-in-the-loop review of the AI's judgments
