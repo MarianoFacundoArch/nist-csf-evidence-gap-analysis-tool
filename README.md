@@ -59,7 +59,7 @@ documents, and a person reviews and confirms each one.
 - [Providers, privacy, and offline mode](#providers-privacy-and-offline-mode)
 - [Outputs](#outputs)
 - [How this supports CSF 2.0](#how-this-supports-csf-20)
-- [Anti-hallucination safeguards](#anti-hallucination-safeguards)
+- [Anti-hallucination safeguards](#anti-hallucination-safeguards) — with [measured results](eval/RESULTS.md)
 - [Configuration](#configuration)
 - [Data source (CPRT)](#data-source-cprt)
 - [Limitations](#limitations)
@@ -327,6 +327,20 @@ The AI is constrained both by its prompt and, more importantly, by code:
 - **Mandatory human review.** Unreviewed/stale items are clearly marked in every
   deliverable, and a **strict mode** refuses to emit the final profile until every
   item has been reviewed.
+
+**These safeguards are measured, not asserted.** [`eval/RESULTS.md`](eval/RESULTS.md)
+reports the experiments, and [`eval/`](eval/) contains the harness and the raw model
+outputs behind every number:
+
+| Experiment | Result |
+| --- | --- |
+| 13 models (cloud + local), 106 Subcategories | raw fabrication 0.0–17.7%; **delivered 0.0% on every model** |
+| 122 crafted adversarial quotes | **100% caught**, 0% false rejection of legitimate quotes |
+| Ablation over 642 real quotes | removing the verifier lets **4.7%** of delivered quotes be fabricated |
+
+Faithfulness turned out to be model-*family* driven rather than size driven — a 9B
+local model matched the cloud frontier while an 8B from another family fabricated
+17.7% — which is the case for verifying in code rather than trusting any single model.
 
 ## Configuration
 

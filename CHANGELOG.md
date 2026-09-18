@@ -4,9 +4,27 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.0] — 2026-09-18
 
 ### Added
+- **Published evaluation harness and measured results (`eval/`).** The
+  anti-hallucination safeguards were documented but never backed by published
+  numbers. `eval/RESULTS.md` now reports the experiments and `eval/` contains the
+  harness plus the raw model outputs behind every figure, so the claims are
+  reproducible rather than asserted:
+  - **Model spectrum** (13 cloud and local models, 106 CSF 2.0 Subcategories):
+    raw fabrication runs 0.0–17.7% and is model-*family* driven rather than size
+    driven; after the verbatim verifier, **delivered fabrication is 0.0% on every
+    model**.
+  - **Adversarial benchmark** (122 crafted cases): 100% of attacks dropped
+    — fabricated, paraphrase/substitution, cross-chunk splice and trivial anchors
+    — with 0% false rejection of legitimate quotes.
+  - **Ablations** (642 real quotes): removing the verifier lets 4.7% of delivered
+    quotes be fabricated.
+  - **Reasoning-effort sweep:** no faithfulness gain from medium or high.
+  Per-run embedding indexes are not committed (large and regenerable), and the
+  corpus2 source PDFs are third-party NYS ITS documents this project does not
+  redistribute — `eval/corpus2/fetch.sh` re-downloads them from the official source.
 - **`llm.reasoningEffort` configuration field** (`low` | `medium` | `high`,
   default `low`). Reasoning models that accept an effort hint previously received
   a hardcoded `low`; the level is now configurable and validated. The default
