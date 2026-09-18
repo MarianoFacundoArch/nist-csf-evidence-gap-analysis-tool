@@ -1,0 +1,212 @@
+[
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "GV.OC-01",
+    "quote": "The organizational mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim policy sentence except \"Our mission\" replaced with \"The organizational mission\""
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "GV.RM-01",
+    "quote": "Risk management objectives are not explicitly established and agreed to by organizational stakeholders.",
+    "category": "framework_echo",
+    "reason": "GV.RM-01 outcome text reproduced with \"not explicitly\" inserted as a negated gap statement, not document text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "GV.RM-02",
+    "quote": "Risk appetite and risk tolerance statements are not explicitly mentioned in this policy.",
+    "category": "framework_echo",
+    "reason": "Framework subject phrase \"Risk appetite and risk tolerance statements\" turned into a gap remark (\"not explicitly mentioned in this policy\"); not document text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "GV.RR-03",
+    "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.RR-03 outcome text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "GV.SC-01",
+    "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.SC-01 outcome text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "ID.AM-02",
+    "quote": "The software Inventory A list of approved applications is kept by the IT team.",
+    "category": "near_verbatim_miss",
+    "reason": "Heading + sentence verbatim from asset-inventory chunk except a spurious leading \"The\""
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "ID.RA-05",
+    "quote": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the ID.RA-05 outcome text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "ID.RA-06",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "PR.DS-02",
+    "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim policy sentence except \"Our mission\" replaced with \"The mission\""
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "PR.DS-10",
+    "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim policy sentence except \"Our mission\" replaced with \"The mission\""
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "PR.IR-03",
+    "quote": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations.",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the PR.IR-03 outcome text (plus final period)"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "DE.AE-02",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "DE.AE-06",
+    "quote": "Information on adverse events is declared by the on-call lead when adverse events meet the documented incident criteria.",
+    "category": "paraphrase_of_present",
+    "reason": "Chunk sentence \"Incidents are declared by the on-call lead...\" restated with subject swapped to the framework phrase \"Information on adverse events\"; underlying content is in the chunk"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "RS.MA-01",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "RS.AN-03",
+    "quote": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the RS.AN-03 outcome text"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "RS.CO-02",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.1_8b",
+    "subcategory_id": "RS.CO-03",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.2_3b",
+    "subcategory_id": "GV.OC-05",
+    "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim prefix of the incident-response chunk sentence with a trailing \"...\" truncation marker"
+  },
+  {
+    "model": "ollama_llama3.2_3b",
+    "subcategory_id": "DE.AE-08",
+    "quote": "Incidents are declared when adverse events meet the defined incident criteria",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the DE.AE-08 outcome text; chunk wording differs (\"by the on-call lead\", \"documented\" vs \"defined\")"
+  },
+  {
+    "model": "ollama_mistral_7b",
+    "subcategory_id": "GV.OC-03",
+    "quote": "This policy is communicated to all employees during onboarding and is reviewed and re-approved annually by the Security Committee.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim policy sentence except \"The policy\" changed to \"This policy\""
+  },
+  {
+    "model": "ollama_mistral_7b",
+    "subcategory_id": "GV.RR-04",
+    "quote": "Cybersecurity responsibilities are documented in role descriptions, communicated to staff, and the CISO confirms that they are understood during annual training.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim policy sentence except \"These responsibilities\" changed to \"Cybersecurity responsibilities\""
+  },
+  {
+    "model": "ollama_mistral_7b",
+    "subcategory_id": "PR.AA-05",
+    "quote": "Access permissions are defined in this policy, managed through role-based access control (RBAC), and enforced by our identity provider.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim access-control sentence with internal elision of \", entitlements, and authorizations\""
+  },
+  {
+    "model": "ollama_qwen2.5_14b",
+    "subcategory_id": "GV.OC-04",
+    "quote": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.OC-04 outcome text"
+  },
+  {
+    "model": "ollama_qwen2.5_14b",
+    "subcategory_id": "GV.RR-02",
+    "quote": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.RR-02 outcome text"
+  },
+  {
+    "model": "ollama_qwen2.5_14b",
+    "subcategory_id": "GV.RR-03",
+    "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.RR-03 outcome text"
+  },
+  {
+    "model": "ollama_qwen2.5_14b",
+    "subcategory_id": "GV.SC-02",
+    "quote": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the GV.SC-02 outcome text"
+  },
+  {
+    "model": "ollama_qwen2.5_14b",
+    "subcategory_id": "PR.PS-03",
+    "quote": "Hardware inventories are maintained in our configuration management database (CMDB). Every laptop, server, and network device is recorded with an owner, location, and serial number.",
+    "category": "paraphrase_of_present",
+    "reason": "First sentence compressed (\"Inventories of hardware managed by the organization\" -> \"Hardware inventories\"); second sentence verbatim; all content present in the asset-inventory chunk"
+  },
+  {
+    "model": "ollama_qwen2.5_3b",
+    "subcategory_id": "ID.AM-01",
+    "quote": "Hardware Inventory\\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB). Every laptop, server, and network device is recorded with an owner, location, and serial number.",
+    "category": "near_verbatim_miss",
+    "reason": "Verbatim asset-inventory text except a literal two-character \"\\n\" escaping artifact between heading and sentence"
+  },
+  {
+    "model": "ollama_qwen2.5_7b",
+    "subcategory_id": "ID.IM-04",
+    "quote": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+    "category": "framework_echo",
+    "reason": "Quote is character-identical to the ID.IM-04 outcome text"
+  },
+  {
+    "model": "openai_gpt-4o",
+    "subcategory_id": "GV.RR-02",
+    "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams.",
+    "category": "cross_chunk",
+    "reason": "Verbatim in information-security-policy.md but spans the c0/c1 chunk boundary (\"...executive leadership\" onward only in c1; opening clause only in c0), so no single chunk contains it"
+  }
+]

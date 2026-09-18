@@ -1,0 +1,649 @@
+{
+  "description": "Every non-verbatim quote on corpus 2 (normalized quote not a substring of any of the item's 6 normalized hit chunks), classified after manual review of the quote, the hit chunks, and the CSF outcome text. All 23 came from local models; the 3 cloud models produced 0.",
+  "normalization": "NFC; ‘’‛->'; “”->\"; –—->-; whitespace collapse; trim; lowercase",
+  "total": 23,
+  "counts_by_category": {
+    "framework_echo": 12,
+    "paraphrase_of_present": 1,
+    "fabricated_content": 0,
+    "near_verbatim_miss": 5,
+    "cross_chunk": 0,
+    "pdf_extraction_artifact": 2,
+    "ambiguous": 3
+  },
+  "counts_by_model": {
+    "ollama_llama3.1_8b": {
+      "total": 19,
+      "framework_echo": 11,
+      "paraphrase_of_present": 0,
+      "fabricated_content": 0,
+      "near_verbatim_miss": 4,
+      "cross_chunk": 0,
+      "pdf_extraction_artifact": 2,
+      "ambiguous": 2
+    },
+    "ollama_gemma2_9b": {
+      "total": 3,
+      "framework_echo": 1,
+      "paraphrase_of_present": 0,
+      "fabricated_content": 0,
+      "near_verbatim_miss": 1,
+      "cross_chunk": 0,
+      "pdf_extraction_artifact": 0,
+      "ambiguous": 1
+    },
+    "ollama_mistral_7b": {
+      "total": 1,
+      "framework_echo": 0,
+      "paraphrase_of_present": 1,
+      "fabricated_content": 0,
+      "near_verbatim_miss": 0,
+      "cross_chunk": 0,
+      "pdf_extraction_artifact": 0,
+      "ambiguous": 0
+    }
+  },
+  "entries": [
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.OC-03",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf",
+      "quote": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+      "outcome": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p19#c46",
+        "nys-s14-009-mobile-device-security.pdf~f2202f#p3#c6",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p9#c20",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p2#c3",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p20#c48",
+        "nys-s14-010-remote-access.pdf~dbb417#p3#c6"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for GV.OC-03 presented as a document quote; appears in no retrieved chunk.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p19#c46",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "nys-p03-002 page 19 of 23 21. procedures must be established to maintain information security during an adverse event. for those controls that cannot be maintained, compensatory controls must be in place. associated standards: nys-s14-008 secure configuration standard; nys-s14-005 security logging s…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.RM-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+      "quote": "Risk management objectives are not explicitly mentioned in the provided evidence.",
+      "outcome": "Risk management objectives are established and agreed to by organizational stakeholders",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c4",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p3#c6",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c8",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p7#c17",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p3#c5"
+      ],
+      "category": "ambiguous",
+      "subtype": "meta_statement",
+      "analyst_note": "Model-authored absence claim (\"Risk management objectives are not explicitly mentioned in the provided evidence.\") placed in the quote field; not document text and asserts no org-specific fact.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "shared_content_words": 4,
+        "chunk_excerpt_normalized": "process information security risk management is an organizational function that considers vulnerabilities, threat sources, identified risks, and security controls within an organization's environment. these factors help determine the resulting level of risk posed to se information, systems, processe…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.RM-04",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c8",
+      "quote": "Strategic direction that describes appropriate risk response options is established and communicated through the SE's defined risk tolerance.",
+      "outcome": "Strategic direction that describes appropriate risk response options is established and communicated",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c8",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c10",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c4",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c7"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "CSF outcome text for GV.RM-04 with an appended clause (\"through the SE's defined risk tolerance\") lifted from the hit chunk; the composite exists nowhere in the documents.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c10",
+        "shared_content_words": 8,
+        "chunk_excerpt_normalized": "…t be included as a stakeholder. 4.2.2 governance governance ensures that strategic and operational decisions align with the se's defined risk tolerance to ensure that risk-based activities are monitored and evolve with the changing threat landscape. the se must implement mechanisms to monitor risk management processes (e.g., establish and track approved risk assessment methodologies, risk responses, or create risk management procedures) and regularly review…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.RR-02",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+      "quote": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c5",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p5#c13",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c6",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p5#c10"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for GV.RR-02.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "nys-p03-002 page 23 of 23 appendix a cyber risk coordinator description as outlined in section 4.1., ses must designate an individual or group to be responsible for cyber-related risk management. the cyber risk coordinator (crc) is the se-assigned individual who ensures that cyber-related risk is ma…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.OV-02",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf",
+      "quote": "the risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
+      "outcome": "The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p5#c10",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c5",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c7",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p8#c20"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "CSF outcome text for GV.OV-02 with \"cybersecurity\" dropped; not document text.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11",
+        "shared_content_words": 8,
+        "chunk_excerpt_normalized": "…w performance, at least annually. this review serves two purposes: 1. ensuring compliance with the information security risk management strategy (this includes relevant regulatory or business requirements) of the se; and 2. identifying potential changes required to the se risk management strategy. se information security risk management activities should align with the processes used for other types of risk (e.g., financial, lega…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.SC-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+      "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "outcome": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "quote_count_in_item": 2,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c5",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p5#c13",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p3#c5",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for GV.SC-01 (the item's other quote was verbatim, so coverage survived).",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "shared_content_words": 8,
+        "chunk_excerpt_normalized": "process information security risk management is an organizational function that considers vulnerabilities, threat sources, identified risks, and security controls within an organization's environment. these factors help determine the resulting level of risk posed to se information, systems, processe…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.SC-04",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9",
+      "quote": "Defining SE risk tolerance includes determining who is allowed to accept risk at defined risk levels (low, moderate, high).",
+      "outcome": "Suppliers are known and prioritized by criticality",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c5",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9",
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c45",
+        "nys-s14-007-encryption.pdf~415b03#p11#c24",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p20#c44"
+      ],
+      "category": "near_verbatim_miss",
+      "analyst_note": "Chunk has \"defining risk tolerance includes determining who is allowed to accept risk at defined risk levels (low, moderate, high).\"; model inserted \"SE\" (\"defining SE risk tolerance includes...\") by fusing the preceding sentence's phrasing.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9",
+        "shared_content_words": 13,
+        "chunk_excerpt_normalized": "… define the organizational risk tolerance to support an effective risk management program. it is important to note that defining se risk tolerance is an executive-level function and cannot be solely defined by information technology (it) professionals unless explicitly delegated by the se. defining risk tolerance includes determining who is allowed to accept risk at defined risk levels (low, moderate, high). the se is still responsible for…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.SC-05",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c6",
+      "quote": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties",
+      "outcome": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other types of agreements with suppliers and other relevant third parties",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c5",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p5#c13",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p5#c10",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p7#c15",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p3#c6"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for GV.SC-05.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p7#c15",
+        "shared_content_words": 8,
+        "chunk_excerpt_normalized": "r any other third party on behalf of the se. 3. ses are responsible for selecting the risk assessment approach they will use based on their needs and any applicable laws, regulations, and policies. 4. risk assessments must include additional considerations when systems, services, or information will…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.SC-07",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c13",
+      "quote": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+      "outcome": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c13",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p15#c32",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p8#c19",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c4"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for GV.SC-07.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "nys - s14 - 001 page 6 of 10 require an immediate fix. at the same time, another vulnerability may exist in components of several less critical systems. the se must assess and prioritize responses to both vulnerabilities within the context of other risk management activities. additional requirements…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "GV.SC-08",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c25",
+      "quote": "Relevant suppliers and other third parties are not explicitly mentioned in this excerpt.",
+      "outcome": "Relevant suppliers and other third parties are included in incident planning, response, and recovery activities",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c25",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c24",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p7#c18",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p7#c19",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c45",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p8#c20"
+      ],
+      "category": "ambiguous",
+      "subtype": "meta_statement",
+      "analyst_note": "Model-authored absence claim (\"Relevant suppliers and other third parties are not explicitly mentioned in this excerpt.\") in the quote field.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c25",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "te early and often throughout the response process with all relevant ir stakeholders and partners. ses may need to interact with several types of external organizations while conducting ir activities. examples of these organizations include other ir teams, dhses oem, law enforcement agencies, intern…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "ID.AM-03",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf",
+      "quote": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+      "outcome": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p15#c36",
+        "nys-s14-010-remote-access.pdf~dbb417#p2#c4",
+        "nys-s14-002-information-classification.pdf~09badf#p6#c14",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p5#c13",
+        "nys-s14-010-remote-access.pdf~dbb417#p3#c6",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p6#c16"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for ID.AM-03.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p15#c36",
+        "shared_content_words": 7,
+        "chunk_excerpt_normalized": "nys-p03-002 page 15 of 23 b. all connections and their configurations must be documented. the documentation must be reviewed by the information owner and the iso annually, at a minimum, to ensure: i. the business case for the connection is still valid and the connection is still required; and ii. th…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "ID.RA-04",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf",
+      "quote": "Potential threats (both internal and external) to the organization’s operations, assets, individuals, or systems; • Vulnerabilities, or weaknesses, that could impact the confidentiality, integrity, or availability of the assessed system, process, or other source;",
+      "outcome": "Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c15",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c16",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p16#c36",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p11#c25",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c13"
+      ],
+      "category": "near_verbatim_miss",
+      "analyst_note": "Model wrote \"Potential threats (both internal and external)...\"; the chunk's bullet reads \"threats (both internal and external)...\" — a single inserted word (\"Potential\", echoing the outcome phrasing); the remaining 38 words incl. the bullet glyph are verbatim.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12",
+        "shared_content_words": 25,
+        "chunk_excerpt_normalized": "…ng from the operation and use of information systems and other sources. the goal of a risk assessment is to identify: • threats (both internal and external) to the organization's operations, assets, individuals, or systems; • vulnerabilities, or weaknesses, that could impact the confidentiality, integrity, or availability of the assessed system, process, or other source; • impact, the level of harm (i.e., consequence), to the se that may occur if a potential threat exploits a vulnerability; and • likelihood that the event will occur.…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "ID.RA-08",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c38",
+      "quote": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
+      "outcome": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c38",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c15",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c39",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11",
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c3"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for ID.RA-08.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c39",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "ed vulnerabilities. for any discovered vulnerability, a plan of action and milestones must be created, and updated accordingly, to document the planned remedial actions to mitigate vulnerabilities. 7. any vulnerability scanning or penetration testing must be conducted by individuals who are authoriz…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "PR.AA-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-013-account-management-access-control.pdf~924e67#p4#c9",
+      "quote": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+      "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-013-account-management-access-control.pdf~924e67#p4#c9",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p2#c4",
+        "nys-p14-001-acceptable-use-of-it-resources.pdf~b57302#p5#c11",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p2#c3",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p4#c10",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p4#c8"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "Exact CSF outcome text for PR.AA-01.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p14-001-acceptable-use-of-it-resources.pdf~b57302#p5#c11",
+        "shared_content_words": 6,
+        "chunk_excerpt_normalized": "nys-p14-001 page 5 of 9 • does not impede the ability of the individual or other users to fulfill the se's responsibilities and duties, including but not limited to, extensive bandwidth, resource, or storage utilization. exercising good judgment regarding incidental and necessary personal use is imp…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "PR.PS-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+      "quote": "A process must be in place to manage patches. This process must include the following: • Monitoring security sources (see Exhibit 1) for vulnerabilities, patch and non-patch remediation, and emerging threats.",
+      "outcome": "Configuration management practices are established and applied",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c4",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p5#c11",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p17#c42",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c40",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p14#c35"
+      ],
+      "category": "pdf_extraction_artifact",
+      "analyst_note": "Quote is REAL document text (NYS-S15-001 §3). It fails only because PDF extraction left \"( see Exhibit 1)\" (stray space after the paren) and \"non- patch\" (line-break hyphenation space) in the chunk, while the model echoed the clean rendering \"(see Exhibit 1)\" / \"non-patch\".",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "shared_content_words": 22,
+        "chunk_excerpt_normalized": "… patching. if patching is the responsibility of the third party, ses must verify that the patches have been applied. 3. a process must be in place to manage patches. this process must include the following: • monitoring security sources ( see exhibit 1) for vulnerabilities, patch and non- patch remediation, and emerging threats. • overseeing patch distribution, including verifying that a change control procedure is being followed. • testing for stability and deploying patches. • using an automated centralized patch managem…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "PR.PS-05",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf~9e1de7#p17#c42",
+      "quote": "10. Controls must be implemented to allow only SE approved software to run on a system and prevent execution of all other software.",
+      "outcome": "Installation and execution of unauthorized software are prevented",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p17#c42",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p16#c37",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p14#c35",
+        "nys-s14-013-account-management-access-control.pdf~924e67#p8#c19",
+        "nys-s14-009-mobile-device-security.pdf~f2202f#p3#c6",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c39"
+      ],
+      "category": "near_verbatim_miss",
+      "analyst_note": "Model wrote \"Controls must be implemented to allow only SE approved software...\"; the document's item 10 reads \"Controls must be in place to allow only...\" — the verb phrase was borrowed from the adjacent item 9 (\"Controls must be implemented to limit storage...\").",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p17#c42",
+        "shared_content_words": 14,
+        "chunk_excerpt_normalized": "…nt from removable media. 9. controls must be implemented to limit storage of se information to se authorized locations. 10. controls must be in place to allow only se approved software to run on a system and prevent execution of all other software. 11. all systems must be maintained at a vendor-supported level to ensure accuracy and integrity. 12. all security patches must be reviewed, evaluated, and appropriately applied in a timely manner. this …"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "DE.CM-03",
+      "quote_index": 1,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf",
+      "quote": "Systems and applications must be monitored and analyzed to detect deviation from the access control requirements outlined in this policy...",
+      "outcome": "Personnel activity and technology usage are monitored to find potentially adverse events",
+      "quote_count_in_item": 2,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c14",
+        "nys-p14-001-acceptable-use-of-it-resources.pdf~b57302#p2#c3",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c44",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p6#c13",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c15",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p9#c23"
+      ],
+      "category": "near_verbatim_miss",
+      "analyst_note": "Text is verbatim chunk text but the model appended a truncation ellipsis \"...\" (\"...outlined in this policy...\"), which the substring check rightly does not strip.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c44",
+        "shared_content_words": 16,
+        "chunk_excerpt_normalized": "nys-p03-002 page 18 of 23 14. systems and applications must be monitored and analyzed to detect deviation from the access control requirements outlined in this policy and the nys-s14-005 security logging standard , and must record events to provide evidence and to reconstruct lost or damaged information. 15. audit logs recording exceptions and other information secur…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "DE.CM-06",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf",
+      "quote": "14. Systems and applications must be monitored and analyzed to detect deviation from the access control requirements outlined in this policy and the NYS-S14-005 Security Logging Standard,",
+      "outcome": "External service provider activities and services are monitored to find potentially adverse events",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c44",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c14",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p20#c43",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p9#c23",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p18#c39",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p6#c13"
+      ],
+      "category": "pdf_extraction_artifact",
+      "analyst_note": "Quote is REAL document text (NYS-P03-002 item 14). The chunk's extracted text has a space before the comma (\"Security Logging Standard ,\"); the model echoed the typographically clean \"Standard,\" and the substring match fails on that single space.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c44",
+        "shared_content_words": 20,
+        "chunk_excerpt_normalized": "nys-p03-002 page 18 of 23 14. systems and applications must be monitored and analyzed to detect deviation from the access control requirements outlined in this policy and the nys-s14-005 security logging standard , and must record events to provide evidence and to reconstruct lost or damaged information. 15. audit logs recording exceptions and other information security-relevant events must be produced, protec…"
+      }
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "item": "RC.RP-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s13-005-cyber-incident-response.pdf",
+      "quote": "The recovery portion of the incident response plan is executed once initiated from the incident response process.",
+      "outcome": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p4#c9",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p18#c45",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p7#c19",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p1#c0",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p10#c24",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c25"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "CSF outcome text for RC.RP-01 plus a final period.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s13-005-cyber-incident-response.pdf~15faf7#p10#c25",
+        "shared_content_words": 5,
+        "chunk_excerpt_normalized": "…r. • consult with counsel before initiating any coordination efforts. • perform incident information sharing throughout the incident response life cycle. • attempt to automate as much of the information sharing process as possible. • balance the benefits of information sharing with the drawbacks of sharing sensitive information. • share as much of the appropriate incident information as possible with other organizations. • any re…"
+      }
+    },
+    {
+      "model": "ollama_gemma2_9b",
+      "item": "ID.RA-06",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s14-001-information-security-risk-management.pdf",
+      "quote": "Risk responses are chosen, prioritized, planned, tracked, and communicated.",
+      "outcome": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c4",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c7",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p8#c18",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p4#c8",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p7#c17"
+      ],
+      "category": "framework_echo",
+      "analyst_note": "CSF outcome text for ID.RA-06 plus a final period.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3",
+        "shared_content_words": 3,
+        "chunk_excerpt_normalized": "process information security risk management is an organizational function that considers vulnerabilities, threat sources, identified risks, and security controls within an organization's environment. these factors help determine the resulting level of risk posed to se information, systems, processe…"
+      }
+    },
+    {
+      "model": "ollama_gemma2_9b",
+      "item": "PR.PS-01",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s15-001-patch-management.pdf",
+      "quote": "This process must include the following: • Overseeing patch distribution, including verifying that a change control procedure is being followed.",
+      "outcome": "Configuration management practices are established and applied",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c4",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p5#c11",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p17#c42",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c40",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p14#c35"
+      ],
+      "category": "ambiguous",
+      "subtype": "non_contiguous_splice",
+      "analyst_note": "Both halves are verbatim in the SAME chunk (\"This process must include the following:\" and the \"Overseeing patch distribution...\" bullet), but the model spliced them together, silently omitting the intervening first bullet — real text, unfaithful joining.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "shared_content_words": 17,
+        "chunk_excerpt_normalized": "…f the third party, ses must verify that the patches have been applied. 3. a process must be in place to manage patches. this process must include the following: • monitoring security sources ( see exhibit 1) for vulnerabilities, patch and non- patch remediation, and emerging threats. • overseeing patch distribution, including verifying that a change control procedure is being followed. • testing for stability and deploying patches. • using an automated central…"
+      }
+    },
+    {
+      "model": "ollama_gemma2_9b",
+      "item": "DE.AE-08",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-s13-005-cyber-incident-response.pdf",
+      "quote": "• Declare Incident • This involves the review of anomalies to determine whether an incident has occurred, and, if one has occurred, determining the nature of the incident.",
+      "outcome": "Incidents are declared when adverse events meet the defined incident criteria",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p7#c18",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p12#c27",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p12#c28",
+        "nys-s14-001-information-security-risk-management.pdf~540af0#p11#c26",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c14",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p18#c39"
+      ],
+      "category": "near_verbatim_miss",
+      "analyst_note": "Model replaced the document's list marker \"1.\" with a bullet \"•\" before \"Declare Incident\"; every following word (\"Declare Incident • This involves the review of anomalies ... the nature of the incident.\") is verbatim in the chunk.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-s13-005-cyber-incident-response.pdf~15faf7#p6#c14",
+        "shared_content_words": 15,
+        "chunk_excerpt_normalized": "… incident to determine its scope, impact, and root cause so that an effective response can be undertaken. activities 1. declare incident • this involves the review of anomalies to determine whether an incident has occurred, and, if one has occurred, determining the nature of the incident. 2. determine investigation scope • this involves the review of anomalies to determine whether an incident has occurred, and, if one has occurred, determining the nature of the incident. detection begin…"
+      }
+    },
+    {
+      "model": "ollama_mistral_7b",
+      "item": "ID.IM-02",
+      "quote_index": 0,
+      "raw_coverage": "partial",
+      "claimed_source": "nys-p03-002-information-security-policy.pdf",
+      "quote": "Vulnerability scanning, and penetration testing must be included in third party agreements.",
+      "outcome": "Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties",
+      "quote_count_in_item": 1,
+      "verbatim_elsewhere_in_corpus": null,
+      "hit_chunk_ids": [
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c38",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p5#c12",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p3#c8",
+        "nys-s15-001-patch-management.pdf~fc0309#p2#c3",
+        "nys-s13-005-cyber-incident-response.pdf~15faf7#p8#c21",
+        "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c39"
+      ],
+      "category": "paraphrase_of_present",
+      "analyst_note": "Fuses the subject of item 3 (\"vulnerability scanning, and penetration testing\") with the predicate of item 4 (\"must be included in third party agreements\"), dropping item 4's \"and mitigation provisions\" — all content present in the chunk, wording recombined.",
+      "nearest_hit_chunk": {
+        "chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p16#c38",
+        "shared_content_words": 10,
+        "chunk_excerpt_normalized": "…equency, or other criteria as defined by the se. 3. where an se has outsourced a system to another se or a third party, vulnerability scanning, and penetration testing must be coordinated. 4. vulnerability scanning, penetration testing, and mitigation provisions must be included in third party agreements. 5. the output of the vulnerability scans and penetration tests must be reviewed in a timely manner by th…"
+      }
+    }
+  ]
+}

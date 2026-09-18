@@ -1,0 +1,1057 @@
+{
+  "generated_at": "2026-06-10T20:56:00.183Z",
+  "description": "Fuzzy-match gate ablation: best-window normalized Levenshtein similarity of each saved quote against the record's hit chunks, evaluated at zero model cost. Gate accepts iff max-over-chunks similarity >= t.",
+  "method": {
+    "normalization": "s.normalize('NFC').replace(/[\\u2018\\u2019\\u201b]/g,\"'\").replace(/[\\u201c\\u201d]/g,'\"').replace(/[\\u2013\\u2014]/g,'-').replace(/\\s+/g,' ').trim().toLowerCase()",
+    "scoring": "score(quote) = max over hit chunks c of max over window starts i of 1 - levenshtein(q, c[i..i+|q|]) / max(|q|, |window|). Coarse stride floor(|q|/10) + provably exhaustive refinement (window-shift bound |d(i)-d(i+k)| <= 2k); result is the exact maximum over all window positions.",
+    "thresholds": [
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      0.98
+    ],
+    "integrity": "Scores computed from text only; taxonomy labels joined after scoring for evaluation. No parameter was tuned on labels (stride is an exactness-preserving efficiency device; thresholds are the pre-registered grid)."
+  },
+  "validation": {
+    "levenshtein_self_test": "pass",
+    "verbatim_audit_shortcut_disabled": {
+      "corpus_A": {
+        "sampled": 12,
+        "scored_1": 12
+      },
+      "corpus_B": {
+        "sampled": 12,
+        "scored_1": 12
+      }
+    },
+    "brute_force_stride1_crosscheck": {
+      "corpus_A": {
+        "sampled": 8,
+        "matched": 8
+      },
+      "corpus_B": {
+        "sampled": 8,
+        "matched": 8
+      }
+    },
+    "label_join": "computed non-verbatim sets exactly match taxonomy key sets and quote texts (A=30, B=23)"
+  },
+  "sanity_checks": [
+    {
+      "name": "verbatim 250-char chunk substring",
+      "expect": "= 1.0",
+      "quote": "policy _fictitious document for demonstration purposes only._ ## 1. purpose and mission northwind analytics provides dat...",
+      "score": 1,
+      "score_no_shortcut": 1
+    },
+    {
+      "name": "one-word edit (\"policy\" -> \"organizational\")",
+      "expect": "> 0.9",
+      "quote": "organizational _fictitious document for demonstration purposes only._ ## 1. purpose and mission northwind analytics prov...",
+      "score": 0.9496124031007752,
+      "score_no_shortcut": 0.9496124031007752
+    },
+    {
+      "name": "unrelated sentence",
+      "expect": "< 0.5",
+      "quote": "the quick brown fox jumps over the lazy dog while reciting sea shanties about quarterly tax filings and the migratory ha...",
+      "score": 0.2875,
+      "score_no_shortcut": 0.2875
+    }
+  ],
+  "corpora": {
+    "A": {
+      "total_quotes": 642,
+      "verbatim": {
+        "count": 612,
+        "all_score_exactly_1": true,
+        "accepted_at": {
+          "0.80": 612,
+          "0.85": 612,
+          "0.90": 612,
+          "0.95": 612,
+          "0.98": 612
+        }
+      },
+      "non_verbatim": {
+        "count": 30,
+        "crosstab": {
+          "cross_chunk": {
+            "total": 1,
+            "accepted_at": {
+              "0.80": 0,
+              "0.85": 0,
+              "0.90": 0,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.741497
+            ]
+          },
+          "framework_echo": {
+            "total": 14,
+            "accepted_at": {
+              "0.80": 0,
+              "0.85": 0,
+              "0.90": 0,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.783333,
+              0.701299,
+              0.414474,
+              0.404959,
+              0.404959,
+              0.40146,
+              0.386364,
+              0.375,
+              0.368932,
+              0.337838,
+              0.336842,
+              0.330275,
+              0.329545,
+              0.299213
+            ]
+          },
+          "near_verbatim_miss": {
+            "total": 13,
+            "accepted_at": {
+              "0.80": 13,
+              "0.85": 13,
+              "0.90": 13,
+              "0.95": 11,
+              "0.98": 4
+            },
+            "scores": [
+              0.987179,
+              0.987069,
+              0.981707,
+              0.981707,
+              0.976923,
+              0.973913,
+              0.973913,
+              0.973913,
+              0.973913,
+              0.973913,
+              0.973913,
+              0.925466,
+              0.910615
+            ]
+          },
+          "paraphrase_of_present": {
+            "total": 2,
+            "accepted_at": {
+              "0.80": 2,
+              "0.85": 2,
+              "0.90": 2,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.911111,
+              0.906077
+            ]
+          }
+        }
+      },
+      "framework_echo_scores": [
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "DE.AE-06",
+          "quote_index": 0,
+          "score": 0.783333,
+          "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+        },
+        {
+          "model": "ollama_llama3.2_3b",
+          "item": "DE.AE-08",
+          "quote_index": 0,
+          "score": 0.701299,
+          "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+        },
+        {
+          "model": "ollama_qwen2.5_14b",
+          "item": "GV.SC-02",
+          "quote_index": 0,
+          "score": 0.414474,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.RR-03",
+          "quote_index": 0,
+          "score": 0.404959,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_qwen2.5_14b",
+          "item": "GV.RR-03",
+          "quote_index": 0,
+          "score": 0.404959,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_qwen2.5_14b",
+          "item": "GV.RR-02",
+          "quote_index": 0,
+          "score": 0.40146,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_qwen2.5_7b",
+          "item": "ID.IM-04",
+          "quote_index": 0,
+          "score": 0.386364,
+          "best_chunk_id": "incident-response-plan.pdf~70a67a#p2#c1"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.SC-01",
+          "quote_index": 0,
+          "score": 0.375,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.RM-01",
+          "quote_index": 0,
+          "score": 0.368932,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_qwen2.5_14b",
+          "item": "GV.OC-04",
+          "quote_index": 0,
+          "score": 0.337838,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "PR.IR-03",
+          "quote_index": 0,
+          "score": 0.336842,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c1"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "RS.AN-03",
+          "quote_index": 0,
+          "score": 0.330275,
+          "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.RM-02",
+          "quote_index": 0,
+          "score": 0.329545,
+          "best_chunk_id": "information-security-policy.md~6bd7af#na#c1"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "ID.RA-05",
+          "quote_index": 0,
+          "score": 0.299213,
+          "best_chunk_id": "incident-response-plan.pdf~70a67a#p2#c1"
+        }
+      ]
+    },
+    "B": {
+      "total_quotes": 527,
+      "verbatim": {
+        "count": 504,
+        "all_score_exactly_1": true,
+        "accepted_at": {
+          "0.80": 504,
+          "0.85": 504,
+          "0.90": 504,
+          "0.95": 504,
+          "0.98": 504
+        }
+      },
+      "non_verbatim": {
+        "count": 23,
+        "crosstab": {
+          "ambiguous": {
+            "total": 3,
+            "accepted_at": {
+              "0.80": 0,
+              "0.85": 0,
+              "0.90": 0,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.75,
+              0.407407,
+              0.318182
+            ]
+          },
+          "framework_echo": {
+            "total": 12,
+            "accepted_at": {
+              "0.80": 0,
+              "0.85": 0,
+              "0.90": 0,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.404255,
+              0.389381,
+              0.389381,
+              0.38835,
+              0.386667,
+              0.347368,
+              0.346939,
+              0.34375,
+              0.338384,
+              0.335766,
+              0.330769,
+              0.296053
+            ]
+          },
+          "near_verbatim_miss": {
+            "total": 5,
+            "accepted_at": {
+              "0.80": 5,
+              "0.85": 5,
+              "0.90": 5,
+              "0.95": 4,
+              "0.98": 1
+            },
+            "scores": [
+              0.994152,
+              0.978417,
+              0.969582,
+              0.95122,
+              0.916031
+            ]
+          },
+          "paraphrase_of_present": {
+            "total": 1,
+            "accepted_at": {
+              "0.80": 0,
+              "0.85": 0,
+              "0.90": 0,
+              "0.95": 0,
+              "0.98": 0
+            },
+            "scores": [
+              0.692308
+            ]
+          },
+          "pdf_extraction_artifact": {
+            "total": 2,
+            "accepted_at": {
+              "0.80": 2,
+              "0.85": 2,
+              "0.90": 2,
+              "0.95": 2,
+              "0.98": 2
+            },
+            "scores": [
+              0.994652,
+              0.980769
+            ]
+          }
+        }
+      },
+      "framework_echo_scores": [
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.RM-04",
+          "quote_index": 0,
+          "score": 0.404255,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.OV-02",
+          "quote_index": 0,
+          "score": 0.389381,
+          "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "RC.RP-01",
+          "quote_index": 0,
+          "score": 0.389381,
+          "best_chunk_id": "nys-s13-005-cyber-incident-response.pdf~15faf7#p4#c9"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "PR.AA-01",
+          "quote_index": 0,
+          "score": 0.38835,
+          "best_chunk_id": "nys-s14-013-account-management-access-control.pdf~924e67#p2#c3"
+        },
+        {
+          "model": "ollama_gemma2_9b",
+          "item": "ID.RA-06",
+          "quote_index": 0,
+          "score": 0.386667,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "ID.RA-08",
+          "quote_index": 0,
+          "score": 0.347368,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.SC-07",
+          "quote_index": 0,
+          "score": 0.346939,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.SC-01",
+          "quote_index": 0,
+          "score": 0.34375,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p3#c5"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.SC-05",
+          "quote_index": 0,
+          "score": 0.338384,
+          "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.RR-02",
+          "quote_index": 0,
+          "score": 0.335766,
+          "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "ID.AM-03",
+          "quote_index": 0,
+          "score": 0.330769,
+          "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p15#c36"
+        },
+        {
+          "model": "ollama_llama3.1_8b",
+          "item": "GV.OC-03",
+          "quote_index": 0,
+          "score": 0.296053,
+          "best_chunk_id": "nys-s14-009-mobile-device-security.pdf~f2202f#p3#c6"
+        }
+      ]
+    }
+  },
+  "pooled": {
+    "total_quotes": 1169,
+    "verbatim": {
+      "count": 1116,
+      "all_score_exactly_1": true,
+      "accepted_at": {
+        "0.80": 1116,
+        "0.85": 1116,
+        "0.90": 1116,
+        "0.95": 1116,
+        "0.98": 1116
+      }
+    },
+    "non_verbatim": {
+      "count": 53,
+      "crosstab": {
+        "ambiguous": {
+          "total": 3,
+          "accepted_at": {
+            "0.80": 0,
+            "0.85": 0,
+            "0.90": 0,
+            "0.95": 0,
+            "0.98": 0
+          },
+          "scores": [
+            0.75,
+            0.407407,
+            0.318182
+          ]
+        },
+        "cross_chunk": {
+          "total": 1,
+          "accepted_at": {
+            "0.80": 0,
+            "0.85": 0,
+            "0.90": 0,
+            "0.95": 0,
+            "0.98": 0
+          },
+          "scores": [
+            0.741497
+          ]
+        },
+        "framework_echo": {
+          "total": 26,
+          "accepted_at": {
+            "0.80": 0,
+            "0.85": 0,
+            "0.90": 0,
+            "0.95": 0,
+            "0.98": 0
+          },
+          "scores": [
+            0.783333,
+            0.701299,
+            0.414474,
+            0.404959,
+            0.404959,
+            0.404255,
+            0.40146,
+            0.389381,
+            0.389381,
+            0.38835,
+            0.386667,
+            0.386364,
+            0.375,
+            0.368932,
+            0.347368,
+            0.346939,
+            0.34375,
+            0.338384,
+            0.337838,
+            0.336842,
+            0.335766,
+            0.330769,
+            0.330275,
+            0.329545,
+            0.299213,
+            0.296053
+          ]
+        },
+        "near_verbatim_miss": {
+          "total": 18,
+          "accepted_at": {
+            "0.80": 18,
+            "0.85": 18,
+            "0.90": 18,
+            "0.95": 15,
+            "0.98": 5
+          },
+          "scores": [
+            0.994152,
+            0.987179,
+            0.987069,
+            0.981707,
+            0.981707,
+            0.978417,
+            0.976923,
+            0.973913,
+            0.973913,
+            0.973913,
+            0.973913,
+            0.973913,
+            0.973913,
+            0.969582,
+            0.95122,
+            0.925466,
+            0.916031,
+            0.910615
+          ]
+        },
+        "paraphrase_of_present": {
+          "total": 3,
+          "accepted_at": {
+            "0.80": 2,
+            "0.85": 2,
+            "0.90": 2,
+            "0.95": 0,
+            "0.98": 0
+          },
+          "scores": [
+            0.911111,
+            0.906077,
+            0.692308
+          ]
+        },
+        "pdf_extraction_artifact": {
+          "total": 2,
+          "accepted_at": {
+            "0.80": 2,
+            "0.85": 2,
+            "0.90": 2,
+            "0.95": 2,
+            "0.98": 2
+          },
+          "scores": [
+            0.994652,
+            0.980769
+          ]
+        }
+      }
+    },
+    "framework_echo_scores": [
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "DE.AE-06",
+        "quote_index": 0,
+        "score": 0.783333,
+        "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+      },
+      {
+        "model": "ollama_llama3.2_3b",
+        "item": "DE.AE-08",
+        "quote_index": 0,
+        "score": 0.701299,
+        "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+      },
+      {
+        "model": "ollama_qwen2.5_14b",
+        "item": "GV.SC-02",
+        "quote_index": 0,
+        "score": 0.414474,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.RR-03",
+        "quote_index": 0,
+        "score": 0.404959,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_qwen2.5_14b",
+        "item": "GV.RR-03",
+        "quote_index": 0,
+        "score": 0.404959,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.RM-04",
+        "quote_index": 0,
+        "score": 0.404255,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9"
+      },
+      {
+        "model": "ollama_qwen2.5_14b",
+        "item": "GV.RR-02",
+        "quote_index": 0,
+        "score": 0.40146,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.OV-02",
+        "quote_index": 0,
+        "score": 0.389381,
+        "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "RC.RP-01",
+        "quote_index": 0,
+        "score": 0.389381,
+        "best_chunk_id": "nys-s13-005-cyber-incident-response.pdf~15faf7#p4#c9"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "PR.AA-01",
+        "quote_index": 0,
+        "score": 0.38835,
+        "best_chunk_id": "nys-s14-013-account-management-access-control.pdf~924e67#p2#c3"
+      },
+      {
+        "model": "ollama_gemma2_9b",
+        "item": "ID.RA-06",
+        "quote_index": 0,
+        "score": 0.386667,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p2#c3"
+      },
+      {
+        "model": "ollama_qwen2.5_7b",
+        "item": "ID.IM-04",
+        "quote_index": 0,
+        "score": 0.386364,
+        "best_chunk_id": "incident-response-plan.pdf~70a67a#p2#c1"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.SC-01",
+        "quote_index": 0,
+        "score": 0.375,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.RM-01",
+        "quote_index": 0,
+        "score": 0.368932,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "ID.RA-08",
+        "quote_index": 0,
+        "score": 0.347368,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p6#c12"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.SC-07",
+        "quote_index": 0,
+        "score": 0.346939,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c9"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.SC-01",
+        "quote_index": 0,
+        "score": 0.34375,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p3#c5"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.SC-05",
+        "quote_index": 0,
+        "score": 0.338384,
+        "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p23#c53"
+      },
+      {
+        "model": "ollama_qwen2.5_14b",
+        "item": "GV.OC-04",
+        "quote_index": 0,
+        "score": 0.337838,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "PR.IR-03",
+        "quote_index": 0,
+        "score": 0.336842,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c1"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.RR-02",
+        "quote_index": 0,
+        "score": 0.335766,
+        "best_chunk_id": "nys-s14-001-information-security-risk-management.pdf~540af0#p5#c11"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "ID.AM-03",
+        "quote_index": 0,
+        "score": 0.330769,
+        "best_chunk_id": "nys-p03-002-information-security-policy.pdf~9e1de7#p15#c36"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "RS.AN-03",
+        "quote_index": 0,
+        "score": 0.330275,
+        "best_chunk_id": "incident-response-plan.pdf~70a67a#p1#c0"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.RM-02",
+        "quote_index": 0,
+        "score": 0.329545,
+        "best_chunk_id": "information-security-policy.md~6bd7af#na#c1"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "ID.RA-05",
+        "quote_index": 0,
+        "score": 0.299213,
+        "best_chunk_id": "incident-response-plan.pdf~70a67a#p2#c1"
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "item": "GV.OC-03",
+        "quote_index": 0,
+        "score": 0.296053,
+        "best_chunk_id": "nys-s14-009-mobile-device-security.pdf~f2202f#p3#c6"
+      }
+    ]
+  },
+  "decision": {
+    "per_corpus": {
+      "A": {
+        "label": "corpus A",
+        "supported_definition": [
+          "near_verbatim_miss",
+          "pdf_extraction_artifact",
+          "paraphrase_of_present",
+          "cross_chunk"
+        ],
+        "n_supported": 16,
+        "n_core_supported": 13,
+        "n_echoes": 14,
+        "max_echo_score": 0.783333,
+        "score_for_80pct_recovery": 0.911111,
+        "per_threshold": [
+          {
+            "threshold": 0.8,
+            "supported_recovered": 15,
+            "supported_total": 16,
+            "recovery_rate": 0.9375,
+            "core_recovered": 13,
+            "core_total": 13,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.85,
+            "supported_recovered": 15,
+            "supported_total": 16,
+            "recovery_rate": 0.9375,
+            "core_recovered": 13,
+            "core_total": 13,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.9,
+            "supported_recovered": 15,
+            "supported_total": 16,
+            "recovery_rate": 0.9375,
+            "core_recovered": 13,
+            "core_total": 13,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.95,
+            "supported_recovered": 11,
+            "supported_total": 16,
+            "recovery_rate": 0.6875,
+            "core_recovered": 11,
+            "core_total": 13,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.98,
+            "supported_recovered": 4,
+            "supported_total": 16,
+            "recovery_rate": 0.25,
+            "core_recovered": 4,
+            "core_total": 13,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          }
+        ],
+        "safe_window": {
+          "exists": true,
+          "open_interval_low_exclusive": 0.783333,
+          "high_inclusive": 0.911111,
+          "tested_thresholds_in_window": [
+            0.8,
+            0.85,
+            0.9
+          ]
+        }
+      },
+      "B": {
+        "label": "corpus B",
+        "supported_definition": [
+          "near_verbatim_miss",
+          "pdf_extraction_artifact",
+          "paraphrase_of_present",
+          "cross_chunk"
+        ],
+        "n_supported": 8,
+        "n_core_supported": 7,
+        "n_echoes": 12,
+        "max_echo_score": 0.404255,
+        "score_for_80pct_recovery": 0.916031,
+        "per_threshold": [
+          {
+            "threshold": 0.8,
+            "supported_recovered": 7,
+            "supported_total": 8,
+            "recovery_rate": 0.875,
+            "core_recovered": 7,
+            "core_total": 7,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.85,
+            "supported_recovered": 7,
+            "supported_total": 8,
+            "recovery_rate": 0.875,
+            "core_recovered": 7,
+            "core_total": 7,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.9,
+            "supported_recovered": 7,
+            "supported_total": 8,
+            "recovery_rate": 0.875,
+            "core_recovered": 7,
+            "core_total": 7,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.95,
+            "supported_recovered": 6,
+            "supported_total": 8,
+            "recovery_rate": 0.75,
+            "core_recovered": 6,
+            "core_total": 7,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          },
+          {
+            "threshold": 0.98,
+            "supported_recovered": 3,
+            "supported_total": 8,
+            "recovery_rate": 0.375,
+            "core_recovered": 3,
+            "core_total": 7,
+            "echoes_admitted": 0,
+            "ambiguous_admitted": 0
+          }
+        ],
+        "safe_window": {
+          "exists": true,
+          "open_interval_low_exclusive": 0.404255,
+          "high_inclusive": 0.916031,
+          "tested_thresholds_in_window": [
+            0.8,
+            0.85,
+            0.9
+          ]
+        }
+      }
+    },
+    "pooled": {
+      "label": "pooled",
+      "supported_definition": [
+        "near_verbatim_miss",
+        "pdf_extraction_artifact",
+        "paraphrase_of_present",
+        "cross_chunk"
+      ],
+      "n_supported": 24,
+      "n_core_supported": 20,
+      "n_echoes": 26,
+      "max_echo_score": 0.783333,
+      "score_for_80pct_recovery": 0.911111,
+      "per_threshold": [
+        {
+          "threshold": 0.8,
+          "supported_recovered": 22,
+          "supported_total": 24,
+          "recovery_rate": 0.9167,
+          "core_recovered": 20,
+          "core_total": 20,
+          "echoes_admitted": 0,
+          "ambiguous_admitted": 0
+        },
+        {
+          "threshold": 0.85,
+          "supported_recovered": 22,
+          "supported_total": 24,
+          "recovery_rate": 0.9167,
+          "core_recovered": 20,
+          "core_total": 20,
+          "echoes_admitted": 0,
+          "ambiguous_admitted": 0
+        },
+        {
+          "threshold": 0.9,
+          "supported_recovered": 22,
+          "supported_total": 24,
+          "recovery_rate": 0.9167,
+          "core_recovered": 20,
+          "core_total": 20,
+          "echoes_admitted": 0,
+          "ambiguous_admitted": 0
+        },
+        {
+          "threshold": 0.95,
+          "supported_recovered": 17,
+          "supported_total": 24,
+          "recovery_rate": 0.7083,
+          "core_recovered": 17,
+          "core_total": 20,
+          "echoes_admitted": 0,
+          "ambiguous_admitted": 0
+        },
+        {
+          "threshold": 0.98,
+          "supported_recovered": 7,
+          "supported_total": 24,
+          "recovery_rate": 0.2917,
+          "core_recovered": 7,
+          "core_total": 20,
+          "echoes_admitted": 0,
+          "ambiguous_admitted": 0
+        }
+      ],
+      "safe_window": {
+        "exists": true,
+        "open_interval_low_exclusive": 0.783333,
+        "high_inclusive": 0.911111,
+        "tested_thresholds_in_window": [
+          0.8,
+          0.85,
+          0.9
+        ]
+      }
+    },
+    "both_corpora_safe_per_threshold": [
+      {
+        "threshold": 0.8,
+        "echoes_admitted_A": 0,
+        "echoes_admitted_B": 0,
+        "pooled_supported_recovered": 22,
+        "pooled_supported_total": 24,
+        "pooled_recovery_rate": 0.9167,
+        "safe_and_recovers_80pct": true
+      },
+      {
+        "threshold": 0.85,
+        "echoes_admitted_A": 0,
+        "echoes_admitted_B": 0,
+        "pooled_supported_recovered": 22,
+        "pooled_supported_total": 24,
+        "pooled_recovery_rate": 0.9167,
+        "safe_and_recovers_80pct": true
+      },
+      {
+        "threshold": 0.9,
+        "echoes_admitted_A": 0,
+        "echoes_admitted_B": 0,
+        "pooled_supported_recovered": 22,
+        "pooled_supported_total": 24,
+        "pooled_recovery_rate": 0.9167,
+        "safe_and_recovers_80pct": true
+      },
+      {
+        "threshold": 0.95,
+        "echoes_admitted_A": 0,
+        "echoes_admitted_B": 0,
+        "pooled_supported_recovered": 17,
+        "pooled_supported_total": 24,
+        "pooled_recovery_rate": 0.7083,
+        "safe_and_recovers_80pct": false
+      },
+      {
+        "threshold": 0.98,
+        "echoes_admitted_A": 0,
+        "echoes_admitted_B": 0,
+        "pooled_supported_recovered": 7,
+        "pooled_supported_total": 24,
+        "pooled_recovery_rate": 0.2917,
+        "safe_and_recovers_80pct": false
+      }
+    ]
+  }
+}

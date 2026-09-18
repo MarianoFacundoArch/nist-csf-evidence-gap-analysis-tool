@@ -1,0 +1,56 @@
+{
+  "UNGROUNDED (plain prompt)": {
+    "n": 106,
+    "alpha_ordinal": 0.6610258734350574,
+    "alpha_interval": 0.6787098312764562,
+    "unanimity_pct": 44.339622641509436,
+    "pairwise_pct": 62.893081761006286,
+    "marginals": [
+      {
+        "none": 9,
+        "partial": 67,
+        "substantial": 15,
+        "full": 15
+      },
+      {
+        "none": 33,
+        "partial": 57,
+        "substantial": 11,
+        "full": 5
+      },
+      {
+        "none": 31,
+        "partial": 54,
+        "substantial": 17,
+        "full": 4
+      }
+    ]
+  },
+  "GROUNDED (method prompt)": {
+    "n": 106,
+    "alpha_ordinal": 0.40132185475900095,
+    "alpha_interval": 0.5063297498241737,
+    "unanimity_pct": 50,
+    "pairwise_pct": 65.72327044025157,
+    "marginals": [
+      {
+        "none": 96,
+        "partial": 2,
+        "substantial": 3,
+        "full": 5
+      },
+      {
+        "none": 66,
+        "partial": 35,
+        "substantial": 5,
+        "full": 0
+      },
+      {
+        "none": 54,
+        "partial": 50,
+        "substantial": 2,
+        "full": 0
+      }
+    ]
+  }
+}

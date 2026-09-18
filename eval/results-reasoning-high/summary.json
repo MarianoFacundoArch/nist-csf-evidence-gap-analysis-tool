@@ -1,0 +1,33 @@
+{
+  "docs": "examples/sample-docs",
+  "csf": "data/csf-core.json",
+  "subcategories": 30,
+  "topk": 6,
+  "embedder": "local-transformers:Xenova/all-MiniLM-L6-v2",
+  "reasoning_effort": "high",
+  "models": [
+    {
+      "model": "openai:gpt-5.5",
+      "type": "cloud",
+      "reasoning_effort": "high",
+      "items": 30,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "raw_quotes": 34,
+      "raw_unverifiable": 0,
+      "raw_overclaim_items": 0,
+      "delivered_quotes": 34,
+      "delivered_unverifiable": 0,
+      "cov_none": 15,
+      "cov_partial": 15,
+      "cov_substantial": 0,
+      "cov_full": 0,
+      "est_in_tokens": 101752,
+      "est_out_tokens": 6920,
+      "UQR": 0,
+      "delivered_UQR": 0,
+      "latency_ms_mean": 10712,
+      "latency_ms_median": 12390
+    }
+  ]
+}

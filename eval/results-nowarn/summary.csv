@@ -1,0 +1,4 @@
+model,type,reasoning_effort,items,parse_failures,call_errors,raw_quotes,raw_unverifiable,UQR,raw_overclaim_items,delivered_quotes,delivered_unverifiable,delivered_UQR,cov_none,cov_partial,cov_substantial,cov_full,est_in_tokens,est_out_tokens,latency_ms_mean,latency_ms_median
+openai:gpt-4o,cloud,low,106,0,0,50,0,0,0,50,0,0,65,36,5,0,348424,15988,1880,1666
+ollama:llama3.1:8b,local,,0,0,106,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ollama:mistral:7b,local,,0,0,106,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

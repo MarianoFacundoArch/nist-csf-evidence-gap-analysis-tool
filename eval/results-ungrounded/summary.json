@@ -1,0 +1,58 @@
+{
+  "condition": "ungrounded-prompt baseline",
+  "index_source": "eval/results-spectrum/_index",
+  "csf": "data/csf-core.json",
+  "subcategories": 106,
+  "topk": 6,
+  "embedder": "local-transformers:Xenova/all-MiniLM-L6-v2",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "system_prompt": "You are a cybersecurity assessor performing a NIST CSF 2.0 gap analysis. For a single CSF subcategory, judge how well the organization achieves the subcategory's outcome, based on the document excerpts provided. Respond with a SINGLE valid JSON object and nothing else, with keys: subcategory_id, coverage (one of \"none\", \"partial\", \"substantial\", \"full\"), confidence (0.0-1.0), rationale (2-4 sentences). Do not add extra keys.",
+  "models": [
+    {
+      "model": "openai:gpt-4o-mini",
+      "type": "cloud",
+      "prompt_condition": "ungrounded",
+      "reasoning_effort": "low",
+      "items": 106,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "cov_none": 9,
+      "cov_partial": 67,
+      "cov_substantial": 15,
+      "cov_full": 15,
+      "latency_ms_mean": 2160,
+      "latency_ms_median": 2067
+    },
+    {
+      "model": "openai:gpt-4o",
+      "type": "cloud",
+      "prompt_condition": "ungrounded",
+      "reasoning_effort": "low",
+      "items": 106,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "cov_none": 33,
+      "cov_partial": 57,
+      "cov_substantial": 11,
+      "cov_full": 5,
+      "latency_ms_mean": 1508,
+      "latency_ms_median": 1375
+    },
+    {
+      "model": "openai:gpt-5.5",
+      "type": "cloud",
+      "prompt_condition": "ungrounded",
+      "reasoning_effort": "low",
+      "items": 106,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "cov_none": 31,
+      "cov_partial": 54,
+      "cov_substantial": 17,
+      "cov_full": 4,
+      "latency_ms_mean": 5127,
+      "latency_ms_median": 4981
+    }
+  ]
+}

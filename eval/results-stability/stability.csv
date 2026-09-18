@@ -1,0 +1,8 @@
+model,kind,run1_quotes,run1_unverifiable,run1_UQR,run2_quotes,run2_unverifiable,run2_UQR,run3_quotes,run3_unverifiable,run3_UQR,verdict_identical_n,verdict_identical_pct,full_record_identical_n,full_record_identical_pct,self_contradictions_n,alpha_ordinal_3runs,raw_files_byte_identical
+openai_gpt-4o-mini,cloud,14,0,0,11,0,0,11,0,0,102,96.23,100,94.34,4,0.9578,false
+openai_gpt-4o,cloud,48,1,0.0208,49,1,0.0204,49,1,0.0204,103,97.17,100,94.34,3,0.9744,false
+openai_gpt-5.5,cloud,109,0,0,112,0,0,116,0,0,92,86.79,66,62.26,14,0.8341,false
+ollama_llama3.1_8b,local,96,17,0.1771,96,17,0.1771,96,17,0.1771,106,100,106,100,0,1,true
+ollama_gemma2_9b,local,72,0,0,72,0,0,72,0,0,106,100,106,100,0,1,true
+ollama_qwen2.5_7b,local,13,1,0.0769,13,1,0.0769,13,1,0.0769,106,100,106,100,0,1,true
+ollama_mistral_7b,local,52,3,0.0577,52,3,0.0577,52,3,0.0577,106,100,106,100,0,1,true

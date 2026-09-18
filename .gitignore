@@ -22,6 +22,19 @@ examples/worked-example/output/index.json
 examples/worked-example/output/assessments.json
 examples/worked-example/output/meta.json
 
+# Evaluation artifacts (eval/). The harness, its aggregated results and the raw
+# model outputs behind every published number ARE committed — they are the
+# receipts. Excluded here:
+#   - per-run embedding indexes: large and fully regenerable by re-running.
+#   - corpus2 source PDFs: third-party documents published by NYS ITS. They are
+#     not redistributed here; eval/corpus2/fetch.sh re-downloads them from the
+#     official source (see eval/corpus2/MANIFEST.md).
+eval/results-*/_index/
+eval/corpus2/docs/
+
+# Local scratch runs against the demo document set (regenerable via the CLI).
+/output-*/
+
 # Atomic-write temp files left behind only if a run is interrupted mid-write.
 *.tmp-*
 

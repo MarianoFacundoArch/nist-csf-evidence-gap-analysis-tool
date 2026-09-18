@@ -1,0 +1,689 @@
+{
+  "meta": {
+    "generated_at": "2026-06-10T22:00:19.757Z",
+    "script": "eval/grounding-effect.mjs",
+    "data_dir": "eval/results-spectrum",
+    "alpha_implementation": "eval/agreement-alpha.mjs (self-validates on import; canonical Krippendorff examples)",
+    "reproduction_check": {
+      "all11_raw_alpha_ordinal": 0.256,
+      "published": 0.256,
+      "passed": true
+    },
+    "verifier": "quote survives iff normalize(quote) is substring of a normalize(hit-chunk text) AND length>=20 AND >=3 matches of /[a-z]{3,}/g; normalize = NFC, curly quotes->straight, en/em dash->'-', whitespace collapse, trim, lowercase; delivered = raw_coverage except raw!='none' with 0 surviving quotes -> 'none'",
+    "levels": [
+      "none",
+      "partial",
+      "substantial",
+      "full"
+    ],
+    "n_outcomes": 106,
+    "included_models": [
+      "ollama_gemma2_9b",
+      "ollama_llama3.1_8b",
+      "ollama_llama3.2_3b",
+      "ollama_mistral_7b",
+      "ollama_qwen2.5_14b",
+      "ollama_qwen2.5_32b",
+      "ollama_qwen2.5_3b",
+      "ollama_qwen2.5_7b",
+      "openai_gpt-4o-mini",
+      "openai_gpt-4o",
+      "openai_gpt-5.5"
+    ],
+    "excluded_models": [
+      "ollama_qwen2.5_0.5b",
+      "ollama_qwen2.5_1.5b"
+    ],
+    "panels": {
+      "all11": [
+        "ollama_gemma2_9b",
+        "ollama_llama3.1_8b",
+        "ollama_llama3.2_3b",
+        "ollama_mistral_7b",
+        "ollama_qwen2.5_14b",
+        "ollama_qwen2.5_32b",
+        "ollama_qwen2.5_3b",
+        "ollama_qwen2.5_7b",
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ],
+      "capable9": [
+        "ollama_mistral_7b",
+        "ollama_qwen2.5_7b",
+        "ollama_llama3.1_8b",
+        "ollama_gemma2_9b",
+        "ollama_qwen2.5_14b",
+        "ollama_qwen2.5_32b",
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ],
+      "cloud3": [
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ]
+    },
+    "strata_definition": {
+      "well_grounded": ">=6 of 11 models with >=1 surviving quote",
+      "sparse": "1-5 models",
+      "ungrounded": "0 models"
+    }
+  },
+  "per_model_verification": {
+    "ollama_gemma2_9b": {
+      "outcomes_with_surviving_quote": 72,
+      "forced_downgrades": 0
+    },
+    "ollama_llama3.1_8b": {
+      "outcomes_with_surviving_quote": 74,
+      "forced_downgrades": 16
+    },
+    "ollama_llama3.2_3b": {
+      "outcomes_with_surviving_quote": 11,
+      "forced_downgrades": 0
+    },
+    "ollama_mistral_7b": {
+      "outcomes_with_surviving_quote": 48,
+      "forced_downgrades": 3
+    },
+    "ollama_qwen2.5_14b": {
+      "outcomes_with_surviving_quote": 63,
+      "forced_downgrades": 5
+    },
+    "ollama_qwen2.5_32b": {
+      "outcomes_with_surviving_quote": 78,
+      "forced_downgrades": 0
+    },
+    "ollama_qwen2.5_3b": {
+      "outcomes_with_surviving_quote": 51,
+      "forced_downgrades": 1
+    },
+    "ollama_qwen2.5_7b": {
+      "outcomes_with_surviving_quote": 12,
+      "forced_downgrades": 1
+    },
+    "openai_gpt-4o-mini": {
+      "outcomes_with_surviving_quote": 10,
+      "forced_downgrades": 0
+    },
+    "openai_gpt-4o": {
+      "outcomes_with_surviving_quote": 39,
+      "forced_downgrades": 1
+    },
+    "openai_gpt-5.5": {
+      "outcomes_with_surviving_quote": 52,
+      "forced_downgrades": 0
+    }
+  },
+  "verification_totals": {
+    "forced_downgrades_total": 27,
+    "total_verdicts": 1166,
+    "none_verdicts_with_claimed_evidence": 4,
+    "none_verdicts_total": 632
+  },
+  "analysis1_raw_vs_delivered": {
+    "all11": {
+      "label": "ALL-11 MODELS",
+      "raters": [
+        "ollama_gemma2_9b",
+        "ollama_llama3.1_8b",
+        "ollama_llama3.2_3b",
+        "ollama_mistral_7b",
+        "ollama_qwen2.5_14b",
+        "ollama_qwen2.5_32b",
+        "ollama_qwen2.5_3b",
+        "ollama_qwen2.5_7b",
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ],
+      "raw": {
+        "n_items": 106,
+        "n_raters": 11,
+        "alpha_ordinal": 0.256,
+        "alpha_note": null,
+        "unanimity_count": 12,
+        "unanimity_pct": 11.3,
+        "unanimous_by_level": {
+          "none": 12,
+          "partial": 0,
+          "substantial": 0,
+          "full": 0
+        },
+        "mean_pairwise_pct": 59.8,
+        "marginal_counts": {
+          "none": 632,
+          "partial": 517,
+          "substantial": 12,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 54.2,
+          "partial": 44.3,
+          "substantial": 1,
+          "full": 0.4
+        },
+        "modal_level": "none",
+        "modal_share_pct": 54.2
+      },
+      "delivered": {
+        "n_items": 106,
+        "n_raters": 11,
+        "alpha_ordinal": 0.2319,
+        "alpha_note": null,
+        "unanimity_count": 12,
+        "unanimity_pct": 11.3,
+        "unanimous_by_level": {
+          "none": 12,
+          "partial": 0,
+          "substantial": 0,
+          "full": 0
+        },
+        "mean_pairwise_pct": 59.3,
+        "marginal_counts": {
+          "none": 659,
+          "partial": 490,
+          "substantial": 12,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 56.5,
+          "partial": 42,
+          "substantial": 1,
+          "full": 0.4
+        },
+        "modal_level": "none",
+        "modal_share_pct": 56.5
+      },
+      "delta": {
+        "alpha_ordinal": -0.0241,
+        "unanimity_pct": 0,
+        "mean_pairwise_pct": -0.5
+      }
+    },
+    "capable9": {
+      "label": "CAPABLE-9 (>=7B local + 3 cloud)",
+      "raters": [
+        "ollama_mistral_7b",
+        "ollama_qwen2.5_7b",
+        "ollama_llama3.1_8b",
+        "ollama_gemma2_9b",
+        "ollama_qwen2.5_14b",
+        "ollama_qwen2.5_32b",
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ],
+      "raw": {
+        "n_items": 106,
+        "n_raters": 9,
+        "alpha_ordinal": 0.2884,
+        "alpha_note": null,
+        "unanimity_count": 13,
+        "unanimity_pct": 12.3,
+        "unanimous_by_level": {
+          "none": 12,
+          "partial": 1,
+          "substantial": 0,
+          "full": 0
+        },
+        "mean_pairwise_pct": 60.3,
+        "marginal_counts": {
+          "none": 480,
+          "partial": 457,
+          "substantial": 12,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 50.3,
+          "partial": 47.9,
+          "substantial": 1.3,
+          "full": 0.5
+        },
+        "modal_level": "none",
+        "modal_share_pct": 50.3
+      },
+      "delivered": {
+        "n_items": 106,
+        "n_raters": 9,
+        "alpha_ordinal": 0.2623,
+        "alpha_note": null,
+        "unanimity_count": 13,
+        "unanimity_pct": 12.3,
+        "unanimous_by_level": {
+          "none": 12,
+          "partial": 1,
+          "substantial": 0,
+          "full": 0
+        },
+        "mean_pairwise_pct": 59.4,
+        "marginal_counts": {
+          "none": 506,
+          "partial": 431,
+          "substantial": 12,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 53,
+          "partial": 45.2,
+          "substantial": 1.3,
+          "full": 0.5
+        },
+        "modal_level": "none",
+        "modal_share_pct": 53
+      },
+      "delta": {
+        "alpha_ordinal": -0.0261,
+        "unanimity_pct": 0,
+        "mean_pairwise_pct": -0.9
+      }
+    },
+    "cloud3": {
+      "label": "CLOUD-3 (OpenAI only)",
+      "raters": [
+        "openai_gpt-4o-mini",
+        "openai_gpt-4o",
+        "openai_gpt-5.5"
+      ],
+      "raw": {
+        "n_items": 106,
+        "n_raters": 3,
+        "alpha_ordinal": 0.4013,
+        "alpha_note": null,
+        "unanimity_count": 53,
+        "unanimity_pct": 50,
+        "unanimous_by_level": {
+          "none": 50,
+          "partial": 2,
+          "substantial": 1,
+          "full": 0
+        },
+        "mean_pairwise_pct": 65.7,
+        "marginal_counts": {
+          "none": 216,
+          "partial": 87,
+          "substantial": 10,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 67.9,
+          "partial": 27.4,
+          "substantial": 3.1,
+          "full": 1.6
+        },
+        "modal_level": "none",
+        "modal_share_pct": 67.9
+      },
+      "delivered": {
+        "n_items": 106,
+        "n_raters": 3,
+        "alpha_ordinal": 0.3812,
+        "alpha_note": null,
+        "unanimity_count": 53,
+        "unanimity_pct": 50,
+        "unanimous_by_level": {
+          "none": 50,
+          "partial": 2,
+          "substantial": 1,
+          "full": 0
+        },
+        "mean_pairwise_pct": 65.4,
+        "marginal_counts": {
+          "none": 217,
+          "partial": 86,
+          "substantial": 10,
+          "full": 5
+        },
+        "marginal_pct": {
+          "none": 68.2,
+          "partial": 27,
+          "substantial": 3.1,
+          "full": 1.6
+        },
+        "modal_level": "none",
+        "modal_share_pct": 68.2
+      },
+      "delta": {
+        "alpha_ordinal": -0.0201,
+        "unanimity_pct": 0,
+        "mean_pairwise_pct": -0.3
+      }
+    }
+  },
+  "analysis2_conditioned_on_grounding": {
+    "grounded_count_histogram": {
+      "0": 12,
+      "1": 6,
+      "2": 7,
+      "3": 13,
+      "4": 8,
+      "5": 13,
+      "6": 15,
+      "7": 10,
+      "8": 11,
+      "9": 5,
+      "10": 5,
+      "11": 1
+    },
+    "strata": {
+      "well_grounded": {
+        "label": "WELL-GROUNDED (>=6 of 11 models with a verified quote)",
+        "n_items": 47,
+        "small_stratum_flag": false,
+        "ids": [
+          "DE.AE-02",
+          "DE.AE-08",
+          "DE.CM-01",
+          "DE.CM-03",
+          "GV.OC-01",
+          "GV.OC-02",
+          "GV.OC-04",
+          "GV.OC-05",
+          "GV.OV-01",
+          "GV.OV-02",
+          "GV.OV-03",
+          "GV.PO-01",
+          "GV.PO-02",
+          "GV.RM-01",
+          "GV.RM-03",
+          "GV.RM-04",
+          "GV.RM-05",
+          "GV.RR-01",
+          "GV.RR-02",
+          "GV.RR-04",
+          "GV.SC-01",
+          "GV.SC-02",
+          "GV.SC-08",
+          "GV.SC-09",
+          "ID.AM-01",
+          "ID.AM-02",
+          "ID.AM-08",
+          "ID.IM-04",
+          "ID.RA-06",
+          "PR.AA-01",
+          "PR.AA-02",
+          "PR.AA-03",
+          "PR.AA-04",
+          "PR.AA-05",
+          "PR.AA-06",
+          "PR.AT-01",
+          "PR.AT-02",
+          "PR.IR-01",
+          "PR.IR-03",
+          "PR.PS-01",
+          "RC.RP-01",
+          "RC.RP-02",
+          "RS.MA-01",
+          "RS.MA-02",
+          "RS.MA-04",
+          "RS.MA-05",
+          "RS.MI-01"
+        ],
+        "raw": {
+          "n_items": 47,
+          "n_raters": 11,
+          "alpha_ordinal": 0.0501,
+          "alpha_note": null,
+          "unanimity_count": 0,
+          "unanimity_pct": 0,
+          "unanimous_by_level": {
+            "none": 0,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 53.4,
+          "marginal_counts": {
+            "none": 149,
+            "partial": 351,
+            "substantial": 12,
+            "full": 5
+          },
+          "marginal_pct": {
+            "none": 28.8,
+            "partial": 67.9,
+            "substantial": 2.3,
+            "full": 1
+          },
+          "modal_level": "partial",
+          "modal_share_pct": 67.9
+        },
+        "delivered": {
+          "n_items": 47,
+          "n_raters": 11,
+          "alpha_ordinal": 0.0284,
+          "alpha_note": null,
+          "unanimity_count": 0,
+          "unanimity_pct": 0,
+          "unanimous_by_level": {
+            "none": 0,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 50.9,
+          "marginal_counts": {
+            "none": 164,
+            "partial": 336,
+            "substantial": 12,
+            "full": 5
+          },
+          "marginal_pct": {
+            "none": 31.7,
+            "partial": 65,
+            "substantial": 2.3,
+            "full": 1
+          },
+          "modal_level": "partial",
+          "modal_share_pct": 65
+        }
+      },
+      "sparse": {
+        "label": "SPARSE (1-5 models with a verified quote)",
+        "n_items": 47,
+        "small_stratum_flag": false,
+        "ids": [
+          "DE.AE-04",
+          "DE.AE-06",
+          "DE.CM-02",
+          "DE.CM-06",
+          "DE.CM-09",
+          "GV.OC-03",
+          "GV.RM-02",
+          "GV.RM-06",
+          "GV.RM-07",
+          "GV.RR-03",
+          "GV.SC-03",
+          "GV.SC-04",
+          "GV.SC-05",
+          "GV.SC-06",
+          "GV.SC-07",
+          "ID.AM-03",
+          "ID.AM-05",
+          "ID.AM-07",
+          "ID.IM-01",
+          "ID.IM-02",
+          "ID.IM-03",
+          "ID.RA-01",
+          "ID.RA-03",
+          "ID.RA-04",
+          "ID.RA-05",
+          "ID.RA-07",
+          "ID.RA-08",
+          "PR.DS-01",
+          "PR.DS-02",
+          "PR.DS-10",
+          "PR.DS-11",
+          "PR.IR-02",
+          "PR.IR-04",
+          "PR.PS-02",
+          "PR.PS-03",
+          "PR.PS-06",
+          "RC.CO-03",
+          "RC.RP-03",
+          "RC.RP-04",
+          "RC.RP-05",
+          "RC.RP-06",
+          "RS.AN-03",
+          "RS.AN-08",
+          "RS.CO-02",
+          "RS.CO-03",
+          "RS.MA-03",
+          "RS.MI-02"
+        ],
+        "raw": {
+          "n_items": 47,
+          "n_raters": 11,
+          "alpha_ordinal": -0.006,
+          "alpha_note": null,
+          "unanimity_count": 0,
+          "unanimity_pct": 0,
+          "unanimous_by_level": {
+            "none": 0,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 56.1,
+          "marginal_counts": {
+            "none": 351,
+            "partial": 166,
+            "substantial": 0,
+            "full": 0
+          },
+          "marginal_pct": {
+            "none": 67.9,
+            "partial": 32.1,
+            "substantial": 0,
+            "full": 0
+          },
+          "modal_level": "none",
+          "modal_share_pct": 67.9
+        },
+        "delivered": {
+          "n_items": 47,
+          "n_raters": 11,
+          "alpha_ordinal": -0.019,
+          "alpha_note": null,
+          "unanimity_count": 0,
+          "unanimity_pct": 0,
+          "unanimous_by_level": {
+            "none": 0,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 57.3,
+          "marginal_counts": {
+            "none": 363,
+            "partial": 154,
+            "substantial": 0,
+            "full": 0
+          },
+          "marginal_pct": {
+            "none": 70.2,
+            "partial": 29.8,
+            "substantial": 0,
+            "full": 0
+          },
+          "modal_level": "none",
+          "modal_share_pct": 70.2
+        }
+      },
+      "ungrounded": {
+        "label": "UNGROUNDED (0 models with a verified quote)",
+        "n_items": 12,
+        "small_stratum_flag": true,
+        "ids": [
+          "DE.AE-03",
+          "DE.AE-07",
+          "GV.SC-10",
+          "ID.AM-04",
+          "ID.RA-02",
+          "ID.RA-09",
+          "ID.RA-10",
+          "PR.PS-04",
+          "PR.PS-05",
+          "RC.CO-04",
+          "RS.AN-06",
+          "RS.AN-07"
+        ],
+        "raw": {
+          "n_items": 12,
+          "n_raters": 11,
+          "alpha_ordinal": null,
+          "alpha_note": "De=0 (single observed category)",
+          "unanimity_count": 12,
+          "unanimity_pct": 100,
+          "unanimous_by_level": {
+            "none": 12,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 100,
+          "marginal_counts": {
+            "none": 132,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "marginal_pct": {
+            "none": 100,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "modal_level": "none",
+          "modal_share_pct": 100
+        },
+        "delivered": {
+          "n_items": 12,
+          "n_raters": 11,
+          "alpha_ordinal": null,
+          "alpha_note": "De=0 (single observed category)",
+          "unanimity_count": 12,
+          "unanimity_pct": 100,
+          "unanimous_by_level": {
+            "none": 12,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "mean_pairwise_pct": 100,
+          "marginal_counts": {
+            "none": 132,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "marginal_pct": {
+            "none": 100,
+            "partial": 0,
+            "substantial": 0,
+            "full": 0
+          },
+          "modal_level": "none",
+          "modal_share_pct": 100
+        }
+      }
+    }
+  },
+  "interpretation_guard": [
+    "Alpha is sensitive to marginal homogeneity: the forcing rule moves mass to 'none' (all-11 'none' share: raw 54.2% -> delivered 56.5%), so % agreement can rise while chance-corrected alpha falls — both are reported throughout.",
+    "The forcing rule fired on only 27 of 1166 verdicts and asymmetrically across models (max: ollama_llama3.1_8b with 16; several models 0) — it moves a few raters away from the panel consensus rather than pulling the panel together, which is why delivered alpha is lower than raw.",
+    "CIRCULARITY: the grounded-count stratifier is not independent of the verdicts — 'none' verdicts carry no claimed evidence essentially by design (4/632 'none' verdicts have any quote), so the UNGROUNDED stratum mechanically selects outcomes where models answered 'none'. Its 100%-style agreement reflects a shared 'none' default, not grounding-induced consistency of judgment.",
+    "RANGE RESTRICTION: stratifying removes between-stratum variance, which alpha rewards; within-stratum alpha is therefore expected to drop even for good judges. The fair within-stratum comparison is pairwise % at similar marginals — and well-grounded (53.4%) does not beat sparse (56.1%) on it.",
+    "UNGROUNDED stratum delivered verdicts are 'none' by construction wherever no quote survives — its 100% delivered pairwise agreement is forced, not judged (and alpha is formally undefined there: a single observed category)."
+  ],
+  "summary_lines": [
+    "A1 (gate effect, all-11): alpha 0.256 raw -> 0.232 delivered (DOWN 0.024); unanimity 11.3% -> 11.3%; pairwise 59.8% -> 59.3%.",
+    "A1 caveat: the gate fired on only 27/1166 verdicts, concentrated in few models (ollama_llama3.1_8b: 16) — it nudges individual raters off the panel consensus, so it homogenizes marginals (more 'none') without homogenizing judgments.",
+    "A2 (conditioning on grounding): RAW alpha by stratum — well-grounded 0.0501 (n=47), sparse -0.0060 (n=47), ungrounded undefined (De=0 (single observed category)) (n=12); pairwise 53.4% / 56.1% / 100%.",
+    "A2 caveat: per-stratum agreement is marginal-driven, not discrimination (well-grounded modal: partial 67.9%; ungrounded modal: none 100%, 100% agreement there is a shared 'none' default and circular with the stratifier); within-stratum alpha ~0 everywhere means the panel's overall alpha comes from the coarse none-vs-partial split between strata.",
+    "Verdict — \"grounding enforcement improves cross-model judgment agreement\": NO on both measures."
+  ],
+  "verdict": "NO on both measures"
+}

@@ -1,0 +1,39 @@
+{
+  "docs": "examples/sample-docs",
+  "chunks": 8,
+  "cases": 122,
+  "catch_rate": 1,
+  "false_rejection_rate": 0,
+  "by_category": {
+    "legit_verbatim": {
+      "n": 40,
+      "correct": 40,
+      "rate": 1
+    },
+    "legit_formatting": {
+      "n": 40,
+      "correct": 40,
+      "rate": 1
+    },
+    "adv_substitution": {
+      "n": 20,
+      "correct": 20,
+      "rate": 1
+    },
+    "adv_fabricated": {
+      "n": 5,
+      "correct": 5,
+      "rate": 1
+    },
+    "adv_trivial": {
+      "n": 5,
+      "correct": 5,
+      "rate": 1
+    },
+    "adv_crosschunk": {
+      "n": 12,
+      "correct": 12,
+      "rate": 1
+    }
+  }
+}

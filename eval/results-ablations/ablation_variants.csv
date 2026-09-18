@@ -1,0 +1,5 @@
+variant,delivered_unverifiable_quotes,delivered_UQR,note
+full (deployed),0,0.0%,verbatim(NFC) + substantive bar
+no_verifier,30,4.7%,model raw quotes reach the user
+no_substantive_bar,0,0.0%,"0 trivial ""fake-anchor"" quotes would survive"
+nfkc_normalization,0,0.0%,0 compatibility-fold escapes on real data

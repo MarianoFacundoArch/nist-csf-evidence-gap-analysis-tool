@@ -1,0 +1,56 @@
+{
+  "docs": "examples/sample-docs",
+  "csf": "data/csf-core.json",
+  "subcategories": 25,
+  "topk": 6,
+  "embedder": "local-transformers:Xenova/all-MiniLM-L6-v2",
+  "models": [
+    {
+      "model": "openai:gpt-5.5",
+      "items": 25,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "raw_quotes": 39,
+      "raw_unverifiable": 0,
+      "raw_overclaim_items": 0,
+      "delivered_quotes": 39,
+      "delivered_unverifiable": 0,
+      "coverage_raw": {
+        "none": 9,
+        "partial": 16,
+        "substantial": 0,
+        "full": 0
+      },
+      "UQR": 0,
+      "delivered_UQR": 0,
+      "latency_ms_mean": 6251,
+      "latency_ms_median": 6102
+    },
+    {
+      "model": "openai:gpt-4o-mini",
+      "items": 25,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "raw_quotes": 2,
+      "raw_unverifiable": 0,
+      "raw_overclaim_items": 0,
+      "delivered_quotes": 2,
+      "delivered_unverifiable": 0,
+      "coverage_raw": {
+        "none": 23,
+        "partial": 2,
+        "substantial": 0,
+        "full": 0
+      },
+      "UQR": 0,
+      "delivered_UQR": 0,
+      "latency_ms_mean": 2092,
+      "latency_ms_median": 1946
+    },
+    {
+      "model": "ollama:llama3.2:3b",
+      "skipped": true,
+      "reason": "Cannot reach the Ollama daemon at 127.0.0.1:11434."
+    }
+  ]
+}

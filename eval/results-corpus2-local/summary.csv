@@ -1,0 +1,5 @@
+model,type,reasoning_effort,items,parse_failures,call_errors,raw_quotes,raw_unverifiable,UQR,raw_overclaim_items,delivered_quotes,delivered_unverifiable,delivered_UQR,cov_none,cov_partial,cov_substantial,cov_full,est_in_tokens,est_out_tokens,latency_ms_mean,latency_ms_median
+ollama:llama3.1:8b,local,,106,0,0,100,19,0.19,17,81,0,0,17,89,0,0,405164,17339,4228,4341
+ollama:gemma2:9b,local,,106,0,0,68,3,0.0441,3,65,0,0,40,66,0,0,405164,14459,5175,5398
+ollama:qwen2.5:7b,local,,106,0,0,14,0,0,0,14,0,0,92,14,0,0,405164,11982,3068,2963
+ollama:mistral:7b,local,,106,0,0,64,1,0.0156,1,63,0,0,61,45,0,0,405164,14459,4399,4034

@@ -1,0 +1,30 @@
+{
+  "docs": "examples/sample-docs",
+  "csf": "data/csf-core.json",
+  "subcategories": 25,
+  "topk": 6,
+  "embedder": "local-transformers:Xenova/all-MiniLM-L6-v2",
+  "models": [
+    {
+      "model": "ollama:llama3.2:3b",
+      "items": 25,
+      "parse_failures": 0,
+      "call_errors": 0,
+      "raw_quotes": 5,
+      "raw_unverifiable": 1,
+      "raw_overclaim_items": 0,
+      "delivered_quotes": 4,
+      "delivered_unverifiable": 0,
+      "coverage_raw": {
+        "none": 22,
+        "partial": 3,
+        "substantial": 0,
+        "full": 0
+      },
+      "UQR": 0.2,
+      "delivered_UQR": 0,
+      "latency_ms_mean": 1454,
+      "latency_ms_median": 1306
+    }
+  ]
+}

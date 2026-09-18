@@ -1,0 +1,14 @@
+model,raw_quotes,nonverbatim_quotes,trivial_verbatim_quotes,nfkc_only_quotes
+ollama_gemma2_9b,72,0,0,0
+ollama_llama3.1_8b,96,17,0,0
+ollama_llama3.2_3b,17,2,0,0
+ollama_mistral_7b,52,3,0,0
+ollama_qwen2.5_0.5b,0,0,0,0
+ollama_qwen2.5_1.5b,11,0,0,0
+ollama_qwen2.5_14b,69,5,0,0
+ollama_qwen2.5_32b,89,0,0,0
+ollama_qwen2.5_3b,52,1,0,0
+ollama_qwen2.5_7b,13,1,0,0
+openai_gpt-4o-mini,14,0,0,0
+openai_gpt-4o,48,1,0,0
+openai_gpt-5.5,109,0,0,0

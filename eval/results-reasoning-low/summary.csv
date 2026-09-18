@@ -1,0 +1,2 @@
+model,type,reasoning_effort,items,parse_failures,call_errors,raw_quotes,raw_unverifiable,UQR,raw_overclaim_items,delivered_quotes,delivered_unverifiable,delivered_UQR,cov_none,cov_partial,cov_substantial,cov_full,est_in_tokens,est_out_tokens,latency_ms_mean,latency_ms_median
+openai:gpt-5.5,cloud,low,30,0,0,44,0,0,0,44,0,0,12,18,0,0,101752,7506,5254,5614

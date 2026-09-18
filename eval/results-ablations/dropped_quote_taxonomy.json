@@ -1,0 +1,616 @@
+{
+  "generated_at": "2026-06-10T14:03:19.526Z",
+  "description": "Taxonomy of all non-verbatim (unverifiable) quotes produced across models in the spectrum experiment. A quote is non-verbatim iff its normalized text is not a substring of the normalized text of any chunk in the record's hit_chunk_ids.",
+  "method": {
+    "inputs": [
+      "eval/results-spectrum/raw_*.jsonl",
+      "eval/results-spectrum/_index/index.json",
+      "data/csf-core.json"
+    ],
+    "normalization": "s.normalize('NFC').replace(/[\\u2018\\u2019\\u201b]/g,\"'\").replace(/[\\u201c\\u201d]/g,'\"').replace(/[\\u2013\\u2014]/g,'-').replace(/\\s+/g,' ').trim().toLowerCase()",
+    "verification": "Each near_verbatim_miss / paraphrase / splice diagnosis was verified mechanically: applying the single described edit (word substitution, ellipsis removal, elision restore, or literal-\\n replacement) makes the quote an exact substring of a chunk in the record's hit list. Each framework_echo marked \"character-exact\" was verified equal (after normalization, modulo a trailing period) to the official CSF 2.0 outcome text for that subcategory.",
+    "categories": {
+      "framework_echo": "Quote substantially reproduces the NIST CSF outcome/framework wording (including negated variants and framework-onto-document splices) rather than document evidence.",
+      "fabricated_content": "Quote asserts content not present in the retrieved chunks (invented controls/processes).",
+      "paraphrase_of_present": "Quote restates content that IS present in the retrieved chunks but reworded/compressed; semantically supported but fails the verbatim test.",
+      "near_verbatim_miss": "Differs from real chunk text only by a tiny edit (one-word substitution, prepended article, trailing ellipsis truncation, escaping artifact); a harsh false negative of the verbatim check.",
+      "cross_chunk": "Text spliced across two different chunks (here: faithful document text spanning an overlapping chunk boundary).",
+      "ambiguous": "Could not be confidently classified."
+    }
+  },
+  "total": 30,
+  "counts": {
+    "near_verbatim_miss": 13,
+    "framework_echo": 14,
+    "paraphrase_of_present": 2,
+    "cross_chunk": 1
+  },
+  "counts_by_model": {
+    "ollama_llama3.1_8b": 17,
+    "ollama_llama3.2_3b": 2,
+    "ollama_mistral_7b": 3,
+    "ollama_qwen2.5_14b": 5,
+    "ollama_qwen2.5_3b": 1,
+    "ollama_qwen2.5_7b": 1,
+    "openai_gpt-4o": 1
+  },
+  "observations": [
+    "No quote invented a control or process out of thin air (fabricated_content = 0): every unverifiable quote is traceable either to the NIST framework text itself or to real chunk text with small edits.",
+    "framework_echo is the dominant failure (14/30): 11 quotes are character-exact copies of the CSF outcome text presented as document evidence, 2 are negated outcome statements used as gap assessments, and 1 grafts the outcome subject onto a real chunk sentence. llama3.1:8b and qwen2.5:14b account for most of these.",
+    "near_verbatim_miss (13/30) is the second-largest bucket and is concentrated in llama3.1:8b: 6 instances are the same incident-response sentence truncated with a trailing \"...\", plus one-word substitutions (Our->The, The->This, These->Cybersecurity) and one literal \"\\n\" escaping artifact (qwen2.5:3b). These are harsh false negatives of the strict substring check.",
+    "The single cross_chunk case (gpt-4o, GV.RR-02) is faithful document text that spans the overlap boundary between two chunks of information-security-policy.md -- arguably the most \"correct\" quote in the entire dropped set.",
+    "The DE.AE-08 case (llama3.2:3b) is diagnostic: the quote says \"defined incident criteria\" (framework wording) where the document says \"documented incident criteria\", proving the model copied the framework outcome rather than the near-identical document sentence."
+  ],
+  "per_quote": [
+    {
+      "index": 0,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "GV.OC-01",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "The organizational mission is understood and informs cybersecurity risk management",
+      "quote": "The organizational mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "access-control-standard.md~8812c8#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk sentence except head substitution 'Our mission' -> 'The organizational mission' (term borrowed from the GV.OC-01 outcome); rest character-identical to information-security-policy.md c0."
+    },
+    {
+      "index": 1,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "GV.RM-01",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Risk management objectives are established and agreed to by organizational stakeholders",
+      "quote": "Risk management objectives are not explicitly established and agreed to by organizational stakeholders.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Not document text: negated restatement of the GV.RM-01 outcome ('Risk management objectives are established and agreed to...') with 'not explicitly' inserted -- a gap-assessment sentence placed in the quote field."
+    },
+    {
+      "index": 2,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "GV.RM-02",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Risk appetite and risk tolerance statements are established, communicated, and maintained",
+      "quote": "Risk appetite and risk tolerance statements are not explicitly mentioned in this policy.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1"
+      ],
+      "category": "framework_echo",
+      "reason": "Not document text: reproduces the GV.RM-02 outcome head phrase 'Risk appetite and risk tolerance statements' plus a meta-claim 'are not explicitly mentioned in this policy' -- an assessment, not evidence."
+    },
+    {
+      "index": 3,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "GV.RR-03",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.RR-03 outcome text presented as a document quote; no such sentence in any retrieved chunk."
+    },
+    {
+      "index": 4,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "GV.SC-01",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.SC-01 outcome text presented as a document quote; the corpus contains no supply-chain content at all."
+    },
+    {
+      "index": 5,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "ID.AM-02",
+      "evidence_index": 1,
+      "source_file_cited": "asset-inventory-procedure.docx",
+      "csf_outcome": "Inventories of software, services, and systems managed by the organization are maintained",
+      "quote": "The software Inventory A list of approved applications is kept by the IT team.",
+      "hit_chunk_ids": [
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk text ('Software Inventory / A list of approved applications is kept by the IT team.') with a single prepended word 'The'."
+    },
+    {
+      "index": 6,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "ID.RA-05",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+      "quote": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the ID.RA-05 outcome text presented as a document quote; nothing like it in the retrieved chunks."
+    },
+    {
+      "index": 7,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "ID.RA-06",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim prefix of the incident-response-plan p1 sentence, truncated with '...' where the chunk continues ', including our managed security provider...'; only the trailing ellipsis breaks the substring test."
+    },
+    {
+      "index": 8,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "PR.DS-02",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "The confidentiality, integrity, and availability of data-in-transit are protected",
+      "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+      "hit_chunk_ids": [
+        "data-protection-note.txt~87ecfd#na#c0",
+        "information-security-policy.md~6bd7af#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "access-control-standard.md~8812c8#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk sentence except 'Our mission' -> 'The mission' (one-word change); note the supported sentence is about the org mission, cited under PR.DS-02 (data-in-transit)."
+    },
+    {
+      "index": 9,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "PR.DS-10",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "The confidentiality, integrity, and availability of data-in-use are protected",
+      "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity.",
+      "hit_chunk_ids": [
+        "data-protection-note.txt~87ecfd#na#c0",
+        "information-security-policy.md~6bd7af#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "access-control-standard.md~8812c8#na#c1",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same one-word edit as #8 ('Our' -> 'The'); otherwise verbatim from information-security-policy.md c0, cited under PR.DS-10."
+    },
+    {
+      "index": 10,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "PR.IR-03",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations",
+      "quote": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations.",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the PR.IR-03 outcome text (plus a period) presented as a document quote; no resilience-mechanism sentence exists in the chunks."
+    },
+    {
+      "index": 11,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "DE.AE-02",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Potentially adverse events are analyzed to better understand associated activities",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same ellipsis-truncated verbatim prefix of the IR-plan sentence as #7."
+    },
+    {
+      "index": 12,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "DE.AE-06",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf",
+      "csf_outcome": "Information on adverse events is provided to authorized staff and tools",
+      "quote": "Information on adverse events is declared by the on-call lead when adverse events meet the documented incident criteria.",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1"
+      ],
+      "category": "framework_echo",
+      "reason": "Hybrid splice: the DE.AE-06 outcome subject 'Information on adverse events' is grafted onto the otherwise-verbatim chunk sentence 'Incidents are declared by the on-call lead when adverse events meet the documented incident criteria', producing a sentence found in neither source."
+    },
+    {
+      "index": 13,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "RS.MA-01",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "access-control-standard.md~8812c8#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same ellipsis-truncated verbatim prefix as #7; here the citation (RS.MA-01) is even semantically on-target."
+    },
+    {
+      "index": 14,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "RS.AN-03",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+      "quote": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "information-security-policy.md~6bd7af#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the RS.AN-03 outcome text presented as a document quote; the chunks say nothing about root-cause analysis."
+    },
+    {
+      "index": 15,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "RS.CO-02",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Internal and external stakeholders are notified of incidents",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same ellipsis-truncated verbatim prefix as #7, cited under RS.CO-02."
+    },
+    {
+      "index": 16,
+      "model": "ollama_llama3.1_8b",
+      "subcategory_id": "RS.CO-03",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Information is shared with designated internal and external stakeholders",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "data-protection-note.txt~87ecfd#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same ellipsis-truncated verbatim prefix as #7, cited under RS.CO-03."
+    },
+    {
+      "index": 17,
+      "model": "ollama_llama3.2_3b",
+      "subcategory_id": "GV.OC-05",
+      "evidence_index": 1,
+      "source_file_cited": "incident-response-plan.pdf~70a67a#p1#c0",
+      "csf_outcome": "Outcomes, capabilities, and services that the organization depends on are understood and communicated",
+      "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties...",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "access-control-standard.md~8812c8#na#c1"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Same ellipsis-truncated verbatim prefix as #7 (llama3.2:3b), cited under GV.OC-05."
+    },
+    {
+      "index": 18,
+      "model": "ollama_llama3.2_3b",
+      "subcategory_id": "DE.AE-08",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf",
+      "csf_outcome": "Incidents are declared when adverse events meet the defined incident criteria",
+      "quote": "Incidents are declared when adverse events meet the defined incident criteria",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the DE.AE-08 outcome text ('...defined incident criteria'); the document's near-twin sentence says 'documented incident criteria' and includes 'by the on-call lead', proving the quote was copied from the framework, not the document."
+    },
+    {
+      "index": 19,
+      "model": "ollama_mistral_7b",
+      "subcategory_id": "GV.OC-03",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md",
+      "csf_outcome": "Legal, regulatory, and contractual requirements regarding cybersecurity - including privacy and civil liberties obligations - are understood and managed",
+      "quote": "This policy is communicated to all employees during onboarding and is reviewed and re-approved annually by the Security Committee.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "access-control-standard.md~8812c8#na#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk sentence except 'The policy' -> 'This policy' (one-word change)."
+    },
+    {
+      "index": 20,
+      "model": "ollama_mistral_7b",
+      "subcategory_id": "GV.RR-04",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md",
+      "csf_outcome": "Cybersecurity is included in human resources practices",
+      "quote": "Cybersecurity responsibilities are documented in role descriptions, communicated to staff, and the CISO confirms that they are understood during annual training.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "access-control-standard.md~8812c8#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk sentence except anaphora resolution 'These responsibilities' -> 'Cybersecurity responsibilities'; rest character-identical to information-security-policy.md c1."
+    },
+    {
+      "index": 21,
+      "model": "ollama_mistral_7b",
+      "subcategory_id": "PR.AA-05",
+      "evidence_index": 0,
+      "source_file_cited": "access-control-standard.md",
+      "csf_outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+      "quote": "Access permissions are defined in this policy, managed through role-based access control (RBAC), and enforced by our identity provider.",
+      "hit_chunk_ids": [
+        "access-control-standard.md~8812c8#na#c1",
+        "access-control-standard.md~8812c8#na#c0",
+        "information-security-policy.md~6bd7af#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "paraphrase_of_present",
+      "reason": "Compressed but fully supported: verbatim chunk sentence with the mid-sentence phrase ', entitlements, and authorizations' silently elided (no ellipsis); every remaining word matches the chunk."
+    },
+    {
+      "index": 22,
+      "model": "ollama_qwen2.5_14b",
+      "subcategory_id": "GV.OC-04",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+      "quote": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.OC-04 outcome text presented as a document quote; no such content in the chunks."
+    },
+    {
+      "index": 23,
+      "model": "ollama_qwen2.5_14b",
+      "subcategory_id": "GV.RR-02",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "quote": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.RR-02 outcome text; the document has a similar real sentence ('The following cybersecurity roles... are established and communicated...') but the model quoted the framework instead."
+    },
+    {
+      "index": 24,
+      "model": "ollama_qwen2.5_14b",
+      "subcategory_id": "GV.RR-03",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.RR-03 outcome text presented as a document quote (same fabrication as llama3.1:8b #3, independently produced by qwen2.5:14b)."
+    },
+    {
+      "index": 25,
+      "model": "ollama_qwen2.5_14b",
+      "subcategory_id": "GV.SC-02",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md~6bd7af#na#c1",
+      "csf_outcome": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+      "quote": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the GV.SC-02 outcome text presented as a document quote; the corpus has no supplier/partner content."
+    },
+    {
+      "index": 26,
+      "model": "ollama_qwen2.5_14b",
+      "subcategory_id": "PR.PS-03",
+      "evidence_index": 0,
+      "source_file_cited": "asset-inventory-procedure.docx~2237a9#na#c0",
+      "csf_outcome": "Hardware is maintained, replaced, and removed commensurate with risk",
+      "quote": "Hardware inventories are maintained in our configuration management database (CMDB). Every laptop, server, and network device is recorded with an owner, location, and serial number.",
+      "hit_chunk_ids": [
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "paraphrase_of_present",
+      "reason": "First clause compressed ('Inventories of hardware managed by the organization' -> 'Hardware inventories'); second sentence verbatim from the asset-inventory chunk. Fully supported, reworded."
+    },
+    {
+      "index": 27,
+      "model": "ollama_qwen2.5_3b",
+      "subcategory_id": "ID.AM-01",
+      "evidence_index": 0,
+      "source_file_cited": "asset-inventory-procedure.docx~2237a9",
+      "csf_outcome": "Inventories of hardware managed by the organization are maintained",
+      "quote": "Hardware Inventory\\nInventories of hardware managed by the organization are maintained in our configuration management database (CMDB). Every laptop, server, and network device is recorded with an owner, location, and serial number.",
+      "hit_chunk_ids": [
+        "asset-inventory-procedure.docx~2237a9#na#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "incident-response-plan.pdf~70a67a#p1#c0"
+      ],
+      "category": "near_verbatim_miss",
+      "reason": "Verbatim chunk text spoiled only by an escaping artifact: the quote contains the literal two characters '\\n' instead of a newline; replacing the literal '\\n' with whitespace makes it an exact substring."
+    },
+    {
+      "index": 28,
+      "model": "ollama_qwen2.5_7b",
+      "subcategory_id": "ID.IM-04",
+      "evidence_index": 0,
+      "source_file_cited": "incident-response-plan.pdf",
+      "csf_outcome": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+      "quote": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+      "hit_chunk_ids": [
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "information-security-policy.md~6bd7af#na#c1",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0",
+        "asset-inventory-procedure.docx~2237a9#na#c0"
+      ],
+      "category": "framework_echo",
+      "reason": "Character-exact copy of the ID.IM-04 outcome text presented as a document quote; the chunks describe an IR plan but never state it is 'established, communicated, maintained, and improved'."
+    },
+    {
+      "index": 29,
+      "model": "openai_gpt-4o",
+      "subcategory_id": "GV.RR-02",
+      "evidence_index": 0,
+      "source_file_cited": "information-security-policy.md",
+      "csf_outcome": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams.",
+      "hit_chunk_ids": [
+        "information-security-policy.md~6bd7af#na#c1",
+        "information-security-policy.md~6bd7af#na#c0",
+        "incident-response-plan.pdf~70a67a#p2#c1",
+        "incident-response-plan.pdf~70a67a#p1#c0",
+        "access-control-standard.md~8812c8#na#c0",
+        "data-protection-note.txt~87ecfd#na#c0"
+      ],
+      "category": "cross_chunk",
+      "reason": "Faithful document text that spans the overlapping boundary between information-security-policy.md chunks c0 and c1: the head ('The following cybersecurity roles...') exists only in c0 and the bullet tail ('...executive leadership / Security Committee / Department managers') only in c1; no single chunk contains the whole quote."
+    }
+  ]
+}

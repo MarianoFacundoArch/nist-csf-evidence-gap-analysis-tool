@@ -1,0 +1,1226 @@
+{
+  "generated_at": "2026-06-10T20:22:27.730Z",
+  "script": "eval/stability-analysis.mjs",
+  "spec": {
+    "corpus": "corpus 1 (Northwind sample docs), identical retrieval across runs",
+    "n_outcomes": 106,
+    "runs": {
+      "cloud": {
+        "run1": "results-spectrum",
+        "run2": "results-rerun2",
+        "run3": "results-rerun3"
+      },
+      "local": {
+        "run1": "results-spectrum",
+        "run2": "results-rerun2-local",
+        "run3": "results-rerun3-local"
+      }
+    },
+    "normalization": "normalizeForMatch (src/engine/verifier.js): NFC; ‘’‛->'; “”->\"; –—->-; whitespace collapsed; trim; lowercase",
+    "verbatim_rule": "quote verbatim iff normalized quote is a substring of a normalized hit-chunk text (record-level hit_chunk_ids, resolved via the run dir's _index/index.json)",
+    "ordinal_coding": {
+      "none": 0,
+      "partial": 1,
+      "substantial": 2,
+      "full": 3
+    },
+    "alpha": "Krippendorff's alpha, ordinal metric, 3 runs as 3 raters; implementation copied from eval/agreement-alpha.mjs and re-validated in this script"
+  },
+  "summary_cross_check": {
+    "all_match": true,
+    "detail": [
+      {
+        "model": "openai_gpt-4o-mini",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 14,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 14,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "openai_gpt-4o-mini",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "openai_gpt-4o-mini",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "openai_gpt-4o",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 48,
+          "raw_unverifiable": 1,
+          "UQR": 0.0208
+        },
+        "recomputed": {
+          "raw_quotes": 48,
+          "raw_unverifiable": 1,
+          "UQR": 0.0208
+        }
+      },
+      {
+        "model": "openai_gpt-4o",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204
+        },
+        "recomputed": {
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204
+        }
+      },
+      {
+        "model": "openai_gpt-4o",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204
+        },
+        "recomputed": {
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204
+        }
+      },
+      {
+        "model": "openai_gpt-5.5",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 109,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 109,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "openai_gpt-5.5",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 112,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 112,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "openai_gpt-5.5",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 116,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 116,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        },
+        "recomputed": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        }
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        },
+        "recomputed": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        }
+      },
+      {
+        "model": "ollama_llama3.1_8b",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        },
+        "recomputed": {
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771
+        }
+      },
+      {
+        "model": "ollama_gemma2_9b",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "ollama_gemma2_9b",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "ollama_gemma2_9b",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        },
+        "recomputed": {
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0
+        }
+      },
+      {
+        "model": "ollama_qwen2.5_7b",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        },
+        "recomputed": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        }
+      },
+      {
+        "model": "ollama_qwen2.5_7b",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        },
+        "recomputed": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        }
+      },
+      {
+        "model": "ollama_qwen2.5_7b",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        },
+        "recomputed": {
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769
+        }
+      },
+      {
+        "model": "ollama_mistral_7b",
+        "run": "run1",
+        "match": true,
+        "summary": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        },
+        "recomputed": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        }
+      },
+      {
+        "model": "ollama_mistral_7b",
+        "run": "run2",
+        "match": true,
+        "summary": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        },
+        "recomputed": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        }
+      },
+      {
+        "model": "ollama_mistral_7b",
+        "run": "run3",
+        "match": true,
+        "summary": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        },
+        "recomputed": {
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577
+        }
+      }
+    ]
+  },
+  "models": [
+    {
+      "model": "openai_gpt-4o-mini",
+      "kind": "cloud",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 14,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "63d84009afd7e57d14b4c06d9c7cdc463be415c2f410129283a1c952e420bfea"
+        },
+        "run2": {
+          "dir": "results-rerun2",
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "ca593bd48cc2c7ae43478adde40ced893aa8a5eba7d2bfe11b3f2951a92a0ed1"
+        },
+        "run3": {
+          "dir": "results-rerun3",
+          "raw_quotes": 11,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "4679ebc8f12f5ad3de31e75ff32bbc04bdcd69763b2bd0c58c21024abafa16a0"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 102,
+        "pct": 96.23
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 100,
+        "pct": 94.34
+      },
+      "self_contradictions": {
+        "count": 4,
+        "outcomes": [
+          {
+            "outcome": "DE.AE-08",
+            "run1": "full",
+            "run2": "full",
+            "run3": "none",
+            "ordinal_spread": 3,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.RR-02",
+            "run1": "substantial",
+            "run2": "partial",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "PR.AA-01",
+            "run1": "full",
+            "run2": "substantial",
+            "run3": "substantial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "RC.RP-01",
+            "run1": "substantial",
+            "run2": "partial",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          }
+        ]
+      },
+      "krippendorff_alpha_ordinal_3runs": 0.9578,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": false
+    },
+    {
+      "model": "openai_gpt-4o",
+      "kind": "cloud",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 48,
+          "raw_unverifiable": 1,
+          "UQR": 0.0208,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.RR-02",
+              "source_file": "information-security-policy.md",
+              "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+            }
+          ],
+          "raw_file_sha256": "710278f89cfe385bdcd2004bd359ac605b18be218c3756c6309ae88985867142"
+        },
+        "run2": {
+          "dir": "results-rerun2",
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.RR-02",
+              "source_file": "information-security-policy.md",
+              "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+            }
+          ],
+          "raw_file_sha256": "6fb944b4f1cfacf7307c222b3ec06be71de3c02987707371ff60ecc316f1d361"
+        },
+        "run3": {
+          "dir": "results-rerun3",
+          "raw_quotes": 49,
+          "raw_unverifiable": 1,
+          "UQR": 0.0204,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.RR-02",
+              "source_file": "information-security-policy.md",
+              "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+            }
+          ],
+          "raw_file_sha256": "8e7f19105dd958b5f88c6735d1ad85e512a9180f416ad812c6344dfc57b61555"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 103,
+        "pct": 97.17
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 100,
+        "pct": 94.34
+      },
+      "self_contradictions": {
+        "count": 3,
+        "outcomes": [
+          {
+            "outcome": "GV.RM-04",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.SC-01",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "PR.AA-05",
+            "run1": "substantial",
+            "run2": "partial",
+            "run3": "substantial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          }
+        ]
+      },
+      "krippendorff_alpha_ordinal_3runs": 0.9744,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": false
+    },
+    {
+      "model": "openai_gpt-5.5",
+      "kind": "cloud",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 109,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "93253c6a9c4d8e9a931069a714c5cd8d1189e0abcffced8cdcd58515653ed1a4"
+        },
+        "run2": {
+          "dir": "results-rerun2",
+          "raw_quotes": 112,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "cc1b791e9af37773fb140b912f3de1c7a0850c34fce16a612367c699808d927f"
+        },
+        "run3": {
+          "dir": "results-rerun3",
+          "raw_quotes": 116,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "0e2aa2dc5a030b150c1b345294ac7a6455f3269f387f4107edadcafef1e4839b"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 92,
+        "pct": 86.79
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 66,
+        "pct": 62.26
+      },
+      "self_contradictions": {
+        "count": 14,
+        "outcomes": [
+          {
+            "outcome": "GV.OC-03",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.OV-01",
+            "run1": "partial",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.OV-02",
+            "run1": "partial",
+            "run2": "partial",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.RM-04",
+            "run1": "partial",
+            "run2": "none",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.RM-06",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "GV.RR-03",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "ID.RA-03",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "ID.RA-04",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "PR.DS-10",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "PR.PS-02",
+            "run1": "none",
+            "run2": "none",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "RS.AN-06",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "RS.AN-07",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "RS.MA-03",
+            "run1": "partial",
+            "run2": "none",
+            "run3": "none",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          },
+          {
+            "outcome": "RS.MI-01",
+            "run1": "none",
+            "run2": "partial",
+            "run3": "partial",
+            "ordinal_spread": 1,
+            "distinct_verdicts": 2
+          }
+        ]
+      },
+      "krippendorff_alpha_ordinal_3runs": 0.8341,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": false
+    },
+    {
+      "model": "ollama_llama3.1_8b",
+      "kind": "local",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The organizational mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "GV.RM-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk management objectives are not explicitly established and agreed to by organizational stakeholders."
+            },
+            {
+              "outcome": "GV.RM-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk appetite and risk tolerance statements are not explicitly mentioned in this policy."
+            },
+            {
+              "outcome": "GV.RR-03",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies"
+            },
+            {
+              "outcome": "GV.SC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders"
+            },
+            {
+              "outcome": "ID.AM-02",
+              "source_file": "asset-inventory-procedure.docx",
+              "quote": "The software Inventory A list of approved applications is kept by the IT team."
+            },
+            {
+              "outcome": "ID.RA-05",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization"
+            },
+            {
+              "outcome": "ID.RA-06",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "PR.DS-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.DS-10",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.IR-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations."
+            },
+            {
+              "outcome": "DE.AE-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "DE.AE-06",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Information on adverse events is declared by the on-call lead when adverse events meet the documented incident criteria."
+            },
+            {
+              "outcome": "RS.MA-01",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.AN-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident"
+            },
+            {
+              "outcome": "RS.CO-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.CO-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            }
+          ],
+          "raw_file_sha256": "dc04b5067bd108e55a077537e549b7aa04b6a5e55af29bbda3a2663447c3ca54"
+        },
+        "run2": {
+          "dir": "results-rerun2-local",
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The organizational mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "GV.RM-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk management objectives are not explicitly established and agreed to by organizational stakeholders."
+            },
+            {
+              "outcome": "GV.RM-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk appetite and risk tolerance statements are not explicitly mentioned in this policy."
+            },
+            {
+              "outcome": "GV.RR-03",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies"
+            },
+            {
+              "outcome": "GV.SC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders"
+            },
+            {
+              "outcome": "ID.AM-02",
+              "source_file": "asset-inventory-procedure.docx",
+              "quote": "The software Inventory A list of approved applications is kept by the IT team."
+            },
+            {
+              "outcome": "ID.RA-05",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization"
+            },
+            {
+              "outcome": "ID.RA-06",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "PR.DS-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.DS-10",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.IR-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations."
+            },
+            {
+              "outcome": "DE.AE-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "DE.AE-06",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Information on adverse events is declared by the on-call lead when adverse events meet the documented incident criteria."
+            },
+            {
+              "outcome": "RS.MA-01",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.AN-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident"
+            },
+            {
+              "outcome": "RS.CO-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.CO-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            }
+          ],
+          "raw_file_sha256": "dc04b5067bd108e55a077537e549b7aa04b6a5e55af29bbda3a2663447c3ca54"
+        },
+        "run3": {
+          "dir": "results-rerun3-local",
+          "raw_quotes": 96,
+          "raw_unverifiable": 17,
+          "UQR": 0.1771,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The organizational mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "GV.RM-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk management objectives are not explicitly established and agreed to by organizational stakeholders."
+            },
+            {
+              "outcome": "GV.RM-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Risk appetite and risk tolerance statements are not explicitly mentioned in this policy."
+            },
+            {
+              "outcome": "GV.RR-03",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies"
+            },
+            {
+              "outcome": "GV.SC-01",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders"
+            },
+            {
+              "outcome": "ID.AM-02",
+              "source_file": "asset-inventory-procedure.docx",
+              "quote": "The software Inventory A list of approved applications is kept by the IT team."
+            },
+            {
+              "outcome": "ID.RA-05",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization"
+            },
+            {
+              "outcome": "ID.RA-06",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "PR.DS-02",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.DS-10",
+              "source_file": "information-security-policy.md~6bd7af#na#c1",
+              "quote": "The mission is to protect the confidentiality and integrity of client data, and the leadership team recognizes that this mission depends on effective cybersecurity."
+            },
+            {
+              "outcome": "PR.IR-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations."
+            },
+            {
+              "outcome": "DE.AE-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "DE.AE-06",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Information on adverse events is declared by the on-call lead when adverse events meet the documented incident criteria."
+            },
+            {
+              "outcome": "RS.MA-01",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.AN-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "Analysis is performed to establish what has taken place during an incident and the root cause of the incident"
+            },
+            {
+              "outcome": "RS.CO-02",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            },
+            {
+              "outcome": "RS.CO-03",
+              "source_file": "incident-response-plan.pdf~70a67a#p1#c0",
+              "quote": "When an incident is declared, the incident response plan is executed in coordination with relevant third parties..."
+            }
+          ],
+          "raw_file_sha256": "dc04b5067bd108e55a077537e549b7aa04b6a5e55af29bbda3a2663447c3ca54"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "self_contradictions": {
+        "count": 0,
+        "outcomes": []
+      },
+      "krippendorff_alpha_ordinal_3runs": 1,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": true
+    },
+    {
+      "model": "ollama_gemma2_9b",
+      "kind": "local",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "71fa88dcb52a733a07036ae878e75becdee0c56235be2de72cf5db89bacd134a"
+        },
+        "run2": {
+          "dir": "results-rerun2-local",
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "71fa88dcb52a733a07036ae878e75becdee0c56235be2de72cf5db89bacd134a"
+        },
+        "run3": {
+          "dir": "results-rerun3-local",
+          "raw_quotes": 72,
+          "raw_unverifiable": 0,
+          "UQR": 0,
+          "unverifiable_quotes": [],
+          "raw_file_sha256": "71fa88dcb52a733a07036ae878e75becdee0c56235be2de72cf5db89bacd134a"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "self_contradictions": {
+        "count": 0,
+        "outcomes": []
+      },
+      "krippendorff_alpha_ordinal_3runs": 1,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": true
+    },
+    {
+      "model": "ollama_qwen2.5_7b",
+      "kind": "local",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769,
+          "unverifiable_quotes": [
+            {
+              "outcome": "ID.IM-04",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved"
+            }
+          ],
+          "raw_file_sha256": "bbdc8e4d0d771f708511b19371e33e425836e794297d9027b1900abd72a7efae"
+        },
+        "run2": {
+          "dir": "results-rerun2-local",
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769,
+          "unverifiable_quotes": [
+            {
+              "outcome": "ID.IM-04",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved"
+            }
+          ],
+          "raw_file_sha256": "bbdc8e4d0d771f708511b19371e33e425836e794297d9027b1900abd72a7efae"
+        },
+        "run3": {
+          "dir": "results-rerun3-local",
+          "raw_quotes": 13,
+          "raw_unverifiable": 1,
+          "UQR": 0.0769,
+          "unverifiable_quotes": [
+            {
+              "outcome": "ID.IM-04",
+              "source_file": "incident-response-plan.pdf",
+              "quote": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved"
+            }
+          ],
+          "raw_file_sha256": "bbdc8e4d0d771f708511b19371e33e425836e794297d9027b1900abd72a7efae"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "self_contradictions": {
+        "count": 0,
+        "outcomes": []
+      },
+      "krippendorff_alpha_ordinal_3runs": 1,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": true
+    },
+    {
+      "model": "ollama_mistral_7b",
+      "kind": "local",
+      "n_outcomes": 106,
+      "uqr_per_run": {
+        "run1": {
+          "dir": "results-spectrum",
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-03",
+              "source_file": "information-security-policy.md",
+              "quote": "This policy is communicated to all employees during onboarding and is reviewed and re-approved annually by the Security Committee."
+            },
+            {
+              "outcome": "GV.RR-04",
+              "source_file": "information-security-policy.md",
+              "quote": "Cybersecurity responsibilities are documented in role descriptions, communicated to staff, and the CISO confirms that they are understood during annual training."
+            },
+            {
+              "outcome": "PR.AA-05",
+              "source_file": "access-control-standard.md",
+              "quote": "Access permissions are defined in this policy, managed through role-based access control (RBAC), and enforced by our identity provider."
+            }
+          ],
+          "raw_file_sha256": "2c2b338aa957a59bc1172f431dc5691cadfe934fedfa008df9d0e2d5a7ee636b"
+        },
+        "run2": {
+          "dir": "results-rerun2-local",
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-03",
+              "source_file": "information-security-policy.md",
+              "quote": "This policy is communicated to all employees during onboarding and is reviewed and re-approved annually by the Security Committee."
+            },
+            {
+              "outcome": "GV.RR-04",
+              "source_file": "information-security-policy.md",
+              "quote": "Cybersecurity responsibilities are documented in role descriptions, communicated to staff, and the CISO confirms that they are understood during annual training."
+            },
+            {
+              "outcome": "PR.AA-05",
+              "source_file": "access-control-standard.md",
+              "quote": "Access permissions are defined in this policy, managed through role-based access control (RBAC), and enforced by our identity provider."
+            }
+          ],
+          "raw_file_sha256": "2c2b338aa957a59bc1172f431dc5691cadfe934fedfa008df9d0e2d5a7ee636b"
+        },
+        "run3": {
+          "dir": "results-rerun3-local",
+          "raw_quotes": 52,
+          "raw_unverifiable": 3,
+          "UQR": 0.0577,
+          "unverifiable_quotes": [
+            {
+              "outcome": "GV.OC-03",
+              "source_file": "information-security-policy.md",
+              "quote": "This policy is communicated to all employees during onboarding and is reviewed and re-approved annually by the Security Committee."
+            },
+            {
+              "outcome": "GV.RR-04",
+              "source_file": "information-security-policy.md",
+              "quote": "Cybersecurity responsibilities are documented in role descriptions, communicated to staff, and the CISO confirms that they are understood during annual training."
+            },
+            {
+              "outcome": "PR.AA-05",
+              "source_file": "access-control-standard.md",
+              "quote": "Access permissions are defined in this policy, managed through role-based access control (RBAC), and enforced by our identity provider."
+            }
+          ],
+          "raw_file_sha256": "2c2b338aa957a59bc1172f431dc5691cadfe934fedfa008df9d0e2d5a7ee636b"
+        }
+      },
+      "verdict_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "full_record_identical_across_3_runs": {
+        "count": 106,
+        "pct": 100
+      },
+      "self_contradictions": {
+        "count": 0,
+        "outcomes": []
+      },
+      "krippendorff_alpha_ordinal_3runs": 1,
+      "krippendorff_alpha_note": null,
+      "raw_files_byte_identical_across_3_runs": true
+    }
+  ],
+  "gpt4o_unverifiable_quote": {
+    "per_run_counts": {
+      "run1": 1,
+      "run2": 1,
+      "run3": 1
+    },
+    "appears_in_runs": [
+      "run1",
+      "run2",
+      "run3"
+    ],
+    "same_outcome_every_time": true,
+    "same_quote_text_every_time": true,
+    "outcome": "GV.RR-02",
+    "source_file": "information-security-policy.md",
+    "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams.",
+    "per_run_detail": {
+      "run1": [
+        {
+          "outcome": "GV.RR-02",
+          "source_file": "information-security-policy.md",
+          "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+        }
+      ],
+      "run2": [
+        {
+          "outcome": "GV.RR-02",
+          "source_file": "information-security-policy.md",
+          "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+        }
+      ],
+      "run3": [
+        {
+          "outcome": "GV.RR-02",
+          "source_file": "information-security-policy.md",
+          "quote": "The following cybersecurity roles, responsibilities, and authorities are established and communicated across the organization: - The Chief Information Security Officer (CISO) is accountable for the cybersecurity program and reports quarterly to executive leadership. - A cross-functional Security Committee meets monthly to oversee risk decisions. - Department managers are responsible for enforcing security requirements within their teams."
+        }
+      ]
+    }
+  }
+}

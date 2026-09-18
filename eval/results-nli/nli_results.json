@@ -1,0 +1,238 @@
+{
+  "generated_at": "2026-06-10T17:40:04.746Z",
+  "description": "NLI entailment baseline over the saved spectrum-experiment quotes. For each quote, premise = each hit chunk text, hypothesis = the quote; score = max P(entailment) across the record’s hit chunks. Compared against the verbatim-substring gate verdicts and the taxonomy of the 30 non-verbatim quotes.",
+  "nli_model": "Xenova/DeBERTa-v3-base-mnli-fever-anli",
+  "model_selection": {
+    "tried_first": [
+      "Xenova/nli-deberta-v3-small",
+      "Xenova/nli-deberta-v3-base"
+    ],
+    "reason": "Both pass single-sentence sanity checks (entailment 0.96-0.99, neutral 0.99, contradiction ~1.0) but assign P(entailment) ~ 0.001-0.013 (neutral ~ 0.99) when the premise is a full ~1200-char chunk, even for hypotheses that are verbatim substrings of the premise (e.g. small model: full-chunk premise + verbatim quote -> neutral 0.9961; same quote vs the 400-char window containing it -> entailment 0.986). SNLI/MNLI sentence-pair training does not transfer to paragraph premises; they would falsely reject ~98% of literally-true quotes."
+  },
+  "id2label": {
+    "0": "entailment",
+    "1": "neutral",
+    "2": "contradiction"
+  },
+  "max_length": 512,
+  "batch_size": 16,
+  "unique_pairs_scored": 758,
+  "sanity_checks": [
+    {
+      "name": "clear entailment",
+      "premise": "All employees must complete security awareness training within 30 days of hire.",
+      "hypothesis": "New employees are required to complete security training.",
+      "expected": "entailment",
+      "predicted": "entailment",
+      "probs": {
+        "entailment": 0.9872,
+        "neutral": 0.012,
+        "contradiction": 0.0008
+      },
+      "pass": true
+    },
+    {
+      "name": "clear neutral",
+      "premise": "All employees must complete security awareness training within 30 days of hire.",
+      "hypothesis": "The company encrypts all backups with AES-256.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "probs": {
+        "entailment": 0.0014,
+        "neutral": 0.9971,
+        "contradiction": 0.0014
+      },
+      "pass": true
+    },
+    {
+      "name": "clear contradiction",
+      "premise": "Multi-factor authentication is enforced for all remote access.",
+      "hypothesis": "Remote access does not require multi-factor authentication.",
+      "expected": "contradiction",
+      "predicted": "contradiction",
+      "probs": {
+        "entailment": 0.0003,
+        "neutral": 0.0005,
+        "contradiction": 0.9991
+      },
+      "pass": true
+    }
+  ],
+  "totals": {
+    "quotes": 642,
+    "verbatim": 612,
+    "non_verbatim": 30
+  },
+  "taxonomy_counts": {
+    "near_verbatim_miss": 13,
+    "framework_echo": 14,
+    "paraphrase_of_present": 2,
+    "cross_chunk": 1
+  },
+  "by_threshold": {
+    "0.5": {
+      "threshold": 0.5,
+      "verbatim_612": {
+        "total": 612,
+        "nli_accepted": 539,
+        "nli_accept_rate_pct": 88.07,
+        "nli_rejected_false_rejections": 73,
+        "nli_false_rejection_rate_pct": 11.93
+      },
+      "non_verbatim_30_cross_tab": {
+        "cross_chunk": {
+          "total": 1,
+          "nli_accepted": 1,
+          "nli_rejected": 0
+        },
+        "framework_echo": {
+          "total": 14,
+          "nli_accepted": 7,
+          "nli_rejected": 7
+        },
+        "near_verbatim_miss": {
+          "total": 13,
+          "nli_accepted": 13,
+          "nli_rejected": 0
+        },
+        "paraphrase_of_present": {
+          "total": 2,
+          "nli_accepted": 1,
+          "nli_rejected": 1
+        }
+      },
+      "key_question": {
+        "framework_echo_fabrications": {
+          "total": 14,
+          "nli_accepted": 7,
+          "nli_rejected": 7
+        },
+        "semantically_supported": {
+          "categories": [
+            "near_verbatim_miss",
+            "paraphrase_of_present",
+            "cross_chunk"
+          ],
+          "total": 16,
+          "nli_accepted": 15,
+          "nli_rejected": 1
+        }
+      },
+      "if_nli_replaced_verbatim_gate": {
+        "non_verbatim_delivered": 22,
+        "of_which_framework_echo_dangerous": 7,
+        "verbatim_wrongly_blocked": 73
+      }
+    },
+    "0.9": {
+      "threshold": 0.9,
+      "verbatim_612": {
+        "total": 612,
+        "nli_accepted": 516,
+        "nli_accept_rate_pct": 84.31,
+        "nli_rejected_false_rejections": 96,
+        "nli_false_rejection_rate_pct": 15.69
+      },
+      "non_verbatim_30_cross_tab": {
+        "cross_chunk": {
+          "total": 1,
+          "nli_accepted": 1,
+          "nli_rejected": 0
+        },
+        "framework_echo": {
+          "total": 14,
+          "nli_accepted": 4,
+          "nli_rejected": 10
+        },
+        "near_verbatim_miss": {
+          "total": 13,
+          "nli_accepted": 12,
+          "nli_rejected": 1
+        },
+        "paraphrase_of_present": {
+          "total": 2,
+          "nli_accepted": 1,
+          "nli_rejected": 1
+        }
+      },
+      "key_question": {
+        "framework_echo_fabrications": {
+          "total": 14,
+          "nli_accepted": 4,
+          "nli_rejected": 10
+        },
+        "semantically_supported": {
+          "categories": [
+            "near_verbatim_miss",
+            "paraphrase_of_present",
+            "cross_chunk"
+          ],
+          "total": 16,
+          "nli_accepted": 14,
+          "nli_rejected": 2
+        }
+      },
+      "if_nli_replaced_verbatim_gate": {
+        "non_verbatim_delivered": 18,
+        "of_which_framework_echo_dangerous": 4,
+        "verbatim_wrongly_blocked": 96
+      }
+    }
+  },
+  "entailment_score_distributions": {
+    "verbatim": {
+      "n": 612,
+      "min": 0.012,
+      "p25": 0.9783,
+      "median": 0.9863,
+      "p75": 0.9925,
+      "max": 0.9978,
+      "mean": 0.8711
+    },
+    "non_verbatim_all": {
+      "n": 30,
+      "min": 0.0044,
+      "p25": 0.2589,
+      "median": 0.9482,
+      "p75": 0.9674,
+      "max": 0.9967,
+      "mean": 0.7035
+    },
+    "non_verbatim_cross_chunk": {
+      "n": 1,
+      "min": 0.9792,
+      "p25": 0.9792,
+      "median": 0.9792,
+      "p75": 0.9792,
+      "max": 0.9792,
+      "mean": 0.9792
+    },
+    "non_verbatim_framework_echo": {
+      "n": 14,
+      "min": 0.0044,
+      "p25": 0.0243,
+      "median": 0.5327,
+      "p75": 0.918,
+      "max": 0.9967,
+      "mean": 0.4663
+    },
+    "non_verbatim_near_verbatim_miss": {
+      "n": 13,
+      "min": 0.8468,
+      "p25": 0.9482,
+      "median": 0.9482,
+      "p75": 0.9674,
+      "max": 0.989,
+      "mean": 0.9498
+    },
+    "non_verbatim_paraphrase_of_present": {
+      "n": 2,
+      "min": 0.2517,
+      "p25": 0.2517,
+      "median": 0.9962,
+      "p75": 0.9962,
+      "max": 0.9962,
+      "mean": 0.624
+    }
+  }
+}

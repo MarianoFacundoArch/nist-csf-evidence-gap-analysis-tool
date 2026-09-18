@@ -1,0 +1,384 @@
+{
+  "generated_by": "eval/corpus2-analysis.mjs",
+  "generated_at": "2026-06-10T20:26:35.844Z",
+  "corpus": {
+    "name": "corpus-2: 12 New York State ITS security policy PDFs (real public documents)",
+    "index_id": "e9bded516a9d",
+    "chunks": 376,
+    "embedder": "local-transformers:Xenova/all-MiniLM-L6-v2",
+    "subcategories": 106,
+    "topk": 6
+  },
+  "definitions": {
+    "normalization": "NFC; ‘’‛->'; “”->\"; –—->-; whitespace collapse; trim; lowercase (src/engine/verifier.js normalizeForMatch)",
+    "verbatim": "normalized quote is a substring of ONE normalized hit-chunk text (the item's 6 retrieved chunks)",
+    "substantive": "normalized length >= 20 AND >= 3 matches of /[a-z]{3,}/g",
+    "UQR": "unverifiable quotes / total quotes (verbatim-vs-hit-chunks definition)",
+    "forcing_rule_downgrades": "definition-a: items with coverage > none and ZERO quotes that are verbatim AND substantive (verified identical to the production verifier's downgrade count)",
+    "items_above_none_empty_evidence": "definition-b: items with coverage > none and an EMPTY evidence array",
+    "latency_median": "per-item latencies (items_*.csv), sorted[floor(n/2)] — same convention as the run harness"
+  },
+  "per_model": [
+    {
+      "model": "openai:gpt-4o-mini",
+      "type": "cloud",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 2,
+      "unverifiable_quotes": 0,
+      "unverifiable_quotes_corpus_wide": 0,
+      "UQR": 0,
+      "UQR_pct": 0,
+      "UQR_wilson95": {
+        "lo_pct": 0,
+        "hi_pct": 65.8
+      },
+      "items_above_none": 2,
+      "forcing_rule_downgrades": 0,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 2,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 1811,
+      "coverage_distribution": {
+        "none": 104,
+        "partial": 2,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 0,
+        "quotes": 14
+      }
+    },
+    {
+      "model": "openai:gpt-4o",
+      "type": "cloud",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 64,
+      "unverifiable_quotes": 0,
+      "unverifiable_quotes_corpus_wide": 0,
+      "UQR": 0,
+      "UQR_pct": 0,
+      "UQR_wilson95": {
+        "lo_pct": 0,
+        "hi_pct": 5.7
+      },
+      "items_above_none": 51,
+      "forcing_rule_downgrades": 0,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 64,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 2126,
+      "coverage_distribution": {
+        "none": 55,
+        "partial": 50,
+        "substantial": 1,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 2.1,
+        "quotes": 48
+      }
+    },
+    {
+      "model": "openai:gpt-5.5",
+      "type": "cloud",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 215,
+      "unverifiable_quotes": 0,
+      "unverifiable_quotes_corpus_wide": 0,
+      "UQR": 0,
+      "UQR_pct": 0,
+      "UQR_wilson95": {
+        "lo_pct": 0,
+        "hi_pct": 1.8
+      },
+      "items_above_none": 86,
+      "forcing_rule_downgrades": 0,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 215,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 4950,
+      "coverage_distribution": {
+        "none": 20,
+        "partial": 86,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 0,
+        "quotes": 109
+      }
+    },
+    {
+      "model": "ollama:llama3.1:8b",
+      "type": "local",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 100,
+      "unverifiable_quotes": 19,
+      "unverifiable_quotes_corpus_wide": 19,
+      "UQR": 0.19,
+      "UQR_pct": 19,
+      "UQR_wilson95": {
+        "lo_pct": 12.5,
+        "hi_pct": 27.8
+      },
+      "items_above_none": 89,
+      "forcing_rule_downgrades": 17,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 81,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 4341,
+      "coverage_distribution": {
+        "none": 17,
+        "partial": 89,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 17.7,
+        "quotes": 96
+      }
+    },
+    {
+      "model": "ollama:gemma2:9b",
+      "type": "local",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 68,
+      "unverifiable_quotes": 3,
+      "unverifiable_quotes_corpus_wide": 3,
+      "UQR": 0.0441,
+      "UQR_pct": 4.4,
+      "UQR_wilson95": {
+        "lo_pct": 1.5,
+        "hi_pct": 12.2
+      },
+      "items_above_none": 66,
+      "forcing_rule_downgrades": 3,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 65,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 5398,
+      "coverage_distribution": {
+        "none": 40,
+        "partial": 66,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 0,
+        "quotes": 72
+      }
+    },
+    {
+      "model": "ollama:qwen2.5:7b",
+      "type": "local",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 14,
+      "unverifiable_quotes": 0,
+      "unverifiable_quotes_corpus_wide": 0,
+      "UQR": 0,
+      "UQR_pct": 0,
+      "UQR_wilson95": {
+        "lo_pct": 0,
+        "hi_pct": 21.5
+      },
+      "items_above_none": 14,
+      "forcing_rule_downgrades": 0,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 14,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 2963,
+      "coverage_distribution": {
+        "none": 92,
+        "partial": 14,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 7.7,
+        "quotes": 13
+      }
+    },
+    {
+      "model": "ollama:mistral:7b",
+      "type": "local",
+      "items": 106,
+      "parse_failures": 0,
+      "quotes": 64,
+      "unverifiable_quotes": 1,
+      "unverifiable_quotes_corpus_wide": 1,
+      "UQR": 0.0156,
+      "UQR_pct": 1.6,
+      "UQR_wilson95": {
+        "lo_pct": 0.3,
+        "hi_pct": 8.3
+      },
+      "items_above_none": 45,
+      "forcing_rule_downgrades": 1,
+      "items_above_none_empty_evidence": 0,
+      "delivered_quotes": 63,
+      "delivered_unverifiable": 0,
+      "latency_ms_median": 4034,
+      "coverage_distribution": {
+        "none": 61,
+        "partial": 45,
+        "substantial": 0,
+        "full": 0
+      },
+      "corpus1_reference": {
+        "uqr_pct": 5.8,
+        "quotes": 52
+      }
+    }
+  ],
+  "taxonomy_summary": {
+    "file": "eval/results-corpus2/dropped_quote_taxonomy_corpus2.json",
+    "total_non_verbatim_quotes": 23,
+    "counts_by_category": {
+      "framework_echo": 12,
+      "paraphrase_of_present": 1,
+      "fabricated_content": 0,
+      "near_verbatim_miss": 5,
+      "cross_chunk": 0,
+      "pdf_extraction_artifact": 2,
+      "ambiguous": 3
+    },
+    "counts_by_model": {
+      "ollama_llama3.1_8b": {
+        "total": 19,
+        "framework_echo": 11,
+        "paraphrase_of_present": 0,
+        "fabricated_content": 0,
+        "near_verbatim_miss": 4,
+        "cross_chunk": 0,
+        "pdf_extraction_artifact": 2,
+        "ambiguous": 2
+      },
+      "ollama_gemma2_9b": {
+        "total": 3,
+        "framework_echo": 1,
+        "paraphrase_of_present": 0,
+        "fabricated_content": 0,
+        "near_verbatim_miss": 1,
+        "cross_chunk": 0,
+        "pdf_extraction_artifact": 0,
+        "ambiguous": 1
+      },
+      "ollama_mistral_7b": {
+        "total": 1,
+        "framework_echo": 0,
+        "paraphrase_of_present": 1,
+        "fabricated_content": 0,
+        "near_verbatim_miss": 0,
+        "cross_chunk": 0,
+        "pdf_extraction_artifact": 0,
+        "ambiguous": 0
+      }
+    },
+    "forcing_rule_interaction": {
+      "sole_support_of_above_none_claim": 21,
+      "item_had_another_verbatim_substantive_quote": 2
+    },
+    "verbatim_elsewhere_in_corpus": 0
+  },
+  "agreement": {
+    "metric": "raw_coverage as ordinal none=0 partial=1 substantial=2 full=3; Krippendorff's alpha (coincidence-matrix formulation; implementation validated against the canonical Krippendorff worked example and hand-computed cases)",
+    "inclusion_rule": ">= 50% valid verdicts (>= 53/106); all 7 models passed with 106/106 on both corpora",
+    "corpus2_7_models": {
+      "raters": [
+        {
+          "name": "openai_gpt-4o-mini",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "openai_gpt-4o",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "openai_gpt-5.5",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_llama3.1_8b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_gemma2_9b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_qwen2.5_7b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_mistral_7b",
+          "valid_verdicts": 106
+        }
+      ],
+      "excluded_raters": [],
+      "n_raters": 7,
+      "unanimity_count": 7,
+      "unanimity_pct": 6.6,
+      "mean_pairwise_agreement_pct": 57.2,
+      "krippendorff_alpha_ordinal": 0.1486,
+      "krippendorff_alpha_interval": 0.1496
+    },
+    "corpus1_same_7_models": {
+      "raters": [
+        {
+          "name": "openai_gpt-4o-mini",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "openai_gpt-4o",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "openai_gpt-5.5",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_llama3.1_8b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_gemma2_9b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_qwen2.5_7b",
+          "valid_verdicts": 106
+        },
+        {
+          "name": "ollama_mistral_7b",
+          "valid_verdicts": 106
+        }
+      ],
+      "excluded_raters": [],
+      "n_raters": 7,
+      "unanimity_count": 14,
+      "unanimity_pct": 13.2,
+      "mean_pairwise_agreement_pct": 58,
+      "krippendorff_alpha_ordinal": 0.2455,
+      "krippendorff_alpha_interval": 0.2769
+    },
+    "corpus1_all_11_models_reference": {
+      "unanimity_pct": 11.3,
+      "krippendorff_alpha_ordinal": 0.256,
+      "note": "previously reported over 11 models incl. 4 additional small local models; not apples-to-apples with the 7-model corpus-2 panel — see corpus1_same_7_models for the matched comparison"
+    }
+  },
+  "retrieval_exposure": {
+    "corpus2_chunks": 376,
+    "topk": 6,
+    "corpus2_chunks_seen_per_query_pct": 1.6,
+    "corpus1_chunks": 8,
+    "corpus1_chunks_seen_per_query_pct": 75
+  }
+}

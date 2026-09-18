@@ -1,0 +1,14 @@
+model,type,reasoning_effort,items,parse_failures,call_errors,raw_quotes,raw_unverifiable,UQR,raw_overclaim_items,delivered_quotes,delivered_unverifiable,delivered_UQR,cov_none,cov_partial,cov_substantial,cov_full,est_in_tokens,est_out_tokens,latency_ms_mean,latency_ms_median
+openai:gpt-4o-mini,cloud,low,106,0,0,14,0,0,0,14,0,0,96,2,3,5,356480,13220,1766,1634
+openai:gpt-4o,cloud,low,106,0,0,48,1,0.0208,1,47,0,0,66,35,5,0,356480,15773,1084,1024
+openai:gpt-5.5,cloud,low,106,0,0,109,0,0,0,109,0,0,54,50,2,0,356480,22854,5214,5096
+ollama:qwen2.5:0.5b,local,,106,106,0,0,0,0,0,0,0,0,0,0,0,0,356480,14092,505,474
+ollama:qwen2.5:1.5b,local,,106,77,0,11,0,0,0,11,0,0,21,8,0,0,356480,25173,1215,920
+ollama:qwen2.5:3b,local,,106,0,0,52,1,0.0192,1,51,0,0,54,52,0,0,356480,11001,1398,1313
+ollama:llama3.2:3b,local,,106,0,0,17,2,0.1176,0,12,0,0,98,8,0,0,356480,14479,2007,1901
+ollama:mistral:7b,local,,106,0,0,52,3,0.0577,3,49,0,0,55,51,0,0,356480,12963,3936,3835
+ollama:qwen2.5:7b,local,,106,0,0,13,1,0.0769,1,12,0,0,93,13,0,0,356480,10080,2558,2450
+ollama:llama3.1:8b,local,,106,0,0,96,17,0.1771,16,79,0,0,16,90,0,0,356480,15909,3532,3557
+ollama:gemma2:9b,local,,106,0,0,72,0,0,0,72,0,0,34,72,0,0,356480,13834,4443,4602
+ollama:qwen2.5:14b,local,,106,0,0,69,5,0.0725,5,64,0,0,38,66,2,0,356480,15373,6954,6892
+ollama:qwen2.5:32b,local,,106,0,0,89,0,0,0,89,0,0,28,78,0,0,356480,15904,15072,15144
