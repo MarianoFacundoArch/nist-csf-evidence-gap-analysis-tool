@@ -4,6 +4,16 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **`llm.reasoningEffort` configuration field** (`low` | `medium` | `high`,
+  default `low`). Reasoning models that accept an effort hint previously received
+  a hardcoded `low`; the level is now configurable and validated. The default
+  stays `low` because the measured sweep in `eval/RESULTS.md` found no
+  faithfulness gain from `medium` or `high` on this task, at roughly twice the
+  latency.
+
 ## [0.2.1] — 2026-07-23
 
 ### Added

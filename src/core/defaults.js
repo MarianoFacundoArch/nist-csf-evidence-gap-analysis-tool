@@ -51,6 +51,11 @@ export function defaultConfig() {
       model: null, // null => provider resolves its own default (see note above)
       temperature: 0, // deterministic judgments
       maxTokens: 1024,
+      // Hint for reasoning models that accept one; ignored by models that do
+      // not. "low" is the default because the measured sweep in eval/RESULTS.md
+      // found no faithfulness gain from medium or high on this task, at roughly
+      // twice the latency.
+      reasoningEffort: 'low', // "low" | "medium" | "high"
     },
 
     retrieval: { topK: 6 },

@@ -44,6 +44,9 @@ export async function createLlm(config, logger) {
   const nextGen = NEXT_GEN.test(model);
   const temperature = config.llm.temperature ?? 0;
   const maxTokens = config.llm.maxTokens ?? 1024;
+  // Reasoning models accept a reasoning-effort hint; configurable, defaulting to
+  // "low" (fast/cheap and, for this verbatim-quoting task, sufficient).
+  const reasoningEffort = config.llm.reasoningEffort || 'low';
 
   function baseParams(system, user) {
     const params = {
@@ -58,7 +61,7 @@ export async function createLlm(config, logger) {
       // Reasoning tokens count toward the budget, so give headroom; keep
       // reasoning light for this short, structured judgment task.
       params.max_completion_tokens = Math.max(maxTokens, 4096);
-      params.reasoning_effort = 'low';
+      params.reasoning_effort = reasoningEffort;
       // These models only support the default temperature; omit it unless the
       // user explicitly asked for the default value.
       if (temperature === 1) params.temperature = 1;

@@ -42,6 +42,7 @@ export const configSchema = {
         model: { type: ['string', 'null'], minLength: 1 },
         temperature: { type: 'number', minimum: 0, maximum: 2 },
         maxTokens: { type: 'integer', minimum: 1, maximum: 32768 },
+        reasoningEffort: { type: 'string', enum: ['low', 'medium', 'high'] },
       },
     },
 

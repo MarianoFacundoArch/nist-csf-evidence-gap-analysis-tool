@@ -334,9 +334,16 @@ Precedence (low → high): built-in defaults < `csf-tool.config.json` < CLI flag
 Secrets/endpoints come from `.env` only. Run `csf-tool init` to scaffold a config.
 See the [Usage Guide](docs/GUIDE.md#12-configuration-reference) for the full
 reference. Key fields: `csfCorePath`, `docsPath`, `workDir`, `chunk.size`/`overlap`,
-`embeddings.provider`/`model`, `llm.provider`/`model`, `retrieval.topK`,
-`analysis.confidenceThreshold`, `analysis.critique`, `analysis.strict`,
-`review.showAll`.
+`embeddings.provider`/`model`, `llm.provider`/`model`, `llm.reasoningEffort`,
+`retrieval.topK`, `analysis.confidenceThreshold`, `analysis.critique`,
+`analysis.strict`, `review.showAll`.
+
+`llm.reasoningEffort` (`low` | `medium` | `high`, default `low`) is a hint for
+reasoning models that accept one and is ignored by models that do not. The
+default is `low` because the measured sweep in
+[`eval/RESULTS.md`](eval/RESULTS.md#4-reasoning-effort-sweep-gpt-55) found no
+faithfulness gain from `medium` or `high` on this task, at roughly twice the
+latency.
 
 ## Data source (CPRT)
 
