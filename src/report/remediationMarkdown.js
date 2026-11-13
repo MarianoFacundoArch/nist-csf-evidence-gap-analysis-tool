@@ -9,6 +9,9 @@
  * 2.0 Implementation Examples for that outcome, quoted verbatim from the CPRT
  * export — the same grounding rule as evidence quotes: the tool never invents
  * recommendations.
+ *
+ * Owner, due date, status and milestones appear on an item only when a person
+ * recorded them in the target profile (`plan`); the tool never fills them in.
  */
 
 import { planOrder } from '../target/targetProfile.js';
@@ -87,6 +90,8 @@ export function renderRemediationMarkdown(profile, view) {
         out.push(`- Outcome: ${e.outcome}`);
         out.push(`- Assessment rationale: ${e.rationale}`);
         if (e.note) out.push(`- Target note: ${e.note}`);
+        const plan = planLine(e.plan);
+        if (plan) out.push(`- Plan (recorded in the target profile): ${plan}`);
         if (e.implementation_examples.length > 0) {
           out.push('- Suggested actions (NIST CSF 2.0 Implementation Examples):');
           e.implementation_examples.forEach((ex, i) => out.push(`  ${i + 1}. ${ex}`));
@@ -143,6 +148,22 @@ export function renderRemediationMarkdown(profile, view) {
 
 function levelsToClose(gap) {
   return gap > 0 ? ` (${gap} level${gap > 1 ? 's' : ''} to close)` : '';
+}
+
+/**
+ * The human's plan fields on one line, or null when none is recorded. Only
+ * what the person wrote is shown: no default status, and no placeholder for a
+ * missing owner or date.
+ */
+function planLine(plan) {
+  if (!plan) return null;
+  const oneLine = (text) => text.replace(/\s*[\r\n]+\s*/g, ' ');
+  const parts = [];
+  if (plan.owner) parts.push(`owner: ${oneLine(plan.owner)}`);
+  if (plan.due) parts.push(`due: ${plan.due}`);
+  if (plan.status) parts.push(`status: ${plan.status}`);
+  if (plan.milestones) parts.push(`milestones: ${oneLine(plan.milestones)}`);
+  return parts.length > 0 ? parts.join('; ') : null;
 }
 
 function statusBadge(e) {

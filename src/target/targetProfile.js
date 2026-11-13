@@ -40,6 +40,7 @@ export function newTargetSpec(now, baseline = DEFAULT_BASELINE) {
     subcategories: {},
     priorities: {},
     notes: {},
+    plan: {},
   };
 }
 
@@ -47,26 +48,71 @@ export function newTargetSpec(now, baseline = DEFAULT_BASELINE) {
  * Validate a spec object (already parsed). Throws TargetDataError on schema
  * violations; returns the spec with all optional maps normalized to {} so
  * callers can read/mutate without null checks.
+ *
+ * Normalization only ever ADDS missing top-level keys. Nested objects are left
+ * untouched: `status` validates a shallow copy of the raw file and then hashes
+ * the raw content, so rewriting a nested value here would make an unchanged
+ * target.json look edited.
  */
 export function validateTargetSpec(data, sourceLabel = 'target profile') {
+  const malformed = (what) =>
+    new TargetDataError(`The ${sourceLabel} is malformed — ${what}.`, {
+      hint: 'Fix the file by hand or recreate it with `csf-tool target`.',
+    });
+
   if (!validate(data)) {
     const first = (validate.errors ?? [])[0];
-    throw new TargetDataError(
-      `The ${sourceLabel} is malformed — ${first ? `${first.instancePath || '(root)'} ${first.message}` : 'schema validation failed'}.`,
-      { hint: 'Fix the file by hand or recreate it with `csf-tool target`.' },
-    );
+    throw malformed(first ? describeSchemaError(first) : 'schema validation failed');
   }
-  for (const key of ['functions', 'categories', 'subcategories', 'priorities', 'notes']) {
+  for (const key of ['functions', 'categories', 'subcategories', 'priorities', 'notes', 'plan']) {
     data[key] ??= {};
+  }
+  // The schema checks the shape of a due date; whether that day exists is
+  // checked here (a plan due on 2026-02-30 is a typo, not a date).
+  for (const [id, entry] of Object.entries(data.plan)) {
+    if (entry.due != null && !isCalendarDate(entry.due)) {
+      throw malformed(`/plan/${id}/due "${entry.due}" is not a calendar date (use YYYY-MM-DD, e.g. 2026-03-31)`);
+    }
   }
   return data;
 }
 
 /**
+ * One schema violation as a sentence a person editing target.json by hand can
+ * act on: which value, and what was expected (Ajv's stock messages for enum
+ * and unknown-field errors name neither the choices nor the field).
+ */
+function describeSchemaError(error) {
+  const where = error.instancePath || '(root)';
+  if (error.keyword === 'enum') {
+    return `${where} must be one of: ${error.params.allowedValues.join(', ')}`;
+  }
+  if (error.keyword === 'additionalProperties') {
+    return `${where} has an unknown field "${error.params.additionalProperty}"`;
+  }
+  if (error.keyword === 'pattern' && where.endsWith('/due')) {
+    return `${where} must be a date written as YYYY-MM-DD`;
+  }
+  return `${where} ${error.message}`;
+}
+
+/** True when a YYYY-MM-DD string names a day that exists (leap years included). */
+function isCalendarDate(text) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  if (!m) return false;
+  const [year, month, day] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  // Build the date in UTC and read it back: an impossible day rolls over into
+  // the next month, so the round trip no longer matches.
+  const date = new Date(0);
+  date.setUTCFullYear(year, month - 1, day);
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+}
+
+/**
  * Load the spec from disk. Returns null when the file does not exist (a target
  * profile is optional); throws TargetDataError when it exists but is invalid.
- * When `csf` is provided, override/priority/note keys that match nothing in the
- * framework are warned about (typos would otherwise silently do nothing).
+ * When `csf` is provided, override/priority/note/plan keys that match nothing
+ * in the framework are warned about (typos would otherwise silently do nothing).
  */
 export async function loadTargetSpec(path, { csf, logger } = {}) {
   if (!(await fileExists(path))) return null;
@@ -98,6 +144,7 @@ function warnUnknownKeys(spec, csf, logger) {
   for (const k of Object.keys(spec.subcategories)) if (!subcategoryIds.has(k)) complain('subcategories', k);
   for (const k of Object.keys(spec.priorities)) if (!anyId(k)) complain('priorities', k);
   for (const k of Object.keys(spec.notes)) if (!subcategoryIds.has(k)) complain('notes', k);
+  for (const k of Object.keys(spec.plan)) if (!subcategoryIds.has(k)) complain('plan', k);
 }
 
 /**
@@ -130,11 +177,24 @@ export function resolveTarget(spec, sub) {
  * is gap 0. "not-applicable" entries carry no gap or priority and are listed
  * separately by renderers. Implementation examples come from the CSF core (the
  * official NIST text) — they are the remediation plan's suggested actions.
+ *
+ * `plan` (owner, due, status, milestones — the human's tracking fields) is
+ * added to EVERY entry, as an object or null, once the target profile records
+ * at least one; a profile that records none gets no `plan` key at all, so its
+ * deliverables are byte-identical to those of versions that predate the field.
  */
 export function buildTargetView(profile, spec, csf) {
   const examplesById = new Map(
     (csf?.subcategories ?? []).map((s) => [s.id, s.implementationExamples ?? []]),
   );
+  // Looked up per Subcategory of THIS profile: a `plan` key that matches
+  // nothing (warned about on load, as "ignored") really is ignored, and so
+  // cannot switch the plan fields on for every entry.
+  const planById = new Map();
+  for (const e of profile.subcategories) {
+    const plan = planEntry(spec.plan?.[e.subcategory_id]);
+    if (plan) planById.set(e.subcategory_id, plan);
+  }
 
   const entries = profile.subcategories.map((e) => {
     const { target, priority, note } = resolveTarget(spec, {
@@ -159,6 +219,7 @@ export function buildTargetView(profile, spec, csf) {
       review_status: e.review_status,
       rationale: e.rationale,
       note,
+      ...(planById.size > 0 ? { plan: planById.get(e.subcategory_id) ?? null } : {}),
       implementation_examples: examplesById.get(e.subcategory_id) ?? [],
     };
   });
@@ -204,6 +265,24 @@ export function buildTargetView(profile, spec, csf) {
     },
     entries,
   };
+}
+
+/**
+ * One Subcategory's plan fields as the deliverables carry them: every field
+ * present, null when the person left it out or blank. Returns null when
+ * nothing at all is recorded, so an empty `{}` in target.json does not count
+ * as a plan entry. Values are only trimmed — never defaulted or inferred.
+ */
+function planEntry(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const text = (value) => (typeof value === 'string' && value.trim() !== '' ? value.trim() : null);
+  const plan = {
+    owner: text(raw.owner),
+    due: text(raw.due),
+    status: text(raw.status),
+    milestones: text(raw.milestones),
+  };
+  return Object.values(plan).some((value) => value != null) ? plan : null;
 }
 
 /**

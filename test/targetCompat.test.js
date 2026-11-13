@@ -29,6 +29,7 @@ import { renderRemediationMarkdown } from '../src/report/remediationMarkdown.js'
 import { buildTargetProfile } from '../src/report/targetJson.js';
 import { renderGapMarkdown } from '../src/report/gapMarkdown.js';
 import { renderDashboardHtml } from '../src/report/htmlDashboard.js';
+import { buildPoamRows } from '../src/report/poamCsv.js';
 import { hashAssessment } from '../src/util/hash.js';
 
 const FIXTURE_DIR = new URL('./fixtures/target-v0.3.0/', import.meta.url);
@@ -167,6 +168,19 @@ test('a v0.3.0 target profile renders byte-identically to v0.3.0', async () => {
   assert.equal(renderGapMarkdown(profile, { targetView: view }), golden('gap-analysis.md'));
   assert.equal(JSON.stringify(buildTargetProfile(profile, view), null, 2) + '\n', golden('target-profile.json'));
   assert.equal(dataBlock(renderDashboardHtml(profile, view)) + '\n', golden('dashboard-data.json'));
+});
+
+test('a v0.3.0 target profile gains nothing it did not record', async () => {
+  const profile = buildFixtureProfile();
+  const { spec } = await loadV030Target();
+  const view = buildTargetView(profile, spec, CSF);
+
+  // No plan was recorded: the view has no plan fields, and the POA&M export
+  // lists the open items with nobody assigned and no date — it invents neither.
+  assert.ok(view.entries.every((e) => !Object.hasOwn(e, 'plan')));
+  const rows = buildPoamRows(profile, view);
+  assert.deepEqual(rows.map((r) => r.subcategory_id), ['GV.OC-02', 'PR.AA-06', 'PR.AA-01', 'RC.RP-01']);
+  assert.ok(rows.every((r) => r.owner === '' && r.due === '' && r.milestones === '' && r.status === 'open'));
 });
 
 test('renderers called the v0.3.0 way (no target, no extras) are unchanged too', () => {

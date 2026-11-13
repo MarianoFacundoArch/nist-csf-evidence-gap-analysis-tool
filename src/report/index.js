@@ -2,10 +2,10 @@
  * Report stage orchestration: build the Current Profile, enforce strict mode,
  * and write the deliverables — machine-readable profile JSON, human
  * gap-analysis Markdown, evidence-map CSV, and a self-contained HTML dashboard.
- * When a target profile exists, two more are emitted: the machine-readable
- * Target Profile and the prioritized remediation plan; when it doesn't, stale
- * target deliverables from an earlier run are removed so an outdated plan can
- * never be mistaken for current.
+ * When a target profile exists, three more are emitted: the machine-readable
+ * Target Profile, the prioritized remediation plan, and its POA&M-style
+ * tracker export; when it doesn't, stale target deliverables from an earlier
+ * run are removed so an outdated plan can never be mistaken for current.
  *
  * Every run also writes the evidence-by-document report — the reverse view
  * (document -> what it contributes), derived from one canonical document view
@@ -27,6 +27,7 @@ import { renderDashboardHtml } from './htmlDashboard.js';
 import { buildDocumentView } from './documentView.js';
 import { renderDocumentsMarkdown } from './documentsMarkdown.js';
 import { renderEvidenceRequestsMarkdown } from './evidenceRequestsMarkdown.js';
+import { renderPoamCsv } from './poamCsv.js';
 import { buildTargetView } from '../target/targetProfile.js';
 import { writeJsonAtomic, writeFileAtomic, removeIfExists } from '../util/fsx.js';
 import { StrictModeError } from '../core/errors.js';
@@ -69,9 +70,11 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   if (targetView) {
     await writeJsonAtomic(ctx.paths.targetProfile, buildTargetProfile(profile, targetView));
     await writeFileAtomic(ctx.paths.remediationPlan, renderRemediationMarkdown(profile, targetView));
+    await writeFileAtomic(ctx.paths.poam, renderPoamCsv(profile, targetView));
   } else {
     await removeIfExists(ctx.paths.targetProfile);
     await removeIfExists(ctx.paths.remediationPlan);
+    await removeIfExists(ctx.paths.poam);
   }
 
   return {
@@ -85,5 +88,6 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     evidenceRequestsPath: ctx.paths.evidenceRequests,
     targetProfileJsonPath: targetView ? ctx.paths.targetProfile : null,
     remediationPlanPath: targetView ? ctx.paths.remediationPlan : null,
+    poamPath: targetView ? ctx.paths.poam : null,
   };
 }

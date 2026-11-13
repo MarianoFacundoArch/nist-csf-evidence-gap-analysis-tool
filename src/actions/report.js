@@ -1,9 +1,9 @@
 /**
  * REPORT action: render the deliverables from the reviewed assessments — and,
  * when a target profile exists, the Target Profile + prioritized remediation
- * plan alongside. In strict mode this refuses to emit until every item is
- * resolved (the renderReports call throws a StrictModeError, caught at the CLI
- * boundary).
+ * plan (and its POA&M-style export) alongside. In strict mode this refuses to
+ * emit until every item is resolved (the renderReports call throws a
+ * StrictModeError, caught at the CLI boundary).
  */
 
 import { loadCsfCore } from '../csf/loader.js';
@@ -58,6 +58,7 @@ export async function report(ctx) {
     logger.info(
       `  target: met ${t.met}/${t.applicable} (${t.pctMet}%) — remediation plan: ${result.remediationPlanPath}`,
     );
+    logger.info(`  POA&M-style tracker (owner, due, status come from target.json): ${result.poamPath}`);
   }
   if (s.unreviewed > 0 || s.stale > 0) {
     logger.warn('The profile contains unreviewed/stale items and is marked DRAFT. Run `review` to validate them.');
@@ -70,6 +71,7 @@ export async function report(ctx) {
     evidenceRequestsPath: result.evidenceRequestsPath,
     targetProfileJsonPath: result.targetProfileJsonPath,
     remediationPlanPath: result.remediationPlanPath,
+    poamPath: result.poamPath,
     summary: s,
     targetSummary: result.targetView?.summary ?? null,
   };

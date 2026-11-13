@@ -7,7 +7,8 @@
  * of human review decisions (accept all, plus two illustrative overrides and a
  * note on the verifier-downgraded item) and an illustrative Target Profile,
  * and finally renders every deliverable — current profile, gap analysis,
- * evidence map, dashboard, target profile, and remediation plan. Because the
+ * evidence map, evidence by document, evidence requests, dashboard, target
+ * profile, remediation plan, and its POA&M-style export. Because the
  * mock providers are deterministic and timestamps are pinned, re-running this
  * reproduces byte-identical output — so anyone can regenerate the example
  * offline with no API key (`npm run example`).
@@ -102,18 +103,33 @@ async function main() {
   // An illustrative Target Profile (human-owned, like the reviews): substantial
   // baseline, identity & access raised to "full", one outcome scoped out. It
   // exists so the committed example exercises the target-side deliverables.
+  //
+  // The `plan` entries stand in for what a person would record — the tool never
+  // assigns an owner or a date. One open item carries every field; the other
+  // belongs to the outcome the reviewer raised, whose target is therefore met:
+  // it shows that a tracked item stays in the POA&M export as a closed row
+  // instead of silently vanishing.
   await writeJsonAtomic(ctx.paths.target, {
     schemaVersion: '1.0',
     createdAt: FIXED_NOW,
     updatedAt: FIXED_NOW,
     description:
-      'Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.',
+      'Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners and dates are fictitious.',
     default: 'substantial',
     functions: {},
     categories: { 'PR.AA': 'full' },
     subcategories: { 'PR.AA-06': 'not-applicable' },
     priorities: { 'PR.AA': 'high', 'GV.OC': 'high', RC: 'low' },
     notes: { 'PR.AA-06': 'Fully remote organization; no physical facilities beyond a registered address.' },
+    plan: {
+      'PR.AA-03': {
+        owner: 'IT Operations Lead',
+        due: '2026-06-30',
+        status: 'in-progress',
+        milestones: 'Pilot with administrator accounts, then extend to all staff.',
+      },
+      ...(raiseId ? { [raiseId]: { owner: 'Chief Information Security Officer', status: 'done' } } : {}),
+    },
   });
 
   const result = await report(ctx);

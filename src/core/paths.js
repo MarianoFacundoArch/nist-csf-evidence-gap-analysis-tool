@@ -35,5 +35,6 @@ export function resolvePaths(workDir) {
     // Emitted only when a target profile exists.
     targetProfile: join(reports, 'target-profile.json'),
     remediationPlan: join(reports, 'remediation-plan.md'),
+    poam: join(reports, 'poam.csv'),
   };
 }

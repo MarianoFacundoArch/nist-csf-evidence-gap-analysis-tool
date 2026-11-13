@@ -15,8 +15,10 @@ import { buildContext } from '../src/core/context.js';
 import { ingest } from '../src/actions/ingest.js';
 import { analyze } from '../src/actions/analyze.js';
 import { review } from '../src/actions/review.js';
+import { target } from '../src/actions/target.js';
 import { report } from '../src/actions/report.js';
-import { readJsonSafe } from '../src/util/fsx.js';
+import { status } from '../src/actions/status.js';
+import { readJsonSafe, writeJsonAtomic } from '../src/util/fsx.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -142,6 +144,50 @@ test('renderReports writes both reports with a target profile too, and the reque
   });
 });
 
+test('renderReports writes the POA&M export with a target profile and removes it without one', async () => {
+  await withWorkDir(async (ctx) => {
+    const targetSpec = validateTargetSpec({
+      default: 'substantial',
+      plan: { 'GV.OC-02': { owner: 'CISO', due: '2026-06-30' } },
+    });
+    const withTarget = await renderReports(ctx, { ...inputs(), targetSpec });
+
+    assert.equal(withTarget.poamPath, ctx.paths.poam);
+    assert.deepEqual(await listReports(ctx), [
+      'current-profile.json',
+      'dashboard.html',
+      'evidence-by-document.md',
+      'evidence-map.csv',
+      'evidence-requests.md',
+      'gap-analysis.md',
+      'poam.csv',
+      'remediation-plan.md',
+      'target-profile.json',
+    ]);
+    const csv = await readFile(ctx.paths.poam, 'utf8');
+    const lines = csv.slice(1).split('\r\n');
+    assert.ok(lines[0].startsWith('poam_id,subcategory_id,'));
+    assert.ok(lines[1].startsWith('POAM-GV.OC-02,GV.OC-02,GOVERN,'));
+    assert.ok(lines[1].includes(',open,CISO,2026-06-30,'));
+    assert.ok(lines[2].startsWith('POAM-PR.AA-01,'));
+    assert.equal(lines.length, 4); // header, two unmet targets, trailing CRLF
+
+    // The target profile is deleted: every target-side deliverable must go, so
+    // an outdated tracker cannot be mistaken for current. The rest stays.
+    const without = await renderReports(ctx, inputs());
+    assert.equal(without.poamPath, null);
+    assert.equal(without.remediationPlanPath, null);
+    assert.deepEqual(await listReports(ctx), [
+      'current-profile.json',
+      'dashboard.html',
+      'evidence-by-document.md',
+      'evidence-map.csv',
+      'evidence-requests.md',
+      'gap-analysis.md',
+    ]);
+  });
+});
+
 test('strict mode still refuses before any deliverable is written', async () => {
   await withWorkDir(async (ctx) => {
     ctx.config.analysis.strict = true;
@@ -204,6 +250,61 @@ test('offline pipeline: ingest → analyze → review → report produces the al
     const checklist = requests.split('\n').filter((line) => line.startsWith('  - [ ] '));
     assert.ok(checklist.length > 0);
     for (const line of checklist) assert.ok(official.has(line.slice('  - [ ] '.length)), line);
+  } finally {
+    await rm(workDir, { recursive: true, force: true });
+  }
+});
+
+test('offline pipeline with a target profile: plan fields edited by hand reach the POA&M, and the report stays current', async () => {
+  const workDir = await mkdtemp(join(tmpdir(), 'csf-reports-e2e-target-'));
+  const logs = [];
+  try {
+    const ctx = await buildContext({
+      docsPath: 'examples/sample-docs',
+      workDir,
+      csfCorePath: 'data/csf-core.json',
+      embeddings: { provider: 'mock', model: 'mock' },
+      llm: { provider: 'mock', model: 'mock' },
+      review: { showAll: true },
+      acceptAll: true,
+      targetDefault: 'substantial',
+      fixedNow: NOW,
+    });
+    const collect = (...args) => logs.push(args.join(' '));
+    ctx.logger = { level: 'info', debug() {}, info: collect, warn: collect, error: collect };
+    ctx.ui = { isInteractive: false, info() {}, warn() {}, success() {}, note() {} };
+
+    await ingest(ctx);
+    await analyze(ctx);
+    await review(ctx);
+    await target(ctx); // --target-default substantial
+
+    // Hand-edited JSON is the interface for plan fields.
+    const spec = await readJsonSafe(ctx.paths.target);
+    assert.deepEqual(spec.plan, {});
+    spec.plan = {
+      'PR.AA-03': { owner: 'IT Operations Lead', due: '2026-06-30', status: 'in-progress' },
+    };
+    await writeJsonAtomic(ctx.paths.target, spec);
+
+    const result = await report(ctx);
+    assert.equal(result.poamPath, ctx.paths.poam);
+    assert.ok(logs.some((line) => line.includes('POA&M-style tracker') && line.includes(ctx.paths.poam)));
+
+    const csv = await readFile(ctx.paths.poam, 'utf8');
+    const rows = csv.slice(1).split('\r\n').filter(Boolean);
+    assert.equal(rows.length - 1, result.targetSummary.unmet);
+    const planned = rows.find((line) => line.startsWith('POAM-PR.AA-03,'));
+    assert.ok(planned.includes(',in-progress,IT Operations Lead,2026-06-30,'));
+    // Official NIST text for that outcome, verbatim.
+    assert.ok(planned.includes('Require multifactor authentication | Enforce policies for the minimum strength of passwords'));
+    assert.match(await readFile(ctx.paths.remediationPlan, 'utf8'), /- Plan \(recorded in the target profile\): owner: IT Operations Lead; due: 2026-06-30; status: in-progress/);
+
+    // Loading the plan must not make the unchanged target.json look edited.
+    const state = await status(ctx);
+    assert.equal(state.target.status, 'configured');
+    assert.equal(state.report.status, 'current');
+    assert.deepEqual(state.report.mismatches, []);
   } finally {
     await rm(workDir, { recursive: true, force: true });
   }
