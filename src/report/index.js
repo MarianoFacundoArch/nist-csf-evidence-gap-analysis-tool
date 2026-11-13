@@ -7,6 +7,10 @@
  * target deliverables from an earlier run are removed so an outdated plan can
  * never be mistaken for current.
  *
+ * Every run also writes the evidence-by-document report — the reverse view
+ * (document -> what it contributes), derived from one canonical document view
+ * that the dashboard shares.
+ *
  * STRICT MODE (brief §6): when enabled, refuse to emit the final profile until
  * every subcategory is resolved by a human. We stop with a clear, actionable
  * message (a StrictModeError, caught and printed by the CLI) listing the
@@ -19,6 +23,8 @@ import { renderEvidenceCsv } from './evidenceCsv.js';
 import { renderRemediationMarkdown } from './remediationMarkdown.js';
 import { buildTargetProfile } from './targetJson.js';
 import { renderDashboardHtml } from './htmlDashboard.js';
+import { buildDocumentView } from './documentView.js';
+import { renderDocumentsMarkdown } from './documentsMarkdown.js';
 import { buildTargetView } from '../target/targetProfile.js';
 import { writeJsonAtomic, writeFileAtomic, removeIfExists } from '../util/fsx.js';
 import { StrictModeError } from '../core/errors.js';
@@ -49,11 +55,13 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     targetView,
   });
   const csv = renderEvidenceCsv(profile);
+  const documentView = buildDocumentView(profile, { assessments, meta });
 
   await writeJsonAtomic(ctx.paths.currentProfile, profile);
   await writeFileAtomic(ctx.paths.gapReport, md);
   await writeFileAtomic(ctx.paths.evidenceMap, csv);
-  await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView));
+  await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView, { documentView }));
+  await writeFileAtomic(ctx.paths.evidenceByDocument, renderDocumentsMarkdown(profile, documentView));
 
   if (targetView) {
     await writeJsonAtomic(ctx.paths.targetProfile, buildTargetProfile(profile, targetView));
@@ -70,6 +78,7 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     gapMdPath: ctx.paths.gapReport,
     evidenceCsvPath: ctx.paths.evidenceMap,
     dashboardPath: ctx.paths.dashboard,
+    evidenceByDocumentPath: ctx.paths.evidenceByDocument,
     targetProfileJsonPath: targetView ? ctx.paths.targetProfile : null,
     remediationPlanPath: targetView ? ctx.paths.remediationPlan : null,
   };

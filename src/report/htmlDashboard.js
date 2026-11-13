@@ -21,7 +21,15 @@
 import { orderFunctions } from '../csf/order.js';
 import { planOrder } from '../target/targetProfile.js';
 
-export function renderDashboardHtml(profile, targetView = null) {
+/**
+ * @param {object} profile the Current Profile from buildProfile()
+ * @param {object|null} [targetView] the target view from buildTargetView(), if any
+ * @param {object} [extras] optional sections, each read from its own key and
+ *   embedded only when passed (omitting it leaves the embedded data unchanged):
+ *   `documentView` — the view from buildDocumentView(), shown as the
+ *   "Evidence by document" table.
+ */
+export function renderDashboardHtml(profile, targetView = null, extras = {}) {
   const payload = {
     profile,
     target: targetView,
@@ -30,6 +38,7 @@ export function renderDashboardHtml(profile, targetView = null) {
       : [],
     functionOrder: orderFunctions(profile.subcategories),
   };
+  if (extras?.documentView) payload.documentView = extras.documentView;
   // <-escape so document text can never close the script element.
   const json = JSON.stringify(payload).replace(/</g, '\\u003c');
 
@@ -676,6 +685,85 @@ if (T && DATA.planOrder.length) {
   });
   card.appendChild(ol);
   wrap.appendChild(card);
+}
+
+/* -------------------------- evidence by document -------------------------- */
+/* The reverse view: document -> outcomes it is quoted for. A plain table, not
+   a chart: the content is a list of named documents with several figures each.
+   Names are untrusted text and go through textContent like everything else. */
+var DV = DATA.documentView;
+if (DV) {
+  var DV_LIMIT = 10;
+  var dvSum = DV.summary;
+  var dvShowAll = DV.documents.length <= DV_LIMIT;
+  function dvCell(value){ return value == null ? '—' : String(value); }
+  function dvCount(n, noun){ return n + ' ' + noun + (n === 1 ? '' : 's'); }
+  var dvCard = el('section','card');
+  var dvHead = el('div','head');
+  var dvHd = el('div');
+  dvHd.appendChild(el('h2', null, 'Evidence by document'));
+  dvHd.appendChild(el('p','desc',
+    (dvSum.documentsIngested == null
+      ? dvCount(dvSum.documents, 'document') + ' seen in the assessment (list reconstructed)'
+      : dvSum.documentNames === dvSum.documentsIngested
+        ? dvCount(dvSum.documentsIngested, 'document') + ' ingested'
+        : dvSum.documentsIngested + ' files ingested under ' + dvCount(dvSum.documentNames, 'distinct name')) +
+    ' · ' + dvSum.documentsQuoted + ' quoted at least once · ' + dvSum.documentsNeverQuoted + ' never quoted' +
+    (dvSum.documentsUnlisted ? ' · ' + dvSum.documentsUnlisted + ' not in the ingest record' : '') + ' · ' +
+    dvSum.outcomesWithQuotes + ' of ' + dvSum.outcomes + ' outcomes have a verified quote. ' +
+    'Per-document detail is in evidence-by-document.md.'));
+  dvHead.appendChild(dvHd);
+  var dvBtn = null;
+  if (!dvShowAll) {
+    dvBtn = el('button','ghost','');
+    dvBtn.type = 'button';
+    dvHead.appendChild(dvBtn);
+  }
+  dvCard.appendChild(dvHead);
+  DV.notes.forEach(function(note){ dvCard.appendChild(el('p','desc','Note: ' + note)); });
+  var dvBody = el('div');
+  dvBody.style.overflowX = 'auto';
+  if (DV.notes.length) dvBody.style.marginTop = '10px';
+  dvCard.appendChild(dvBody);
+  var dvFoot = el('p','desc',
+    'A document that is never quoted is not thereby irrelevant: no passage from it was selected as verbatim evidence for a CSF outcome in this assessment.');
+  dvFoot.style.marginTop = '10px';
+  dvCard.appendChild(dvFoot);
+
+  function renderDocuments(){
+    dvBody.textContent = '';
+    var t = el('table','tbl');
+    var tr = el('tr');
+    ['Document','Chunks','Retrieved for','Quoted for','Quotes','Coverage of quoted outcomes','Functions'].forEach(function(h, i){
+      tr.appendChild(el('th', i >= 1 && i <= 4 ? 'n' : null, h));
+    });
+    t.appendChild(tr);
+    (dvShowAll ? DV.documents : DV.documents.slice(0, DV_LIMIT)).forEach(function(d){
+      var r = el('tr');
+      r.appendChild(el('td', null, d.source_file +
+        (d.files > 1 ? ' (' + d.files + ' files share this name)' : '') +
+        (d.listed ? '' : ' (not in the ingest record)')));
+      r.appendChild(el('td','n', dvCell(d.chunks)));
+      r.appendChild(el('td','n', dvCell(d.retrieved_for)));
+      r.appendChild(el('td','n', String(d.cited_in.length)));
+      r.appendChild(el('td','n', String(d.quotes)));
+      var cov = LEVELS.filter(function(lv){ return d.cited_by_coverage[lv] > 0; })
+        .map(function(lv){ return lv + ' ' + d.cited_by_coverage[lv]; });
+      r.appendChild(el('td', null, cov.length ? cov.join(' · ') : '—'));
+      r.appendChild(el('td', null, d.functions.length ? d.functions.join(', ') : '—'));
+      t.appendChild(r);
+    });
+    dvBody.appendChild(t);
+    if (dvBtn) {
+      dvBtn.textContent = dvShowAll
+        ? 'Show the first ' + DV_LIMIT
+        : 'Show all ' + DV.documents.length + ' documents';
+      dvBtn.setAttribute('aria-pressed', String(dvShowAll));
+    }
+  }
+  if (dvBtn) dvBtn.addEventListener('click', function(){ dvShowAll = !dvShowAll; renderDocuments(); });
+  renderDocuments();
+  wrap.appendChild(dvCard);
 }
 
 /* --------------------------- subcategory explorer ------------------------- */

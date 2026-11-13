@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "createdAt": "2025-12-01T10:00:00.000Z",
+  "updatedAt": "2025-12-15T16:30:00.000Z",
+  "description": "Fixture target profile in the shape v0.3.0 wrote: no plan, no tiers.",
+  "default": "substantial",
+  "functions": {},
+  "categories": {
+    "PR.AA": "full"
+  },
+  "subcategories": {
+    "PR.AA-05": "not-applicable"
+  },
+  "priorities": {
+    "GV.OC": "high",
+    "RC": "low"
+  },
+  "notes": {
+    "GV.OC-02": "Stakeholder register is the first deliverable this quarter.",
+    "PR.AA-05": "No OT systems in scope."
+  }
+}

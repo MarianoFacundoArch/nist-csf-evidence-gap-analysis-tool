@@ -3,7 +3,9 @@
  *
  * One bad file never aborts the run: each parse is isolated and recorded in an
  * ingest report (parsed / skipped-no-text / failed). The index records the
- * embedder id + dimension so the analyze stage can detect a model change.
+ * embedder id + dimension so the analyze stage can detect a model change, and
+ * the run metadata records which documents reached the index so the report
+ * stage can show what each one contributes.
  */
 
 import { discoverDocs } from '../util/files.js';
@@ -11,8 +13,9 @@ import { parseFile } from '../ingest/parsers/index.js';
 import { chunkDocument } from '../ingest/chunker.js';
 import { buildIndex, saveIndex } from '../store/vectorStore.js';
 import { writeJsonAtomic, readJsonSafe } from '../util/fsx.js';
+import { compareText } from '../util/compare.js';
 import { ConfigError } from '../core/errors.js';
-import { basename } from 'node:path';
+import { basename, relative, sep } from 'node:path';
 import { readFileSync } from 'node:fs';
 
 const pkg = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
@@ -46,6 +49,7 @@ export async function ingest(ctx) {
 
   const report = { parsed: [], skipped: [], failed: [] };
   const allChunks = [];
+  const documents = [];
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     if (shouldLogFileProgress(i, files.length)) {
@@ -60,6 +64,9 @@ export async function ingest(ctx) {
       }
       allChunks.push(...chunks);
       report.parsed.push({ file, chunks: chunks.length, warnings: doc.warnings ?? [] });
+      // `source_file` is the label every chunk of this document carries, and
+      // therefore the key evidence quotes are recorded under.
+      documents.push({ source_file: doc.file, path: documentPath(docsPath, file), chunks: chunks.length });
       for (const w of doc.warnings ?? []) logger.warn(`${file}: ${w}`);
     } catch (err) {
       // Isolate the failure to this file; keep going.
@@ -100,6 +107,14 @@ export async function ingest(ctx) {
   meta.docs_path = docsPath;
   meta.ingested_at = ctx.now();
   meta.ingest_report = { parsed: report.parsed.length, skipped: report.skipped.length, failed: report.failed.length };
+  // The documents that made it into the index (additive: work directories
+  // written by earlier versions lack this list). The report stage uses it for
+  // the reverse view — document -> what it contributes — which must include the
+  // documents that were ingested but never quoted, and those leave no other
+  // trace in the assessment.
+  meta.documents = documents.sort(
+    (a, b) => compareText(a.source_file, b.source_file) || compareText(a.path, b.path),
+  );
   await writeJsonAtomic(ctx.paths.meta, meta);
 
   logger.info(
@@ -111,6 +126,21 @@ export async function ingest(ctx) {
     fileCount: files.length,
     report,
   };
+}
+
+/**
+ * A document's path relative to the documents folder, with forward slashes on
+ * every platform. Relative on purpose: the list is carried into deliverables,
+ * and an absolute path would put the assessor's local directory layout into a
+ * file that is handed to someone else. It still tells apart two files that
+ * share a base name in different sub-folders.
+ */
+function documentPath(docsPath, file) {
+  const rel = relative(docsPath, file);
+  // "" => docsPath is the file itself. A path that climbs out of docsPath
+  // cannot come from discoverDocs, but is never emitted either way.
+  if (!rel || rel === '..' || rel.startsWith(`..${sep}`)) return basename(file);
+  return rel.split(sep).join('/');
 }
 
 function shouldLogFileProgress(index, total) {

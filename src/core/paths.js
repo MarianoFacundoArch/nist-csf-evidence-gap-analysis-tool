@@ -30,6 +30,7 @@ export function resolvePaths(workDir) {
     gapReport: join(reports, 'gap-analysis.md'),
     evidenceMap: join(reports, 'evidence-map.csv'),
     dashboard: join(reports, 'dashboard.html'),
+    evidenceByDocument: join(reports, 'evidence-by-document.md'),
     // Emitted only when a target profile exists.
     targetProfile: join(reports, 'target-profile.json'),
     remediationPlan: join(reports, 'remediation-plan.md'),

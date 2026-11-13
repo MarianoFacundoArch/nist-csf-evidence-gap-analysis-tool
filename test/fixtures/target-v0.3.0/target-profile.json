@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0",
+  "profileType": "Target",
+  "framework": "NIST CSF 2.0",
+  "frameworkVersion": "CSF 2.0",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "tool": {
+    "name": "csf-tool",
+    "version": "test"
+  },
+  "disclaimer": "Organizational Target Profile — companion to current-profile.json. Targets, priorities, and not-applicable scoping are human decisions recorded in the target profile file; no AI makes them. implementation_examples are the official NIST CSF 2.0 Implementation Examples (public domain, source: NIST CPRT) — illustrative, not exhaustive.",
+  "baseline": "substantial",
+  "description": "Fixture target profile in the shape v0.3.0 wrote: no plan, no tiers.",
+  "review": {
+    "reviewed": 3,
+    "unreviewed": 3,
+    "stale": 1
+  },
+  "summary": {
+    "total": 7,
+    "applicable": 6,
+    "notApplicable": 1,
+    "met": 2,
+    "unmet": 4,
+    "pctMet": 33,
+    "unmetByPriority": {
+      "high": 1,
+      "medium": 2,
+      "low": 1
+    },
+    "byFunction": [
+      {
+        "function": "GOVERN",
+        "total": 2,
+        "applicable": 2,
+        "met": 1,
+        "unmet": 1,
+        "notApplicable": 0,
+        "pctMet": 50
+      },
+      {
+        "function": "IDENTIFY",
+        "total": 1,
+        "applicable": 1,
+        "met": 1,
+        "unmet": 0,
+        "notApplicable": 0,
+        "pctMet": 100
+      },
+      {
+        "function": "PROTECT",
+        "total": 3,
+        "applicable": 2,
+        "met": 0,
+        "unmet": 2,
+        "notApplicable": 1,
+        "pctMet": 0
+      },
+      {
+        "function": "RECOVER",
+        "total": 1,
+        "applicable": 1,
+        "met": 0,
+        "unmet": 1,
+        "notApplicable": 0,
+        "pctMet": 0
+      }
+    ]
+  },
+  "subcategories": [
+    {
+      "subcategory_id": "GV.OC-01",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Mission understood",
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "rationale for GV.OC-01",
+      "note": null,
+      "implementation_examples": [
+        "Share the mission"
+      ]
+    },
+    {
+      "subcategory_id": "GV.OC-02",
+      "function": "GOVERN",
+      "function_id": "GV",
+      "category": "Organizational Context (GV.OC)",
+      "outcome": "Stakeholders understood",
+      "current_coverage": "none",
+      "target_coverage": "substantial",
+      "priority": "high",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "unreviewed",
+      "rationale": "rationale for GV.OC-02",
+      "note": "Stakeholder register is the first deliverable this quarter.",
+      "implementation_examples": [
+        "Identify stakeholders",
+        "Review expectations yearly"
+      ]
+    },
+    {
+      "subcategory_id": "ID.AM-01",
+      "function": "IDENTIFY",
+      "function_id": "ID",
+      "category": "Asset Management (ID.AM)",
+      "outcome": "Hardware inventoried",
+      "current_coverage": "substantial",
+      "target_coverage": "substantial",
+      "priority": "medium",
+      "gap": 0,
+      "met": true,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "rationale for ID.AM-01",
+      "note": null,
+      "implementation_examples": [
+        "Maintain a hardware inventory"
+      ]
+    },
+    {
+      "subcategory_id": "PR.AA-01",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management (PR.AA)",
+      "outcome": "Identities managed",
+      "current_coverage": "partial",
+      "target_coverage": "full",
+      "priority": "medium",
+      "gap": 2,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "reviewed",
+      "rationale": "rationale for PR.AA-01",
+      "note": null,
+      "implementation_examples": [
+        "Maintain identity inventory"
+      ]
+    },
+    {
+      "subcategory_id": "PR.AA-05",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management (PR.AA)",
+      "outcome": "Access enforced",
+      "current_coverage": "none",
+      "target_coverage": "not-applicable",
+      "priority": null,
+      "gap": 0,
+      "met": false,
+      "not_applicable": true,
+      "review_status": "unreviewed",
+      "rationale": "rationale for PR.AA-05",
+      "note": "No OT systems in scope.",
+      "implementation_examples": [
+        "Require MFA"
+      ]
+    },
+    {
+      "subcategory_id": "PR.AA-06",
+      "function": "PROTECT",
+      "function_id": "PR",
+      "category": "Identity Management (PR.AA)",
+      "outcome": "Physical access managed",
+      "current_coverage": "none",
+      "target_coverage": "full",
+      "priority": "medium",
+      "gap": 3,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "unreviewed",
+      "rationale": "rationale for PR.AA-06",
+      "note": null,
+      "implementation_examples": []
+    },
+    {
+      "subcategory_id": "RC.RP-01",
+      "function": "RECOVER",
+      "function_id": "RC",
+      "category": "Incident Recovery Plan Execution (RC.RP)",
+      "outcome": "Recovery plan executed",
+      "current_coverage": "partial",
+      "target_coverage": "substantial",
+      "priority": "low",
+      "gap": 1,
+      "met": false,
+      "not_applicable": false,
+      "review_status": "stale",
+      "rationale": "rationale for RC.RP-01",
+      "note": null,
+      "implementation_examples": [
+        "Begin recovery procedures"
+      ]
+    }
+  ]
+}

@@ -51,6 +51,7 @@ export async function report(ctx) {
     `  gaps: ${s.gaps}/${s.totalSubcategories} | reviewed: ${s.reviewed}, unreviewed: ${s.unreviewed}, stale: ${s.stale}`,
   );
   logger.info(`  dashboard (open in a browser): ${result.dashboardPath}`);
+  logger.info(`  evidence by document: ${result.evidenceByDocumentPath}`);
   if (result.targetView) {
     const t = result.targetView.summary;
     logger.info(
@@ -64,6 +65,7 @@ export async function report(ctx) {
     profileJsonPath: result.profileJsonPath,
     gapMdPath: result.gapMdPath,
     evidenceCsvPath: result.evidenceCsvPath,
+    evidenceByDocumentPath: result.evidenceByDocumentPath,
     targetProfileJsonPath: result.targetProfileJsonPath,
     remediationPlanPath: result.remediationPlanPath,
     summary: s,
