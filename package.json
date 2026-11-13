@@ -54,6 +54,7 @@
     "example": "node scripts/build-example.js",
     "make-sample-pdf": "node scripts/make-sample-pdf.js",
     "build-csf-core": "node scripts/build-csf-core.js",
+    "build-csf-core-es": "node scripts/build-csf-core-es.js",
     "test": "node --test"
   },
   "dependencies": {

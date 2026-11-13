@@ -1,0 +1,577 @@
+{
+  "_comment": "Spanish text of the NIST Cybersecurity Framework (CSF) 2.0 Core: the names and outcome statements of all 6 Functions, 22 Categories, and 106 Subcategories, reproduced verbatim from Appendix A of NIST CSWP 29 spa, the official U.S. Government Spanish translation published by NIST. It carries no Implementation Examples (NIST publishes those in English only). Keyed by the same identifiers as data/csf-core.json, which remains the authoritative English Core used for the assessment itself. Regenerate with scripts/build-csf-core-es.js.",
+  "language": "es",
+  "frameworkVersion": "CSF 2.0",
+  "source": "NIST CSWP 29 spa — El Marco de Seguridad Cibernética (CSF) 2.0 del NIST (official U.S. Government translation), https://doi.org/10.6028/NIST.CSWP.29.spa",
+  "citation": "Instituto Nacional de Estándares y Tecnología (2024) El Marco de Seguridad Cibernética (CSF) 2.0 del NIST. (National Institute of Standards and Technology, Gaithersburg, MD), NIST Cybersecurity White Paper (CSWP) NIST CSWP 29 spa. https://doi.org/10.6028/NIST.CSWP.29.spa — Republished courtesy of the National Institute of Standards and Technology.",
+  "functions": [
+    {
+      "id": "GV",
+      "name": "GOBERNAR",
+      "outcome": "Se establecen, comunican y supervisan la estrategia, las expectativas y la política de gestión de riesgos de seguridad cibernética de la organización."
+    },
+    {
+      "id": "ID",
+      "name": "IDENTIFICAR",
+      "outcome": "Se conocen los riesgos de seguridad cibernética actuales de la organización"
+    },
+    {
+      "id": "PR",
+      "name": "PROTEGER",
+      "outcome": "Se utilizan medidas de protección para gestionar los riesgos de seguridad cibernética de la organización"
+    },
+    {
+      "id": "DE",
+      "name": "DETECTAR",
+      "outcome": "Se detectan y analizan posibles ataques y situaciones comprometedoras en materia de seguridad cibernética."
+    },
+    {
+      "id": "RS",
+      "name": "RESPONDER",
+      "outcome": "Se toman medidas en relación con un incidente de seguridad cibernética detectado"
+    },
+    {
+      "id": "RC",
+      "name": "RECUPERACIÓN",
+      "outcome": "Se restauran los activos y las operaciones afectados por un incidente de seguridad cibernética"
+    }
+  ],
+  "categories": [
+    {
+      "id": "GV.OC",
+      "name": "Contexto organizativo",
+      "outcome": "Se comprenden las circunstancias - misión, expectativas de las partes interesadas, dependencias y requisitos legales, normativos y contractuales - que afectan a las decisiones de gestión de riesgos de seguridad cibernética de la organización"
+    },
+    {
+      "id": "GV.RM",
+      "name": "Estrategia de gestión de riesgos",
+      "outcome": "Se establecen, comunican y utilizan las prioridades, las restricciones, las declaraciones de tolerancia y apetito por el riesgo y los supuestos de la organización para respaldar las decisiones sobre el riesgo operativo"
+    },
+    {
+      "id": "GV.RR",
+      "name": "Funciones, responsabilidades y autoridades",
+      "outcome": "Se establecen y comunican las funciones, las responsabilidades y las competencias en materia de seguridad cibernética para fomentar la rendición de cuentas, la evaluación del desempeño y la mejora continua."
+    },
+    {
+      "id": "GV.PO",
+      "name": "Política",
+      "outcome": "La política de seguridad cibernética de la organización es establecida, comunicada y aplicada."
+    },
+    {
+      "id": "GV.OV",
+      "name": "Supervisión",
+      "outcome": "Los resultados de las actividades de gestión de riesgos de seguridad cibernética en toda la organización y el rendimiento se utilizan para informar, mejorar y ajustar la estrategia de gestión de riesgos"
+    },
+    {
+      "id": "GV.SC",
+      "name": "Gestión de riesgos de la cadena de suministro de seguridad cibernética",
+      "outcome": "Las partes interesadas de la organización identifican, establecen, gestionan, supervisan y mejoran los procesos de gestión de riesgos de la cadena de suministro cibernética"
+    },
+    {
+      "id": "ID.AM",
+      "name": "Gestión de activos",
+      "outcome": "Los activos (p. ej., datos, hardware, software, sistemas, instalaciones, servicios, personas) que permiten a la organización alcanzar sus objetivos empresariales se identifican y gestionan de acuerdo con su importancia relativa para los objetivos organizativos y la estrategia de riesgos de la organización"
+    },
+    {
+      "id": "ID.RA",
+      "name": "Evaluación de riesgos",
+      "outcome": "La organización comprende el riesgo de seguridad cibernética para la organización, los activos y los individuos"
+    },
+    {
+      "id": "ID.IM",
+      "name": "Mejora",
+      "outcome": "Se identifican mejoras en los procesos, procedimientos y actividades de gestión de riesgos de seguridad cibernética de la organización en todas las funciones del CSF"
+    },
+    {
+      "id": "PR.AA",
+      "name": "Gestión de identidades, autenticación y control de acceso",
+      "outcome": "El acceso a los activos físicos y lógicos se limita a los usuarios, servicios y hardware autorizados y se gestiona de forma proporcional al riesgo evaluado de acceso no autorizado"
+    },
+    {
+      "id": "PR.AT",
+      "name": "Concienciación y capacitación",
+      "outcome": "Se proporciona al personal de la organización concienciación y capacitación en seguridad cibernética para que puedan realizar sus tareas relacionadas con la seguridad cibernética"
+    },
+    {
+      "id": "PR.DS",
+      "name": "Seguridad de los datos",
+      "outcome": "Los datos se gestionan de forma coherente con la estrategia de riesgos de la organización para proteger la confidencialidad, integridad y disponibilidad de la información"
+    },
+    {
+      "id": "PR.PS",
+      "name": "Seguridad de la plataforma",
+      "outcome": "El hardware, el software (p. ej., firmware, sistemas operativos, aplicaciones) y los servicios de las plataformas físicas y virtuales se gestionan de acuerdo con la estrategia de riesgos de la organización para proteger su confidencialidad, integridad y disponibilidad"
+    },
+    {
+      "id": "PR.IR",
+      "name": "Resiliencia de la infraestructura tecnológica",
+      "outcome": "Las arquitecturas de seguridad se gestionan con la estrategia de riesgos de la organización a fin de proteger la confidencialidad, la integridad y la disponibilidad de los activos, así como la resiliencia de la organización"
+    },
+    {
+      "id": "DE.CM",
+      "name": "Monitoreo continuo",
+      "outcome": "Los activos se monitorean para encontrar anomalías, indicadores de compromiso y otros acontecimientos potencialmente adversos"
+    },
+    {
+      "id": "DE.AE",
+      "name": "Análisis de acontecimientos adversos",
+      "outcome": "Se analizan anomalías, indicadores de compromiso y otros acontecimientos potencialmente adversos para caracterizarlos y detectar incidentes de seguridad cibernética"
+    },
+    {
+      "id": "RS.MA",
+      "name": "Gestión de incidentes",
+      "outcome": "Se gestionan las respuestas a los incidentes de seguridad cibernética detectados"
+    },
+    {
+      "id": "RS.AN",
+      "name": "Análisis de incidentes",
+      "outcome": "Se llevan a cabo investigaciones con el fin de garantizar una respuesta eficaz y apoyar las actividades forenses y de recuperación"
+    },
+    {
+      "id": "RS.CO",
+      "name": "Notificación y comunicación de la respuesta al incidente",
+      "outcome": "Las actividades de respuesta se coordinan con las partes interesadas internas y externas, según lo exijan las leyes, las normativas o las políticas"
+    },
+    {
+      "id": "RS.MI",
+      "name": "Mitigación de incidentes",
+      "outcome": "Se llevan a cabo actividades a fin de evitar la expansión de un incidente y mitigar sus efectos"
+    },
+    {
+      "id": "RC.RP",
+      "name": "Ejecución del Plan de Recuperación de Incidentes",
+      "outcome": "Se realizan actividades de restauración que garantizan la disponibilidad operativa de los sistemas y servicios afectados por incidentes de seguridad cibernética"
+    },
+    {
+      "id": "RC.CO",
+      "name": "Comunicación de la recuperación del incidente",
+      "outcome": "Se coordinan las actividades de restauración con las partes internas y externas"
+    }
+  ],
+  "subcategories": [
+    {
+      "id": "GV.OC-01",
+      "outcome": "Se comprende la misión de la organización y se informa sobre la gestión de riesgos de seguridad cibernética."
+    },
+    {
+      "id": "GV.OC-02",
+      "outcome": "Las partes interesadas internas y externas son comprendidas, y sus necesidades y expectativas con respecto a la gestión de riesgos de seguridad cibernética son comprendidas y consideradas."
+    },
+    {
+      "id": "GV.OC-03",
+      "outcome": "Se comprenden y gestionan los requisitos legales, normativos y contractuales relativos a la seguridad cibernética, incluidas las obligaciones en materia de privacidad y libertades civiles."
+    },
+    {
+      "id": "GV.OC-04",
+      "outcome": "Se comprenden y comunican los objetivos, las capacidades y los servicios críticos de los que dependen las partes interesadas externas o que esperan de la organización"
+    },
+    {
+      "id": "GV.OC-05",
+      "outcome": "Se comprenden y comunican los resultados, capacidades y servicios de los que depende la organización"
+    },
+    {
+      "id": "GV.RM-01",
+      "outcome": "Los objetivos de la gestión de riesgos son establecidos y acordados por las partes interesadas de la organización"
+    },
+    {
+      "id": "GV.RM-02",
+      "outcome": "Se establecen, se comunican y se mantienen las declaraciones sobre el apetito de riesgo y la tolerancia al riesgo"
+    },
+    {
+      "id": "GV.RM-03",
+      "outcome": "Las actividades y los resultados de la gestión de riesgos de seguridad cibernética se incluyen en los procesos de gestión de riesgos de la empresa"
+    },
+    {
+      "id": "GV.RM-04",
+      "outcome": "Se establece y comunica una dirección estratégica que describa las opciones adecuadas de respuesta al riesgo."
+    },
+    {
+      "id": "GV.RM-05",
+      "outcome": "Se establecen líneas de comunicación en toda la organización para los riesgos de seguridad cibernética, lo que incluye a los riesgos de proveedores y otros terceros."
+    },
+    {
+      "id": "GV.RM-06",
+      "outcome": "Se establece y comunica un método estandarizado para calcular, documentar, categorizar y priorizar los riesgos de seguridad cibernética."
+    },
+    {
+      "id": "GV.RM-07",
+      "outcome": "Se caracterizan las oportunidades estratégicas (es decir, los riesgos positivos) y se incluyen en las discusiones sobre riesgos de seguridad cibernética de la organización."
+    },
+    {
+      "id": "GV.RR-01",
+      "outcome": "El liderazgo organizativo es responsable de los riesgos de seguridad cibernética y fomenta una cultura consciente de los riesgos, ética y de mejora continua."
+    },
+    {
+      "id": "GV.RR-02",
+      "outcome": "Se establecen, comunican, comprenden y aplican las funciones, responsabilidades y autoridades relacionadas con la gestión de riesgos de seguridad cibernética."
+    },
+    {
+      "id": "GV.RR-03",
+      "outcome": "Se asignan recursos adecuados de acuerdo con la estrategia de riesgos de seguridad cibernética, las funciones, las responsabilidades y las políticas."
+    },
+    {
+      "id": "GV.RR-04",
+      "outcome": "La seguridad cibernética se incluye en las prácticas de recursos humanos"
+    },
+    {
+      "id": "GV.PO-01",
+      "outcome": "La política de gestión de riesgos de seguridad cibernética se establece en base al contexto organizativo, la estrategia de seguridad cibernética y las prioridades, y es comunicada y aplicada"
+    },
+    {
+      "id": "GV.PO-02",
+      "outcome": "La política de gestión de riesgos de seguridad cibernética se revisa, actualiza, comunica y aplica para reflejar los cambios en los requisitos, las amenazas, la tecnología y la misión de la organización"
+    },
+    {
+      "id": "GV.OV-01",
+      "outcome": "Los resultados de la estrategia de gestión de riesgos de seguridad cibernética se revisan para informar y ajustar la estrategia y la dirección"
+    },
+    {
+      "id": "GV.OV-02",
+      "outcome": "La estrategia de gestión de riesgos de seguridad cibernética se revisa y ajusta para garantizar la cobertura de los requisitos y riesgos de la organización"
+    },
+    {
+      "id": "GV.OV-03",
+      "outcome": "El rendimiento de la gestión de riesgos de seguridad cibernética de la organización se evalúa y revisa para realizar los ajustes necesarios"
+    },
+    {
+      "id": "GV.SC-01",
+      "outcome": "Las partes interesadas de la organización establecen y acuerdan un programa, estrategia, objetivos, políticas y procesos de gestión de riesgos de seguridad cibernética en la cadena de suministro"
+    },
+    {
+      "id": "GV.SC-02",
+      "outcome": "Se establecen, comunican y coordinan interna y externamente las funciones y responsabilidades de seguridad cibernética para proveedores, clientes y colaboradores"
+    },
+    {
+      "id": "GV.SC-03",
+      "outcome": "La gestión de riesgos de la cadena de suministro de seguridad cibernética está integrada en la seguridad cibernética y la gestión de riesgos empresariales, la evaluación de riesgos y los procesos de mejora"
+    },
+    {
+      "id": "GV.SC-04",
+      "outcome": "Los proveedores son conocidos y priorizados por criticidad"
+    },
+    {
+      "id": "GV.SC-05",
+      "outcome": "Los requisitos para abordar los riesgos de seguridad cibernética en las cadenas de suministro se establecen, priorizan e integran en contratos y otros tipos de acuerdos con proveedores y otras terceras partes pertinentes"
+    },
+    {
+      "id": "GV.SC-06",
+      "outcome": "Se llevan a cabo la planificación y la diligencia debida para reducir los riesgos antes de entablar relaciones formales con proveedores u otros terceros"
+    },
+    {
+      "id": "GV.SC-07",
+      "outcome": "Los riesgos planteados por un proveedor, sus productos y servicios y otros terceros se comprenden, registran, priorizan, evalúan, responden y monitorean a lo largo de la relación"
+    },
+    {
+      "id": "GV.SC-08",
+      "outcome": "Los proveedores pertinentes y otros terceros se incluyen en las actividades de planificación, respuesta y recuperación de incidentes"
+    },
+    {
+      "id": "GV.SC-09",
+      "outcome": "Las prácticas de seguridad de la cadena de suministro se integran en los programas de seguridad cibernética y de gestión de riesgos empresariales, y su rendimiento se monitorea a lo largo del ciclo de vida de los productos y servicios tecnológicos"
+    },
+    {
+      "id": "GV.SC-10",
+      "outcome": "Los planes de gestión de riesgos de la cadena de suministro de seguridad cibernética incluyen disposiciones para las actividades que ocurren después de la conclusión de un acuerdo de colaboración o servicio"
+    },
+    {
+      "id": "ID.AM-01",
+      "outcome": "Se mantienen inventarios del hardware gestionado por la organización"
+    },
+    {
+      "id": "ID.AM-02",
+      "outcome": "Se mantienen inventarios de software, servicios y sistemas gestionados por la organización"
+    },
+    {
+      "id": "ID.AM-03",
+      "outcome": "Se mantienen representaciones de la comunicación de red autorizada de la organización y de los flujos de datos de red internos y externos"
+    },
+    {
+      "id": "ID.AM-04",
+      "outcome": "Se mantienen inventarios de los servicios prestados por los proveedores"
+    },
+    {
+      "id": "ID.AM-05",
+      "outcome": "Se priorizan los activos en función de su clasificación, criticidad, recursos e impacto en la misión"
+    },
+    {
+      "id": "ID.AM-07",
+      "outcome": "Se mantienen inventarios de datos y los metadatos correspondientes para los tipos de datos designados"
+    },
+    {
+      "id": "ID.AM-08",
+      "outcome": "Los sistemas, el hardware, el software, los servicios y los datos se gestionan durante todo su ciclo de vida"
+    },
+    {
+      "id": "ID.RA-01",
+      "outcome": "Se identifican, validan y registran las vulnerabilidades de los activos"
+    },
+    {
+      "id": "ID.RA-02",
+      "outcome": "Se recibe información sobre amenazas cibernéticas de foros y fuentes de intercambio de información"
+    },
+    {
+      "id": "ID.RA-03",
+      "outcome": "Se identifican y registran las amenazas internas y externas a la organización"
+    },
+    {
+      "id": "ID.RA-04",
+      "outcome": "Se identifican y registran los impactos potenciales y las probabilidades de que las amenazas exploten las vulnerabilidades"
+    },
+    {
+      "id": "ID.RA-05",
+      "outcome": "Las amenazas, las vulnerabilidades, las probabilidades y los impactos se utilizan para comprender el riesgo inherente e informar sobre la priorización de la respuesta al riesgo"
+    },
+    {
+      "id": "ID.RA-06",
+      "outcome": "Se eligen, priorizan, planifican, controlan y comunican las respuestas al riesgo"
+    },
+    {
+      "id": "ID.RA-07",
+      "outcome": "Se gestionan los cambios y las excepciones, se evalúa su impacto en el riesgo, se registran y se realiza su seguimiento"
+    },
+    {
+      "id": "ID.RA-08",
+      "outcome": "Se establecen procesos para recibir, analizar y responder a las divulgaciones de vulnerabilidades"
+    },
+    {
+      "id": "ID.RA-09",
+      "outcome": "Se evalúa la autenticidad e integridad del hardware y software antes de su adquisición y uso"
+    },
+    {
+      "id": "ID.RA-10",
+      "outcome": "Se evalúan los proveedores críticos antes de su adquisición"
+    },
+    {
+      "id": "ID.IM-01",
+      "outcome": "Las mejoras se identifican a partir de evaluaciones"
+    },
+    {
+      "id": "ID.IM-02",
+      "outcome": "Las mejoras se identifican a partir de pruebas y ejercicios de seguridad, lo que incluye a los realizados en coordinación con proveedores y terceros pertinentes"
+    },
+    {
+      "id": "ID.IM-03",
+      "outcome": "Las mejoras se identifican a partir de la ejecución de procesos, procedimientos y actividades operativos"
+    },
+    {
+      "id": "ID.IM-04",
+      "outcome": "Se establecen, comunican, mantienen y mejoran los planes de respuesta a incidentes y otros planes de seguridad cibernética que afectan a las operaciones."
+    },
+    {
+      "id": "PR.AA-01",
+      "outcome": "La organización gestiona las identidades y credenciales de los usuarios, servicios y equipos autorizados"
+    },
+    {
+      "id": "PR.AA-02",
+      "outcome": "Las identidades están comprobadas y vinculadas a credenciales basadas en el contexto de las interacciones"
+    },
+    {
+      "id": "PR.AA-03",
+      "outcome": "Los usuarios, servicios y hardware están autenticados"
+    },
+    {
+      "id": "PR.AA-04",
+      "outcome": "Las afirmaciones de identidad se protegen, transmiten y verifican"
+    },
+    {
+      "id": "PR.AA-05",
+      "outcome": "Los permisos de acceso, los derechos y las autorizaciones se definen en una política, se gestionan, se aplican y se revisan, e incorporan los principios de privilegio mínimo y separación de funciones"
+    },
+    {
+      "id": "PR.AA-06",
+      "outcome": "El acceso físico a los activos se gestiona, supervisa y aplica de forma proporcional al riesgo"
+    },
+    {
+      "id": "PR.AT-01",
+      "outcome": "Se sensibiliza y capacita al personal para que disponga de los conocimientos y habilidades necesarios para realizar tareas generales teniendo en cuenta los riesgos de seguridad cibernética"
+    },
+    {
+      "id": "PR.AT-02",
+      "outcome": "Se sensibiliza y capacita a las personas que desempeñan funciones especializadas para que posean los conocimientos y aptitudes necesarios para realizar las tareas pertinentes teniendo en cuenta los riesgos de seguridad cibernética"
+    },
+    {
+      "id": "PR.DS-01",
+      "outcome": "La confidencialidad, la integridad y la disponibilidad de los datos en reposo están protegidas"
+    },
+    {
+      "id": "PR.DS-02",
+      "outcome": "La confidencialidad, la integridad y la disponibilidad de los datos en tránsito están protegidas"
+    },
+    {
+      "id": "PR.DS-10",
+      "outcome": "La confidencialidad, la integridad y la disponibilidad de los datos en uso están protegidas"
+    },
+    {
+      "id": "PR.DS-11",
+      "outcome": "Se crean, protegen, mantienen y comprueban copias de seguridad de los datos"
+    },
+    {
+      "id": "PR.PS-01",
+      "outcome": "Se establecen y aplican prácticas de gestión de la configuración"
+    },
+    {
+      "id": "PR.PS-02",
+      "outcome": "Se mantiene, sustituye y elimina el software en función del riesgo"
+    },
+    {
+      "id": "PR.PS-03",
+      "outcome": "Se mantiene, sustituye y elimina el hardware en función del riesgo"
+    },
+    {
+      "id": "PR.PS-04",
+      "outcome": "Se generen registros y se pongan a disposición para una supervisión continua"
+    },
+    {
+      "id": "PR.PS-05",
+      "outcome": "Se impide la instalación y la ejecución de software no autorizado"
+    },
+    {
+      "id": "PR.PS-06",
+      "outcome": "Se integran prácticas seguras de desarrollo de software y se supervisa su rendimiento durante todo el ciclo de vida de desarrollo del software"
+    },
+    {
+      "id": "PR.IR-01",
+      "outcome": "Las redes y los entornos están protegidos contra el acceso lógico y el uso no autorizados"
+    },
+    {
+      "id": "PR.IR-02",
+      "outcome": "Los activos tecnológicos de la organización están protegidos de las amenazas del entorno"
+    },
+    {
+      "id": "PR.IR-03",
+      "outcome": "Se implementan mecanismos para lograr los requisitos de resiliencia en situaciones normales y adversas"
+    },
+    {
+      "id": "PR.IR-04",
+      "outcome": "Se mantiene una capacidad de recursos adecuada para garantizar la disponibilidad"
+    },
+    {
+      "id": "DE.CM-01",
+      "outcome": "Las redes y los servicios de red se monitorean para detectar acontecimientos potencialmente adversos"
+    },
+    {
+      "id": "DE.CM-02",
+      "outcome": "Se monitorea el entorno físico para detectar posibles acontecimientos adversos"
+    },
+    {
+      "id": "DE.CM-03",
+      "outcome": "Se monitorea la actividad del personal y el uso de la tecnología para detectar posibles acontecimientos adversos"
+    },
+    {
+      "id": "DE.CM-06",
+      "outcome": "Se monitorean las actividades y los servicios de los proveedores de servicios externos para detectar acontecimientos potencialmente adversos."
+    },
+    {
+      "id": "DE.CM-09",
+      "outcome": "Se monitorean el hardware y el software informáticos, los entornos de ejecución y sus datos para detectar posibles acontecimientos adversos"
+    },
+    {
+      "id": "DE.AE-02",
+      "outcome": "Los acontecimientos potencialmente adversos se analizan para comprender mejor las actividades asociadas"
+    },
+    {
+      "id": "DE.AE-03",
+      "outcome": "Se correlaciona la información procedente de diversas fuentes"
+    },
+    {
+      "id": "DE.AE-04",
+      "outcome": "Se comprende el impacto estimado y el alcance de los acontecimientos adversos"
+    },
+    {
+      "id": "DE.AE-06",
+      "outcome": "La información sobre acontecimientos adversos se proporciona al personal y a las herramientas autorizadas"
+    },
+    {
+      "id": "DE.AE-07",
+      "outcome": "La inteligencia sobre amenazas cibernéticas y otra información contextual se integran en el análisis"
+    },
+    {
+      "id": "DE.AE-08",
+      "outcome": "Se declaran incidentes cuando los acontecimientos adversos cumplen con los criterios de incidente definidos"
+    },
+    {
+      "id": "RS.MA-01",
+      "outcome": "Se ejecuta el plan de respuesta a incidentes en coordinación con los terceros pertinentes una vez que se declara un incidente"
+    },
+    {
+      "id": "RS.MA-02",
+      "outcome": "Se clasifican y validan los informes de incidentes"
+    },
+    {
+      "id": "RS.MA-03",
+      "outcome": "Se clasifican y priorizan los incidentes"
+    },
+    {
+      "id": "RS.MA-04",
+      "outcome": "Se escalan o elevan los incidentes según sea necesario"
+    },
+    {
+      "id": "RS.MA-05",
+      "outcome": "Se aplican los criterios para iniciar la recuperación de incidentes"
+    },
+    {
+      "id": "RS.AN-03",
+      "outcome": "Se realizan análisis para determinar lo que ocurrió durante un incidente y la causa raíz del mismo"
+    },
+    {
+      "id": "RS.AN-06",
+      "outcome": "Se registran las acciones realizadas durante una investigación y se preservan la integridad y la procedencia de los registros"
+    },
+    {
+      "id": "RS.AN-07",
+      "outcome": "Se recopilan los datos y metadatos del incidente y se preservan su integridad y su procedencia"
+    },
+    {
+      "id": "RS.AN-08",
+      "outcome": "Se estima y valida la magnitud de un incidente."
+    },
+    {
+      "id": "RS.CO-02",
+      "outcome": "Se notifican los incidentes a las partes interesadas internas y externas"
+    },
+    {
+      "id": "RS.CO-03",
+      "outcome": "La información se comparte con las partes interesadas internas y externas designadas"
+    },
+    {
+      "id": "RS.MI-01",
+      "outcome": "Se contienen los incidentes"
+    },
+    {
+      "id": "RS.MI-02",
+      "outcome": "Se erradican los incidentes"
+    },
+    {
+      "id": "RC.RP-01",
+      "outcome": "La parte de recuperación del plan de respuesta a incidentes se ejecuta una vez que se inicia desde el proceso de respuesta a incidentes"
+    },
+    {
+      "id": "RC.RP-02",
+      "outcome": "Se seleccionan, delimitan, priorizan y llevan a cabo las acciones de recuperación"
+    },
+    {
+      "id": "RC.RP-03",
+      "outcome": "Se verifica la integridad de las copias de seguridad y otros activos de restauración antes de usarlos para la restauración"
+    },
+    {
+      "id": "RC.RP-04",
+      "outcome": "Se tienen en cuenta las funciones críticas de la misión y la gestión de riesgos de seguridad cibernética para establecer normas operativas posteriores al incidente"
+    },
+    {
+      "id": "RC.RP-05",
+      "outcome": "Se verifica la integridad de los activos restaurados, se restauran los sistemas y servicios y se confirma el estado operativo normal"
+    },
+    {
+      "id": "RC.RP-06",
+      "outcome": "Se declara el fin de la recuperación del incidente sobre la base de criterios y se completa la documentación relacionada con el incidente"
+    },
+    {
+      "id": "RC.CO-03",
+      "outcome": "Las actividades de recuperación y los progresos en el restablecimiento de las capacidades operativas se comunican a las partes interesadas internas y externas designadas"
+    },
+    {
+      "id": "RC.CO-04",
+      "outcome": "Las actualizaciones públicas sobre la recuperación del incidente se comparten mediante el uso de métodos y mensajes aprobados"
+    }
+  ]
+}
