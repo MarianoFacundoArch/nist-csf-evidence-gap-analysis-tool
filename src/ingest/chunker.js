@@ -14,6 +14,13 @@
  * The chunker runs PER SEGMENT (a segment is one PDF page, or the whole body of
  * a non-paginated file). A chunk therefore never spans two pages, so a PDF
  * chunk's page number is always exact and survives to the final evidence quote.
+ *
+ * Cut points are character offsets, so by default a chunk can begin in the
+ * middle of a word. That is harmless for retrieval, but not when each chunk is
+ * later scanned ON ITS OWN for identifiers to replace (opt-in redaction): the
+ * tail of an address cut off at a chunk start is no longer recognizable as an
+ * address. The optional `keepTogether` callback names spans that no cut may
+ * fall inside; without it, chunking is exactly what it always was.
  */
 
 import { basename } from 'node:path';
@@ -49,12 +56,22 @@ function snapToBoundary(text, start, end, lookback = 120) {
   return end;
 }
 
+/** The span, if any, that `position` falls strictly inside (so that cutting there would split it). */
+function spanAround(spans, position) {
+  return spans.find((span) => span.start < position && position < span.end) ?? null;
+}
+
 /**
  * @param {{file:string, path:string, format:string, segments:Array<{text:string, page:number|null}>}} parsed
- * @param {{size?:number, overlap?:number}} [opts]
+ * @param {object} [opts]
+ * @param {number} [opts.size]
+ * @param {number} [opts.overlap]
+ * @param {(text: string) => Array<{start:number, end:number}>} [opts.keepTogether]
+ *   returns, for a segment's text, the non-overlapping spans a chunk must not
+ *   begin or end inside. A span longer than a whole chunk is still cut.
  * @returns {Array<object>} chunk records
  */
-export function chunkDocument(parsed, { size = 1200, overlap = 200 } = {}) {
+export function chunkDocument(parsed, { size = 1200, overlap = 200, keepTogether = null } = {}) {
   const chunkSize = clampInt(size, 100, 100000);
   const chunkOverlap = clampInt(overlap, 0, chunkSize - 1);
   const fileSlug = slug(basename(parsed.file));
@@ -67,6 +84,7 @@ export function chunkDocument(parsed, { size = 1200, overlap = 200 } = {}) {
     if (text.trim().length === 0) continue; // skip blank pages/segments
 
     const pageTag = segment.page == null ? 'na' : `p${segment.page}`;
+    const spans = typeof keepTogether === 'function' ? keepTogether(text) : [];
 
     // Small segment: a single chunk, no overlap math.
     if (text.length <= chunkSize) {
@@ -78,6 +96,11 @@ export function chunkDocument(parsed, { size = 1200, overlap = 200 } = {}) {
     while (start < text.length) {
       let end = Math.min(start + chunkSize, text.length);
       end = snapToBoundary(text, start, end);
+      // Never end inside a protected span: end just before it instead, and let
+      // the next chunk carry it whole. (If the span began at or before this
+      // chunk's start it is longer than a chunk, and has to be cut.)
+      const cut = spanAround(spans, end);
+      if (cut && cut.start > start) end = cut.start;
       const slice = text.slice(start, end);
       chunks.push(makeChunk(parsed, fileSlug, pageTag, segment.page, slice, start, end, globalOrdinal++));
       if (end >= text.length) break;
@@ -89,6 +112,12 @@ export function chunkDocument(parsed, { size = 1200, overlap = 200 } = {}) {
       // loop always terminates and no source characters are ever dropped.
       let next = end - chunkOverlap;
       if (next <= start) next = end;
+      // Never begin inside a protected span either: begin at its start (a
+      // little more overlap), or right after it when that start is not ahead
+      // of this chunk's own. Both stay within (start, end], so the two
+      // guarantees above — progress and no gap — still hold.
+      const split = spanAround(spans, next);
+      if (split) next = split.start > start ? split.start : Math.min(split.end, end);
       start = next;
     }
   }

@@ -47,6 +47,19 @@ export async function ingest(ctx) {
   }
   logger.info(`Found ${files.length} document(s). Parsing…`);
 
+  // With redaction on, each chunk is later scanned on its own for identifiers
+  // to replace, so a chunk must not begin or end in the middle of one: its
+  // cut-off part would not be recognized (see privacy/wholeIdentifiers.js).
+  // The index records that it was cut this way. Off: chunking is unchanged.
+  let chunkParams = ctx.config.chunk;
+  let chunkOptions = ctx.config.chunk;
+  if (ctx.config.privacy?.redact) {
+    const { chunkProtection } = await import('../privacy/wholeIdentifiers.js');
+    const { keepTogether, wholeIdentifiers } = chunkProtection(ctx.config);
+    chunkOptions = { ...ctx.config.chunk, keepTogether };
+    chunkParams = { ...ctx.config.chunk, wholeIdentifiers };
+  }
+
   const report = { parsed: [], skipped: [], failed: [] };
   const allChunks = [];
   const documents = [];
@@ -57,7 +70,7 @@ export async function ingest(ctx) {
     }
     try {
       const doc = await parseFile(file);
-      const chunks = chunkDocument(doc, ctx.config.chunk);
+      const chunks = chunkDocument(doc, chunkOptions);
       if (chunks.length === 0) {
         report.skipped.push({ file, reason: doc.warnings?.join('; ') || 'no extractable text' });
         continue;
@@ -91,7 +104,7 @@ export async function ingest(ctx) {
     vectors,
     embedderId: embedder.id,
     dim,
-    chunkParams: ctx.config.chunk,
+    chunkParams,
     createdAt: ctx.now(),
   });
   await saveIndex(ctx.paths.index, index);
@@ -103,7 +116,7 @@ export async function ingest(ctx) {
   meta.index_id = index.index_id ?? index.created_at;
   meta.embedder_id = embedder.id;
   meta.embedding_dim = dim;
-  meta.chunk_params = ctx.config.chunk;
+  meta.chunk_params = chunkParams;
   meta.docs_path = docsPath;
   meta.ingested_at = ctx.now();
   meta.ingest_report = { parsed: report.parsed.length, skipped: report.skipped.length, failed: report.failed.length };

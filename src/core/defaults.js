@@ -95,6 +95,14 @@ export function defaultConfig() {
       crosswalks: null,
     },
 
+    // Opt-in pseudonymization of text sent to NON-local providers (also via
+    // --redact). Pattern-based identifiers (e-mail addresses, IP addresses,
+    // URLs, ...) plus the literal `terms` listed here (e.g. the organization's
+    // name) are replaced with placeholders before a request leaves the machine
+    // and restored in the response. Local providers are never wrapped: nothing
+    // leaves the machine there. This is NOT anonymization — see the README.
+    privacy: { redact: false, terms: [] },
+
     // Reviewer identity recorded on review decisions (advisory only).
     identity: null,
 

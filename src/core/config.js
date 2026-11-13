@@ -115,6 +115,16 @@ function repairInvalid(config, warn) {
 
   const defaults = defaultConfig();
   for (const err of validate.errors ?? []) {
+    // The one exception to "repair and warn": a privacy setting is never
+    // guessed. Reverting it to a default would switch redaction off, or empty
+    // the list of terms, behind a warning that is easy to miss (and that
+    // --quiet hides) — the user would believe text is redacted when it is not.
+    const privacyKey = privacySettingIn(err);
+    if (privacyKey) {
+      throw new ConfigError(`Invalid privacy setting "${privacyKey}": ${describePrivacyError(err)}.`, {
+        hint: 'Redaction settings are never repaired or guessed. Expected: "privacy": { "redact": true, "terms": ["Name", "Other name"] }.',
+      });
+    }
     if (err.keyword === 'additionalProperties') {
       const parent = pointerGet(config, err.instancePath);
       const bad = err.params.additionalProperty;
@@ -134,6 +144,24 @@ function repairInvalid(config, warn) {
       hint: 'Delete or fix csf-tool.config.json, or run `csf-tool init` to regenerate it.',
     });
   }
+}
+
+/**
+ * The dotted name of the privacy setting a validation error is about, or null.
+ * Besides everything under "privacy", this catches the misplaced and misspelled
+ * forms that would otherwise be dropped as unknown keys ("redact": true at the
+ * top level, "privacy": { "term": [...] }).
+ */
+function privacySettingIn(err) {
+  const unknownKey = err.keyword === 'additionalProperties' ? err.params.additionalProperty : null;
+  if (err.instancePath === '/privacy' || err.instancePath.startsWith('/privacy/')) {
+    return unknownKey ? joinPointer(err.instancePath, unknownKey) : joinPointer(err.instancePath, null);
+  }
+  return unknownKey && /^(?:redact|privacy|terms?$)/i.test(unknownKey) ? joinPointer(err.instancePath, unknownKey) : null;
+}
+
+function describePrivacyError(err) {
+  return err.keyword === 'additionalProperties' ? 'this key is not recognized' : err.message;
 }
 
 // --- JSON-pointer helpers (instancePath form: "/embeddings/provider") -------
@@ -163,5 +191,5 @@ function pointerSet(obj, pointer, value) {
 }
 
 function joinPointer(pointer, key) {
-  return [...pointerSegments(pointer), key].join('.');
+  return [...pointerSegments(pointer), ...(key == null ? [] : [key])].join('.');
 }

@@ -29,6 +29,7 @@ const OPTIONS = {
   'tier-current': { type: 'string' },
   'tier-target': { type: 'string' },
   crosswalk: { type: 'string' },
+  redact: { type: 'boolean' },
   strict: { type: 'boolean' },
   critique: { type: 'boolean' },
   'no-critique': { type: 'boolean' },
@@ -88,6 +89,7 @@ export function parseCliArgs(argv) {
   if (values['tier-current'] !== undefined) set('tierCurrent', Number(values['tier-current']));
   if (values['tier-target'] !== undefined) set('tierTarget', Number(values['tier-target']));
   if (values.crosswalk !== undefined) set('report.crosswalks', parseCrosswalkSelection(values.crosswalk));
+  if (values.redact) set('privacy.redact', true);
   if (values.strict) set('analysis.strict', true);
   if (values.critique) set('analysis.critique', true);
   if (values['no-critique']) set('analysis.critique', false);
@@ -173,6 +175,8 @@ KEY OPTIONS
   --crosswalk <ids>        Crosswalks to include in reports: comma-separated ids,
                            "default" (all except third-party mappings), "all"
                            (third-party mappings included), or "none"
+  --redact                 Pseudonymize identifiers before text is sent to a
+                           non-local provider (restored locally in the result)
   --strict                 Refuse to emit the profile until all items reviewed
   --force                  Recompute assessments even if cached
   --config <path>          Use a specific config file

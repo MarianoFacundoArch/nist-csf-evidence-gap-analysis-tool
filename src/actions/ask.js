@@ -72,9 +72,14 @@ export async function ask(ctx) {
   const embedder = await ctx.getEmbedder();
   const llm = await ctx.getLlm();
 
-  // Same correctness guard as `analyze`: a question embedded with a different
-  // model than the index cannot be compared with its vectors.
+  // Same correctness guards as `analyze`: a question embedded with a different
+  // model than the index cannot be compared with its vectors, and with
+  // redaction on the chunks must have been cut with it on as well.
   assertSameEmbedder(index, embedder);
+  if (config.privacy?.redact) {
+    const { assertChunksFitForRedaction } = await import('../privacy/wholeIdentifiers.js');
+    assertChunksFitForRedaction(index, config, [embedder, llm]);
+  }
 
   logger.info(`Searching ${index.chunks.length} indexed passage(s) and asking ${llm.id}…`);
   const answer = await answerQuestion({ question, index, embedder, llm, config });

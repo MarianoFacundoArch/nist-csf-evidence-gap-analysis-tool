@@ -39,6 +39,7 @@ export async function createEmbedder(config, logger) {
   return {
     id: `openai:${model}`,
     dim: null, // discovered from the first response
+    isLocal: false, // every text is sent to the API
     async embed(texts) {
       const out = [];
       for (let i = 0; i < texts.length; i += batchSize) {

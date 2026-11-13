@@ -27,6 +27,11 @@ export async function analyze(ctx) {
   // Correctness guard: the index was built with a specific embedder; mixing
   // vectors from a different embedding model is meaningless.
   assertSameEmbedder(index, embedder);
+  // With redaction on, the chunks must have been cut with it on as well.
+  if (config.privacy?.redact) {
+    const { assertChunksFitForRedaction } = await import('../privacy/wholeIdentifiers.js');
+    assertChunksFitForRedaction(index, config, [embedder, llm]);
+  }
 
   const engineSig = engineSignature({
     embeddingModel: embedder.id,

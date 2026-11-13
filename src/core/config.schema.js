@@ -85,6 +85,15 @@ export const configSchema = {
       },
     },
 
+    privacy: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        redact: { type: 'boolean' },
+        terms: { type: 'array', items: { type: 'string', minLength: 1 } },
+      },
+    },
+
     identity: { type: ['string', 'null'] },
     fixedNow: { type: ['string', 'null'] },
     acceptAll: { type: 'boolean' },

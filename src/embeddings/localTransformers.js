@@ -38,6 +38,7 @@ export async function createEmbedder(config, logger) {
   return {
     id: `local-transformers:${model}`,
     dim: null, // discovered from the first embedding
+    isLocal: true, // inference runs in-process; texts never leave the machine
     async embed(texts) {
       const out = [];
       for (const text of texts) {

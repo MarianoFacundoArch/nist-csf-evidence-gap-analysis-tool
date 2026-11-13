@@ -39,6 +39,7 @@ export function createEmbedder() {
   return {
     id: 'mock',
     dim: DIM,
+    isLocal: true, // computed in-process; nothing leaves the machine
     async embed(texts) {
       return texts.map((text) => {
         const v = new Float32Array(DIM);
