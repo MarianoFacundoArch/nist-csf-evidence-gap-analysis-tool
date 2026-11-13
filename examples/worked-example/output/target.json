@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "createdAt": "2026-01-01T00:00:00.000Z",
   "updatedAt": "2026-01-01T00:00:00.000Z",
-  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.",
+  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners, dates, and the Tier selection are fictitious.",
   "default": "substantial",
   "functions": {},
   "categories": {
@@ -18,5 +18,22 @@
   },
   "notes": {
     "PR.AA-06": "Fully remote organization; no physical facilities beyond a registered address."
+  },
+  "plan": {
+    "PR.AA-03": {
+      "owner": "IT Operations Lead",
+      "due": "2026-06-30",
+      "status": "in-progress",
+      "milestones": "Pilot with administrator accounts, then extend to all staff."
+    },
+    "GV.OC-02": {
+      "owner": "Chief Information Security Officer",
+      "status": "done"
+    }
+  },
+  "tiers": {
+    "current": 2,
+    "target": 3,
+    "note": "Illustrative selection for the worked example."
   }
 }

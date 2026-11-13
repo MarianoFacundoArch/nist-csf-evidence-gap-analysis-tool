@@ -28,6 +28,10 @@
 
 Target baseline: **substantial**. Met **10/105** applicable outcomes (10%); unmet 95 (high 9, medium 78, low 8); out of scope 1.
 
+CSF Tier — current: Tier 2 (Risk Informed); target: Tier 3 (Repeatable). Selected by the organization and recorded in the target profile; not derived by this tool. Tier definitions: NIST Cybersecurity Framework (CSF) 2.0, NIST CSWP 29, Appendix B.
+
+Tier note: Illustrative selection for the worked example.
+
 | Function | Applicable | Met | Unmet | Out of scope | % met |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | GOVERN | 31 | 7 | 24 | 0 | 23% |

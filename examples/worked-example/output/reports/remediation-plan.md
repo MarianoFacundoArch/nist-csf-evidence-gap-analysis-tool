@@ -7,7 +7,9 @@
 - Framework: NIST CSF 2.0 (CSF 2.0)
 - Generated: 2026-01-01T00:00:00.000Z
 - Target baseline: **substantial** for every outcome, plus any overrides recorded in the target profile
-- Target description: Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.
+- Target description: Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners, dates, and the Tier selection are fictitious.
+- CSF Tier — current: Tier 2 (Risk Informed); target: Tier 3 (Repeatable). Selected by the organization and recorded in the target profile; not derived by this tool. Tier definitions: NIST Cybersecurity Framework (CSF) 2.0, NIST CSWP 29, Appendix B.
+- Tier note: Illustrative selection for the worked example.
 - Applicable outcomes: 105 of 106 (1 scoped out as not-applicable)
 - Target met: **10/105 (10%)** — unmet: **95** (high 9, medium 78, low 8)
 
@@ -33,6 +35,7 @@ Ranked by remediation priority, then by distance from the target. Work the list 
 - Function / Category: PROTECT / Identity Management, Authentication, and Access Control (PR.AA)
 - Outcome: Users, services, and hardware are authenticated
 - Assessment rationale: The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.
+- Plan (recorded in the target profile): owner: IT Operations Lead; due: 2026-06-30; status: in-progress; milestones: Pilot with administrator accounts, then extend to all staff.
 - Suggested actions (NIST CSF 2.0 Implementation Examples):
   1. Require multifactor authentication
   2. Enforce policies for the minimum strength of passwords, PINs, and similar authenticators

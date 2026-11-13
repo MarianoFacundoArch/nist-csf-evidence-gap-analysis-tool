@@ -26,7 +26,11 @@
     "showAll": true
   },
   "report": {
-    "evidenceQuoteMaxChars": 300
+    "evidenceQuoteMaxChars": 300,
+    "crosswalks": [
+      "sp800-53-r5",
+      "cis-v8.1"
+    ]
   },
   "identity": "reviewer@example.org",
   "fixedNow": "2026-01-01T00:00:00.000Z",

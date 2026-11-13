@@ -6,11 +6,24 @@
   "generatedAt": "2026-01-01T00:00:00.000Z",
   "tool": {
     "name": "nist-csf-evidence-gap-analysis-tool",
-    "version": "0.2.1"
+    "version": "0.4.0"
   },
   "disclaimer": "Organizational Target Profile — companion to current-profile.json. Targets, priorities, and not-applicable scoping are human decisions recorded in the target profile file; no AI makes them. implementation_examples are the official NIST CSF 2.0 Implementation Examples (public domain, source: NIST CPRT) — illustrative, not exhaustive.",
   "baseline": "substantial",
-  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle.",
+  "description": "Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners, dates, and the Tier selection are fictitious.",
+  "tiers": {
+    "current": {
+      "tier": 2,
+      "name": "Risk Informed"
+    },
+    "target": {
+      "tier": 3,
+      "name": "Repeatable"
+    },
+    "note": "Illustrative selection for the worked example.",
+    "basis": "Selected by the organization and recorded in the target profile; not derived by this tool.",
+    "definitions": "NIST Cybersecurity Framework (CSF) 2.0, NIST CSWP 29, Appendix B"
+  },
   "review": {
     "reviewed": 106,
     "unreviewed": 0,
@@ -101,6 +114,7 @@
       "review_status": "reviewed",
       "rationale": "[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] The organization appears to link its mission to cybersecurity risk decisions through a formal annual review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Share the organization's mission (e.g., through vision and mission statements, marketing, and service strategies) to provide a basis for identifying risks that may impede that mission"
       ]
@@ -120,6 +134,12 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": {
+        "owner": "Chief Information Security Officer",
+        "due": null,
+        "status": "done",
+        "milestones": null
+      },
       "implementation_examples": [
         "Identify relevant internal stakeholders and their cybersecurity-related expectations (e.g., performance and risk expectations of officers, directors, and advisors; cultural expectations of employees)",
         "Identify relevant external stakeholders and their cybersecurity-related expectations (e.g., privacy expectations of customers, business expectations of partnerships, compliance expectations of regulators, ethics expectations of society)"
@@ -140,6 +160,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Determine a process to track and manage legal and regulatory requirements regarding protection of individuals' information (e.g., Health Insurance Portability and Accountability Act, California Consumer Privacy Act, General Data Protection Regulation)",
         "Determine a process to track and manage contractual requirements for cybersecurity management of supplier, customer, and partner information",
@@ -161,6 +182,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish criteria for determining the criticality of capabilities and services as viewed by internal and external stakeholders",
         "Determine (e.g., from a business impact analysis) assets and business operations that are vital to achieving mission objectives and the potential impact of a loss (or partial loss) of such operations",
@@ -182,6 +204,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Create an inventory of the organization's dependencies on external resources (e.g., facilities, cloud-based hosting providers) and their relationships to organizational assets and business functions",
         "Identify and document external dependencies that are potential points of failure for the organization's critical capabilities and services, and share that information with appropriate personnel"
@@ -202,6 +225,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Update near-term and long-term cybersecurity risk management objectives as part of annual strategic planning and when major changes occur",
         "Establish measurable objectives for cybersecurity risk management (e.g., manage the quality of user training, ensure adequate risk protection for industrial control systems)",
@@ -223,6 +247,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Determine and communicate risk appetite statements that convey expectations about the appropriate level of risk for the organization",
         "Translate risk appetite statements into specific, measurable, and broadly understandable risk tolerance statements",
@@ -244,6 +269,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Aggregate and manage cybersecurity risks alongside other enterprise risks (e.g., compliance, financial, operational, regulatory, reputational, safety)",
         "Include cybersecurity risk managers in enterprise risk management planning",
@@ -265,6 +291,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Specify criteria for accepting and avoiding cybersecurity risk for various classifications of data",
         "Determine whether to purchase cybersecurity insurance",
@@ -286,6 +313,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Determine how to update senior executives, directors, and management on the organization's cybersecurity posture at agreed-upon intervals",
         "Identify how all departments across the organization - such as management, operations, internal auditors, legal, acquisition, physical security, and HR - will communicate with each other about cybersecurity risks"
@@ -306,6 +334,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish criteria for using a quantitative approach to cybersecurity risk analysis, and specify probability and exposure formulas",
         "Create and use templates (e.g., a risk register) to document cybersecurity risk information (e.g., risk description, exposure, treatment, and ownership)",
@@ -328,6 +357,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Define and communicate guidance and methods for identifying opportunities and including them in risk discussions (e.g., strengths, weaknesses, opportunities, and threats [SWOT] analysis)",
         "Identify stretch goals and document them",
@@ -349,6 +379,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Leaders (e.g., directors) agree on their roles and responsibilities in developing, implementing, and assessing the organization's cybersecurity strategy",
         "Share leaders' expectations regarding a secure and ethical culture, especially when current events present the opportunity to highlight positive or negative examples of cybersecurity risk management",
@@ -371,6 +402,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Document risk management roles and responsibilities in policy",
         "Document who is responsible and accountable for cybersecurity risk management activities and how those teams and individuals are to be consulted and informed",
@@ -394,6 +426,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Conduct periodic management reviews to ensure that those given cybersecurity risk management responsibilities have the necessary authority",
         "Identify resource allocation and investment in line with risk tolerance and response",
@@ -415,6 +448,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Integrate cybersecurity risk management considerations into human resources processes (e.g., personnel screening, onboarding, change notification, offboarding)",
         "Consider cybersecurity knowledge to be a positive factor in hiring, training, and retention decisions",
@@ -437,6 +471,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Create, disseminate, and maintain an understandable, usable risk management policy with statements of management intent, expectations, and direction",
         "Periodically review policy and supporting processes and procedures to ensure that they align with risk management strategy objectives and priorities, as well as the high-level direction of the cybersecurity policy",
@@ -460,6 +495,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Update policy based on periodic reviews of cybersecurity risk management results to ensure that policy and supporting processes and procedures adequately maintain risk at an acceptable level",
         "Provide a timeline for reviewing changes to the organization's risk environment (e.g., changes in risk or in the organization's mission objectives), and communicate recommended policy updates",
@@ -482,6 +518,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Measure how well the risk management strategy and risk results have helped leaders make decisions and achieve organizational objectives",
         "Examine whether cybersecurity risk strategies that impede operations or innovation should be adjusted"
@@ -502,6 +539,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Review audit findings to confirm whether the existing cybersecurity strategy has ensured compliance with internal and external requirements",
         "Review the performance oversight of those in cybersecurity-related roles to determine whether policy changes are necessary",
@@ -523,6 +561,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Review key performance indicators (KPIs) to ensure that organization-wide policies and procedures achieve objectives",
         "Review key risk indicators (KRIs) to identify risks the organization faces, including likelihood and potential impact",
@@ -544,6 +583,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish a strategy that expresses the objectives of the cybersecurity supply chain risk management program",
         "Develop the cybersecurity supply chain risk management program, including a plan (with milestones), policies, and procedures that guide implementation and improvement of the program, and share the policies and procedures with the organizational stakeholders",
@@ -566,6 +606,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Identify one or more specific roles or positions that will be responsible and accountable for planning, resourcing, and executing cybersecurity supply chain risk management activities",
         "Document cybersecurity supply chain risk management roles and responsibilities in policy",
@@ -592,6 +633,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Identify areas of alignment and overlap with cybersecurity and enterprise risk management",
         "Establish integrated control sets for cybersecurity risk management and cybersecurity supply chain risk management",
@@ -614,6 +656,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Develop criteria for supplier criticality based on, for example, the sensitivity of data processed or possessed by suppliers, the degree of access to the organization's systems, and the importance of the products or services to the organization's mission",
         "Keep a record of all suppliers, and prioritize suppliers based on the criticality criteria"
@@ -634,6 +677,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish security requirements for suppliers, products, and services commensurate with their criticality level and potential impact if compromised",
         "Include all cybersecurity and supply chain requirements that third parties must follow and how compliance with the requirements may be verified in default contractual language",
@@ -662,6 +706,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Perform thorough due diligence on prospective suppliers that is consistent with procurement planning and commensurate with the level of risk, criticality, and complexity of each supplier relationship",
         "Assess the suitability of the technology and cybersecurity capabilities and the risk management practices of prospective suppliers",
@@ -684,6 +729,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Adjust assessment formats and frequencies based on the third party's reputation and the criticality of the products or services they provide",
         "Evaluate third parties' evidence of compliance with contractual cybersecurity requirements, such as self-attestations, warranties, certifications, and other artifacts",
@@ -707,6 +753,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Define and use rules and protocols for reporting incident response and recovery activities and the status between the organization and its suppliers",
         "Identify and document the roles and responsibilities of the organization and its suppliers for incident response",
@@ -730,6 +777,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Policies and procedures require provenance records for all acquired technology products and services",
         "Periodically provide risk reporting to leaders about how acquired components are proven to be untampered and authentic",
@@ -753,6 +801,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish processes for terminating critical relationships under both normal and adverse circumstances",
         "Define and implement plans for component end-of-life maintenance support and obsolescence",
@@ -778,6 +827,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Maintain inventories for all types of hardware, including IT, IoT, OT, and mobile devices",
         "Constantly monitor networks to detect new hardware and automatically update inventories"
@@ -798,6 +848,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Maintain inventories for all types of software and services, including commercial-off-the-shelf, open-source, custom applications, API services, and cloud-based applications and services",
         "Constantly monitor all platforms, including containers and virtual machines, for software and service inventory changes",
@@ -819,6 +870,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Maintain baselines of communication and data flows within the organization's wired and wireless networks",
         "Maintain baselines of communication and data flows between the organization and third parties",
@@ -841,6 +893,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Inventory all external services used by the organization, including third-party infrastructure-as-a-service (IaaS), platform-as-a-service (PaaS), and software-as-a-service (SaaS) offerings; APIs; and other externally hosted application services",
         "Update the inventory when a new external service is going to be utilized to ensure adequate cybersecurity risk management monitoring of the organization's use of that service"
@@ -861,6 +914,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Define criteria for prioritizing each class of assets",
         "Apply the prioritization criteria to assets",
@@ -882,6 +936,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Maintain a list of the designated data types of interest (e.g., personally identifiable information, protected health information, financial account numbers, organization intellectual property, operational technology data)",
         "Continuously discover and analyze ad hoc data to identify new instances of designated data types",
@@ -904,6 +959,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"asset-inventory-procedure.docx\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Integrate cybersecurity considerations throughout the life cycles of systems, hardware, software, and services",
         "Integrate cybersecurity considerations into product life cycles",
@@ -931,6 +987,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use vulnerability management technologies to identify unpatched and misconfigured software",
         "Assess network and system architectures for design and implementation weaknesses that affect cybersecurity",
@@ -955,6 +1012,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Configure cybersecurity tools and technologies with detection or response capabilities to securely ingest cyber threat intelligence feeds",
         "Receive and review advisories from reputable third parties on current threat actors and their tactics, techniques, and procedures (TTPs)",
@@ -976,6 +1034,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use cyber threat intelligence to maintain awareness of the types of threat actors likely to target the organization and the TTPs they are likely to use",
         "Perform threat hunting to look for signs of threat actors within the environment",
@@ -997,6 +1056,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Business leaders and cybersecurity risk management practitioners work together to estimate the likelihood and impact of risk scenarios and record them in risk registers",
         "Enumerate the potential business impacts of unauthorized access to the organization's communications, systems, and data processed in or by those systems",
@@ -1018,6 +1078,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Develop threat models to better understand risks to the data and identify appropriate risk responses",
         "Prioritize cybersecurity resource allocations and investments based on estimated likelihoods and impacts"
@@ -1038,6 +1099,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Apply the vulnerability management plan's criteria for deciding whether to accept, transfer, mitigate, or avoid risk",
         "Apply the vulnerability management plan's criteria for selecting compensating controls to mitigate risk",
@@ -1061,6 +1123,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Implement and follow procedures for the formal documentation, review, testing, and approval of proposed changes and requested exceptions",
         "Document the possible risks of making or not making each proposed change, and provide guidance on rolling back changes",
@@ -1083,6 +1146,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Conduct vulnerability information sharing between the organization and its suppliers following the rules and protocols defined in contracts",
         "Assign responsibilities and verify the execution of procedures for processing, analyzing the impact of, and responding to cybersecurity threat, vulnerability, or incident disclosures by suppliers, customers, partners, and government cybersecurity organizations"
@@ -1103,6 +1167,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Assess the authenticity and cybersecurity of critical technology products and services prior to acquisition and use"
       ]
@@ -1122,6 +1187,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Conduct supplier risk assessments against business and applicable cybersecurity requirements, including the supply chain"
       ]
@@ -1141,6 +1207,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Perform self-assessments of critical services that take current threats and TTPs into consideration",
         "Invest in third-party assessments or independent audits of the effectiveness of the organization's cybersecurity program to identify areas that need improvement",
@@ -1162,6 +1229,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Identify improvements for future incident response activities based on findings from incident response assessments (e.g., tabletop exercises and simulations, tests, internal reviews, independent audits)",
         "Identify improvements for future business continuity, disaster recovery, and incident response activities based on exercises performed in coordination with critical service providers and product suppliers",
@@ -1186,6 +1254,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Conduct collaborative lessons learned sessions with suppliers",
         "Annually review cybersecurity policies, processes, and procedures to take lessons learned into account",
@@ -1207,6 +1276,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish contingency plans (e.g., incident response, business continuity, disaster recovery) for responding to and recovering from adverse events that can interfere with operations, expose confidential information, or otherwise endanger the organization's mission and viability",
         "Include contact and communication information, processes for handling common scenarios, and criteria for prioritization, escalation, and elevation in all contingency plans",
@@ -1230,6 +1300,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Initiate requests for new access or additional access for employees, contractors, and others, and track, review, and fulfill the requests, with permission from system or data owners when needed",
         "Issue, manage, and revoke cryptographic certificates and identity tokens, cryptographic keys (i.e., key management), and other credentials",
@@ -1252,6 +1323,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Verify a person's claimed identity at enrollment time using government-issued identity credentials (e.g., passport, visa, driver's license)",
         "Issue a different credential for each person (i.e., no credential sharing)"
@@ -1272,6 +1344,12 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": {
+        "owner": "IT Operations Lead",
+        "due": "2026-06-30",
+        "status": "in-progress",
+        "milestones": "Pilot with administrator accounts, then extend to all staff."
+      },
       "implementation_examples": [
         "Require multifactor authentication",
         "Enforce policies for the minimum strength of passwords, PINs, and similar authenticators",
@@ -1294,6 +1372,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Protect identity assertions that are used to convey authentication and user information through single sign-on systems",
         "Protect identity assertions that are used to convey authentication and user information between federated systems",
@@ -1315,6 +1394,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Review logical and physical access privileges periodically and whenever someone changes roles or leaves the organization, and promptly rescind privileges that are no longer needed",
         "Take attributes of the requester and the requested resource into account for authorization decisions (e.g., geolocation, day/time, requester endpoint's cyber health)",
@@ -1337,6 +1417,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"access-control-standard.md\". Flagged for human confirmation of operational evidence.",
       "note": "Fully remote organization; no physical facilities beyond a registered address.",
+      "plan": null,
       "implementation_examples": [
         "Use security guards, security cameras, locked entrances, alarm systems, and other physical controls to monitor facilities and restrict access",
         "Employ additional physical security controls for areas that contain high-risk assets",
@@ -1358,6 +1439,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Provide basic cybersecurity awareness and training to employees, contractors, partners, suppliers, and all other users of the organization's non-public resources",
         "Train personnel to recognize social engineering attempts and other common attacks, report attacks and suspicious activity, comply with acceptable use policies, and perform basic cyber hygiene tasks (e.g., patching software, choosing passwords, protecting credentials)",
@@ -1381,6 +1463,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Identify the specialized roles within the organization that require additional cybersecurity training, such as physical and cybersecurity personnel, finance personnel, senior leadership, and anyone with access to business-critical data",
         "Provide role-based cybersecurity awareness and training to all those in specialized roles, including contractors, partners, suppliers, and other third parties",
@@ -1403,6 +1486,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of stored data in files, databases, virtual machine disk images, container images, and other resources",
         "Use full disk encryption to protect data stored on user endpoints",
@@ -1426,6 +1510,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use encryption, digital signatures, and cryptographic hashes to protect the confidentiality and integrity of network communications",
         "Automatically encrypt or block outbound emails and other communications that contain sensitive data, depending on the data classification",
@@ -1448,6 +1533,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Remove data that must remain confidential (e.g., from processors and memory) as soon as it is no longer needed",
         "Protect data in use from access by other users and processes of the same platform"
@@ -1468,6 +1554,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Continuously back up critical data in near-real-time, and back up other data frequently at agreed-upon schedules",
         "Test backups and restores for all types of data sources at least annually",
@@ -1490,6 +1577,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Establish, test, deploy, and maintain hardened baselines that enforce the organization's cybersecurity policies and provide only essential capabilities (i.e., principle of least functionality)",
         "Review all default configuration settings that may potentially impact cybersecurity when installing or upgrading software",
@@ -1511,6 +1599,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Perform routine and emergency patching within the timeframes specified in the vulnerability management plan",
         "Update container images, and deploy new container instances to replace rather than update existing instances",
@@ -1535,6 +1624,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Replace hardware when it lacks needed security capabilities or when it cannot support software with needed security capabilities",
         "Define and implement plans for hardware end-of-life maintenance support and obsolescence",
@@ -1556,6 +1646,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Configure all operating systems, applications, and services (including cloud-based services) to generate log records",
         "Configure log generators to securely share their logs with the organization's logging infrastructure systems and services",
@@ -1577,6 +1668,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "When risk warrants it, restrict software execution to permitted products only or deny the execution of prohibited and unauthorized software",
         "Verify the source of new software and the software's integrity before installing it",
@@ -1599,6 +1691,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"access-control-standard.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Protect all components of organization-developed software from tampering and unauthorized access",
         "Secure all software produced by the organization, with minimal vulnerabilities in their releases",
@@ -1620,6 +1713,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Logically segment organization networks and cloud-based platforms according to trust boundaries and platform types (e.g., IT, IoT, OT, mobile, guests), and permit required communications only between segments",
         "Logically segment organization networks from external networks, and permit only necessary communications to enter the organization's networks from the external networks",
@@ -1642,6 +1736,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Protect organizational equipment from known environmental threats, such as flooding, fire, wind, and excessive heat and humidity",
         "Include protection from environmental threats and provisions for adequate operating infrastructure in requirements for service providers that operate systems on the organization's behalf"
@@ -1662,6 +1757,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Avoid single points of failure in systems and infrastructure",
         "Use load balancing to increase capacity and improve reliability",
@@ -1683,6 +1779,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Monitor usage of storage, power, compute, network bandwidth, and other resources",
         "Forecast future needs, and scale resources accordingly"
@@ -1703,6 +1800,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Monitor DNS, BGP, and other network services for adverse events",
         "Monitor wired and wireless networks for connections from unauthorized endpoints",
@@ -1726,6 +1824,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Monitor logs from physical access control systems (e.g., badge readers) to find unusual access patterns (e.g., deviations from the norm) and failed access attempts",
         "Review and monitor physical access records (e.g., from visitor registration, sign-in sheets)",
@@ -1748,6 +1847,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use behavior analytics software to detect anomalous user activity to mitigate insider threats",
         "Monitor logs from logical access control systems to find unusual access patterns and failed access attempts",
@@ -1769,6 +1869,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Monitor remote and onsite administration and maintenance activities that external providers perform on organizational systems",
         "Monitor activity from cloud-based services, internet service providers, and other service providers for deviations from expected behavior"
@@ -1789,6 +1890,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Monitor email, web, file sharing, collaboration services, and other common attack vectors to detect malware, phishing, data leaks and exfiltration, and other adverse events",
         "Monitor authentication attempts to identify attacks against credentials and unauthorized credential reuse",
@@ -1812,6 +1914,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use security information and event management (SIEM) or other tools to continuously monitor log events for known malicious and suspicious activity",
         "Utilize up-to-date cyber threat intelligence in log analysis tools to improve detection accuracy and characterize threat actors, their methods, and indicators of compromise",
@@ -1834,6 +1937,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Constantly transfer log data generated by other sources to a relatively small number of log servers",
         "Use event correlation technology (e.g., SIEM) to collect information captured by multiple sources",
@@ -1855,6 +1959,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use SIEMs or other tools to estimate impact and scope, and review and refine the estimates",
         "A person creates their own estimates of impact and scope"
@@ -1875,6 +1980,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use cybersecurity software to generate alerts and provide them to the security operations center (SOC), incident responders, and incident response tools",
         "Incident responders and other authorized personnel can access log analysis findings at all times",
@@ -1897,6 +2003,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Securely provide cyber threat intelligence feeds to detection technologies, processes, and personnel",
         "Securely provide information from asset inventories to detection technologies, processes, and personnel",
@@ -1918,6 +2025,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Apply incident criteria to known and assumed characteristics of activity in order to determine whether an incident should be declared",
         "Take known false positives into account when applying incident criteria"
@@ -1938,6 +2046,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence addresses this topic as stated intent/policy rather than demonstrated operation, so coverage is capped at partial. It is grounded in \"incident-response-plan.pdf\". Flagged for human confirmation of operational evidence.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Detection technologies automatically report confirmed incidents",
         "Request incident response assistance from the organization's incident response outsourcer",
@@ -1960,6 +2069,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Preliminarily review incident reports to confirm that they are cybersecurity-related and necessitate incident response activities",
         "Apply criteria to estimate the severity of an incident"
@@ -1980,6 +2090,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Further review and categorize incidents based on the type of incident (e.g., data breach, ransomware, DDoS, account compromise)",
         "Prioritize incidents based on their scope, likely impact, and time-critical nature",
@@ -2001,6 +2112,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Track and validate the status of all ongoing incidents",
         "Coordinate incident escalation or elevation with designated internal and external stakeholders"
@@ -2021,6 +2133,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Apply incident recovery criteria to known and assumed characteristics of the incident to determine whether incident recovery processes should be initiated",
         "Take the possible operational disruption of incident recovery activities into account"
@@ -2041,6 +2154,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Determine the sequence of events that occurred during the incident and which assets and resources were involved in each event",
         "Attempt to determine what vulnerabilities, threats, and threat actors were directly or indirectly involved in the incident",
@@ -2063,6 +2177,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Require each incident responder and others (e.g., system administrators, cybersecurity engineers) who perform incident response tasks to record their actions and make the record immutable",
         "Require the incident lead to document the incident in detail and be responsible for preserving the integrity of the documentation and the sources of all information being reported"
@@ -2083,6 +2198,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Collect, preserve, and safeguard the integrity of all pertinent incident data and metadata (e.g., data source, date/time of collection) based on evidence preservation and chain-of-custody procedures"
       ]
@@ -2102,6 +2218,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Review other potential targets of the incident to search for indicators of compromise and evidence of persistence",
         "Automatically run tools on targets to look for indicators of compromise and evidence of persistence"
@@ -2122,6 +2239,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Follow the organization's breach notification procedures after discovering a data breach incident, including notifying affected customers",
         "Notify business partners and customers of incidents in accordance with contractual requirements",
@@ -2143,6 +2261,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Securely share information consistent with response plans and information sharing agreements",
         "Voluntarily share information about an attacker's observed TTPs, with all sensitive data removed, with an Information Sharing and Analysis Center (ISAC)",
@@ -2167,6 +2286,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Cybersecurity technologies (e.g., antivirus software) and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform containment actions",
         "Allow incident responders to manually select and perform containment actions",
@@ -2189,6 +2309,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Cybersecurity technologies and cybersecurity features of other technologies (e.g., operating systems, network infrastructure devices) automatically perform eradication actions",
         "Allow incident responders to manually select and perform eradication actions",
@@ -2210,6 +2331,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Begin recovery procedures during or after incident response processes",
         "Make all individuals with recovery responsibilities aware of the plans for recovery and the authorizations required to implement each aspect of the plans"
@@ -2230,6 +2352,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Select recovery actions based on the criteria defined in the incident response plan and available resources",
         "Change planned recovery actions based on a reassessment of organizational needs and resources"
@@ -2250,6 +2373,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Check restoration assets for indicators of compromise, file corruption, and other integrity issues before use"
       ]
@@ -2269,6 +2393,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"information-security-policy.md\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Use business impact and system categorization records (including service delivery objectives) to validate that essential services are restored in the appropriate order",
         "Work with system owners to confirm the successful restoration of systems and the return to normal operations",
@@ -2290,6 +2415,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Check restored assets for indicators of compromise and remediation of root causes of the incident before production use",
         "Verify the correctness and adequacy of the restoration actions taken before putting a restored system online"
@@ -2310,6 +2436,7 @@
       "review_status": "reviewed",
       "rationale": "The evidence in \"incident-response-plan.pdf\" shows the outcome is at least partly achieved in operation (lexical overlap with the outcome statement). A human should confirm scope and completeness.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Prepare an after-action report that documents the incident itself, the response and recovery actions taken, and lessons learned",
         "Declare the end of incident recovery once the criteria are met"
@@ -2330,6 +2457,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Securely share recovery information, including restoration progress, consistent with response plans and information sharing agreements",
         "Regularly update senior leadership on recovery status and restoration progress for major incidents",
@@ -2352,6 +2480,7 @@
       "review_status": "reviewed",
       "rationale": "The retrieved evidence does not demonstrate this outcome; relevant terms are absent or only incidental. Flagged for human review.",
       "note": null,
+      "plan": null,
       "implementation_examples": [
         "Follow the organization's breach notification procedures for recovering from a data breach incident",
         "Explain the steps being taken to recover from the incident and to prevent a recurrence"
