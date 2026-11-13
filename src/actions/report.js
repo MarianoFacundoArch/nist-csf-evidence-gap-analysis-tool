@@ -52,6 +52,7 @@ export async function report(ctx) {
   );
   logger.info(`  dashboard (open in a browser): ${result.dashboardPath}`);
   logger.info(`  evidence by document: ${result.evidenceByDocumentPath}`);
+  logger.info(`  evidence requests (what to ask and collect next): ${result.evidenceRequestsPath}`);
   if (result.targetView) {
     const t = result.targetView.summary;
     logger.info(
@@ -66,6 +67,7 @@ export async function report(ctx) {
     gapMdPath: result.gapMdPath,
     evidenceCsvPath: result.evidenceCsvPath,
     evidenceByDocumentPath: result.evidenceByDocumentPath,
+    evidenceRequestsPath: result.evidenceRequestsPath,
     targetProfileJsonPath: result.targetProfileJsonPath,
     remediationPlanPath: result.remediationPlanPath,
     summary: s,

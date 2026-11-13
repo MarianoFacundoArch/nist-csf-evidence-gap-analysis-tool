@@ -9,7 +9,8 @@
  *
  * Every run also writes the evidence-by-document report — the reverse view
  * (document -> what it contributes), derived from one canonical document view
- * that the dashboard shares.
+ * that the dashboard shares — and the evidence request list: what to ask and
+ * collect for each outcome that could not be demonstrated.
  *
  * STRICT MODE (brief §6): when enabled, refuse to emit the final profile until
  * every subcategory is resolved by a human. We stop with a clear, actionable
@@ -25,6 +26,7 @@ import { buildTargetProfile } from './targetJson.js';
 import { renderDashboardHtml } from './htmlDashboard.js';
 import { buildDocumentView } from './documentView.js';
 import { renderDocumentsMarkdown } from './documentsMarkdown.js';
+import { renderEvidenceRequestsMarkdown } from './evidenceRequestsMarkdown.js';
 import { buildTargetView } from '../target/targetProfile.js';
 import { writeJsonAtomic, writeFileAtomic, removeIfExists } from '../util/fsx.js';
 import { StrictModeError } from '../core/errors.js';
@@ -62,6 +64,7 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   await writeFileAtomic(ctx.paths.evidenceMap, csv);
   await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView, { documentView }));
   await writeFileAtomic(ctx.paths.evidenceByDocument, renderDocumentsMarkdown(profile, documentView));
+  await writeFileAtomic(ctx.paths.evidenceRequests, renderEvidenceRequestsMarkdown(profile, { csf, targetView }));
 
   if (targetView) {
     await writeJsonAtomic(ctx.paths.targetProfile, buildTargetProfile(profile, targetView));
@@ -79,6 +82,7 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     evidenceCsvPath: ctx.paths.evidenceMap,
     dashboardPath: ctx.paths.dashboard,
     evidenceByDocumentPath: ctx.paths.evidenceByDocument,
+    evidenceRequestsPath: ctx.paths.evidenceRequests,
     targetProfileJsonPath: targetView ? ctx.paths.targetProfile : null,
     remediationPlanPath: targetView ? ctx.paths.remediationPlan : null,
   };

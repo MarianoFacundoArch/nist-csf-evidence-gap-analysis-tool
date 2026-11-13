@@ -91,16 +91,18 @@ async function withWorkDir(fn) {
 
 const listReports = async (ctx) => (await readdir(ctx.paths.reportsDir)).sort();
 
-test('renderReports always writes the evidence-by-document report', async () => {
+test('renderReports always writes the evidence-by-document report and the evidence request list', async () => {
   await withWorkDir(async (ctx) => {
     const result = await renderReports(ctx, inputs());
 
     assert.equal(result.evidenceByDocumentPath, ctx.paths.evidenceByDocument);
+    assert.equal(result.evidenceRequestsPath, ctx.paths.evidenceRequests);
     assert.deepEqual(await listReports(ctx), [
       'current-profile.json',
       'dashboard.html',
       'evidence-by-document.md',
       'evidence-map.csv',
+      'evidence-requests.md',
       'gap-analysis.md',
     ]);
     const md = await readFile(ctx.paths.evidenceByDocument, 'utf8');
@@ -111,14 +113,32 @@ test('renderReports always writes the evidence-by-document report', async () => 
     const data = JSON.parse(/<script id="csf-data" type="application\/json">([\s\S]*?)<\/script>/.exec(html)[1]);
     assert.equal(data.documentView.documents[0].source_file, 'policy.md');
     assert.equal(data.documentView.summary.outcomesWithQuotes, 2);
+
+    // No target profile: the request list covers the gaps, grouped by Function.
+    const requests = await readFile(ctx.paths.evidenceRequests, 'utf8');
+    assert.match(requests, /^# NIST CSF 2\.0 — Evidence Request List/);
+    assert.match(requests, /- Open requests: 2 \(current coverage: none 1, partial 1\)/);
+    assert.match(requests, /### GOVERN \(1\)\n\n#### GV\.OC-02 — none/);
+    assert.match(requests, / {2}- \[ \] Identify stakeholders/);
   });
 });
 
-test('renderReports writes the evidence-by-document report with a target profile too', async () => {
+test('renderReports writes both reports with a target profile too, and the request list follows the plan', async () => {
   await withWorkDir(async (ctx) => {
-    const targetSpec = validateTargetSpec({ default: 'substantial' });
+    const targetSpec = validateTargetSpec({ default: 'substantial', priorities: { PR: 'high' } });
     await renderReports(ctx, { ...inputs(), targetSpec });
-    assert.ok((await listReports(ctx)).includes('evidence-by-document.md'));
+    const files = await listReports(ctx);
+    assert.ok(files.includes('evidence-by-document.md'));
+    assert.ok(files.includes('evidence-requests.md'));
+
+    const headings = (text) => text.split('\n').filter((line) => line.startsWith('#### '));
+    const requests = await readFile(ctx.paths.evidenceRequests, 'utf8');
+    const plan = await readFile(ctx.paths.remediationPlan, 'utf8');
+    assert.deepEqual(headings(requests), headings(plan));
+    assert.deepEqual(headings(requests), [
+      '#### 1. PR.AA-01 — partial → substantial (1 level to close) _(⚠ UNREVIEWED)_',
+      '#### 2. GV.OC-02 — none → substantial (2 levels to close) _(⚠ UNREVIEWED)_',
+    ]);
   });
 });
 
@@ -130,7 +150,7 @@ test('strict mode still refuses before any deliverable is written', async () => 
   });
 });
 
-test('offline pipeline: ingest → analyze → review → report produces the document view end to end', async () => {
+test('offline pipeline: ingest → analyze → review → report produces the always-written reports end to end', async () => {
   const workDir = await mkdtemp(join(tmpdir(), 'csf-reports-e2e-'));
   try {
     const ctx = await buildContext({
@@ -174,6 +194,16 @@ test('offline pipeline: ingest → analyze → review → report produces the do
     const quotes = profile.subcategories.reduce((n, e) => n + e.evidence.length, 0);
     assert.ok(quotes > 0);
     assert.match(md, new RegExp(`- Verified quotes: ${quotes}\\n`));
+
+    // One request per gap, each with NIST's examples for that outcome, verbatim.
+    assert.equal(result.evidenceRequestsPath, ctx.paths.evidenceRequests);
+    const requests = await readFile(ctx.paths.evidenceRequests, 'utf8');
+    assert.equal(requests.split('\n').filter((line) => line.startsWith('#### ')).length, profile.summary.gaps);
+    const csf = await readJsonSafe('data/csf-core.json');
+    const official = new Set(csf.subcategories.flatMap((s) => s.implementationExamples));
+    const checklist = requests.split('\n').filter((line) => line.startsWith('  - [ ] '));
+    assert.ok(checklist.length > 0);
+    for (const line of checklist) assert.ok(official.has(line.slice('  - [ ] '.length)), line);
   } finally {
     await rm(workDir, { recursive: true, force: true });
   }
