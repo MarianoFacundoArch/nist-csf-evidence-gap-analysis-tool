@@ -7,6 +7,7 @@
 import { copyFile } from 'node:fs/promises';
 import { defaultConfig, DEFAULT_CONFIG_FILENAME } from '../core/defaults.js';
 import { fileExists, writeJsonAtomic, ensureDir } from '../util/fsx.js';
+import { bundledPath } from '../core/bundled.js';
 
 export async function init(ctx) {
   const { logger } = ctx;
@@ -30,10 +31,15 @@ export async function init(ctx) {
     created.push(configPath);
   }
 
-  // Copy the env template to .env if present and not already set up.
-  if (!(await fileExists('.env')) && (await fileExists('.env.example'))) {
-    await copyFile('.env.example', '.env');
-    created.push('.env');
+  // Copy the env template to .env if not already set up. Prefer a template in
+  // the working directory; otherwise use the one shipped with the tool, so
+  // `init` also works from a folder that is not the tool's own repository.
+  if (!(await fileExists('.env'))) {
+    const template = (await fileExists('.env.example')) ? '.env.example' : bundledPath('.env.example');
+    if (await fileExists(template)) {
+      await copyFile(template, '.env');
+      created.push('.env');
+    }
   }
 
   await ensureDir(ctx.paths.root);

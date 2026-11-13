@@ -18,12 +18,17 @@
 
 export const DEFAULT_CONFIG_FILENAME = 'csf-tool.config.json';
 
+// Built-in data file, relative to the package root. When a run's working
+// directory has no such file, the copy shipped with the tool is used (see
+// core/bundled.js) so the default works from any directory.
+export const DEFAULT_CSF_CORE_PATH = 'data/csf-core.json';
+
 export function defaultConfig() {
   return {
     // Path to the CSF 2.0 core data file. Ships with the COMPLETE 106-subcategory
     // CSF 2.0 Core (sourced from NIST CPRT; see data/csf-core.json and
     // scripts/build-csf-core.js). Point this at your own CPRT export if needed.
-    csfCorePath: 'data/csf-core.json',
+    csfCorePath: DEFAULT_CSF_CORE_PATH,
 
     // Folder (or single file) of the organization's documents. Null => the
     // tool asks for it interactively (menu) or you pass --docs on the CLI.

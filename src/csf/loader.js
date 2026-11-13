@@ -11,6 +11,8 @@ import Ajv from 'ajv';
 import { csfSchema } from './csf.schema.js';
 import { readJsonSafe, fileExists } from '../util/fsx.js';
 import { CsfDataError } from '../core/errors.js';
+import { resolveDataPath } from '../core/bundled.js';
+import { DEFAULT_CSF_CORE_PATH } from '../core/defaults.js';
 
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(csfSchema);
@@ -25,7 +27,10 @@ const validate = ajv.compile(csfSchema);
  *     functionId:string,categoryId:string,functionName:string}>
  * }>}
  */
-export async function loadCsfCore(path, logger) {
+export async function loadCsfCore(configuredPath, logger) {
+  // The built-in default names a file shipped with the tool; find it even when
+  // the tool is run from another directory. A user's own file always wins.
+  const path = await resolveDataPath(configuredPath, DEFAULT_CSF_CORE_PATH);
   if (!(await fileExists(path))) {
     throw new CsfDataError(`CSF core data file not found: ${path}`, {
       hint: 'Set "csfCorePath" in your config, or download the full export from NIST CPRT (https://csrc.nist.gov/projects/cprt).',
