@@ -47,9 +47,21 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
   const showAll = config.review.showAll;
   const queue = buildQueue(csf, assessments, reviews, showAll);
 
+  // "Remaining" = items still not resolved by a (non-stale) human decision,
+  // independent of the show-all toggle.
+  const countRemaining = () =>
+    csf.subcategories.filter((sub) => reviewStatus(assessments[sub.id] ?? null, reviews[sub.id]) !== 'reviewed').length;
+
   const stats = { reviewed: 0, overridden: 0, skipped: 0, remaining: queue.length };
   if (queue.length === 0) {
-    ui.info('Nothing to review — all items are resolved.');
+    // An empty queue is not the same as "everything is reviewed": by default
+    // the queue holds only the items flagged for review, so say what is left.
+    stats.remaining = countRemaining();
+    ui.info(
+      stats.remaining === 0
+        ? 'Nothing to review — all items are resolved.'
+        : `Nothing in the review queue. ${stats.remaining} item(s) that were not flagged for review are still unreviewed — run \`csf-tool review --all\` to review them.`,
+    );
     return stats;
   }
 
@@ -128,11 +140,7 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
     await persist();
   }
 
-  // "Remaining" = items still not resolved by a (non-stale) human decision,
-  // independent of the show-all toggle.
-  stats.remaining = csf.subcategories.filter(
-    (sub) => reviewStatus(assessments[sub.id] ?? null, reviews[sub.id]) !== 'reviewed',
-  ).length;
+  stats.remaining = countRemaining();
   return stats;
 }
 

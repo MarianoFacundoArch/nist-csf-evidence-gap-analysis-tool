@@ -94,7 +94,24 @@ test('review without a terminal and with nothing to review is not an error', asy
   }
   const stats = await runReview(ctx, { csf: CSF, assessments, reviews, persist: async () => {} });
   assert.equal(stats.reviewed, 0);
-  assert.match(lines.join('\n'), /Nothing to review/);
+  // The queue is empty, but the item that was never flagged is still unreviewed:
+  // the run must say so instead of reporting everything as resolved.
+  assert.equal(stats.remaining, 1);
+  assert.match(lines.join('\n'), /Nothing in the review queue\. 1 item\(s\) that were not flagged for review are still unreviewed/);
+  assert.match(lines.join('\n'), /review --all/);
+  assert.doesNotMatch(lines.join('\n'), /all items are resolved/);
+});
+
+test('"all items are resolved" is said only when every item carries a current decision', async () => {
+  const { ctx, lines } = nonInteractiveCtx();
+  const assessments = fixture();
+  const reviews = {};
+  for (const id of Object.keys(assessments)) {
+    reviews[id] = { subcategory_id: id, decision: 'accept', final_coverage: assessments[id].coverage, reviewed_against: hashAssessment(assessments[id]) };
+  }
+  const stats = await runReview(ctx, { csf: CSF, assessments, reviews, persist: async () => {} });
+  assert.equal(stats.remaining, 0);
+  assert.match(lines.join('\n'), /Nothing to review — all items are resolved\./);
 });
 
 test('the refusal also covers --all (review every item) without a terminal', async () => {
