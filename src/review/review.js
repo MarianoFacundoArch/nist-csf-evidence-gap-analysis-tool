@@ -15,6 +15,7 @@
 import { reviewStatus } from './state.js';
 import { hashAssessment } from '../util/hash.js';
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
+import { ConfigError } from '../core/errors.js';
 
 function buildQueue(csf, assessments, reviews, showAll) {
   return csf.subcategories.filter((sub) => {
@@ -36,7 +37,9 @@ function buildQueue(csf, assessments, reviews, showAll) {
  * @param {Record<string,object>} params.assessments
  * @param {Record<string,object>} params.reviews mutated in place
  * @param {() => Promise<void>} params.persist writes reviews to disk
- * @param {boolean} [params.acceptAll] non-interactive: auto-accept the queue
+ * @param {boolean} [params.acceptAll] accept the whole queue without asking
+ *   (--accept-all). Required to run without a terminal: a session that cannot
+ *   ask anyone never accepts on its own.
  * @returns {Promise<{reviewed:number, overridden:number, skipped:number, remaining:number}>}
  */
 export async function runReview(ctx, { csf, assessments, reviews, persist, acceptAll = false }) {
@@ -48,6 +51,21 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
   if (queue.length === 0) {
     ui.info('Nothing to review — all items are resolved.');
     return stats;
+  }
+
+  // A session without a terminal cannot ask anyone. Accepting the queue there
+  // would record decisions that no person made, so it happens only when the
+  // caller asked for exactly that with --accept-all. Checked before anything is
+  // written: a refused run leaves reviews.json untouched.
+  if (!acceptAll && !ui.isInteractive) {
+    throw new ConfigError(
+      `${queue.length} item(s) are waiting for review, and this session is not interactive.`,
+      {
+        hint:
+          'Run `csf-tool review` in a terminal to validate them. To accept the whole queue without ' +
+          'looking at it (demos, CI), pass --accept-all explicitly.',
+      },
+    );
   }
 
   ui.info(`${queue.length} item(s) to review (${showAll ? 'review-all' : 'flagged/unresolved only'}).`);
@@ -66,8 +84,8 @@ export async function runReview(ctx, { csf, assessments, reviews, persist, accep
       reviewed_against: hashAssessment(a),
     };
 
-    // Non-interactive bulk accept (used by CI / the worked-example regeneration).
-    if (acceptAll || !ui.isInteractive) {
+    // Bulk accept, only on explicit request (--accept-all).
+    if (acceptAll) {
       reviews[sub.id] = baseDecision;
       stats.reviewed++;
       await persist();
