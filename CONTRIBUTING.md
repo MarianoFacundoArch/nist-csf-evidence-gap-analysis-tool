@@ -38,7 +38,13 @@ npm run example     # regenerate the deterministic worked example (offline)
 - `src/embeddings`, `src/store` — embeddings providers + in-memory vector store
 - `src/llm`, `src/prompts` — reasoning providers + the assessment prompts
 - `src/engine` — the mapping engine and the verbatim-quote verifier
-- `src/review`, `src/report` — human review + the three deliverables
+- `src/review`, `src/report` — human review + the deliverables
+- `src/crosswalk` — crosswalk data loader, selection, and the view the crosswalk
+  deliverables share
+- `src/privacy` — opt-in redaction: the redactor, the provider wrappers, and the
+  rule that keeps identifiers whole when documents are cut into passages
+- `src/i18n` — message catalogs (`en.js`, `es.js`) and the report locale used by
+  the renderers
 - `src/actions` — the single code path shared by the CLI and the menu
 - `src/cli` — flag parsing, router, interactive menu, UI ports
 
@@ -47,15 +53,43 @@ npm run example     # regenerate the deterministic worked example (offline)
 Providers are looked up in a small registry and lazily imported:
 
 - Embeddings: add a module under `src/embeddings/` exporting
-  `createEmbedder(config, logger)` that returns `{ id, dim, embed(texts) }` with
-  **L2-normalized** vectors, and register it in `src/embeddings/index.js`.
+  `createEmbedder(config, logger)` that returns
+  `{ id, dim, isLocal, embed(texts) }` with **L2-normalized** vectors, and
+  register it in `src/embeddings/index.js`.
 - Reasoning LLM: add a module under `src/llm/` exporting
   `createLlm(config, logger)` that returns `{ id, isLocal, judge({system, user, meta}) }`
   returning the model's **raw** text (the engine parses/validates/verifies), and
   register it in `src/llm/index.js`.
 
+`isLocal` must say truthfully where the provider runs: `true` only when nothing
+passed to it leaves the user's machine. A provider that does not say is treated
+as remote, and its input is redacted when the user turns redaction on. Text may
+leave the machine only from a provider module, and providers are created only by
+the two factories: `test/redactingProviders.test.js` lists the provider modules
+and fails if network code or provider creation appears anywhere else under
+`src/`, because it would bypass redaction. Add a new provider module to that
+list.
+
 Do not hardcode a commercial model name as authoritative — make it configurable
 and resolve a provider-specific default when unset.
+
+## Report wording and languages
+
+The wording of every deliverable lives in `src/i18n/en.js` and
+`src/i18n/es.js`, with the same keys in both (tests enforce it). To change a
+sentence, change it in the catalog. If it is an English sentence, the frozen
+English reports under `test/fixtures/i18n/en` change with it: regenerate them
+deliberately and review the diff, never to make a red test green:
+
+```bash
+CSF_WRITE_GOLDEN=1 node --test test/i18nReports.test.js
+```
+
+The dashboard's script keeps its English text inline, with the catalog key
+beside each string (`/*L10N tx('key') */'English'/*END*/`); a test compares the
+two forms. Framework text — Function names, Category names, outcomes — never
+goes in a catalog: it is read from a published translation
+(`src/csf/localized.js`).
 
 ## Tests
 
