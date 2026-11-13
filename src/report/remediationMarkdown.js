@@ -18,6 +18,7 @@
 
 import { planOrder } from '../target/targetProfile.js';
 import { orderFunctions } from '../csf/order.js';
+import { compareText } from '../util/compare.js';
 import { PRIORITY_LEVELS } from '../target/target.schema.js';
 import { tierSentence } from '../target/tiers.js';
 import { mdLine } from './markdownText.js';
@@ -121,7 +122,7 @@ export function renderRemediationMarkdown(profile, view) {
     for (const fn of orderFunctions(met)) {
       const es = met
         .filter((e) => e.function === fn)
-        .sort((a, b) => a.subcategory_id.localeCompare(b.subcategory_id));
+        .sort((a, b) => compareText(a.subcategory_id, b.subcategory_id));
       out.push(`### ${fn}`);
       out.push('');
       for (const e of es) {
@@ -137,7 +138,7 @@ export function renderRemediationMarkdown(profile, view) {
     out.push('');
     out.push('Marked not-applicable in the target profile; excluded from the met/unmet figures above.');
     out.push('');
-    for (const e of na.sort((a, b) => a.subcategory_id.localeCompare(b.subcategory_id))) {
+    for (const e of na.sort((a, b) => compareText(a.subcategory_id, b.subcategory_id))) {
       out.push(`- **${e.subcategory_id}** — ${e.outcome}${e.note ? ` _(reason: ${e.note})_` : ''}`);
     }
     out.push('');

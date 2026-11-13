@@ -22,6 +22,7 @@ import {
 import { resolveTiers } from './tiers.js';
 import { coverageRank } from '../engine/coverage.js';
 import { FUNCTION_ORDER, orderFunctions } from '../csf/order.js';
+import { compareText } from '../util/compare.js';
 import { readJsonSafe, fileExists } from '../util/fsx.js';
 import { TargetDataError } from '../core/errors.js';
 
@@ -307,7 +308,9 @@ function planEntry(raw) {
  * The remediation plan's ordering, in one place so the Markdown plan and the
  * dashboard agree: priority first, then how far from the goal (bigger gap
  * first, lower current coverage breaking ties), then canonical Function order,
- * then id — fully deterministic.
+ * then id — fully deterministic. Ids are compared without consulting the host
+ * locale: under Danish or Norwegian collation "AA" sorts after "Z", which
+ * would move PR.AA behind the rest of PROTECT and renumber the plan.
  */
 export function planOrder(entries) {
   const prio = (p) => {
@@ -324,7 +327,7 @@ export function planOrder(entries) {
       b.gap - a.gap ||
       coverageRank(a.current_coverage) - coverageRank(b.current_coverage) ||
       fnRank(a.function) - fnRank(b.function) ||
-      a.subcategory_id.localeCompare(b.subcategory_id),
+      compareText(a.subcategory_id, b.subcategory_id),
   );
 }
 

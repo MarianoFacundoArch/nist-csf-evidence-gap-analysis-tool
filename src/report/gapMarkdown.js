@@ -10,6 +10,7 @@
 
 import { isGap } from '../engine/coverage.js';
 import { orderFunctions } from '../csf/order.js';
+import { compareText } from '../util/compare.js';
 import { tierSentence } from '../target/tiers.js';
 import { mdLine } from './markdownText.js';
 
@@ -111,7 +112,7 @@ export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300, target
   for (const fn of orderFunctions(entries)) {
     const gaps = entries
       .filter((e) => e.function === fn && isGap(e.coverage))
-      .sort((a, b) => rank(a.coverage) - rank(b.coverage) || a.subcategory_id.localeCompare(b.subcategory_id));
+      .sort((a, b) => rank(a.coverage) - rank(b.coverage) || compareText(a.subcategory_id, b.subcategory_id));
     if (gaps.length === 0) continue;
     anyGap = true;
     out.push(`### ${fn}`);
@@ -137,7 +138,7 @@ export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300, target
   for (const fn of orderFunctions(entries)) {
     const covered = entries
       .filter((e) => e.function === fn && !isGap(e.coverage))
-      .sort((a, b) => a.subcategory_id.localeCompare(b.subcategory_id));
+      .sort((a, b) => compareText(a.subcategory_id, b.subcategory_id));
     if (covered.length === 0) continue;
     anyCovered = true;
     out.push(`### ${fn}`);
