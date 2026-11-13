@@ -10,11 +10,11 @@
  */
 
 import { loadCsfCore } from '../csf/loader.js';
-import { loadIndex } from '../store/vectorStore.js';
+import { loadIndex, assertSameEmbedder } from '../store/vectorStore.js';
 import { assessSubcategory } from '../engine/mapping.js';
 import { engineSignature } from '../util/hash.js';
 import { readJsonSafe, writeJsonAtomic } from '../util/fsx.js';
-import { ProviderError, ConfigError } from '../core/errors.js';
+import { ProviderError } from '../core/errors.js';
 
 export async function analyze(ctx) {
   const { logger, config } = ctx;
@@ -26,12 +26,7 @@ export async function analyze(ctx) {
 
   // Correctness guard: the index was built with a specific embedder; mixing
   // vectors from a different embedding model is meaningless.
-  if (index.embedder_id && embedder.id && index.embedder_id !== embedder.id) {
-    throw new ConfigError(
-      `The index was built with embedder "${index.embedder_id}" but the current embedder is "${embedder.id}".`,
-      { hint: 'Re-run `csf-tool ingest` with the current embeddings settings.' },
-    );
-  }
+  assertSameEmbedder(index, embedder);
 
   const engineSig = engineSignature({
     embeddingModel: embedder.id,

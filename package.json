@@ -50,6 +50,7 @@
     "review": "node bin/csf-tool.js review",
     "target": "node bin/csf-tool.js target",
     "report": "node bin/csf-tool.js report",
+    "ask": "node bin/csf-tool.js ask",
     "crosswalk": "node bin/csf-tool.js crosswalk",
     "all": "node bin/csf-tool.js all",
     "example": "node scripts/build-example.js",

@@ -98,6 +98,13 @@ export function parseCliArgs(argv) {
   if (values.verbose) set('logLevel', 'debug');
   if (values.quiet) set('logLevel', 'quiet');
 
+  // `ask` takes its question as the remaining positionals, so both
+  // `csf-tool ask "do we have an incident response plan?"` and the unquoted
+  // form work.
+  if (positionals[0] === 'ask' && positionals.length > 1) {
+    set('question', positionals.slice(1).join(' '));
+  }
+
   return {
     command: positionals[0] ?? null,
     overrides,
@@ -138,6 +145,8 @@ COMMANDS
   target      Define the Target Profile (goal coverage + priorities per outcome)
   report      Generate the Current Profile, gap analysis, evidence map, dashboard,
               and — when a target profile exists — the prioritized remediation plan
+  ask         Ask a question about the ingested documents; the answer is backed
+              by quotes verified verbatim (e.g. csf-tool ask "is MFA required?")
   crosswalk   List the informative-reference crosswalks available to reports
   all | run   Run the whole pipeline (ingest -> analyze -> review -> report)
 

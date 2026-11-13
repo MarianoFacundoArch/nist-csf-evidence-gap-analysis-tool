@@ -45,15 +45,20 @@ function isSubstantiveQuote(normalized) {
 }
 
 /**
- * Verify each claimed quote against the retrieved evidence and, if a coverage
- * claim above "none" has no surviving verbatim quote, downgrade it to "none".
+ * Verify each claimed quote against the retrieved evidence: the matching rules
+ * themselves, with no opinion about what the quotes are used for. Every caller
+ * that lets a model claim "this text is in the documents" goes through here —
+ * coverage assessments (verifyAndDowngrade below) and question answering
+ * (engine/ask.js) — so there is exactly one definition of "verbatim".
  *
- * @param {object} assessment validated model output (mutated and returned)
+ * @param {Array<{source_file:string, quote:string}>} claimedEvidence the quotes
+ *   the model returned (anything that is not an array counts as no quotes)
  * @param {Array<{chunk:{source_file:string,page:number|null,id:string,text:string}, score:number}>} hits
- * @returns {object} the assessment with verified+enriched evidence and a
- *   `verification` summary; coverage/needs_review possibly downgraded.
+ * @returns {{verified: object[], checked: number, dropped: number}} the quotes
+ *   that exist verbatim in a single chunk, enriched with their real provenance
+ *   (source file, page, chunk id, score), plus how many were checked and dropped
  */
-export function verifyAndDowngrade(assessment, hits) {
+export function verifyQuotes(claimedEvidence, hits) {
   const chunks = hits.map((h) => h.chunk ?? h);
   // Pre-normalize each chunk once; remember source/page/id for attribution.
   const normChunks = chunks.map((c, i) => ({
@@ -64,7 +69,7 @@ export function verifyAndDowngrade(assessment, hits) {
     score: hits[i]?.score ?? null,
   }));
 
-  const claimed = Array.isArray(assessment.evidence) ? assessment.evidence : [];
+  const claimed = Array.isArray(claimedEvidence) ? claimedEvidence : [];
   const verified = [];
 
   for (const item of claimed) {
@@ -92,7 +97,20 @@ export function verifyAndDowngrade(assessment, hits) {
     });
   }
 
-  const droppedCount = claimed.length - verified.length;
+  return { verified, checked: claimed.length, dropped: claimed.length - verified.length };
+}
+
+/**
+ * Verify each claimed quote against the retrieved evidence and, if a coverage
+ * claim above "none" has no surviving verbatim quote, downgrade it to "none".
+ *
+ * @param {object} assessment validated model output (mutated and returned)
+ * @param {Array<{chunk:{source_file:string,page:number|null,id:string,text:string}, score:number}>} hits
+ * @returns {object} the assessment with verified+enriched evidence and a
+ *   `verification` summary; coverage/needs_review possibly downgraded.
+ */
+export function verifyAndDowngrade(assessment, hits) {
+  const { verified, checked, dropped: droppedCount } = verifyQuotes(assessment.evidence, hits);
   assessment.evidence = verified;
 
   // THE FORCING RULE (brief §6): coverage above "none" with zero verified
@@ -114,7 +132,7 @@ export function verifyAndDowngrade(assessment, hits) {
   }
 
   assessment.verification = {
-    quotes_checked: claimed.length,
+    quotes_checked: checked,
     quotes_verified: verified.length,
     downgraded: assessment.verifier_action === 'downgraded_to_none_no_valid_quote',
   };

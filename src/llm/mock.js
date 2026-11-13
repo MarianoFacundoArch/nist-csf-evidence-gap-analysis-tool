@@ -12,6 +12,11 @@
  * designated subcategory (FABRICATE_FOR) it returns a plausible quote that is
  * NOT present in the evidence, so the code-side verifier downgrades that item to
  * "none" and flags it — visible in the worked-example artifacts.
+ *
+ * For `csf-tool ask` it does the same kind of thing for a question: it returns
+ * the retrieved sentence with the most words in common with the question, as a
+ * verbatim quote, or reports that nothing matches. That keeps the command
+ * usable offline and testable end to end; it is a lexical lookup, not an answer.
  */
 
 // Subcategory for which the mock returns a fabricated (non-verbatim) quote to
@@ -106,6 +111,49 @@ function judgeFirstPass(sub, hits) {
   };
 }
 
+// Words that shape a question without being its subject. Removed on the `ask`
+// path only, so a question's overlap ratio is measured on what it is about.
+// (Shorter ones — "who", "how", "do" — never pass keywords()' length filter.)
+const QUESTION_WORDS = new Set(
+  'what when where which whom whose does done have there they them your ours about into some ever often many much each every such than then also only'.split(/\s+/),
+);
+
+/**
+ * `ask` pass: pick the sentence of the retrieved evidence that shares the most
+ * key terms with the question and return it as a verbatim quote. The bar is
+ * deliberately conservative — at least two key terms and 60% of them in ONE
+ * sentence — so a question the documents do not cover comes back unsupported
+ * instead of being "answered" with a loosely related passage. Ties resolve to
+ * the earlier hit, then the earlier sentence, so the output is deterministic.
+ */
+function answerByOverlap(question, hits) {
+  const kws = keywords(String(question ?? '')).filter((k) => !QUESTION_WORDS.has(k));
+  let best = null;
+  for (const h of hits) {
+    const chunk = h.chunk ?? h;
+    for (const sentence of sentences(chunk.text)) {
+      const low = sentence.toLowerCase();
+      const matched = kws.filter((k) => low.includes(k)).length;
+      if (!best || matched > best.matched) best = { chunk, sentence, matched };
+    }
+  }
+
+  if (!best || best.matched < 2 || best.matched / kws.length < 0.6) {
+    return { answer: '', supported: false, evidence: [] };
+  }
+
+  // The summary makes no claim about what the passage means: this engine
+  // matches words, so it only says where the closest passage is.
+  const file = best.chunk.source_file;
+  return {
+    answer:
+      `The passage of "${file}" that shares the most key terms with the question is quoted below. ` +
+      'This is the offline mock engine: it matches words and does not interpret them, so read the quote to see what it says.',
+    supported: true,
+    evidence: [{ source_file: file, quote: best.sentence }],
+  };
+}
+
 export function createLlm() {
   return {
     id: 'mock',
@@ -113,6 +161,11 @@ export function createLlm() {
     async judge({ meta }) {
       const sub = meta?.subcategory;
       const hits = meta?.hits ?? [];
+
+      // Question answering (`csf-tool ask`): no subcategory is involved.
+      if (meta?.pass === 'ask') {
+        return JSON.stringify(answerByOverlap(meta.question, hits));
+      }
 
       // Critique pass: a skeptical confirm — re-emit the first pass unchanged
       // (its quotes are already verbatim) with a note that it was confirmed.

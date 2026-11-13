@@ -66,6 +66,21 @@ export async function loadIndex(path) {
 }
 
 /**
+ * Correctness guard shared by every stage that queries the index: the index
+ * was built with one specific embedder, and comparing its vectors with a query
+ * vector from a different embedding model is meaningless. Throws a ConfigError
+ * telling the user to re-ingest; does nothing when either id is unknown.
+ */
+export function assertSameEmbedder(index, embedder) {
+  if (index.embedder_id && embedder.id && index.embedder_id !== embedder.id) {
+    throw new ConfigError(
+      `The index was built with embedder "${index.embedder_id}" but the current embedder is "${embedder.id}".`,
+      { hint: 'Re-run `csf-tool ingest` with the current embeddings settings.' },
+    );
+  }
+}
+
+/**
  * Retrieve the top-k chunks most similar to a query vector.
  * @returns {Array<{chunk: object, score: number}>}
  */

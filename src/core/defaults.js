@@ -116,6 +116,9 @@ export function defaultConfig() {
     tierCurrent: null,
     tierTarget: null,
 
+    // Per-run input for the `ask` command (the positional question text).
+    question: null,
+
     // Master offline switch (also via --local). Applied AFTER merge: forces
     // local-transformers embeddings + ollama LLM regardless of other settings.
     local: false,

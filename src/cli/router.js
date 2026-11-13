@@ -29,6 +29,7 @@ const COMMANDS = {
   review: actions.review,
   target: actions.target,
   report: actions.report,
+  ask: actions.ask,
   crosswalk: actions.crosswalk,
   all: actions.runAll,
   run: actions.runAll,

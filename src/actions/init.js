@@ -25,6 +25,7 @@ export async function init(ctx) {
   delete cfg.targetImport;
   delete cfg.tierCurrent;
   delete cfg.tierTarget;
+  delete cfg.question;
 
   if (await fileExists(configPath)) {
     logger.info(`Config already exists: ${configPath} (left unchanged).`);

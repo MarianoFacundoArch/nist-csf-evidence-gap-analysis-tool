@@ -96,6 +96,7 @@ export const configSchema = {
     targetImport: { type: ['string', 'null'] },
     tierCurrent: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
     tierTarget: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
+    question: { type: ['string', 'null'] },
     local: { type: 'boolean' },
     logLevel: { type: 'string', enum: ['debug', 'info', 'warn', 'error', 'quiet'] },
   },
