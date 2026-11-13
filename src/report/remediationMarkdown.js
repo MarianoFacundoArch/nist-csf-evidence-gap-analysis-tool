@@ -50,7 +50,7 @@ export function renderRemediationMarkdown(profile, view) {
   out.push(`- Framework: ${profile.framework} (${profile.frameworkVersion})`);
   out.push(`- Generated: ${profile.generatedAt}`);
   out.push(`- Target baseline: **${view.baseline}** for every outcome, plus any overrides recorded in the target profile`);
-  if (view.description) out.push(`- Target description: ${view.description}`);
+  if (view.description) out.push(`- Target description: ${mdLine(view.description)}`);
   if (view.tiers) {
     out.push(`- ${tierSentence(view.tiers)}`);
     if (view.tiers.note) out.push(`- Tier note: ${mdLine(view.tiers.note)}`);
@@ -97,8 +97,10 @@ export function renderRemediationMarkdown(profile, view) {
         out.push('');
         out.push(`- Function / Category: ${e.function} / ${e.category}`);
         out.push(`- Outcome: ${e.outcome}`);
-        out.push(`- Assessment rationale: ${e.rationale}`);
-        if (e.note) out.push(`- Target note: ${e.note}`);
+        // Held to one line each: the next lines are NIST's own examples, and
+        // free text must not be able to add a look-alike entry to that list.
+        out.push(`- Assessment rationale: ${mdLine(e.rationale)}`);
+        if (e.note) out.push(`- Target note: ${mdLine(e.note)}`);
         const plan = planLine(e.plan);
         if (plan) out.push(`- Plan (recorded in the target profile): ${plan}`);
         if (e.implementation_examples.length > 0) {
@@ -139,7 +141,7 @@ export function renderRemediationMarkdown(profile, view) {
     out.push('Marked not-applicable in the target profile; excluded from the met/unmet figures above.');
     out.push('');
     for (const e of na.sort((a, b) => compareText(a.subcategory_id, b.subcategory_id))) {
-      out.push(`- **${e.subcategory_id}** — ${e.outcome}${e.note ? ` _(reason: ${e.note})_` : ''}`);
+      out.push(`- **${e.subcategory_id}** — ${e.outcome}${e.note ? ` _(reason: ${mdLine(e.note)})_` : ''}`);
     }
     out.push('');
   }
@@ -166,12 +168,11 @@ function levelsToClose(gap) {
  */
 function planLine(plan) {
   if (!plan) return null;
-  const oneLine = (text) => text.replace(/\s*[\r\n]+\s*/g, ' ');
   const parts = [];
-  if (plan.owner) parts.push(`owner: ${oneLine(plan.owner)}`);
+  if (plan.owner) parts.push(`owner: ${mdLine(plan.owner)}`);
   if (plan.due) parts.push(`due: ${plan.due}`);
   if (plan.status) parts.push(`status: ${plan.status}`);
-  if (plan.milestones) parts.push(`milestones: ${oneLine(plan.milestones)}`);
+  if (plan.milestones) parts.push(`milestones: ${mdLine(plan.milestones)}`);
   return parts.length > 0 ? parts.join('; ') : null;
 }
 

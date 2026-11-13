@@ -120,9 +120,11 @@ export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300, target
     for (const e of gaps) {
       out.push(`- **${e.subcategory_id}** — _${e.coverage}_${statusBadge(e)}`);
       out.push(`  - Outcome: ${e.outcome}`);
-      out.push(`  - Rationale: ${e.rationale}`);
+      // Held to one line each: a line break in AI- or human-written text
+      // must not start a list item or a heading of its own.
+      out.push(`  - Rationale: ${mdLine(e.rationale)}`);
       out.push(...evidenceLines(e, evidenceQuoteMaxChars));
-      if (e.reviewer_notes) out.push(`  - Reviewer note: ${e.reviewer_notes}`);
+      if (e.reviewer_notes) out.push(`  - Reviewer note: ${mdLine(e.reviewer_notes)}`);
     }
     out.push('');
   }
