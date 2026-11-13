@@ -709,9 +709,9 @@ test('CLI: the answer goes to stdout, diagnostics to stderr, and --quiet silence
     const args = [
       BIN, 'ask', 'Is multi-factor authentication enforced for remote access?',
       '--work-dir', dir, '--embed-provider', 'mock', '--llm-provider', 'mock', '--top-k', '2',
-      '--config', join(dir, 'no-such-config.json'),
     ];
-    // Run from the temp directory so no local .env or config file is picked up.
+    // Run from the temp directory so no local .env or config file is picked up
+    // (it holds no csf-tool.config.json, so the built-in defaults apply).
     const normal = await execFileAsync(process.execPath, args, { cwd: dir });
     const quiet = await execFileAsync(process.execPath, [...args, '--quiet'], { cwd: dir });
 
@@ -728,7 +728,7 @@ test('CLI: the answer goes to stdout, diagnostics to stderr, and --quiet silence
 
 test('CLI: a missing question exits non-zero with the usage on stderr and nothing on stdout', async () => {
   await withWorkDir(async ({ dir }) => {
-    const args = [BIN, 'ask', '--work-dir', dir, '--embed-provider', 'mock', '--llm-provider', 'mock', '--config', join(dir, 'no-such-config.json')];
+    const args = [BIN, 'ask', '--work-dir', dir, '--embed-provider', 'mock', '--llm-provider', 'mock'];
     await assert.rejects(
       () => execFileAsync(process.execPath, args, { cwd: dir }),
       (err) => {

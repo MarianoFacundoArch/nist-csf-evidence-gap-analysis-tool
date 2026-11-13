@@ -17,7 +17,8 @@ import { createNonInteractiveUi } from './ui.cli.js';
 import { createInteractiveUi } from './ui.menu.js';
 import { startMenu } from './menu.js';
 import * as actions from '../actions/index.js';
-import { AppError } from '../core/errors.js';
+import { AppError, ConfigError } from '../core/errors.js';
+import { fileExists } from '../util/fsx.js';
 
 const pkg = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
 
@@ -50,6 +51,15 @@ export async function main(argv = process.argv.slice(2)) {
   if (help) {
     process.stdout.write(HELP_TEXT);
     return;
+  }
+
+  // An explicit --config must name a file that exists — a mistyped path would
+  // otherwise run on the built-in defaults without a word. `init` is the one
+  // command that creates the file it is pointed at.
+  if (overrides.configPath && command !== 'init' && !(await fileExists(overrides.configPath))) {
+    throw new ConfigError(`Config file not found: ${overrides.configPath}`, {
+      hint: 'Check the --config path, or create the file with `csf-tool init --config <path>`.',
+    });
   }
 
   const ctx = await buildContext(overrides);

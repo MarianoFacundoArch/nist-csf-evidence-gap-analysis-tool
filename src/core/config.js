@@ -7,6 +7,10 @@
  *    never part of the config object so they can't leak into a meta snapshot.)
  *  - Validate against the schema and REPAIR rather than crash: any invalid key
  *    is reset to its default (or dropped if unknown) with a warning.
+ *  - Never GUESS a whole file. A config file that exists but cannot be read is
+ *    an error, not "use the defaults": the defaults are cloud-first, so running
+ *    on them would silently replace the user's choice of where their documents
+ *    are sent, and whether identifiers are redacted.
  *  - Apply the `--local` master switch LAST so it deterministically overrides
  *    provider selection regardless of file/flag values.
  */
@@ -14,7 +18,7 @@
 import Ajv from 'ajv';
 import { defaultConfig, DEFAULT_CONFIG_FILENAME } from './defaults.js';
 import { configSchema } from './config.schema.js';
-import { readJsonSafe } from '../util/fsx.js';
+import { readJsonSafe, fileExists } from '../util/fsx.js';
 import { ConfigError } from './errors.js';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: false });
@@ -50,11 +54,26 @@ export async function loadConfig(cliOverrides = {}, { warn = () => {} } = {}) {
   // 1) Config file (path may itself be overridden by a flag).
   const configPath = cliOverrides.configPath || DEFAULT_CONFIG_FILENAME;
   let fileConfig = null;
+  const hasFile = await fileExists(configPath);
   try {
-    fileConfig = await readJsonSafe(configPath, null);
+    if (hasFile) fileConfig = await readJsonSafe(configPath, null);
   } catch (err) {
-    // The file exists but is not valid JSON. Don't crash — warn and ignore it.
-    warn(`Config file "${configPath}" is not valid JSON (${err.message}); using defaults + flags only.`);
+    // The file exists but cannot be read as JSON (a syntax error such as a
+    // trailing comma, a directory, a permission problem). Repairing one bad
+    // value is safe; ignoring the whole file is not — every setting in it,
+    // including the offline switch and redaction, would quietly fall back to
+    // the cloud-first defaults. Stop before anything is read or sent.
+    throw new ConfigError(`Config file "${configPath}" could not be read as JSON (${err.message}).`, {
+      hint: 'Fix the file, or move it aside to run on the built-in defaults. Nothing was sent anywhere.',
+    });
+  }
+  // Valid JSON that is not an object (a list, null, a bare value) holds no
+  // settings this loader can use; treating it as "no file" would be the same
+  // silent fallback as above.
+  if (hasFile && !isPlainObject(fileConfig)) {
+    throw new ConfigError(`Config file "${configPath}" must contain a JSON object ({ ... }).`, {
+      hint: 'Fix the file, or move it aside to run on the built-in defaults. Nothing was sent anywhere.',
+    });
   }
   if (fileConfig) deepMerge(config, fileConfig);
 
