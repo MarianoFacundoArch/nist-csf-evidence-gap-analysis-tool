@@ -22,6 +22,30 @@ Implementation Examples). Per NIST, Implementation Examples are illustrative and
 not exhaustive; they are not a baseline of required actions.
 
 -------------------------------------------------------------------------------
+Spanish text of the CSF 2.0 Core (data/csf-core.es.json)
+-------------------------------------------------------------------------------
+The Spanish names and outcome statements of the CSF 2.0 Functions, Categories,
+and Subcategories shown in Spanish-language reports are reproduced verbatim from
+Appendix A of NIST CSWP 29 spa, the official U.S. Government Spanish translation
+of the Framework published by NIST:
+
+    Instituto Nacional de Estándares y Tecnología (2024) El Marco de Seguridad
+    Cibernética (CSF) 2.0 del NIST. (National Institute of Standards and
+    Technology, Gaithersburg, MD), NIST Cybersecurity White Paper (CSWP)
+    NIST CSWP 29 spa. https://doi.org/10.6028/NIST.CSWP.29.spa
+    Republished courtesy of the National Institute of Standards and Technology.
+
+This project does not translate framework text itself. The extraction is
+reproducible from the published document with:
+    npm run build-csf-core-es
+See scripts/build-csf-core-es.js: it cross-checks the result against
+data/csf-core.json (the same 6 Functions, 22 Categories, and 106 Subcategories,
+in the same order) and aborts on any difference. The assessment itself always
+runs on the authoritative English Core; the Spanish text is used for display
+only. NIST publishes the Implementation Examples in English only, so they are
+shown in English in every report language.
+
+-------------------------------------------------------------------------------
 Informative-reference crosswalks (data/csf-crosswalks.json)
 -------------------------------------------------------------------------------
 The crosswalk data relates CSF 2.0 Functions, Categories and Subcategories to

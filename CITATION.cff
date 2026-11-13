@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "NIST CSF 2.0 AI-Assisted Evidence & Gap Analysis Tool"
+abstract: >-
+  Free, open-source command-line tool for NIST Cybersecurity Framework (CSF) 2.0
+  Organizational Profiles. It maps an organization's own documents to all 106 CSF 2.0
+  Subcategory outcomes with an AI model, verifies every supporting quote verbatim in code,
+  requires human review, and produces a Current Profile, a Target Profile, a prioritized
+  remediation plan, and a self-contained dashboard. The repository includes the evaluation
+  harness and the raw model outputs behind its published measurements (eval/RESULTS.md).
+authors:
+  - family-names: Scigliano
+    given-names: Mariano Facundo
+repository-code: "https://github.com/MarianoFacundoArch/nist-csf-evidence-gap-analysis-tool"
+url: "https://github.com/MarianoFacundoArch/nist-csf-evidence-gap-analysis-tool"
+license: MIT
+version: 0.4.0
+date-released: "2026-11-13"
+keywords:
+  - NIST Cybersecurity Framework
+  - CSF 2.0
+  - cybersecurity
+  - gap analysis
+  - Organizational Profile
+  - retrieval-augmented generation
+  - grounded generation
+  - human-in-the-loop
