@@ -175,8 +175,10 @@ test('a v0.3.0 target profile gains nothing it did not record', async () => {
   const { spec } = await loadV030Target();
   const view = buildTargetView(profile, spec, CSF);
 
-  // No plan was recorded: the view has no plan fields, and the POA&M export
-  // lists the open items with nobody assigned and no date — it invents neither.
+  // No plan and no Tier were recorded: the view has neither, and the POA&M
+  // export lists the open items with nobody assigned and no date — it invents
+  // neither.
+  assert.ok(!Object.hasOwn(view, 'tiers'));
   assert.ok(view.entries.every((e) => !Object.hasOwn(e, 'plan')));
   const rows = buildPoamRows(profile, view);
   assert.deepEqual(rows.map((r) => r.subcategory_id), ['GV.OC-02', 'PR.AA-06', 'PR.AA-01', 'RC.RP-01']);

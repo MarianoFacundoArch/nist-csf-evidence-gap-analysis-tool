@@ -387,6 +387,17 @@ tile('Verifier downgrades', String(S.downgradedByVerifier), 'claims dropped for 
 if (T) tile('Target met', T.summary.pctMet + '%',
   T.summary.met + ' of ' + T.summary.applicable + ' applicable at target' +
   (T.summary.notApplicable ? ' · ' + T.summary.notApplicable + ' out of scope' : ''));
+/* The organization's own CSF Tier selection, when it recorded one. A Tier is
+   chosen, never computed from the coverage figures beside it — the tile says so. */
+if (T && T.tiers && (T.tiers.current || T.tiers.target)) {
+  var tierCur = T.tiers.current, tierTgt = T.tiers.target;
+  tile('CSF Tier',
+    tierCur && tierTgt ? tierCur.tier + ' → ' + tierTgt.tier : String((tierCur || tierTgt).tier),
+    (tierCur && tierTgt ? 'Current ' + tierCur.name + ' → target ' + tierTgt.name
+      : tierCur ? 'Current ' + tierCur.name + ' · target not recorded'
+      : 'Target ' + tierTgt.name + ' · current not recorded') +
+    ' · selected by the organization, not derived by this tool');
+}
 wrap.appendChild(tiles);
 
 /* --------------------------- chart card helpers --------------------------- */

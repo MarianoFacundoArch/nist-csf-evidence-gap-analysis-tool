@@ -4,7 +4,8 @@
  * Organizational Profile: one entry per Subcategory with the current coverage,
  * the target, the gap, and the human-set priority/scoping, plus the official
  * NIST Implementation Examples so downstream (GRC) consumers get the full
- * remediation context from one file.
+ * remediation context from one file. When the organization recorded its CSF
+ * Tier selection, it is included with its label (selected, not derived).
  */
 
 const DISCLAIMER =
@@ -24,6 +25,8 @@ export function buildTargetProfile(profile, view) {
     disclaimer: DISCLAIMER,
     baseline: view.baseline,
     description: view.description,
+    // Only when recorded: a profile without a Tier selection has no such key.
+    ...(view.tiers ? { tiers: view.tiers } : {}),
     // Maturity of the current-coverage side this comparison was made against.
     review: {
       reviewed: profile.summary.reviewed,

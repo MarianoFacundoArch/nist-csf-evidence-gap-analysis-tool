@@ -17,6 +17,11 @@
  * human-owned file, because the deliverables are regenerated on every run: a
  * generated file cannot be where a person records a decision. The tool never
  * fills them in; it only carries them into the plan and the POA&M export.
+ *
+ * `tiers` records the organization's CSF Tier selection (1..4, current and
+ * target) with an optional note. A Tier is chosen by the organization, not
+ * computed from coverage (see tiers.js), so it is recorded here like every
+ * other human decision.
  */
 
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
@@ -70,6 +75,15 @@ export const targetSchema = {
           status: { type: 'string', enum: PLAN_STATUSES },
           milestones: { type: 'string' },
         },
+      },
+    },
+    tiers: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        current: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
+        target: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
+        note: { type: ['string', 'null'] },
       },
     },
   },

@@ -10,6 +10,8 @@
 
 import { isGap } from '../engine/coverage.js';
 import { orderFunctions } from '../csf/order.js';
+import { tierSentence } from '../target/tiers.js';
+import { mdLine } from './markdownText.js';
 
 function statusBadge(e) {
   const parts = [];
@@ -82,6 +84,16 @@ export function renderGapMarkdown(profile, { evidenceQuoteMaxChars = 300, target
         `low ${t.unmetByPriority.low})${t.notApplicable ? `; out of scope ${t.notApplicable}` : ''}.`,
     );
     out.push('');
+    // The organization's CSF Tier selection, when it recorded one. Tiers are
+    // chosen, not computed from the coverage above; the sentence says so.
+    if (targetView.tiers) {
+      out.push(tierSentence(targetView.tiers));
+      out.push('');
+      if (targetView.tiers.note) {
+        out.push(`Tier note: ${mdLine(targetView.tiers.note)}`);
+        out.push('');
+      }
+    }
     out.push('| Function | Applicable | Met | Unmet | Out of scope | % met |');
     out.push('| --- | ---: | ---: | ---: | ---: | ---: |');
     for (const f of t.byFunction) {

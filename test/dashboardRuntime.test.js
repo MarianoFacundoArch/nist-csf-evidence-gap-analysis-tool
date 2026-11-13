@@ -14,6 +14,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildProfile } from '../src/report/profile.js';
 import { buildDocumentView } from '../src/report/documentView.js';
+import { buildTargetView, validateTargetSpec } from '../src/target/targetProfile.js';
 import { renderDashboardHtml } from '../src/report/htmlDashboard.js';
 
 /* ------------------------------ DOM stand-in ------------------------------ */
@@ -99,6 +100,15 @@ function cardTitled(root, title) {
   return all(root, (n) => n.tagName === 'section').find((section) =>
     all(section, (n) => n.tagName === 'h2').some((h) => h.textContent === title),
   );
+}
+
+/** The stat tiles as { label, value, context } in display order. */
+function tiles(root) {
+  return all(root, (n) => n.className === 'tile').map((tile) => ({
+    label: tile.children[0].textContent,
+    value: tile.children[1].textContent,
+    context: tile.children[2]?.textContent ?? null,
+  }));
 }
 
 /** Table rows of a card as arrays of cell text (header row included). */
@@ -262,4 +272,39 @@ test('dashboard carries the document view caveats: reconstructed list, shared na
   assert.equal(tableRows(card)[1][0], 'policy.md (not in the ingest record)');
   assert.equal(tableRows(card)[2][0], 'other.md');
   assert.match(card.textContent, /1 document ingested · 0 quoted at least once · 1 never quoted · 1 not in the ingest record · /);
+});
+
+test('dashboard shows the recorded CSF Tier selection as one tile, labeled as selected and not derived', () => {
+  const { profile } = fixture();
+  const dashboard = (tiers) => {
+    const view = buildTargetView(profile, validateTargetSpec({ default: 'substantial', tiers }), CSF);
+    return runDashboard(renderDashboardHtml(profile, view));
+  };
+  const tierTiles = (root) => tiles(root).filter((tile) => tile.label === 'CSF Tier');
+
+  assert.deepEqual(tierTiles(dashboard({ current: 2, target: 3, note: 'Committee decision.' })), [{
+    label: 'CSF Tier',
+    value: '2 → 3',
+    context: 'Current Risk Informed → target Repeatable · selected by the organization, not derived by this tool',
+  }]);
+  assert.deepEqual(tierTiles(dashboard({ current: 4 })), [{
+    label: 'CSF Tier',
+    value: '4',
+    context: 'Current Adaptive · target not recorded · selected by the organization, not derived by this tool',
+  }]);
+  assert.deepEqual(tierTiles(dashboard({ target: 1 })), [{
+    label: 'CSF Tier',
+    value: '1',
+    context: 'Target Partial · current not recorded · selected by the organization, not derived by this tool',
+  }]);
+
+  // Nothing recorded: no tile, no placeholder — the row is exactly the pre-existing six.
+  for (const nothing of [undefined, {}, { current: null, target: null, note: null }, { note: 'Deferred to Q3.' }]) {
+    const root = dashboard(nothing);
+    assert.deepEqual(tierTiles(root), [], JSON.stringify(nothing));
+    assert.deepEqual(
+      tiles(root).map((tile) => tile.label),
+      ['Outcomes addressed', 'Gaps', 'Review progress', 'Human overrides', 'Verifier downgrades', 'Target met'],
+    );
+  }
 });

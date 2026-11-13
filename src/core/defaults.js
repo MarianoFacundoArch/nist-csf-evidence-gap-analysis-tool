@@ -95,6 +95,10 @@ export function defaultConfig() {
     // (<workDir>/target.json), not configuration.
     targetDefault: null,
     targetImport: null,
+    // Per-run inputs recording the organization's CSF Tier selection in the
+    // target profile (via --tier-current / --tier-target; 1..4).
+    tierCurrent: null,
+    tierTarget: null,
 
     // Master offline switch (also via --local). Applied AFTER merge: forces
     // local-transformers embeddings + ollama LLM regardless of other settings.

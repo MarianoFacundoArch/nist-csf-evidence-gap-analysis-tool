@@ -255,7 +255,7 @@ test('offline pipeline: ingest → analyze → review → report produces the al
   }
 });
 
-test('offline pipeline with a target profile: plan fields edited by hand reach the POA&M, and the report stays current', async () => {
+test('offline pipeline with a target profile: plan fields and the Tier selection reach the deliverables, and the report stays current', async () => {
   const workDir = await mkdtemp(join(tmpdir(), 'csf-reports-e2e-target-'));
   const logs = [];
   try {
@@ -268,6 +268,8 @@ test('offline pipeline with a target profile: plan fields edited by hand reach t
       review: { showAll: true },
       acceptAll: true,
       targetDefault: 'substantial',
+      tierCurrent: 2,
+      tierTarget: 3,
       fixedNow: NOW,
     });
     const collect = (...args) => logs.push(args.join(' '));
@@ -277,11 +279,12 @@ test('offline pipeline with a target profile: plan fields edited by hand reach t
     await ingest(ctx);
     await analyze(ctx);
     await review(ctx);
-    await target(ctx); // --target-default substantial
+    await target(ctx); // --target-default substantial --tier-current 2 --tier-target 3
 
     // Hand-edited JSON is the interface for plan fields.
     const spec = await readJsonSafe(ctx.paths.target);
     assert.deepEqual(spec.plan, {});
+    assert.deepEqual(spec.tiers, { current: 2, target: 3, note: null });
     spec.plan = {
       'PR.AA-03': { owner: 'IT Operations Lead', due: '2026-06-30', status: 'in-progress' },
     };
@@ -300,7 +303,15 @@ test('offline pipeline with a target profile: plan fields edited by hand reach t
     assert.ok(planned.includes('Require multifactor authentication | Enforce policies for the minimum strength of passwords'));
     assert.match(await readFile(ctx.paths.remediationPlan, 'utf8'), /- Plan \(recorded in the target profile\): owner: IT Operations Lead; due: 2026-06-30; status: in-progress/);
 
-    // Loading the plan must not make the unchanged target.json look edited.
+    // The organization's Tier selection is carried through, labeled as selected.
+    const tierSentence = 'CSF Tier — current: Tier 2 (Risk Informed); target: Tier 3 (Repeatable). Selected by the organization';
+    assert.ok((await readFile(ctx.paths.gapReport, 'utf8')).includes(tierSentence));
+    assert.ok((await readFile(ctx.paths.remediationPlan, 'utf8')).includes(`- ${tierSentence}`));
+    const targetProfile = await readJsonSafe(ctx.paths.targetProfile);
+    assert.deepEqual(targetProfile.tiers.current, { tier: 2, name: 'Risk Informed' });
+    assert.deepEqual(targetProfile.tiers.target, { tier: 3, name: 'Repeatable' });
+
+    // Loading the plan and the tiers must not make the unchanged target.json look edited.
     const state = await status(ctx);
     assert.equal(state.target.status, 'configured');
     assert.equal(state.report.status, 'current');

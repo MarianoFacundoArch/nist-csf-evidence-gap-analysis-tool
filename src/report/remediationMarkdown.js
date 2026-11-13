@@ -12,11 +12,15 @@
  *
  * Owner, due date, status and milestones appear on an item only when a person
  * recorded them in the target profile (`plan`); the tool never fills them in.
+ * The same goes for the CSF Tier line in the overview: it reports the
+ * organization's own selection and is absent when none is recorded.
  */
 
 import { planOrder } from '../target/targetProfile.js';
 import { orderFunctions } from '../csf/order.js';
 import { PRIORITY_LEVELS } from '../target/target.schema.js';
+import { tierSentence } from '../target/tiers.js';
+import { mdLine } from './markdownText.js';
 
 const NOTE =
   'Targets, priorities, and out-of-scope decisions are human choices recorded in the target profile — no AI ' +
@@ -46,6 +50,10 @@ export function renderRemediationMarkdown(profile, view) {
   out.push(`- Generated: ${profile.generatedAt}`);
   out.push(`- Target baseline: **${view.baseline}** for every outcome, plus any overrides recorded in the target profile`);
   if (view.description) out.push(`- Target description: ${view.description}`);
+  if (view.tiers) {
+    out.push(`- ${tierSentence(view.tiers)}`);
+    if (view.tiers.note) out.push(`- Tier note: ${mdLine(view.tiers.note)}`);
+  }
   out.push(
     `- Applicable outcomes: ${s.applicable} of ${s.total}` +
       (s.notApplicable ? ` (${s.notApplicable} scoped out as not-applicable)` : ''),

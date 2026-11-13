@@ -8,11 +8,14 @@
  * like reviews.json: re-running any pipeline stage never touches it. Three ways
  * to drive this stage, sharing one code path:
  *   - interactive editor (menu or `csf-tool target` in a terminal),
- *   - one-shot flags (--target-default, --target-import) for scripted runs,
+ *   - one-shot flags (--target-default, --target-import, --tier-current,
+ *     --tier-target) for scripted runs,
  *   - editing target.json by hand (validated on every load).
  *
  * No AI is involved anywhere in this stage: targets, priorities, and notes are
- * purely human decisions, applied deterministically.
+ * purely human decisions, applied deterministically. The same holds for the
+ * CSF Tier selection recorded here: the organization chooses its Tiers; the
+ * tool stores the choice and never derives one from coverage.
  */
 
 import { loadCsfCore } from '../csf/loader.js';
@@ -26,6 +29,7 @@ import {
   PRIORITY_LEVELS,
   DEFAULT_PRIORITY,
 } from '../target/targetProfile.js';
+import { CSF_TIERS, TIER_SOURCE, tierName, tierLabel, tierWarnings } from '../target/tiers.js';
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
 import { readJsonSafe, fileExists, writeJsonAtomic } from '../util/fsx.js';
 import { ConfigError } from '../core/errors.js';
@@ -61,17 +65,46 @@ export async function target(ctx) {
     changed = true;
   }
 
+  // --tier-current / --tier-target record the organization's CSF Tier
+  // selection, on top of whatever the import or the existing file holds. Each
+  // flag sets only its own side; the other side and the note are left alone.
+  if (config.tierCurrent != null) {
+    spec.tiers.current = tierFlag(config.tierCurrent, '--tier-current');
+    changed = true;
+  }
+  if (config.tierTarget != null) {
+    spec.tiers.target = tierFlag(config.tierTarget, '--tier-target');
+    changed = true;
+  }
+
   if (changed) {
     return persistAndSummarize(ctx, spec, csf, existed);
   }
 
   if (!ui?.isInteractive) {
     throw new ConfigError('The target stage needs input, and this session is not interactive.', {
-      hint: `Pass --target-default <level> or --target-import <path>, or edit ${ctx.paths.target} by hand.`,
+      hint:
+        'Pass --target-default <level>, --target-import <path>, or --tier-current / --tier-target <1-4>, ' +
+        `or edit ${ctx.paths.target} by hand.`,
     });
   }
 
   return editInteractively(ctx, spec, csf, existed);
+}
+
+/**
+ * A Tier passed as a per-run input. The config layer already rejects anything
+ * but 1..4; this keeps the guarantee for callers that build the context
+ * themselves — an invalid number must never be written into target.json, where
+ * it would make the next load fail.
+ */
+function tierFlag(value, flag) {
+  if (!tierName(value)) {
+    throw new ConfigError(`${flag} must be a CSF Tier number from 1 to 4 (got ${JSON.stringify(value)}).`, {
+      hint: `The four Tiers are ${CSF_TIERS.map((t) => `${t.tier} ${t.name}`).join(', ')}.`,
+    });
+  }
+  return value;
 }
 
 async function persistAndSummarize(ctx, spec, csf, existed) {
@@ -80,6 +113,10 @@ async function persistAndSummarize(ctx, spec, csf, existed) {
   const counts = resolvedCounts(spec, csf);
   ctx.logger.info(`Target profile ${existed ? 'updated' : 'created'}: ${ctx.paths.target}`);
   ctx.logger.info(`  resolved targets: ${formatCounts(counts)}`);
+  if (tiersRecorded(spec)) {
+    ctx.logger.info(`  CSF Tier (selected by the organization): ${formatTiers(spec)}`);
+    for (const warning of tierWarnings(spec.tiers)) ctx.logger.warn(warning);
+  }
   ctx.logger.info('Run `csf-tool report` to generate the remediation plan against this target.');
   return { path: ctx.paths.target, saved: true, counts };
 }
@@ -99,13 +136,14 @@ async function editInteractively(ctx, spec, csf, existed) {
   for (;;) {
     const o = overrideCounts(spec);
     const choice = await ui.select(
-      `Target profile — baseline: ${spec.default}; overrides: ${o.functions} function, ${o.categories} category, ${o.subcategories} subcategory; priorities: ${o.priorities}${dirty ? '  (unsaved changes)' : ''}`,
+      `Target profile — baseline: ${spec.default}; overrides: ${o.functions} function, ${o.categories} category, ${o.subcategories} subcategory; priorities: ${o.priorities}${tiersRecorded(spec) ? `; CSF Tier: ${formatTiers(spec)}` : ''}${dirty ? '  (unsaved changes)' : ''}`,
       [
         { value: 'baseline', label: `Set the baseline target for every outcome (now: ${spec.default})` },
         { value: 'function', label: 'Override a Function' },
         { value: 'category', label: 'Override a Category' },
         { value: 'subcategory', label: 'Override a Subcategory (target, priority, note)' },
         { value: 'priority', label: 'Set a remediation priority' },
+        { value: 'tiers', label: 'Record the CSF Tier selection (current, target, note)' },
         { value: 'preview', label: 'Preview resolved targets (vs current assessment, if any)' },
         { value: 'save', label: 'Save and exit' },
         { value: 'discard', label: 'Exit without saving' },
@@ -130,6 +168,7 @@ async function editInteractively(ctx, spec, csf, existed) {
     else if (choice === 'category') dirty = (await editOverride(ui, spec, csf, 'categories')) || dirty;
     else if (choice === 'subcategory') dirty = (await editSubcategory(ui, spec, csf)) || dirty;
     else if (choice === 'priority') dirty = (await editPriority(ui, spec, csf)) || dirty;
+    else if (choice === 'tiers') dirty = (await editTiers(ui, spec)) || dirty;
     else if (choice === 'preview') await preview(ctx, spec, csf);
   }
 }
@@ -210,6 +249,47 @@ async function editPriority(ui, spec, csf) {
 }
 
 /**
+ * Record the organization's CSF Tier selection: current Tier, target Tier, and
+ * an optional note. The tool offers the four Tiers by number and name only and
+ * points to NIST for what they mean — choosing one is the organization's call.
+ * Returns whether the spec changed.
+ */
+async function editTiers(ui, spec) {
+  ui.info(
+    'CSF Tiers are selected by the organization; this tool records the selection and never derives one ' +
+      `from the assessment. Tier definitions: ${TIER_SOURCE}.`,
+  );
+  const before = JSON.stringify(spec.tiers);
+
+  for (const side of ['current', 'target']) {
+    const recorded = spec.tiers[side];
+    // The first option is the one Enter picks, so it always leaves the
+    // selection as it is; clearing a recorded Tier takes a deliberate choice.
+    const choice = await ui.select(`${side === 'current' ? 'Current' : 'Target'} CSF Tier`, [
+      { value: 'keep', label: recorded == null ? 'not recorded (keep as is)' : `keep ${tierLabel(recorded)}` },
+      ...CSF_TIERS.map((t) => ({
+        value: String(t.tier),
+        label: `Tier ${t.tier} — ${t.name}${recorded === t.tier ? ' (recorded)' : ''}`,
+      })),
+      ...(recorded == null ? [] : [{ value: 'none', label: 'not recorded (clear the selection)' }]),
+    ]);
+    if (choice === 'none') spec.tiers[side] = null;
+    else if (choice !== 'keep') spec.tiers[side] = Number(choice);
+  }
+
+  // Shown in the deliverables next to the selection (a note without a Tier is
+  // kept in target.json but not rendered).
+  const note = (await ui.text('Note on the Tier selection (optional; empty clears)', {
+    initial: spec.tiers.note ?? '',
+  })).trim();
+  spec.tiers.note = note || null;
+
+  // Allowed, but worth saying while the person can still change it.
+  for (const warning of tierWarnings(spec.tiers)) ui.warn(warning);
+  return JSON.stringify(spec.tiers) !== before;
+}
+
+/**
  * Shared "pick a level for this key" step: inherit (delete the override) or an
  * explicit level including not-applicable. Returns whether the spec changed.
  */
@@ -284,6 +364,7 @@ async function preview(ctx, spec, csf) {
   const { ui } = ctx;
   const counts = resolvedCounts(spec, csf);
   const lines = [`Resolved targets: ${formatCounts(counts)}`];
+  if (tiersRecorded(spec)) lines.push(`CSF Tier (selected by the organization): ${formatTiers(spec)}`);
 
   // Live current-vs-target preview when assessments exist (never required).
   if (await fileExists(ctx.paths.assessments)) {
@@ -331,4 +412,12 @@ function formatCounts(counts) {
     .filter(([, n]) => n > 0)
     .map(([k, n]) => `${k} ${n}`)
     .join(', ');
+}
+
+function tiersRecorded(spec) {
+  return spec.tiers?.current != null || spec.tiers?.target != null;
+}
+
+function formatTiers(spec) {
+  return `current ${tierLabel(spec.tiers.current)}, target ${tierLabel(spec.tiers.target)}`;
 }

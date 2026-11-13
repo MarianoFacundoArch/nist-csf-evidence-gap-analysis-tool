@@ -89,6 +89,8 @@ export const configSchema = {
       enum: ['none', 'partial', 'substantial', 'full', null],
     },
     targetImport: { type: ['string', 'null'] },
+    tierCurrent: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
+    tierTarget: { type: ['integer', 'null'], minimum: 1, maximum: 4 },
     local: { type: 'boolean' },
     logLevel: { type: 'string', enum: ['debug', 'info', 'warn', 'error', 'quiet'] },
   },

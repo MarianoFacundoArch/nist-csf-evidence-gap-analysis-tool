@@ -19,6 +19,7 @@ import {
   DEFAULT_PRIORITY,
   DEFAULT_BASELINE,
 } from './target.schema.js';
+import { resolveTiers } from './tiers.js';
 import { coverageRank } from '../engine/coverage.js';
 import { FUNCTION_ORDER, orderFunctions } from '../csf/order.js';
 import { readJsonSafe, fileExists } from '../util/fsx.js';
@@ -41,6 +42,7 @@ export function newTargetSpec(now, baseline = DEFAULT_BASELINE) {
     priorities: {},
     notes: {},
     plan: {},
+    tiers: { current: null, target: null, note: null },
   };
 }
 
@@ -49,10 +51,11 @@ export function newTargetSpec(now, baseline = DEFAULT_BASELINE) {
  * violations; returns the spec with all optional maps normalized to {} so
  * callers can read/mutate without null checks.
  *
- * Normalization only ever ADDS missing top-level keys. Nested objects are left
- * untouched: `status` validates a shallow copy of the raw file and then hashes
- * the raw content, so rewriting a nested value here would make an unchanged
- * target.json look edited.
+ * Normalization only ever sets top-level keys (missing maps, and `tiers`
+ * completed to its three fields). Nested objects of the input are never
+ * rewritten in place: `status` validates a shallow copy of the raw file and
+ * then hashes the raw content, so an in-place change here would make an
+ * unchanged target.json look edited.
  */
 export function validateTargetSpec(data, sourceLabel = 'target profile') {
   const malformed = (what) =>
@@ -67,6 +70,13 @@ export function validateTargetSpec(data, sourceLabel = 'target profile') {
   for (const key of ['functions', 'categories', 'subcategories', 'priorities', 'notes', 'plan']) {
     data[key] ??= {};
   }
+  // A fresh object, so a partial `tiers` in the file is completed without
+  // touching the object that was read from it.
+  data.tiers = {
+    current: data.tiers?.current ?? null,
+    target: data.tiers?.target ?? null,
+    note: data.tiers?.note ?? null,
+  };
   // The schema checks the shape of a due date; whether that day exists is
   // checked here (a plan due on 2026-02-30 is a typo, not a date).
   for (const [id, entry] of Object.entries(data.plan)) {
@@ -92,6 +102,9 @@ function describeSchemaError(error) {
   }
   if (error.keyword === 'pattern' && where.endsWith('/due')) {
     return `${where} must be a date written as YYYY-MM-DD`;
+  }
+  if (where === '/tiers/current' || where === '/tiers/target') {
+    return `${where} must be a CSF Tier number (1, 2, 3 or 4) or null`;
   }
   return `${where} ${error.message}`;
 }
@@ -182,6 +195,8 @@ export function resolveTarget(spec, sub) {
  * added to EVERY entry, as an object or null, once the target profile records
  * at least one; a profile that records none gets no `plan` key at all, so its
  * deliverables are byte-identical to those of versions that predate the field.
+ * The same holds for `tiers` (the organization's CSF Tier selection, with the
+ * Tier names resolved): present on the view only when one is recorded.
  */
 export function buildTargetView(profile, spec, csf) {
   const examplesById = new Map(
@@ -242,11 +257,14 @@ export function buildTargetView(profile, spec, csf) {
     };
   });
 
+  const tiers = resolveTiers(spec.tiers);
+
   return {
     baseline: spec.default,
     description: spec.description ?? null,
     createdAt: typeof spec.createdAt === 'string' ? spec.createdAt : null,
     updatedAt: typeof spec.updatedAt === 'string' ? spec.updatedAt : null,
+    ...(tiers ? { tiers } : {}),
     summary: {
       total: entries.length,
       applicable: applicable.length,

@@ -109,12 +109,16 @@ async function main() {
   // belongs to the outcome the reviewer raised, whose target is therefore met:
   // it shows that a tracked item stays in the POA&M export as a closed row
   // instead of silently vanishing.
+  //
+  // `tiers` likewise stands in for the organization's own CSF Tier selection.
+  // A Tier is chosen by the organization, never derived from coverage, so the
+  // numbers below say nothing about the sample documents.
   await writeJsonAtomic(ctx.paths.target, {
     schemaVersion: '1.0',
     createdAt: FIXED_NOW,
     updatedAt: FIXED_NOW,
     description:
-      'Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners and dates are fictitious.',
+      'Illustrative Target Profile for the worked example: substantial baseline, full identity and access management, recovery deprioritized this cycle. Plan owners, dates, and the Tier selection are fictitious.',
     default: 'substantial',
     functions: {},
     categories: { 'PR.AA': 'full' },
@@ -129,6 +133,11 @@ async function main() {
         milestones: 'Pilot with administrator accounts, then extend to all staff.',
       },
       ...(raiseId ? { [raiseId]: { owner: 'Chief Information Security Officer', status: 'done' } } : {}),
+    },
+    tiers: {
+      current: 2,
+      target: 3,
+      note: 'Illustrative selection for the worked example.',
     },
   });
 

@@ -26,6 +26,8 @@ const OPTIONS = {
   'fixed-now': { type: 'string' },
   'target-default': { type: 'string' },
   'target-import': { type: 'string' },
+  'tier-current': { type: 'string' },
+  'tier-target': { type: 'string' },
   strict: { type: 'boolean' },
   critique: { type: 'boolean' },
   'no-critique': { type: 'boolean' },
@@ -79,6 +81,11 @@ export function parseCliArgs(argv) {
   set('fixedNow', values['fixed-now']);
   set('targetDefault', values['target-default']);
   set('targetImport', values['target-import']);
+  // A Tier that is not a number is passed on as given (NaN) instead of being
+  // dropped like the tuning flags above: config validation then reports the
+  // bad value, so a mistyped Tier is never silently ignored.
+  if (values['tier-current'] !== undefined) set('tierCurrent', Number(values['tier-current']));
+  if (values['tier-target'] !== undefined) set('tierTarget', Number(values['tier-target']));
   if (values.strict) set('analysis.strict', true);
   if (values.critique) set('analysis.critique', true);
   if (values['no-critique']) set('analysis.critique', false);
@@ -134,6 +141,8 @@ KEY OPTIONS
   --target-default <lvl>   Set the target baseline for every subcategory
                            (none | partial | substantial | full)
   --target-import <path>   Replace the target profile with the given JSON file
+  --tier-current <1-4>     Record the organization's current CSF Tier
+  --tier-target <1-4>      Record the organization's target CSF Tier
   --strict                 Refuse to emit the profile until all items reviewed
   --force                  Recompute assessments even if cached
   --config <path>          Use a specific config file

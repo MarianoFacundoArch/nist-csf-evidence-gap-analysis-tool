@@ -33,7 +33,10 @@ export async function createInteractiveUi() {
       return cancelGuard(await p.confirm({ message, initialValue }));
     },
     async text(message, { placeholder, initial } = {}) {
-      const r = cancelGuard(await p.text({ message, placeholder, defaultValue: initial }));
+      // `initial` pre-fills the field so the person can keep, edit or erase it.
+      // Passed as a default instead, it would come back whenever the answer is
+      // empty — and "leave empty to clear" could never clear anything.
+      const r = cancelGuard(await p.text({ message, placeholder, initialValue: initial }));
       return r ?? '';
     },
   };
