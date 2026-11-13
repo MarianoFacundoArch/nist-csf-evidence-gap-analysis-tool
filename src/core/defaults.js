@@ -18,10 +18,11 @@
 
 export const DEFAULT_CONFIG_FILENAME = 'csf-tool.config.json';
 
-// Built-in data file, relative to the package root. When a run's working
+// Built-in data files, relative to the package root. When a run's working
 // directory has no such file, the copy shipped with the tool is used (see
-// core/bundled.js) so the default works from any directory.
+// core/bundled.js) so the defaults work from any directory.
 export const DEFAULT_CSF_CORE_PATH = 'data/csf-core.json';
+export const DEFAULT_CROSSWALK_PATH = 'data/csf-crosswalks.json';
 
 export function defaultConfig() {
   return {
@@ -29,6 +30,12 @@ export function defaultConfig() {
     // CSF 2.0 Core (sourced from NIST CPRT; see data/csf-core.json and
     // scripts/build-csf-core.js). Point this at your own CPRT export if needed.
     csfCorePath: DEFAULT_CSF_CORE_PATH,
+
+    // Path to the informative-reference crosswalks (CSF 2.0 Subcategory ->
+    // identifiers in other frameworks), built from NIST's OLIR catalog by
+    // scripts/build-crosswalks.js. Optional: when the file is absent the
+    // crosswalk deliverables are simply not produced.
+    crosswalkPath: DEFAULT_CROSSWALK_PATH,
 
     // Folder (or single file) of the organization's documents. Null => the
     // tool asks for it interactively (menu) or you pass --docs on the CLI.
@@ -77,7 +84,16 @@ export function defaultConfig() {
     // Normally set per-run via --accept-all; never a substitute for real review.
     acceptAll: false,
 
-    report: { evidenceQuoteMaxChars: 300 },
+    report: {
+      evidenceQuoteMaxChars: 300,
+      // Which crosswalks to include in the crosswalk deliverables: null => every
+      // crosswalk in the data file except third-party mappings (those developed
+      // by neither NIST nor the mapped framework's publisher); an array of ids
+      // => exactly those, which is how a third-party mapping is chosen ("all"
+      // in the array => every crosswalk); [] => none. Also via
+      // --crosswalk <id,id|default|all|none>. List ids with `csf-tool crosswalk`.
+      crosswalks: null,
+    },
 
     // Reviewer identity recorded on review decisions (advisory only).
     identity: null,

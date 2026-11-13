@@ -32,6 +32,9 @@ export function resolvePaths(workDir) {
     dashboard: join(reports, 'dashboard.html'),
     evidenceByDocument: join(reports, 'evidence-by-document.md'),
     evidenceRequests: join(reports, 'evidence-requests.md'),
+    // Emitted only when crosswalk data is available and at least one is selected.
+    crosswalkCsv: join(reports, 'crosswalk.csv'),
+    crosswalkReport: join(reports, 'crosswalk.md'),
     // Emitted only when a target profile exists.
     targetProfile: join(reports, 'target-profile.json'),
     remediationPlan: join(reports, 'remediation-plan.md'),

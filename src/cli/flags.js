@@ -28,6 +28,7 @@ const OPTIONS = {
   'target-import': { type: 'string' },
   'tier-current': { type: 'string' },
   'tier-target': { type: 'string' },
+  crosswalk: { type: 'string' },
   strict: { type: 'boolean' },
   critique: { type: 'boolean' },
   'no-critique': { type: 'boolean' },
@@ -86,6 +87,7 @@ export function parseCliArgs(argv) {
   // bad value, so a mistyped Tier is never silently ignored.
   if (values['tier-current'] !== undefined) set('tierCurrent', Number(values['tier-current']));
   if (values['tier-target'] !== undefined) set('tierTarget', Number(values['tier-target']));
+  if (values.crosswalk !== undefined) set('report.crosswalks', parseCrosswalkSelection(values.crosswalk));
   if (values.strict) set('analysis.strict', true);
   if (values.critique) set('analysis.critique', true);
   if (values['no-critique']) set('analysis.critique', false);
@@ -105,6 +107,21 @@ export function parseCliArgs(argv) {
   };
 }
 
+/**
+ * --crosswalk value -> config.report.crosswalks: "default" => null (every
+ * crosswalk that is not a third-party mapping), "all" => ['all'] (every
+ * crosswalk in the data file, third-party ones included), "none" => [] (no
+ * crosswalk deliverables), otherwise a comma-separated list of crosswalk ids.
+ */
+function parseCrosswalkSelection(raw) {
+  const value = String(raw).trim();
+  const keyword = value.toLowerCase();
+  if (keyword === 'default') return null;
+  if (keyword === 'all') return ['all'];
+  if (value === '' || keyword === 'none') return [];
+  return value.split(',').map((s) => s.trim()).filter(Boolean);
+}
+
 export const HELP_TEXT = `csf-tool — NIST CSF 2.0 AI-assisted evidence & gap analysis
 (Free and open source.)
 
@@ -121,6 +138,7 @@ COMMANDS
   target      Define the Target Profile (goal coverage + priorities per outcome)
   report      Generate the Current Profile, gap analysis, evidence map, dashboard,
               and — when a target profile exists — the prioritized remediation plan
+  crosswalk   List the informative-reference crosswalks available to reports
   all | run   Run the whole pipeline (ingest -> analyze -> review -> report)
 
 KEY OPTIONS
@@ -143,6 +161,9 @@ KEY OPTIONS
   --target-import <path>   Replace the target profile with the given JSON file
   --tier-current <1-4>     Record the organization's current CSF Tier
   --tier-target <1-4>      Record the organization's target CSF Tier
+  --crosswalk <ids>        Crosswalks to include in reports: comma-separated ids,
+                           "default" (all except third-party mappings), "all"
+                           (third-party mappings included), or "none"
   --strict                 Refuse to emit the profile until all items reviewed
   --force                  Recompute assessments even if cached
   --config <path>          Use a specific config file

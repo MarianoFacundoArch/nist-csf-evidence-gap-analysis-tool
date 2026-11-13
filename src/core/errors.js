@@ -43,6 +43,9 @@ export class ProviderError extends AppError {}
 /** The CSF core data file is missing or malformed. */
 export class CsfDataError extends AppError {}
 
+/** The crosswalk data file (informative references) is malformed. */
+export class CrosswalkDataError extends AppError {}
+
 /** The target-profile file (<work-dir>/target.json) is malformed. */
 export class TargetDataError extends AppError {}
 

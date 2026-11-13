@@ -12,6 +12,7 @@ export const configSchema = {
   additionalProperties: false,
   properties: {
     csfCorePath: { type: 'string', minLength: 1 },
+    crosswalkPath: { type: 'string', minLength: 1 },
     docsPath: { type: ['string', 'null'] },
     workDir: { type: 'string', minLength: 1 },
 
@@ -77,6 +78,10 @@ export const configSchema = {
       additionalProperties: false,
       properties: {
         evidenceQuoteMaxChars: { type: 'integer', minimum: 20, maximum: 100000 },
+        crosswalks: {
+          type: ['array', 'null'],
+          items: { type: 'string', minLength: 1 },
+        },
       },
     },
 

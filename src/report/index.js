@@ -5,7 +5,10 @@
  * When a target profile exists, three more are emitted: the machine-readable
  * Target Profile, the prioritized remediation plan, and its POA&M-style
  * tracker export; when it doesn't, stale target deliverables from an earlier
- * run are removed so an outdated plan can never be mistaken for current.
+ * run are removed so an outdated plan can never be mistaken for current. The
+ * crosswalk deliverables (CSF 2.0 outcomes related to identifiers in other
+ * frameworks) follow the same rule: written when crosswalks are selected,
+ * removed when they are not.
  *
  * Every run also writes the evidence-by-document report — the reverse view
  * (document -> what it contributes), derived from one canonical document view
@@ -29,10 +32,13 @@ import { renderDocumentsMarkdown } from './documentsMarkdown.js';
 import { renderEvidenceRequestsMarkdown } from './evidenceRequestsMarkdown.js';
 import { renderPoamCsv } from './poamCsv.js';
 import { buildTargetView } from '../target/targetProfile.js';
+import { buildCrosswalkView, crosswalkDashboardData } from '../crosswalk/view.js';
+import { renderCrosswalkCsv } from './crosswalkCsv.js';
+import { renderCrosswalkMarkdown } from './crosswalkMarkdown.js';
 import { writeJsonAtomic, writeFileAtomic, removeIfExists } from '../util/fsx.js';
 import { StrictModeError } from '../core/errors.js';
 
-export async function renderReports(ctx, { csf, assessments, reviews, meta, targetSpec = null }) {
+export async function renderReports(ctx, { csf, assessments, reviews, meta, targetSpec = null, crosswalks = null }) {
   const profile = buildProfile(ctx, { csf, assessments, reviews, meta });
 
   if (ctx.config.analysis.strict) {
@@ -52,6 +58,8 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   }
 
   const targetView = targetSpec ? buildTargetView(profile, targetSpec, csf) : null;
+  // Optional: the selected crosswalk data (null/empty => none selected or no data file).
+  const crosswalkView = crosswalks?.crosswalks?.length ? buildCrosswalkView(profile, crosswalks) : null;
 
   const md = renderGapMarkdown(profile, {
     evidenceQuoteMaxChars: ctx.config.report.evidenceQuoteMaxChars,
@@ -63,7 +71,9 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   await writeJsonAtomic(ctx.paths.currentProfile, profile);
   await writeFileAtomic(ctx.paths.gapReport, md);
   await writeFileAtomic(ctx.paths.evidenceMap, csv);
-  await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView, { documentView }));
+  const dashboardExtras = { documentView };
+  if (crosswalkView) dashboardExtras.crosswalk = crosswalkDashboardData(crosswalkView);
+  await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView, dashboardExtras));
   await writeFileAtomic(ctx.paths.evidenceByDocument, renderDocumentsMarkdown(profile, documentView));
   await writeFileAtomic(ctx.paths.evidenceRequests, renderEvidenceRequestsMarkdown(profile, { csf, targetView }));
 
@@ -77,9 +87,21 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     await removeIfExists(ctx.paths.poam);
   }
 
+  if (crosswalkView) {
+    await writeFileAtomic(ctx.paths.crosswalkCsv, renderCrosswalkCsv(crosswalkView));
+    await writeFileAtomic(ctx.paths.crosswalkReport, renderCrosswalkMarkdown(profile, crosswalkView));
+  } else {
+    // Same rule as the target deliverables: a crosswalk left over from an
+    // earlier run must not sit next to a report that no longer selects it.
+    for (const stale of [ctx.paths.crosswalkCsv, ctx.paths.crosswalkReport]) {
+      if (stale) await removeIfExists(stale);
+    }
+  }
+
   return {
     profile,
     targetView,
+    crosswalkView,
     profileJsonPath: ctx.paths.currentProfile,
     gapMdPath: ctx.paths.gapReport,
     evidenceCsvPath: ctx.paths.evidenceMap,
@@ -89,5 +111,7 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
     targetProfileJsonPath: targetView ? ctx.paths.targetProfile : null,
     remediationPlanPath: targetView ? ctx.paths.remediationPlan : null,
     poamPath: targetView ? ctx.paths.poam : null,
+    crosswalkCsvPath: crosswalkView ? ctx.paths.crosswalkCsv : null,
+    crosswalkReportPath: crosswalkView ? ctx.paths.crosswalkReport : null,
   };
 }

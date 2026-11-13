@@ -24,6 +24,7 @@ export async function startMenu(ctx) {
       { value: 'review', label: 'Review AI judgments (human-in-the-loop)' },
       { value: 'target', label: 'Set the target profile (goal coverage + priorities)' },
       { value: 'report', label: 'Generate reports (profile, gaps, remediation plan, dashboard)' },
+      { value: 'crosswalk', label: 'List available crosswalks (CSF 2.0 → other frameworks)' },
       { value: 'all', label: 'Run everything (ingest → analyze → review → report)' },
       { value: 'exit', label: 'Exit' },
     ]);

@@ -4,8 +4,9 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, realpath } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { bundledPath, resolveDataPath } from '../src/core/bundled.js';
-import { DEFAULT_CSF_CORE_PATH, defaultConfig } from '../src/core/defaults.js';
+import { DEFAULT_CSF_CORE_PATH, DEFAULT_CROSSWALK_PATH, defaultConfig } from '../src/core/defaults.js';
 import { loadCsfCore } from '../src/csf/loader.js';
+import { loadCrosswalks } from '../src/crosswalk/loader.js';
 import { init } from '../src/actions/init.js';
 import { CsfDataError } from '../src/core/errors.js';
 
@@ -38,6 +39,16 @@ test('the built-in default resolves to the shipped file when run from another di
     // The loader therefore works with the default configuration from anywhere.
     const csf = await loadCsfCore(defaultConfig().csfCorePath, null);
     assert.equal(csf.subcategories.length, 106);
+  });
+});
+
+test('the default crosswalk data resolves the same way, and a custom path is not redirected', async () => {
+  await inEmptyDir(async () => {
+    assert.equal(defaultConfig().crosswalkPath, DEFAULT_CROSSWALK_PATH);
+    const data = await loadCrosswalks(defaultConfig().crosswalkPath, null);
+    assert.ok(data.crosswalks.length > 0);
+    // Crosswalks are optional: a custom path that does not exist is simply absent.
+    assert.equal(await loadCrosswalks('data/csf-crosswalk.json', null), null);
   });
 });
 

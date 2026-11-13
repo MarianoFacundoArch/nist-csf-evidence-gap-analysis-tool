@@ -40,7 +40,9 @@ const CONFIG = {
   retrieval: { topK: 6 },
   analysis: { confidenceThreshold: 0.6, critique: false, strict: false },
   review: { showAll: true },
-  report: { evidenceQuoteMaxChars: 300 },
+  // Two crosswalks are enough to show the crosswalk deliverables; the default
+  // selection would add several hundred kilobytes to the committed example.
+  report: { evidenceQuoteMaxChars: 300, crosswalks: ['sp800-53-r5', 'cis-v8.1'] },
   identity: REVIEWER,
   fixedNow: FIXED_NOW,
   logLevel: 'warn',

@@ -13,4 +13,5 @@ export { analyze } from './analyze.js';
 export { review } from './review.js';
 export { target } from './target.js';
 export { report } from './report.js';
+export { crosswalk } from './crosswalk.js';
 export { runAll } from './runAll.js';

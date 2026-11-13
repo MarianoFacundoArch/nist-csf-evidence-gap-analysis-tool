@@ -50,11 +50,13 @@
     "review": "node bin/csf-tool.js review",
     "target": "node bin/csf-tool.js target",
     "report": "node bin/csf-tool.js report",
+    "crosswalk": "node bin/csf-tool.js crosswalk",
     "all": "node bin/csf-tool.js all",
     "example": "node scripts/build-example.js",
     "make-sample-pdf": "node scripts/make-sample-pdf.js",
     "build-csf-core": "node scripts/build-csf-core.js",
     "build-csf-core-es": "node scripts/build-csf-core-es.js",
+    "build-crosswalks": "node scripts/build-crosswalks.js",
     "test": "node --test"
   },
   "dependencies": {

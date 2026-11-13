@@ -22,6 +22,46 @@ Implementation Examples). Per NIST, Implementation Examples are illustrative and
 not exhaustive; they are not a baseline of required actions.
 
 -------------------------------------------------------------------------------
+Informative-reference crosswalks (data/csf-crosswalks.json)
+-------------------------------------------------------------------------------
+The crosswalk data relates CSF 2.0 Functions, Categories and Subcategories to
+identifiers in other frameworks. The relationships are those published through
+NIST's National Online Informative References (OLIR) Program
+(https://csrc.nist.gov/projects/olir) and were retrieved from the NIST CSF 2.0
+reference data service. Each relationship is kept at the level its mapping
+records it. Each mapping was developed by the party named as its developer in
+NIST's catalog of informative references
+(https://csrc.nist.gov/projects/olir/informative-reference-catalog); that name
+and the mapping's release date are recorded with it. Inclusion of a mapping is
+not an endorsement by NIST or by this project.
+
+A mapping whose developer is neither NIST nor the publisher of the referenced
+framework is marked as a third-party mapping. By default the deliverables carry
+only mappings developed by NIST or by the body that publishes the mapped
+framework. Third-party mappings are available but must be chosen deliberately,
+and they are reproduced as published — including entries that are non-specific
+or appear erroneous.
+
+Links are limited to documents hosted by NIST. A mapping's own document is
+linked only when NIST hosts it; otherwise NIST's catalog is the citation. The
+data therefore carries no links to third-party pages, which can move or change.
+
+The file contains identifiers only (control, requirement, or clause numbers).
+It reproduces no control or requirement text and no control titles from any
+referenced framework. The referenced frameworks remain the property of their
+respective publishers and are identified here by name and by reference only;
+consult each publisher's own edition for their content. A mapping records that
+a CSF element and a reference are related. It does not state that they are
+equivalent, and it is not a determination of conformance with the referenced
+framework.
+
+The generation is reproducible from the official source with:
+    npm run build-crosswalks
+See scripts/build-crosswalks.js for the exact selection and extraction (which
+mappings are shipped and why, the integrity checks against data/csf-core.json,
+and how identifiers are normalized).
+
+-------------------------------------------------------------------------------
 Third-party software
 -------------------------------------------------------------------------------
 This tool keeps a minimal dependency surface. Required: "ajv" (MIT) and

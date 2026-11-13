@@ -24,10 +24,12 @@ import { planOrder } from '../target/targetProfile.js';
 /**
  * @param {object} profile the Current Profile from buildProfile()
  * @param {object|null} [targetView] the target view from buildTargetView(), if any
- * @param {object} [extras] optional sections, each read from its own key and
- *   embedded only when passed (omitting it leaves the embedded data unchanged):
- *   `documentView` — the view from buildDocumentView(), shown as the
- *   "Evidence by document" table.
+ * @param {{documentView?: object, crosswalk?: object}} [extras] optional
+ *   sections, each read from its own key and embedded only when passed
+ *   (omitting it leaves the embedded data unchanged): `documentView` — the view
+ *   from buildDocumentView(), shown as the "Evidence by document" table;
+ *   `crosswalk` — crosswalkDashboardData(view): reference identifiers per
+ *   Subcategory, shown as "related references" in the explorer.
  */
 export function renderDashboardHtml(profile, targetView = null, extras = {}) {
   const payload = {
@@ -38,7 +40,9 @@ export function renderDashboardHtml(profile, targetView = null, extras = {}) {
       : [],
     functionOrder: orderFunctions(profile.subcategories),
   };
+  // Each is added only when given, so the embedded data is unchanged without it.
   if (extras?.documentView) payload.documentView = extras.documentView;
+  if (extras?.crosswalk) payload.crosswalk = extras.crosswalk;
   // <-escape so document text can never close the script element.
   const json = JSON.stringify(payload).replace(/</g, '\\u003c');
 
@@ -183,6 +187,7 @@ tr.drow>td{background:var(--page);padding:14px 16px}
 .det .q .src{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
 .det ol{margin:4px 0 4px 20px;padding:0;color:var(--ink2)}
 .det ol li{margin:4px 0}
+.det .xref{color:var(--ink2);margin:4px 0;overflow-wrap:anywhere}
 ol.plan{margin:6px 0 2px 22px;padding:0}
 ol.plan li{margin:7px 0}
 ol.plan .meta{color:var(--ink2)}
@@ -209,6 +214,18 @@ const APP_JS = `
 'use strict';
 var DATA = JSON.parse(document.getElementById('csf-data').textContent);
 var P = DATA.profile, T = DATA.target;
+var XW = DATA.crosswalk || null;
+/* Reference ids one crosswalk relates to an outcome: to the outcome itself,
+   to its whole Category, to its whole Function (as the mapping records them). */
+function xwIds(cw, e){
+  var catId = e.subcategory_id.split('-')[0];
+  var fnId = e.function_id || e.subcategory_id.split('.')[0];
+  return [
+    { label: '', ids: cw.map[e.subcategory_id] || [] },
+    { label: 'Category ' + catId, ids: (cw.categories || {})[catId] || [] },
+    { label: 'Function ' + fnId, ids: (cw.functions || {})[fnId] || [] }
+  ];
+}
 var LEVELS = ['none','partial','substantial','full'];
 var LEVEL_VAR = {none:'--cov-none',partial:'--cov-partial',substantial:'--cov-substantial',full:'--cov-full'};
 var app = document.getElementById('app');
@@ -882,6 +899,11 @@ P.subcategories.forEach(function(e){
     parts.push(tgt.target_coverage, tgt.priority, tgt.note);
     (tgt.implementation_examples || []).forEach(function(ex){ parts.push(ex); });
   }
+  if (XW) XW.crosswalks.forEach(function(cw){
+    xwIds(cw, e).forEach(function(group){
+      group.ids.forEach(function(id){ parts.push(id); });
+    });
+  });
   searchIndex[e.subcategory_id] = parts.filter(function(value){
     return value != null && value !== '';
   }).join(' ').toLowerCase();
@@ -933,6 +955,35 @@ function detailCell(e, t, cols){
     var ol = document.createElement('ol');
     t.implementation_examples.forEach(function(ex){ ol.appendChild(el('li', null, ex)); });
     box.appendChild(ol);
+  }
+  if (XW) {
+    box.appendChild(el('h4', null, 'Related references (informative)'));
+    box.appendChild(el('p','xref','Identifiers that the selected mappings relate to this outcome. Related is not equivalent: ' +
+      'coverage of this outcome is not a determination of conformance with any of them.'));
+    var anyRef = false;
+    var whole = [];
+    XW.crosswalks.forEach(function(cw){
+      var name = cw.framework + (cw.thirdParty ? ' (third-party mapping)' : '');
+      var groups = xwIds(cw, e);
+      if (groups[0].ids.length) {
+        anyRef = true;
+        var line = el('p','xref');
+        line.appendChild(el('strong', null, name + ': '));
+        line.appendChild(document.createTextNode(groups[0].ids.join(', ')));
+        box.appendChild(line);
+      }
+      var above = groups.slice(1).filter(function(g){ return g.ids.length; }).map(function(g){
+        return g.label + ': ' + g.ids.join(', ');
+      });
+      if (above.length) whole.push(name + ' — ' + above.join('; '));
+    });
+    if (!anyRef) box.appendChild(el('p','xref','(none recorded for this outcome itself in the selected mappings)'));
+    if (whole.length) {
+      var wline = el('p','xref');
+      wline.appendChild(el('strong', null, 'Related to its whole Category or Function, not to this outcome alone: '));
+      wline.appendChild(document.createTextNode(whole.join(' · ')));
+      box.appendChild(wline);
+    }
   }
   td.appendChild(box);
   return td;
@@ -1037,6 +1088,10 @@ foot.appendChild(el('div', null, P.disclaimer));
 if (T) foot.appendChild(el('div', null,
   'Target profile: baseline "' + T.baseline + '"' + (T.description ? ' — ' + T.description : '') +
   '. Targets, priorities, and scoping are human decisions; suggested actions are official NIST CSF 2.0 Implementation Examples (public domain).'));
+if (XW) foot.appendChild(el('div', null,
+  'Related references: identifiers only, as each selected mapping records them for a Subcategory, a whole ' +
+  'Category or a whole Function. Mapping source: ' + XW.source + ' (retrieved ' + XW.retrievedAt + '). A mapping records a relationship, ' +
+  'not equivalence or conformance. Search also matches these identifiers, as plain text; see crosswalk.md for details.'));
 foot.appendChild(el('div', null,
   'Self-contained report generated by ' + (P.tool ? P.tool.name + ' v' + P.tool.version : 'csf-tool') +
   ' — no network access is required or used by this page.'));

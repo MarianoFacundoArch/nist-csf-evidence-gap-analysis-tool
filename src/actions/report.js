@@ -8,6 +8,7 @@
 
 import { loadCsfCore } from '../csf/loader.js';
 import { loadTargetSpec } from '../target/targetProfile.js';
+import { loadSelectedCrosswalks } from '../crosswalk/select.js';
 import { readJsonSafe, writeJsonAtomic, fileExists } from '../util/fsx.js';
 import { renderReports } from '../report/index.js';
 import { buildReportSnapshot } from '../status/reportSnapshot.js';
@@ -29,8 +30,11 @@ export async function report(ctx) {
   // Read the original representation only after friendly validation succeeds;
   // its hash must match the same hand-edited JSON that `status` later reads.
   const rawTarget = await readJsonSafe(ctx.paths.target, null);
+  // Optional: informative-reference crosswalks. Absent data file or an empty
+  // selection => no crosswalk deliverables (loudly invalid if malformed).
+  const crosswalks = await loadSelectedCrosswalks(config, logger);
 
-  const result = await renderReports(ctx, { csf, assessments, reviews, meta, targetSpec });
+  const result = await renderReports(ctx, { csf, assessments, reviews, meta, targetSpec, crosswalks });
 
   // Save hashes only (never report content) so `status` can detect manual edits
   // and target removal even when an optional timestamp was not updated.
@@ -60,6 +64,12 @@ export async function report(ctx) {
     );
     logger.info(`  POA&M-style tracker (owner, due, status come from target.json): ${result.poamPath}`);
   }
+  if (result.crosswalkView) {
+    logger.info(
+      `  crosswalks: ${result.crosswalkView.crosswalks.length} mapping(s) to other frameworks ` +
+        `(related outcomes, not conformance) — ${result.crosswalkReportPath}`,
+    );
+  }
   if (s.unreviewed > 0 || s.stale > 0) {
     logger.warn('The profile contains unreviewed/stale items and is marked DRAFT. Run `review` to validate them.');
   }
@@ -72,6 +82,8 @@ export async function report(ctx) {
     targetProfileJsonPath: result.targetProfileJsonPath,
     remediationPlanPath: result.remediationPlanPath,
     poamPath: result.poamPath,
+    crosswalkCsvPath: result.crosswalkCsvPath,
+    crosswalkReportPath: result.crosswalkReportPath,
     summary: s,
     targetSummary: result.targetView?.summary ?? null,
   };
