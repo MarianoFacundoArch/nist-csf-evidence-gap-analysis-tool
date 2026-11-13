@@ -41,6 +41,10 @@ export async function analyze(ctx) {
     chunkOverlap: config.chunk.overlap,
     critique: config.analysis.critique,
     indexId: index.index_id ?? index.created_at,
+    // A report language other than English asks the model to write its
+    // rationale in it, so assessments made under another language are not
+    // reusable. English adds nothing: its signature is the one it always was.
+    language: config.report?.language,
   });
 
   const assessments = (await readJsonSafe(ctx.paths.assessments, {})) ?? {};

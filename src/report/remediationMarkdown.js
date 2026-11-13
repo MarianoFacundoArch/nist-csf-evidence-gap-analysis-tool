@@ -14,100 +14,127 @@
  * recorded them in the target profile (`plan`); the tool never fills them in.
  * The same goes for the CSF Tier line in the overview: it reports the
  * organization's own selection and is absent when none is recorded.
+ *
+ * In another report language (a locale from src/i18n/locale.js) the tool's
+ * sentences are translated and the outcome text is that of the published
+ * translation of the Core. The suggested actions are not: NIST publishes the
+ * Implementation Examples in English only, so they stay verbatim in English
+ * and the plan says so once, above the list.
  */
 
 import { planOrder } from '../target/targetProfile.js';
 import { orderFunctions } from '../csf/order.js';
 import { compareText } from '../util/compare.js';
 import { PRIORITY_LEVELS } from '../target/target.schema.js';
-import { tierSentence } from '../target/tiers.js';
 import { mdLine } from './markdownText.js';
+import { asLocale, frameworkNoteLines } from '../i18n/locale.js';
 
-const NOTE =
-  'Targets, priorities, and out-of-scope decisions are human choices recorded in the target profile — no AI ' +
-  'makes them. Suggested actions are the official NIST CSF 2.0 Implementation Examples (public domain, source: ' +
-  'NIST CPRT): illustrative starting points, not an exhaustive or mandatory list.';
-
-export function renderRemediationMarkdown(profile, view) {
+/**
+ * @param {object} profile the Current Profile from buildProfile()
+ * @param {object} view the target view from buildTargetView()
+ * @param {object} [options]
+ * @param {ReturnType<typeof import('../i18n/locale.js').createReportLocale>} [options.locale]
+ *   report locale; English when omitted
+ * @returns {string} Markdown
+ */
+export function renderRemediationMarkdown(profile, view, options) {
+  const locale = asLocale(options?.locale);
+  const { t } = locale;
   const s = view.summary;
+  const functionName = locale.functionNames(view.entries);
   const out = [];
 
-  out.push('# NIST CSF 2.0 — Remediation Plan (Current → Target)');
+  out.push(`# ${t('plan.title')}`);
   out.push('');
-  out.push(`> ${NOTE}`);
+  out.push(`> ${t('plan.note')}`);
   out.push('');
   if (profile.summary.unreviewed > 0 || profile.summary.stale > 0) {
-    out.push(
-      `> **DRAFT — not fully reviewed.** The current-coverage side of this plan contains ` +
-        `${profile.summary.unreviewed} unreviewed and ${profile.summary.stale} stale item(s). ` +
-        'A human must validate every item before this plan is authoritative.',
-    );
+    out.push(`> ${t('plan.draft', { unreviewed: profile.summary.unreviewed, stale: profile.summary.stale })}`);
     out.push('');
   }
+  out.push(...frameworkNoteLines(locale, view.entries));
 
-  out.push('## Overview');
+  out.push(`## ${t('common.heading.overview')}`);
   out.push('');
-  out.push(`- Framework: ${profile.framework} (${profile.frameworkVersion})`);
-  out.push(`- Generated: ${profile.generatedAt}`);
-  out.push(`- Target baseline: **${view.baseline}** for every outcome, plus any overrides recorded in the target profile`);
-  if (view.description) out.push(`- Target description: ${mdLine(view.description)}`);
+  out.push(`- ${t('common.overview.framework', { framework: profile.framework, version: profile.frameworkVersion })}`);
+  out.push(`- ${t('common.overview.generated', { date: profile.generatedAt })}`);
+  out.push(`- ${t('plan.overview.baseline', { baseline: locale.coverage(view.baseline) })}`);
+  if (view.description) out.push(`- ${t('plan.overview.description', { description: mdLine(view.description) })}`);
   if (view.tiers) {
-    out.push(`- ${tierSentence(view.tiers)}`);
-    if (view.tiers.note) out.push(`- Tier note: ${mdLine(view.tiers.note)}`);
+    out.push(`- ${locale.tierSentence(view.tiers)}`);
+    if (view.tiers.note) out.push(`- ${t('tier.note', { note: mdLine(view.tiers.note) })}`);
   }
   out.push(
-    `- Applicable outcomes: ${s.applicable} of ${s.total}` +
-      (s.notApplicable ? ` (${s.notApplicable} scoped out as not-applicable)` : ''),
+    `- ${t('plan.overview.applicable', { applicable: s.applicable, total: s.total })}` +
+      (s.notApplicable ? ` (${t('plan.overview.scopedOut', { count: s.notApplicable })})` : ''),
   );
-  out.push(`- Target met: **${s.met}/${s.applicable} (${s.pctMet}%)** — unmet: **${s.unmet}**` +
-    ` (high ${s.unmetByPriority.high}, medium ${s.unmetByPriority.medium}, low ${s.unmetByPriority.low})`);
+  out.push(
+    `- ${t('plan.overview.met', {
+      met: s.met,
+      applicable: s.applicable,
+      pct: s.pctMet,
+      unmet: s.unmet,
+      high: s.unmetByPriority.high,
+      medium: s.unmetByPriority.medium,
+      low: s.unmetByPriority.low,
+    })}`,
+  );
   out.push('');
 
-  out.push('## Current vs target by Function');
+  out.push(`## ${t('plan.heading.byFunction')}`);
   out.push('');
-  out.push('| Function | Applicable | Met | Unmet | Out of scope | % met |');
+  out.push(t('common.table.target.header'));
   out.push('| --- | ---: | ---: | ---: | ---: | ---: |');
   for (const f of s.byFunction) {
-    out.push(`| ${f.function} | ${f.applicable} | ${f.met} | ${f.unmet} | ${f.notApplicable} | ${f.pctMet}% |`);
+    out.push(`| ${functionName(f.function)} | ${f.applicable} | ${f.met} | ${f.unmet} | ${f.notApplicable} | ${f.pctMet}% |`);
   }
   out.push('');
 
   const unmet = planOrder(view.entries.filter((e) => !e.not_applicable && !e.met));
 
-  out.push('## Prioritized action plan');
+  out.push(`## ${t('plan.heading.actionPlan')}`);
   out.push('');
   if (unmet.length === 0) {
-    out.push('_No unmet targets — the current posture meets or exceeds the target everywhere it applies._');
+    out.push(t('plan.noUnmet'));
     out.push('');
   } else {
-    out.push(
-      'Ranked by remediation priority, then by distance from the target. Work the list top-down; ' +
-        'each item lists what the outcome requires, where the assessment stands, and NIST\'s example actions.',
-    );
+    out.push(t('plan.intro'));
     out.push('');
+    // Only a translated plan needs it: the examples below are NIST's English.
+    const examplesNote = locale.examplesNote();
+    if (examplesNote) {
+      out.push(examplesNote);
+      out.push('');
+    }
     let n = 0;
     for (const prio of PRIORITY_LEVELS) {
       const items = unmet.filter((e) => e.priority === prio);
       if (items.length === 0) continue;
-      out.push(`### ${prio.charAt(0).toUpperCase()}${prio.slice(1)} priority (${items.length})`);
+      out.push(`### ${locale.priorityHeading(prio, items.length)}`);
       out.push('');
       for (const e of items) {
         n++;
-        out.push(`#### ${n}. ${e.subcategory_id} — ${e.current_coverage} → ${e.target_coverage}${levelsToClose(e.gap)}${statusBadge(e)}`);
+        out.push(
+          `#### ${n}. ${e.subcategory_id} — ${locale.coverage(e.current_coverage)} → ` +
+            `${locale.coverage(e.target_coverage)}${levelsToClose(e.gap, locale)}${statusBadge(e, locale)}`,
+        );
         out.push('');
-        out.push(`- Function / Category: ${e.function} / ${e.category}`);
-        out.push(`- Outcome: ${e.outcome}`);
+        out.push(
+          `- ${t('common.item.functionCategory', { function: functionName(e.function), category: locale.categoryLabel(e) })}`,
+        );
+        out.push(`- ${t('common.item.outcome', { outcome: locale.outcome(e) })}`);
         // Held to one line each: the next lines are NIST's own examples, and
         // free text must not be able to add a look-alike entry to that list.
-        out.push(`- Assessment rationale: ${mdLine(e.rationale)}`);
-        if (e.note) out.push(`- Target note: ${mdLine(e.note)}`);
-        const plan = planLine(e.plan);
-        if (plan) out.push(`- Plan (recorded in the target profile): ${plan}`);
+        out.push(`- ${t('common.item.assessmentRationale', { rationale: mdLine(locale.fixed(e.rationale)) })}`);
+        if (e.note) out.push(`- ${t('plan.item.targetNote', { note: mdLine(e.note) })}`);
+        const plan = planLine(e.plan, locale);
+        if (plan) out.push(`- ${t('plan.item.plan', { plan })}`);
         if (e.implementation_examples.length > 0) {
-          out.push('- Suggested actions (NIST CSF 2.0 Implementation Examples):');
+          out.push(`- ${t('plan.item.actions')}`);
+          // Verbatim, in NIST's order and in NIST's language, in every report language.
           e.implementation_examples.forEach((ex, i) => out.push(`  ${i + 1}. ${ex}`));
         } else {
-          out.push('- Suggested actions: (none provided by this CSF core export)');
+          out.push(`- ${t('plan.item.noActions')}`);
         }
         out.push('');
       }
@@ -115,20 +142,24 @@ export function renderRemediationMarkdown(profile, view) {
   }
 
   const met = view.entries.filter((e) => e.met);
-  out.push(`## At or above target (${met.length})`);
+  out.push(`## ${t('plan.heading.met', { count: met.length })}`);
   out.push('');
   if (met.length === 0) {
-    out.push('_No outcome meets its target yet._');
+    out.push(t('plan.noneMet'));
     out.push('');
   } else {
     for (const fn of orderFunctions(met)) {
       const es = met
         .filter((e) => e.function === fn)
         .sort((a, b) => compareText(a.subcategory_id, b.subcategory_id));
-      out.push(`### ${fn}`);
+      out.push(`### ${functionName(fn)}`);
       out.push('');
       for (const e of es) {
-        out.push(`- **${e.subcategory_id}** — ${e.current_coverage} (target: ${e.target_coverage})${statusBadge(e)}`);
+        const entry = t('plan.met.entry', {
+          current: locale.coverage(e.current_coverage),
+          target: locale.coverage(e.target_coverage),
+        });
+        out.push(`- **${e.subcategory_id}** — ${entry}${statusBadge(e, locale)}`);
       }
       out.push('');
     }
@@ -136,48 +167,49 @@ export function renderRemediationMarkdown(profile, view) {
 
   const na = view.entries.filter((e) => e.not_applicable);
   if (na.length > 0) {
-    out.push(`## Out of scope — not-applicable (${na.length})`);
+    out.push(`## ${t('plan.heading.outOfScope', { count: na.length })}`);
     out.push('');
-    out.push('Marked not-applicable in the target profile; excluded from the met/unmet figures above.');
+    out.push(t('plan.outOfScope.intro'));
     out.push('');
     for (const e of na.sort((a, b) => compareText(a.subcategory_id, b.subcategory_id))) {
-      out.push(`- **${e.subcategory_id}** — ${e.outcome}${e.note ? ` _(reason: ${mdLine(e.note)})_` : ''}`);
+      const reason = e.note ? ` _(${t('plan.outOfScope.reason', { reason: mdLine(e.note) })})_` : '';
+      out.push(`- **${e.subcategory_id}** — ${locale.outcome(e)}${reason}`);
     }
     out.push('');
   }
 
   out.push('---');
   out.push('');
-  out.push(
-    'The current-coverage side of this plan comes from the reviewed assessment (see gap-analysis.md and ' +
-      'current-profile.json); every coverage level above "none" is anchored to quotes verified verbatim ' +
-      'against the source documents. Items marked UNREVIEWED or STALE still require human validation.',
-  );
+  out.push(t('plan.footer'));
   out.push('');
   return out.join('\n');
 }
 
-function levelsToClose(gap) {
-  return gap > 0 ? ` (${gap} level${gap > 1 ? 's' : ''} to close)` : '';
+function levelsToClose(gap, locale) {
+  // "1 level" / "2 levels", decided by the same test the reports have always used.
+  const key = gap > 1 ? 'common.levelsToClose.other' : 'common.levelsToClose.one';
+  return gap > 0 ? ` (${locale.t(key, { count: gap })})` : '';
 }
 
 /**
  * The human's plan fields on one line, or null when none is recorded. Only
  * what the person wrote is shown: no default status, and no placeholder for a
- * missing owner or date.
+ * missing owner or date. The status is one of the values target.json accepts
+ * and is shown in the report's language; everything else is the person's text.
  */
-function planLine(plan) {
+function planLine(plan, locale) {
   if (!plan) return null;
+  const { t } = locale;
   const parts = [];
-  if (plan.owner) parts.push(`owner: ${mdLine(plan.owner)}`);
-  if (plan.due) parts.push(`due: ${plan.due}`);
-  if (plan.status) parts.push(`status: ${plan.status}`);
-  if (plan.milestones) parts.push(`milestones: ${mdLine(plan.milestones)}`);
+  if (plan.owner) parts.push(t('plan.item.plan.owner', { value: mdLine(plan.owner) }));
+  if (plan.due) parts.push(t('plan.item.plan.due', { value: plan.due }));
+  if (plan.status) parts.push(t('plan.item.plan.status', { value: locale.planStatus(plan.status) }));
+  if (plan.milestones) parts.push(t('plan.item.plan.milestones', { value: mdLine(plan.milestones) }));
   return parts.length > 0 ? parts.join('; ') : null;
 }
 
-function statusBadge(e) {
-  if (e.review_status === 'unreviewed') return ' _(⚠ UNREVIEWED)_';
-  if (e.review_status === 'stale') return ' _(⚠ STALE REVIEW)_';
+function statusBadge(e, locale) {
+  if (e.review_status === 'unreviewed') return ` _(${locale.t('badge.unreviewed')})_`;
+  if (e.review_status === 'stale') return ` _(${locale.t('badge.stale')})_`;
   return '';
 }

@@ -9,7 +9,15 @@
  * is also told that an automated verifier independently re-checks every quote —
  * which is true (see ../engine/verifier.js) and is what makes honest quoting the
  * model's best strategy.
+ *
+ * The prompts are English in every report language. For a report language
+ * other than English the two user-message builders append one delimited
+ * instruction — write the rationale in that language, leave everything else,
+ * the quotes above all, as specified (see ./language.js). Without a language,
+ * or with English, each builder returns exactly the text it always has.
  */
+
+import { rationaleLanguageSuffix } from './language.js';
 
 export const SYSTEM_PROMPT = `You are a conservative cybersecurity assessor performing a NIST Cybersecurity Framework (CSF) 2.0
 "Current Profile" gap analysis. For a single CSF subcategory, you judge HOW WELL the organization
@@ -115,8 +123,13 @@ export function renderEvidence(hits) {
     .join('\n\n');
 }
 
-/** Build the first-pass per-subcategory task prompt (user message). */
-export function buildTaskPrompt(sub, hits) {
+/**
+ * Build the first-pass per-subcategory task prompt (user message).
+ * @param {object} sub enriched subcategory
+ * @param {Array<object>} hits retrieved evidence chunks
+ * @param {{language?: string}} [options] report language; English when omitted
+ */
+export function buildTaskPrompt(sub, hits, options) {
   return `Assess ONE NIST CSF 2.0 subcategory using ONLY the evidence provided below.
 
 === SUBCATEGORY UNDER ASSESSMENT ===
@@ -157,11 +170,17 @@ markdown, no code fences):
   "needs_review": true
 }
 If you cannot supply a verbatim quote, set "coverage" to "none", "evidence" to [], and "needs_review"
-to true.`;
+to true.${rationaleLanguageSuffix(options?.language)}`;
 }
 
-/** Build the optional skeptical second-pass critique prompt (user message). */
-export function buildCritiquePrompt(sub, hits, firstPassJson) {
+/**
+ * Build the optional skeptical second-pass critique prompt (user message).
+ * @param {object} sub enriched subcategory
+ * @param {Array<object>} hits retrieved evidence chunks
+ * @param {string} firstPassJson the first-pass assessment, serialized
+ * @param {{language?: string}} [options] report language; English when omitted
+ */
+export function buildCritiquePrompt(sub, hits, firstPassJson, options) {
   return `You are reviewing a FIRST-PASS coverage assessment of a single NIST CSF 2.0 subcategory. Your job is
 to independently CONFIRM or CORRECT it using ONLY the same evidence, applying every rule in your system
 instructions. You are a skeptical second reviewer; do not defer to the first pass. Assume the first
@@ -197,5 +216,5 @@ ${firstPassJson}
 Return a SINGLE JSON object and nothing else, in the SAME schema as the first pass (keys:
 subcategory_id, coverage, confidence, evidence[ {source_file, quote} ], rationale, needs_review).
 No prose, no markdown, no code fences. Your "rationale" (2-4 sentences) should state whether you
-confirmed or corrected the first pass and why, grounded only in the evidence above.`;
+confirmed or corrected the first pass and why, grounded only in the evidence above.${rationaleLanguageSuffix(options?.language)}`;
 }

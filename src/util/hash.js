@@ -3,9 +3,10 @@
  *
  * Used for two distinct purposes:
  *  - engineSignature(): a fingerprint of the inputs that produced an assessment
- *    (models, retrieval params, index version). If any input changes, the
- *    signature changes and `analyze` knows the stored assessment is stale and
- *    must be recomputed — this is how resume stays correct.
+ *    (models, retrieval params, index version, and the report language when it
+ *    changes the prompt). If any input changes, the signature changes and
+ *    `analyze` knows the stored assessment is stale and must be recomputed —
+ *    this is how resume stays correct.
  *  - hashAssessment(): a content hash of an AI assessment, recorded on a human
  *    review as `reviewed_against`. If the assessment later changes, the recorded
  *    hash no longer matches and the review is flagged STALE (the human approved
@@ -13,6 +14,7 @@
  */
 
 import { createHash } from 'node:crypto';
+import { DEFAULT_LANGUAGE } from '../i18n/languages.js';
 
 /** Stable SHA-256 (hex) of any JSON-serializable value, with sorted keys. */
 export function stableHash(value) {
@@ -46,9 +48,17 @@ function sortKeys(value) {
 /**
  * Fingerprint of everything that affects an assessment's content. Two analyze
  * runs with the same signature may reuse cached assessments.
+ *
+ * `language` is the report language. A language other than English adds an
+ * instruction to the prompt, so the model's output differs and the language
+ * is part of the fingerprint. English — given or not — is not: an English run
+ * hashes exactly the seven inputs it always has, so assessments made by
+ * earlier versions keep their signature and are not recomputed.
  */
-export function engineSignature({ embeddingModel, llmModel, topK, chunkSize, chunkOverlap, critique, indexId }) {
-  return shortHash({ embeddingModel, llmModel, topK, chunkSize, chunkOverlap, critique, indexId });
+export function engineSignature({ embeddingModel, llmModel, topK, chunkSize, chunkOverlap, critique, indexId, language }) {
+  const inputs = { embeddingModel, llmModel, topK, chunkSize, chunkOverlap, critique, indexId };
+  if (language && language !== DEFAULT_LANGUAGE) inputs.language = language;
+  return shortHash(inputs);
 }
 
 /**

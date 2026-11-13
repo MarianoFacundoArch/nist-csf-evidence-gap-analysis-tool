@@ -7,6 +7,8 @@
  * lets us catch typos like "topk" instead of "topK".
  */
 
+import { SUPPORTED_LANGUAGES } from '../i18n/languages.js';
+
 export const configSchema = {
   type: 'object',
   additionalProperties: false,
@@ -82,6 +84,8 @@ export const configSchema = {
           type: ['array', 'null'],
           items: { type: 'string', minLength: 1 },
         },
+        // The languages src/i18n ships a message catalog for.
+        language: { type: 'string', enum: [...SUPPORTED_LANGUAGES] },
       },
     },
 

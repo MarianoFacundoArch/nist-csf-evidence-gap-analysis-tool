@@ -16,6 +16,11 @@
  * Provider/transport errors are allowed to propagate so a systemic failure
  * (bad key, daemon down) stops the run with guidance instead of silently
  * marking every subcategory "none". Only MALFORMED MODEL OUTPUT degrades here.
+ *
+ * The report language (`config.report.language`) reaches the model as one
+ * added instruction in the user messages: write the rationale in it. Nothing
+ * else in this flow depends on the language — the same retrieval, the same
+ * schema, the same verifier — and for English the prompts are unchanged.
  */
 
 import { SYSTEM_PROMPT, buildTaskPrompt, buildCritiquePrompt } from '../prompts/templates.js';
@@ -103,7 +108,8 @@ export async function assessSubcategory({ sub, index, embedder, llm, config, eng
 
   // 3) Prompt + parse + validate, retry once on malformed output.
   const system = SYSTEM_PROMPT;
-  let user = buildTaskPrompt(sub, hits);
+  const promptOptions = { language: config.report?.language };
+  let user = buildTaskPrompt(sub, hits, promptOptions);
   let parsed = null;
   for (let attempt = 0; attempt < 2 && !parsed; attempt++) {
     const raw = await llm.judge({ system, user, meta: { subcategory: sub, hits, pass: 'first' } });
@@ -114,7 +120,7 @@ export async function assessSubcategory({ sub, index, embedder, llm, config, eng
     } else if (attempt === 0) {
       // Retry once, telling the model exactly what was wrong.
       user =
-        buildTaskPrompt(sub, hits) +
+        buildTaskPrompt(sub, hits, promptOptions) +
         `\n\nYOUR PREVIOUS RESPONSE WAS REJECTED for these reasons:\n- ${result.errors.join('\n- ')}\n` +
         'Return ONLY the corrected single JSON object, nothing else.';
     }
@@ -141,7 +147,7 @@ export async function assessSubcategory({ sub, index, embedder, llm, config, eng
       rationale: parsed.rationale,
       needs_review: parsed.needs_review,
     });
-    const critiqueUser = buildCritiquePrompt(sub, hits, firstPassJson);
+    const critiqueUser = buildCritiquePrompt(sub, hits, firstPassJson, promptOptions);
     const raw2 = await llm.judge({
       system,
       user: critiqueUser,

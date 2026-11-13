@@ -30,6 +30,7 @@
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
 import { orderFunctions } from '../csf/order.js';
 import { compareText } from '../util/compare.js';
+import { asLocale } from '../i18n/locale.js';
 
 /** Names listed inline in a note before it switches to "and N more". */
 const NOTE_NAME_LIMIT = 10;
@@ -186,61 +187,52 @@ export function buildDocumentView(profile, { assessments = {}, meta = {} } = {})
  * The caveats that apply to a view, as fixed sentences. One function so the
  * Markdown report and the dashboard word them identically; `formatName` lets a
  * renderer escape document names for its own medium (they are untrusted text).
+ * The view itself always carries the English sentences (`view.notes`); a
+ * renderer in another report language asks for them again with its locale.
  * @param {object} view a view from buildDocumentView()
  * @param {(name: string) => string} [formatName]
+ * @param {ReturnType<typeof import('../i18n/locale.js').createReportLocale>} [locale]
+ *   report locale; English when omitted
  * @returns {string[]}
  */
-export function documentViewNotes(view, formatName = (name) => name) {
+export function documentViewNotes(view, formatName = (name) => name, given) {
+  const locale = asLocale(given);
+  const { t } = locale;
   const notes = [];
   const list = (names) => {
     const shown = names.slice(0, NOTE_NAME_LIMIT).map(formatName).join(', ');
-    return names.length > NOTE_NAME_LIMIT ? `${shown}, and ${names.length - NOTE_NAME_LIMIT} more` : shown;
+    return names.length > NOTE_NAME_LIMIT
+      ? t('docs.caveat.andMore', { shown, count: names.length - NOTE_NAME_LIMIT })
+      : shown;
   };
 
   if (view.documentList === 'reconstructed') {
-    notes.push(
-      'Document list reconstructed from the assessment: this work directory has no ingest record of its ' +
-        'documents (it was ingested by an earlier version of the tool). Only documents that were retrieved or ' +
-        'quoted for at least one outcome are listed, chunk counts are unavailable, and files that share a name ' +
-        'cannot be detected. Re-run the ingest stage to record the full list.',
-    );
+    notes.push(t('docs.caveat.reconstructed'));
   }
   for (const shared of view.sharedNames) {
     notes.push(
-      `${shared.paths.length} ingested files share the name ${formatName(shared.source_file)}: ${list(shared.paths)}. ` +
-        'Evidence is recorded by file name, so their quotes and retrievals cannot be attributed to one file or ' +
-        'another and are counted together in a single row.',
+      t('docs.caveat.sharedName', {
+        count: shared.paths.length,
+        name: formatName(shared.source_file),
+        paths: list(shared.paths),
+      }),
     );
   }
   if (view.unlisted.length > 0) {
-    const n = view.unlisted.length;
-    notes.push(
-      `${n} document${n === 1 ? ' appears' : 's appear'} in the assessment but not in the latest ingest record: ` +
-        `${list(view.unlisted)}. The assessment was made against an earlier set of documents; re-run the analyze ` +
-        'stage to bring it up to date.',
-    );
+    notes.push(locale.plural('docs.caveat.unlisted', view.unlisted.length, { names: list(view.unlisted) }));
   }
   if (!view.retrievalRecorded) {
-    notes.push(
-      'The assessment does not record which passages were retrieved for each outcome, so the "retrieved for" ' +
-        'figures are unavailable.',
-    );
+    notes.push(t('docs.caveat.noRetrieval'));
   }
   // This view can only show what the analysis looked at. When the analysis is
   // behind the document index, or unfinished, "never quoted" would otherwise
   // read as a finding about documents that were never examined.
   const analysis = view.analysis;
   if (analysis?.status === 'stale') {
-    notes.push(
-      `The assessment is out of date with its inputs (${analysis.reasons.join('; ')}). A document ingested or ` +
-        'changed after the analysis has not been assessed and appears here as never quoted; re-run the analyze ' +
-        'stage.',
-    );
+    // The reasons are the status module's fixed phrases, kept in the data in English.
+    notes.push(t('docs.caveat.stale', { reasons: analysis.reasons.map(locale.fixed).join('; ') }));
   } else if (analysis && analysis.assessed < analysis.total) {
-    notes.push(
-      `The analysis is incomplete: ${analysis.assessed} of ${analysis.total} outcomes have been assessed. The ` +
-        'figures here cover only those outcomes; run the analyze stage to complete it.',
-    );
+    notes.push(t('docs.caveat.incomplete', { assessed: analysis.assessed, total: analysis.total }));
   }
   return notes;
 }

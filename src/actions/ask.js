@@ -16,11 +16,18 @@
  * The answer is this command's product, so it is handed to the UI port's
  * `result()` — stdout in command mode, a note in the interactive menu — while
  * diagnostics go through the logger (stderr), like every other action.
+ *
+ * The result block follows `report.language`, like the reports: its wording
+ * comes from the message catalog, and the model is asked to write its summary
+ * in that language (engine/ask.js). The quotes are never translated — they are
+ * the documents' own words — and the structured result the action returns is
+ * the same in every language. Prompts and log lines stay English.
  */
 
 import { loadIndex, assertSameEmbedder } from '../store/vectorStore.js';
 import { answerQuestion, UNSUPPORTED_REASONS } from '../engine/ask.js';
 import { ConfigError } from '../core/errors.js';
+import { createReportLocale, asLocale } from '../i18n/locale.js';
 
 const USAGE_HINT = 'Usage: csf-tool ask "is MFA required for remote access?"';
 
@@ -92,8 +99,10 @@ export async function ask(ctx) {
     providers: { embeddings: embedder.id, llm: llm.id },
   };
 
-  const body = renderAnswer(result);
-  if (ctx.ui?.result) ctx.ui.result('Answer', body);
+  // Only the wording is needed here, not the framework's translated text.
+  const locale = createReportLocale({ language: config.report?.language });
+  const body = renderAnswer(result, { locale });
+  if (ctx.ui?.result) ctx.ui.result(locale.t('ask.title'), body);
   else logger.info(body);
   return result;
 }
@@ -104,29 +113,34 @@ export async function ask(ctx) {
  * is not (the summary sentence), and that only the retrieved passages were
  * searched — so "no evidence" is never read as "the documents contain none".
  * @param {object} result the action's structured result
+ * @param {object} [options]
+ * @param {ReturnType<typeof createReportLocale>} [options.locale] report locale; English when omitted
  * @returns {string}
  */
-export function renderAnswer(result) {
-  const lines = [`Question: ${oneLine(result.question)}`, ''];
-  const searched = describeSearch(result);
+export function renderAnswer(result, options) {
+  const locale = asLocale(options?.locale);
+  const { t } = locale;
+  const lines = [t('ask.question', { question: oneLine(result.question) }), ''];
+  const searched = describeSearch(result, locale);
 
   if (!result.supported) {
-    lines.push(result.answer); // always the tool's own fixed sentence
-    const why = describeUnsupported(result);
+    // Always the tool's own fixed sentence; the result carries it in English.
+    lines.push(locale.fixed(result.answer));
+    const why = describeUnsupported(result, locale);
     if (why) lines.push(why);
     lines.push(searched);
     if (result.passages_searched > 0 && result.passages_searched < result.passages_indexed) {
-      lines.push('Only those passages were read, so this means "not found there", not "the documents contain nothing on this".');
+      lines.push(t('ask.partialSearch'));
     }
     return lines.join('\n');
   }
 
-  lines.push('Answer (AI-generated summary — check it against the quotes below):');
+  lines.push(t('ask.answerLabel'));
   lines.push(oneLine(result.answer));
   lines.push('');
-  lines.push(`Verified quotes (${result.evidence.length}):`);
+  lines.push(t('ask.quotesLabel', { count: result.evidence.length }));
   result.evidence.forEach((e, i) => {
-    const where = `${e.source_file}${e.page ? `, p.${e.page}` : ''}`;
+    const where = locale.where(e.source_file, e.page);
     // One line per quote: line breaks inside a quote are shown as spaces.
     lines.push(`  ${i + 1}. ${oneLine(where)}: "${oneLine(e.quote)}"`);
   });
@@ -134,34 +148,33 @@ export function renderAnswer(result) {
 
   const { quotes_checked: checked, quotes_verified: verified, quotes_dropped: dropped } = result.verification;
   if (dropped > 0) {
-    lines.push(`${verified} of ${checked} quotes returned by the model were verified verbatim against the ingested documents; the rest were removed.`);
+    lines.push(t('ask.verified.some', { verified, checked }));
   } else if (checked === 1) {
-    lines.push('The quote returned by the model was verified verbatim against the ingested documents.');
+    lines.push(t('ask.verified.single'));
   } else {
-    lines.push(`All ${checked} quotes returned by the model were verified verbatim against the ingested documents.`);
+    lines.push(t('ask.verified.all', { count: checked }));
   }
-  lines.push('Only the quotes are verified. The summary is the model\'s wording and is not itself verified.');
+  lines.push(t('ask.onlyQuotesVerified'));
   lines.push(searched);
   return lines.join('\n');
 }
 
-function describeSearch(result) {
+function describeSearch(result, locale) {
   const n = result.passages_searched;
-  if (n === 0) return 'The index returned no passages to search.';
-  if (n >= result.passages_indexed) return `Searched all ${n} passage${n === 1 ? '' : 's'} of the index.`;
-  return `Searched the ${n} most relevant of ${result.passages_indexed} passages of the index (retrieval.topK = ${result.top_k}).`;
+  if (n === 0) return locale.t('ask.search.none');
+  if (n >= result.passages_indexed) return locale.plural('ask.search.all', n);
+  return locale.t('ask.search.top', { count: n, indexed: result.passages_indexed, topK: result.top_k });
 }
 
 /** The one extra line that says why there is no answer, when there is more to say. */
-function describeUnsupported(result) {
+function describeUnsupported(result, locale) {
   const checked = result.verification.quotes_checked;
   switch (result.unsupported_reason) {
     case UNSUPPORTED_REASONS.NO_VALID_QUOTE:
-      return checked === 0
-        ? 'The model proposed an answer without any quote, so the answer was withheld.'
-        : `The model proposed an answer, but ${checked === 1 ? 'its quote could not' : `none of its ${checked} quotes could`} be verified verbatim, so the answer was withheld.`;
+      if (checked === 0) return locale.t('ask.withheld.noQuote');
+      return checked === 1 ? locale.t('ask.withheld.oneQuote') : locale.t('ask.withheld.quotes', { count: checked });
     case UNSUPPORTED_REASONS.INVALID_OUTPUT:
-      return 'The model did not return a usable response, even after one retry, so there was no answer to verify.';
+      return locale.t('ask.invalidOutput');
     default:
       return null;
   }

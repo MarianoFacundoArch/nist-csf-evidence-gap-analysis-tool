@@ -13,152 +13,146 @@
  * it may be outside the framework's scope, duplicate what another document was
  * quoted for, or simply not have been retrieved. Document names are untrusted
  * text and are always emitted as code spans.
+ *
+ * The wording comes from the message catalog through a report locale
+ * (src/i18n/locale.js): English when none is given, as always; otherwise the
+ * tool's sentences in that language, with Function names and outcomes from the
+ * published translation of the Core.
  */
 
 import { documentViewNotes } from './documentView.js';
 import { mdCode, mdCell } from './markdownText.js';
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
-
-const NOTE =
-  'The reverse view of the assessment: for each of the organization\'s documents, the CSF 2.0 outcomes it is ' +
-  'quoted for. Every quote counted here was verified verbatim against the document text. Coverage levels are ' +
-  'those of the Current Profile (see gap-analysis.md): AI proposes, a human validates.';
-
-const NEVER_QUOTED_NOTE =
-  'No passage from these documents was selected as verbatim evidence for a CSF 2.0 outcome in this assessment. ' +
-  'That alone does not make a document irrelevant or without value: its content may be outside the scope of ' +
-  'the framework, may duplicate what another document was quoted for, or may simply not have been among the ' +
-  'passages retrieved for an outcome.';
+import { asLocale, frameworkNoteLines } from '../i18n/locale.js';
 
 /**
  * @param {object} profile the Current Profile from buildProfile()
  * @param {object} view the document view from buildDocumentView()
+ * @param {object} [options]
+ * @param {ReturnType<typeof import('../i18n/locale.js').createReportLocale>} [options.locale]
+ *   report locale; English when omitted
  * @returns {string} Markdown
  */
-export function renderDocumentsMarkdown(profile, view) {
+export function renderDocumentsMarkdown(profile, view, options) {
+  const locale = asLocale(options?.locale);
+  const { t } = locale;
   const s = view.summary;
   const reconstructed = view.documentList === 'reconstructed';
   const byId = new Map(profile.subcategories.map((e) => [e.subcategory_id, e]));
+  const functionName = locale.functionNames(profile.subcategories);
+  const functionList = (names) => names.map(functionName).join(', ');
   const out = [];
 
-  out.push('# NIST CSF 2.0 — Evidence by Document');
+  out.push(`# ${t('docs.title')}`);
   out.push('');
-  out.push(`> ${NOTE}`);
+  out.push(`> ${t('docs.note')}`);
   out.push('');
   if (profile.summary.unreviewed > 0 || profile.summary.stale > 0) {
-    out.push(
-      `> **DRAFT — not fully reviewed.** ${profile.summary.unreviewed} unreviewed and ${profile.summary.stale} ` +
-        'stale item(s) remain. A human must validate every item before the coverage levels shown here are ' +
-        'authoritative.',
-    );
+    out.push(`> ${t('docs.draft', { unreviewed: profile.summary.unreviewed, stale: profile.summary.stale })}`);
     out.push('');
   }
+  out.push(...frameworkNoteLines(locale, profile.subcategories));
 
-  out.push('## Summary');
+  out.push(`## ${t('docs.heading.summary')}`);
   out.push('');
-  out.push(`- Generated: ${profile.generatedAt}`);
-  out.push(`- Documents ingested: ${ingestedLine(view)}`);
+  out.push(`- ${t('common.overview.generated', { date: profile.generatedAt })}`);
+  out.push(`- ${t('docs.summary.ingested', { value: ingestedLine(view, locale) })}`);
   if (s.notIngested) {
-    out.push(
-      `- Not ingested: ${s.notIngested.skipped} skipped (no extractable text), ${s.notIngested.failed} failed to ` +
-        'parse — these files are not part of the assessment and are not listed here',
-    );
+    out.push(`- ${t('docs.summary.notIngested', { skipped: s.notIngested.skipped, failed: s.notIngested.failed })}`);
   }
-  out.push(`- Quoted at least once: ${s.documentsQuoted}`);
-  out.push(`- ${reconstructed ? 'Retrieved' : 'Ingested'} but never quoted: ${s.documentsNeverQuoted}`);
+  out.push(`- ${t('docs.summary.quoted', { count: s.documentsQuoted })}`);
+  out.push(
+    `- ${t(reconstructed ? 'docs.summary.neverQuoted.retrieved' : 'docs.summary.neverQuoted.ingested', { count: s.documentsNeverQuoted })}`,
+  );
   if (s.documentsUnlisted > 0) {
-    out.push(`- In the assessment but not in the latest ingest record: ${s.documentsUnlisted} (see the note below)`);
+    out.push(`- ${t('docs.summary.unlisted', { count: s.documentsUnlisted })}`);
   }
-  out.push(`- Outcomes with at least one verified quote: ${s.outcomesWithQuotes} of ${s.outcomes}`);
-  out.push(`- Verified quotes: ${s.quotes}`);
-  out.push(`- Evidence concentration: ${concentrationLine(s)}`);
+  out.push(`- ${t('docs.summary.outcomesWithQuotes', { count: s.outcomesWithQuotes, total: s.outcomes })}`);
+  out.push(`- ${t('docs.summary.quotes', { count: s.quotes })}`);
+  out.push(`- ${t('docs.summary.concentration', { value: concentrationLine(s, locale) })}`);
   out.push('');
-  for (const note of documentViewNotes(view, mdCode)) {
-    out.push(`> **Note.** ${note}`);
+  for (const note of documentViewNotes(view, mdCode, locale)) {
+    out.push(`> ${t('common.note', { note })}`);
     out.push('');
   }
 
-  out.push('## Documents');
+  out.push(`## ${t('docs.heading.documents')}`);
   out.push('');
   if (view.documents.length === 0) {
-    out.push('_No document is recorded for this assessment._');
+    out.push(t('docs.noDocuments'));
     out.push('');
   } else {
-    out.push(
-      'Ordered by the number of outcomes a document is quoted for, then by name. "Retrieved for" counts the ' +
-        'outcomes for which at least one passage of the document was among those retrieved for the assessment; ' +
-        '"Quoted for" counts the outcomes with at least one verified quote from it. The last four numeric ' +
-        'columns break those outcomes down by their current coverage.',
-    );
+    out.push(t('docs.documents.intro'));
     out.push('');
-    out.push('| Document | Chunks | Retrieved for | Quoted for | Verified quotes | None | Partial | Substantial | Full | Functions |');
+    out.push(t('docs.table.documents.header'));
     out.push('| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |');
     for (const d of view.documents) {
       const c = d.cited_by_coverage;
       out.push(
         `| ${mdCell(mdCode(d.source_file))} | ${orDash(d.chunks)} | ${orDash(d.retrieved_for)} | ${d.cited_in.length} | ` +
-          `${d.quotes} | ${c.none} | ${c.partial} | ${c.substantial} | ${c.full} | ${d.functions.join(', ') || '—'} |`,
+          `${d.quotes} | ${c.none} | ${c.partial} | ${c.substantial} | ${c.full} | ${functionList(d.functions) || '—'} |`,
       );
     }
     out.push('');
   }
 
   const quoted = view.documents.filter((d) => d.quotes > 0);
-  out.push('## What each document is quoted for');
+  out.push(`## ${t('docs.heading.quotedFor')}`);
   out.push('');
   if (quoted.length === 0) {
-    out.push('_No document is quoted: no outcome has a verified quote in this assessment._');
+    out.push(t('docs.noneQuoted'));
     out.push('');
   } else if (quoted.some((d) => d.cited_by_coverage.none > 0)) {
     // Only possible through a human override; explain it where it occurs.
-    out.push(
-      'An outcome listed below with coverage "none" was set to that level by a reviewer: the quotes the ' +
-        'assessment selected stay listed so the decision remains traceable.',
-    );
+    out.push(t('docs.quotedFor.noneOverride'));
     out.push('');
   }
   for (const d of quoted) {
     out.push(`### ${mdCode(d.source_file)}`);
     out.push('');
-    if (d.files > 1) out.push(`- ${d.files} ingested files share this name; their figures are combined (see the note above)`);
-    if (!d.listed) out.push('- Not in the latest ingest record (see the note above)');
-    out.push(`- Chunks indexed: ${d.chunks ?? 'not recorded'}`);
-    if (d.retrieved_for != null) out.push(`- Retrieved for: ${d.retrieved_for} of ${s.outcomes} outcomes`);
+    if (d.files > 1) out.push(`- ${t('docs.doc.sharedName', { files: d.files })}`);
+    if (!d.listed) out.push(`- ${t('docs.doc.unlisted')}`);
+    out.push(`- ${t('docs.doc.chunks', { chunks: d.chunks ?? t('docs.notRecorded') })}`);
+    if (d.retrieved_for != null) {
+      out.push(`- ${t('docs.doc.retrievedFor', { count: d.retrieved_for, total: s.outcomes })}`);
+    }
     out.push(
-      `- Quoted for: ${count(d.cited_in.length, 'outcome')} (${count(d.quotes, 'verified quote')}) in ${d.functions.join(', ')}`,
+      `- ${t('docs.doc.quotedFor', {
+        outcomes: locale.plural('common.count.outcome', d.cited_in.length),
+        quotes: locale.plural('docs.count.verifiedQuote', d.quotes),
+        functions: functionList(d.functions),
+      })}`,
     );
     out.push(
-      `- Current coverage of those outcomes: ${COVERAGE_LEVELS.map((level) => `${level} ${d.cited_by_coverage[level]}`).join(', ')}`,
+      `- ${t('docs.doc.coverage', {
+        distribution: COVERAGE_LEVELS.map((level) => `${locale.coverage(level)} ${d.cited_by_coverage[level]}`).join(', '),
+      })}`,
     );
     out.push('');
     for (const c of d.citations) {
       const e = byId.get(c.subcategory_id);
-      const pages = c.pages.length ? ` (${c.pages.map((p) => `p.${p}`).join(', ')})` : '';
+      const pages = c.pages.length ? ` (${c.pages.map((page) => t('common.page', { page })).join(', ')})` : '';
       out.push(
-        `- **${c.subcategory_id}** — _${c.coverage}_${statusBadge(c, e)} — ${count(c.quotes, 'quote')}${pages}` +
-          `${e ? `: ${e.outcome}` : ''}`,
+        `- **${c.subcategory_id}** — _${locale.coverage(c.coverage)}_${statusBadge(c, e, locale)} — ` +
+          `${locale.plural('common.count.quote', c.quotes)}${pages}${e ? `: ${locale.outcome(e)}` : ''}`,
       );
     }
     out.push('');
   }
 
   const neverQuoted = view.documents.filter((d) => d.quotes === 0 && d.listed);
-  out.push(`## ${reconstructed ? 'Retrieved' : 'Ingested'} but never quoted`);
+  out.push(`## ${t(reconstructed ? 'docs.heading.neverQuoted.retrieved' : 'docs.heading.neverQuoted.ingested')}`);
   out.push('');
   if (view.documents.length === 0) {
-    out.push('_No document is recorded for this assessment._');
+    out.push(t('docs.noDocuments'));
     out.push('');
   } else if (neverQuoted.length === 0) {
-    out.push(
-      reconstructed
-        ? '_Every document seen in the assessment is quoted for at least one outcome._'
-        : '_Every ingested document is quoted for at least one outcome._',
-    );
+    out.push(t(reconstructed ? 'docs.neverQuoted.none.retrieved' : 'docs.neverQuoted.none.ingested'));
     out.push('');
   } else {
-    out.push(NEVER_QUOTED_NOTE);
+    out.push(t('docs.neverQuoted.note'));
     out.push('');
-    out.push('| Document | Chunks | Retrieved for |');
+    out.push(t('docs.table.neverQuoted.header'));
     out.push('| --- | ---: | ---: |');
     for (const d of neverQuoted) {
       out.push(`| ${mdCell(mdCode(d.source_file))} | ${orDash(d.chunks)} | ${orDash(d.retrieved_for)} |`);
@@ -166,32 +160,25 @@ export function renderDocumentsMarkdown(profile, view) {
     out.push('');
   }
   if (reconstructed) {
-    out.push(
-      'The document list was reconstructed, so a document that was never retrieved for any outcome is missing ' +
-        'from this section.',
-    );
+    out.push(t('docs.neverQuoted.reconstructed'));
     out.push('');
   }
 
   out.push('---');
   out.push('');
-  out.push(
-    'Derived from the same Current Profile as gap-analysis.md and evidence-map.csv, which lists every quote with ' +
-      'its text. Documents are identified by file name. Items marked UNREVIEWED or STALE still require human ' +
-      'validation.',
-  );
+  out.push(t('docs.footer'));
   out.push('');
   return out.join('\n');
 }
 
-function ingestedLine(view) {
+function ingestedLine(view, locale) {
   const s = view.summary;
   if (s.documentsIngested == null) {
-    return `not recorded — ${s.documents} seen in the assessment (see the note below)`;
+    return locale.t('docs.summary.ingested.notRecorded', { count: s.documents });
   }
   return s.documentNames === s.documentsIngested
     ? String(s.documentsIngested)
-    : `${s.documentsIngested} files under ${s.documentNames} distinct file names (see the note below)`;
+    : locale.t('docs.summary.ingested.sharedNames', { files: s.documentsIngested, names: s.documentNames });
 }
 
 /**
@@ -200,27 +187,24 @@ function ingestedLine(view) {
  * by name — so it is "where half is first reached in this table", not a claim
  * about the smallest possible set of documents.
  */
-function concentrationLine(s) {
-  if (!s.concentration) return 'not applicable (no outcome has a verified quote)';
+function concentrationLine(s, locale) {
+  if (!s.concentration) return locale.t('docs.concentration.none');
   const { documents, outcomes } = s.concentration;
-  const share = `${outcomes} of the ${s.outcomesWithQuotes} outcomes that have a quote`;
   return documents === 1
-    ? `the first document in the table below is quoted for ${share} — at least half`
-    : `the first ${documents} documents in the table below are together quoted for ${share} — the point in ` +
-        'the table at which half is first reached';
+    ? locale.t('docs.concentration.single', { outcomes, total: s.outcomesWithQuotes })
+    : locale.t('docs.concentration.several', { documents, outcomes, total: s.outcomesWithQuotes });
 }
 
 /** Review state of the cited outcome; AI output is never shown as validated. */
-function statusBadge(citation, entry) {
+function statusBadge(citation, entry, locale) {
+  const { t } = locale;
   const parts = [];
-  if (citation.review_status === 'unreviewed') parts.push('⚠ UNREVIEWED');
-  else if (citation.review_status === 'stale') parts.push('⚠ STALE REVIEW');
-  if (entry?.human_coverage != null) parts.push(`reviewer override: ${entry.ai_coverage} → ${entry.human_coverage}`);
+  if (citation.review_status === 'unreviewed') parts.push(t('badge.unreviewed'));
+  else if (citation.review_status === 'stale') parts.push(t('badge.stale'));
+  if (entry?.human_coverage != null) {
+    parts.push(t('badge.override', { from: locale.coverage(entry.ai_coverage), to: locale.coverage(entry.human_coverage) }));
+  }
   return parts.length ? ` _(${parts.join('; ')})_` : '';
-}
-
-function count(n, noun) {
-  return `${n} ${noun}${n === 1 ? '' : 's'}`;
 }
 
 function orDash(value) {

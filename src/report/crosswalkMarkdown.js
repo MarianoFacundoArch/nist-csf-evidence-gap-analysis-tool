@@ -26,13 +26,17 @@
  * Unreviewed/stale outcomes are marked inline and the report carries the same
  * DRAFT banner rule as the gap analysis, so AI output is never mistaken for
  * validated output here either.
+ *
+ * In another report language (a locale from src/i18n/locale.js) the same
+ * statements are made in that language — the caveats above are the reason this
+ * deliverable exists, so every one of them has a translated counterpart — and
+ * a related Category or Function is named as the published translation of the
+ * Core names it. What comes from the mapping data (framework names, developer
+ * names, identifiers) is never translated.
  */
 
 import { COVERAGE_LEVELS } from '../engine/coverage.js';
-
-const THIRD_PARTY_LINE =
-  '**Third-party mapping — not produced by the framework\'s publisher.** It is reproduced as published, ' +
-  'including any entries that are non-specific or appear to be errors.';
+import { asLocale, frameworkNoteLines } from '../i18n/locale.js';
 
 /**
  * Escape text from the data file for inline Markdown. Labels and identifiers
@@ -45,47 +49,40 @@ function esc(value) {
     .replace(/[\\`*_[\]<>|]/g, '\\$&');
 }
 
-function howToRead(view) {
+function howToRead(view, t) {
   return [
-    '**Related, not equivalent.** A mapping records that a CSF 2.0 outcome and a reference in another ' +
-      'framework are related. It does not say that achieving one satisfies the other.',
-    '**Coverage is about the CSF outcome only.** The coverage shown beside an outcome is what this assessment ' +
-      'found for that outcome. It is not a determination of conformance with the referenced control or ' +
-      'requirement, and this report does not measure conformance with any other framework.',
-    '**Three levels of relationship.** A mapping relates a reference to one CSF outcome (a Subcategory), to a ' +
-      'whole Category, or to a whole Function. Each crosswalk below lists the first kind in one table and the ' +
-      'other two in a second table. For a whole Category or Function the report shows how the outcomes under ' +
-      'it are distributed across coverage levels; it does not pick one, because the mapping does not.',
-    '**Identifiers only.** No control or requirement text from the referenced frameworks is reproduced here. ' +
-      'Consult each framework\'s own publication for what an identifier means.',
-    `**Who made each mapping.** The mappings come from: ${esc(view.source)}. Each was developed by the party ` +
-      'named as its developer there — not by this project, which adds no mappings of its own. Inclusion here ' +
-      'is not an endorsement by NIST or by this project.',
+    t('crosswalk.howToRead.related'),
+    t('crosswalk.howToRead.coverage'),
+    t('crosswalk.howToRead.levels'),
+    t('crosswalk.howToRead.identifiers'),
+    t('crosswalk.howToRead.who', { source: esc(view.source) }),
   ];
 }
 
-function relatedCell(reference, hasGroupTable) {
+function relatedCell(reference, hasGroupTable, locale) {
+  const { t } = locale;
   const outcomes = reference.related
     .map((r) => {
-      const marks = [r.coverage];
-      if (r.review_status === 'unreviewed') marks.push('⚠ UNREVIEWED');
-      else if (r.review_status === 'stale') marks.push('⚠ STALE REVIEW');
+      const marks = [locale.coverage(r.coverage)];
+      if (r.review_status === 'unreviewed') marks.push(t('badge.unreviewed'));
+      else if (r.review_status === 'stale') marks.push(t('badge.stale'));
       return `${esc(r.subcategory_id)} (${marks.join(', ')})`;
     })
     .join(', ');
-  return reference.groups.length > 0 && hasGroupTable
-    ? `${outcomes} — also related to a whole Category or Function (next table)`
-    : outcomes;
+  return reference.groups.length > 0 && hasGroupTable ? t('crosswalk.related.alsoGroup', { outcomes }) : outcomes;
 }
 
 /** "5 outcomes: none 2, partial 3 (⚠ 1 unreviewed)" — counts, never a single level. */
-function distributionCell(group) {
-  const levels = COVERAGE_LEVELS.filter((level) => group.coverage[level] > 0).map((level) => `${level} ${group.coverage[level]}`);
+function distributionCell(group, locale) {
+  const { t } = locale;
+  const levels = COVERAGE_LEVELS.filter((level) => group.coverage[level] > 0).map(
+    (level) => `${locale.coverage(level)} ${group.coverage[level]}`,
+  );
   const pending = [];
-  if (group.review.unreviewed > 0) pending.push(`${group.review.unreviewed} unreviewed`);
-  if (group.review.stale > 0) pending.push(`${group.review.stale} stale`);
+  if (group.review.unreviewed > 0) pending.push(t('crosswalk.pending.unreviewed', { count: group.review.unreviewed }));
+  if (group.review.stale > 0) pending.push(t('crosswalk.pending.stale', { count: group.review.stale }));
   return (
-    `${group.outcomes} outcome${group.outcomes === 1 ? '' : 's'}: ${levels.join(', ')}` +
+    locale.plural('crosswalk.distribution', group.outcomes, { distribution: levels.join(', ') }) +
     (pending.length ? ` (⚠ ${pending.join(', ')})` : '')
   );
 }
@@ -93,93 +90,96 @@ function distributionCell(group) {
 /**
  * @param {object} profile the Current Profile (framework, timestamps, review counts)
  * @param {ReturnType<typeof import('../crosswalk/view.js').buildCrosswalkView>} view
+ * @param {object} [options]
+ * @param {ReturnType<typeof import('../i18n/locale.js').createReportLocale>} [options.locale]
+ *   report locale; English when omitted
  * @returns {string} Markdown
  */
-export function renderCrosswalkMarkdown(profile, view) {
+export function renderCrosswalkMarkdown(profile, view, options) {
+  const locale = asLocale(options?.locale);
+  const { t } = locale;
   const s = profile.summary;
   const out = [];
 
-  out.push('# NIST CSF 2.0 — Crosswalks to Other Frameworks (Informative References)');
+  out.push(`# ${t('crosswalk.title')}`);
   out.push('');
-  out.push('> **How to read this report**');
+  out.push(`> ${t('crosswalk.howToRead.title')}`);
   out.push('>');
-  for (const line of howToRead(view)) out.push(`> - ${line}`);
+  for (const line of howToRead(view, t)) out.push(`> - ${line}`);
   out.push('');
   if (s.unreviewed > 0 || s.stale > 0) {
     // The counts are assessment-wide (a narrow selection may show none of the
     // affected outcomes), so the banner says "in the assessment", not "below".
-    out.push(
-      `> **DRAFT — not fully reviewed.** ${s.unreviewed} unreviewed and ${s.stale} stale item(s) remain in the ` +
-        'assessment; any of them that appear below are marked. A human must validate every item before these ' +
-        'coverage values are relied on.',
-    );
+    out.push(`> ${t('crosswalk.draft', { unreviewed: s.unreviewed, stale: s.stale })}`);
     out.push('');
   }
+  out.push(...frameworkNoteLines(locale, profile.subcategories));
 
-  out.push('## Overview');
+  out.push(`## ${t('common.heading.overview')}`);
   out.push('');
-  out.push(`- Framework: ${profile.framework} (${profile.frameworkVersion})`);
-  out.push(`- Generated: ${profile.generatedAt}`);
-  out.push(`- CSF source: ${profile.csfSource}`);
-  out.push(`- Mapping source: ${esc(view.source)} — retrieved ${esc(view.retrievedAt)}`);
+  out.push(`- ${t('common.overview.framework', { framework: profile.framework, version: profile.frameworkVersion })}`);
+  out.push(`- ${t('common.overview.generated', { date: profile.generatedAt })}`);
+  out.push(`- ${t('common.overview.csfSource', { source: locale.fixed(profile.csfSource) })}`);
+  out.push(`- ${t('crosswalk.overview.mappingSource', { source: esc(view.source), date: esc(view.retrievedAt) })}`);
   // Angle brackets make a URL an autolink: nothing inside is parsed as Markdown.
-  out.push(`- Catalog where each mapping and its developer are listed: <${view.catalogUrl}>`);
-  out.push(
-    `- Coverage: from the Current Profile (current-profile.json) — reviewed ${s.reviewed}, ` +
-      `unreviewed ${s.unreviewed}, stale ${s.stale}`,
-  );
-  out.push(`- Crosswalks included: ${view.crosswalks.length}`);
+  out.push(`- ${t('crosswalk.overview.catalog', { url: `<${view.catalogUrl}>` })}`);
+  out.push(`- ${t('crosswalk.overview.coverage', { reviewed: s.reviewed, unreviewed: s.unreviewed, stale: s.stale })}`);
+  out.push(`- ${t('crosswalk.overview.included', { count: view.crosswalks.length })}`);
   out.push('');
-  out.push('| Crosswalk | Framework | Mapping developer | Released | References | Subcategories mapped |');
+  out.push(t('crosswalk.table.overview.header'));
   out.push('| --- | --- | --- | --- | ---: | ---: |');
   for (const c of view.crosswalks) {
+    const mapped = t('crosswalk.ofTotal', { count: c.summary.subcategoriesMapped, total: c.summary.totalSubcategories });
     out.push(
-      `| \`${esc(c.id)}\` | ${esc(c.framework)}${c.thirdParty ? ' — third-party mapping' : ''} | ${esc(c.developer)} | ` +
-        `${esc(c.releaseDate)} | ${c.summary.references} | ${c.summary.subcategoriesMapped} of ${c.summary.totalSubcategories} |`,
+      `| \`${esc(c.id)}\` | ${esc(c.framework)}${c.thirdParty ? ` — ${t('crosswalk.thirdParty.label')}` : ''} | ` +
+        `${esc(c.developer)} | ${esc(c.releaseDate)} | ${c.summary.references} | ${mapped} |`,
     );
   }
   out.push('');
 
   for (const c of view.crosswalks) {
     const m = c.summary;
-    out.push(`## ${esc(c.framework)}${c.thirdParty ? ' (third-party mapping)' : ''}`);
+    out.push(`## ${esc(c.framework)}${c.thirdParty ? ` (${t('crosswalk.thirdParty.label')})` : ''}`);
     out.push('');
-    out.push(`- Crosswalk id: \`${esc(c.id)}\``);
-    out.push(`- Mapping: ${esc(c.olirName)}, version ${esc(c.olirVersion)}, released ${esc(c.releaseDate)}`);
-    out.push(`- Mapping developer (as listed in the mapping source): ${esc(c.developer)}`);
-    out.push(`- Catalog where this mapping and its developer are listed: <${view.catalogUrl}>`);
+    out.push(`- ${t('crosswalk.item.id', { id: `\`${esc(c.id)}\`` })}`);
+    out.push(
+      `- ${t('crosswalk.item.mapping', { name: esc(c.olirName), version: esc(c.olirVersion), date: esc(c.releaseDate) })}`,
+    );
+    out.push(`- ${t('crosswalk.item.developer', { developer: esc(c.developer) })}`);
+    out.push(`- ${t('crosswalk.item.catalog', { url: `<${view.catalogUrl}>` })}`);
     // Present only when NIST hosts the mapping's own document (the loader
     // accepts no other link).
-    if (c.sourceUrl) out.push(`- Mapping document (hosted by NIST): <${c.sourceUrl}>`);
-    if (c.thirdParty) out.push(`- ${THIRD_PARTY_LINE}`);
+    if (c.sourceUrl) out.push(`- ${t('crosswalk.item.document', { url: `<${c.sourceUrl}>` })}`);
+    if (c.thirdParty) out.push(`- ${t('crosswalk.thirdParty.line')}`);
     out.push(
-      `- Relationships recorded for: ${m.subcategoriesMapped} of ${m.totalSubcategories} Subcategories, ` +
-        `${m.categoriesMapped} of ${m.totalCategories} Categories, ${m.functionsMapped} of ${m.totalFunctions} Functions`,
+      `- ${t('crosswalk.item.relationships', {
+        subcategories: m.subcategoriesMapped,
+        totalSubcategories: m.totalSubcategories,
+        categories: m.categoriesMapped,
+        totalCategories: m.totalCategories,
+        functions: m.functionsMapped,
+        totalFunctions: m.totalFunctions,
+      })}`,
     );
     if (m.subcategoriesNotAssessed + m.groupsNotAssessed > 0) {
       out.push(
-        `- Not shown: this mapping also covers ${m.subcategoriesNotAssessed} Subcategory(ies) and ` +
-          `${m.groupsNotAssessed} Category(ies) or Function(s) that are not part of this assessment.`,
+        `- ${t('crosswalk.item.notShown', { subcategories: m.subcategoriesNotAssessed, groups: m.groupsNotAssessed })}`,
       );
     }
     out.push('');
 
     if (c.references.length === 0) {
-      out.push('_This mapping has no reference related to an outcome in this assessment._');
+      out.push(t('crosswalk.noReferences'));
       out.push('');
       continue;
     }
 
-    out.push(
-      'The counts below describe the CSF outcomes related to each reference; a reference related to a whole ' +
-        'Category or Function is related to every outcome under it. They describe those outcomes: they do not ' +
-        `say whether a reference is satisfied, and they are not a measure of conformance with ${esc(c.framework)}.`,
-    );
+    out.push(t('crosswalk.counts.intro', { framework: esc(c.framework) }));
     out.push('');
-    out.push(`- References listed: ${m.references}`);
-    out.push(`- References with at least one related outcome at none or partial: ${m.referencesWithGap}`);
+    out.push(`- ${t('crosswalk.counts.listed', { count: m.references })}`);
+    out.push(`- ${t('crosswalk.counts.withGap', { count: m.referencesWithGap })}`);
     if (m.referencesPendingReview > 0) {
-      out.push(`- References with at least one related outcome still unreviewed or stale: ${m.referencesPendingReview}`);
+      out.push(`- ${t('crosswalk.counts.pending', { count: m.referencesPendingReview })}`);
     }
     out.push('');
 
@@ -187,32 +187,28 @@ export function renderCrosswalkMarkdown(profile, view) {
     const withGroups = c.references.filter((r) => r.groups.length > 0);
 
     if (withOutcomes.length > 0) {
-      out.push('**References related to individual outcomes (Subcategories)**');
+      out.push(t('crosswalk.table.outcomes.title'));
       out.push('');
-      out.push('| Reference | Related CSF 2.0 outcomes (coverage) |');
+      out.push(t('crosswalk.table.outcomes.header'));
       out.push('| --- | --- |');
       for (const reference of withOutcomes) {
-        out.push(`| ${esc(reference.reference_id)} | ${relatedCell(reference, withGroups.length > 0)} |`);
+        out.push(`| ${esc(reference.reference_id)} | ${relatedCell(reference, withGroups.length > 0, locale)} |`);
       }
       out.push('');
     }
 
     if (withGroups.length > 0) {
-      out.push('**References related to a whole Category or Function**');
+      out.push(t('crosswalk.table.groups.title'));
       out.push('');
-      out.push(
-        'The mapping relates each of these references to the Category or Function as a whole, not to one ' +
-          'outcome in it. The last column counts the outcomes under it by coverage.',
-      );
+      out.push(t('crosswalk.table.groups.intro'));
       out.push('');
-      out.push('| Reference | Related Category or Function | Outcomes under it, by coverage |');
+      out.push(t('crosswalk.table.groups.header'));
       out.push('| --- | --- | --- |');
       for (const reference of withGroups) {
         for (const group of reference.groups) {
-          out.push(
-            `| ${esc(reference.reference_id)} | ${group.level === 'category' ? 'Category' : 'Function'}: ${esc(group.name)} | ` +
-              `${distributionCell(group)} |`,
-          );
+          const name = esc(locale.groupName(group));
+          const related = t(group.level === 'category' ? 'crosswalk.group.category' : 'crosswalk.group.function', { name });
+          out.push(`| ${esc(reference.reference_id)} | ${related} | ${distributionCell(group, locale)} |`);
         }
       }
       out.push('');
@@ -221,12 +217,7 @@ export function renderCrosswalkMarkdown(profile, view) {
 
   out.push('---');
   out.push('');
-  out.push(
-    'Coverage values come from the assessment; gap-analysis.md and current-profile.json hold the evidence, the ' +
-      'rationale and the review record behind each one. Items marked UNREVIEWED or STALE still require human ' +
-      'validation. Reference identifiers come from the mappings as retrieved on the date above; this tool adds ' +
-      'no mappings of its own.',
-  );
+  out.push(t('crosswalk.footer'));
   out.push('');
   return out.join('\n');
 }

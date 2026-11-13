@@ -1,0 +1,1974 @@
+{
+  "_comment": "Inputs shared by the report-language tests (test/i18n*.test.js): a small CSF core, crosswalk data, and assessment scenarios chosen to reach every sentence the human-readable deliverables can print. The CSF entries are real CSF 2.0 Subcategories (text from data/csf-core.json, first two Implementation Examples each) plus one element of a custom export, ZZ.CU-01, that the published Spanish translation does not cover. Free text (rationales, notes, quotes, file names) is deliberately written without common English function words, so a Spanish rendering can be scanned for English that leaked from the tool. A review whose \"reviewed_against\" is \"@current\" was made against the assessment as it stands; its \"final_coverage\", when null, is the assessed coverage. A scenario with \"extends\" is its base scenario with the listed top-level keys replaced; \"only\" names the deliverables that differ from the base scenario and are therefore worth rendering.",
+  "now": "2026-01-01T00:00:00.000Z",
+  "csf": {
+    "frameworkVersion": "CSF 2.0",
+    "sample": false,
+    "functions": [
+      {
+        "id": "GV",
+        "name": "GOVERN"
+      },
+      {
+        "id": "ID",
+        "name": "IDENTIFY"
+      },
+      {
+        "id": "PR",
+        "name": "PROTECT"
+      },
+      {
+        "id": "DE",
+        "name": "DETECT"
+      },
+      {
+        "id": "RC",
+        "name": "RECOVER"
+      },
+      {
+        "id": "ZZ",
+        "name": "CUSTOM"
+      }
+    ],
+    "subcategories": [
+      {
+        "function": "GOVERN",
+        "category": "Organizational Context (GV.OC)",
+        "id": "GV.OC-01",
+        "outcome": "The organizational mission is understood and informs cybersecurity risk management",
+        "implementationExamples": [
+          "Share the organization's mission (e.g., through vision and mission statements, marketing, and service strategies) to provide a basis for identifying risks that may impede that mission"
+        ]
+      },
+      {
+        "function": "GOVERN",
+        "category": "Organizational Context (GV.OC)",
+        "id": "GV.OC-02",
+        "outcome": "Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered",
+        "implementationExamples": [
+          "Identify relevant internal stakeholders and their cybersecurity-related expectations (e.g., performance and risk expectations of officers, directors, and advisors; cultural expectations of employees)",
+          "Identify relevant external stakeholders and their cybersecurity-related expectations (e.g., privacy expectations of customers, business expectations of partnerships, compliance expectations of regulators, ethics expectations of society)"
+        ]
+      },
+      {
+        "function": "GOVERN",
+        "category": "Risk Management Strategy (GV.RM)",
+        "id": "GV.RM-01",
+        "outcome": "Risk management objectives are established and agreed to by organizational stakeholders",
+        "implementationExamples": [
+          "Update near-term and long-term cybersecurity risk management objectives as part of annual strategic planning and when major changes occur",
+          "Establish measurable objectives for cybersecurity risk management (e.g., manage the quality of user training, ensure adequate risk protection for industrial control systems)"
+        ]
+      },
+      {
+        "function": "IDENTIFY",
+        "category": "Asset Management (ID.AM)",
+        "id": "ID.AM-01",
+        "outcome": "Inventories of hardware managed by the organization are maintained",
+        "implementationExamples": [
+          "Maintain inventories for all types of hardware, including IT, IoT, OT, and mobile devices",
+          "Constantly monitor networks to detect new hardware and automatically update inventories"
+        ]
+      },
+      {
+        "function": "PROTECT",
+        "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+        "id": "PR.AA-01",
+        "outcome": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+        "implementationExamples": [
+          "Initiate requests for new access or additional access for employees, contractors, and others, and track, review, and fulfill the requests, with permission from system or data owners when needed",
+          "Issue, manage, and revoke cryptographic certificates and identity tokens, cryptographic keys (i.e., key management), and other credentials"
+        ]
+      },
+      {
+        "function": "PROTECT",
+        "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+        "id": "PR.AA-05",
+        "outcome": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+        "implementationExamples": [
+          "Review logical and physical access privileges periodically and whenever someone changes roles or leaves the organization, and promptly rescind privileges that are no longer needed",
+          "Take attributes of the requester and the requested resource into account for authorization decisions (e.g., geolocation, day/time, requester endpoint's cyber health)"
+        ]
+      },
+      {
+        "function": "PROTECT",
+        "category": "Identity Management, Authentication, and Access Control (PR.AA)",
+        "id": "PR.AA-06",
+        "outcome": "Physical access to assets is managed, monitored, and enforced commensurate with risk",
+        "implementationExamples": [
+          "Use security guards, security cameras, locked entrances, alarm systems, and other physical controls to monitor facilities and restrict access",
+          "Employ additional physical security controls for areas that contain high-risk assets"
+        ]
+      },
+      {
+        "function": "DETECT",
+        "category": "Continuous Monitoring (DE.CM)",
+        "id": "DE.CM-01",
+        "outcome": "Networks and network services are monitored to find potentially adverse events",
+        "implementationExamples": [
+          "Monitor DNS, BGP, and other network services for adverse events",
+          "Monitor wired and wireless networks for connections from unauthorized endpoints"
+        ]
+      },
+      {
+        "function": "RECOVER",
+        "category": "Incident Recovery Plan Execution (RC.RP)",
+        "id": "RC.RP-01",
+        "outcome": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
+        "implementationExamples": [
+          "Begin recovery procedures during or after incident response processes",
+          "Make all individuals with recovery responsibilities aware of the plans for recovery and the authorizations required to implement each aspect of the plans"
+        ]
+      },
+      {
+        "function": "CUSTOM",
+        "category": "Custom Controls",
+        "id": "ZZ.CU-01",
+        "outcome": "A custom outcome that is not part of the published Core",
+        "implementationExamples": []
+      }
+    ]
+  },
+  "crosswalks": {
+    "frameworkVersion": "CSF 2.0",
+    "source": "Test source (OLIR)",
+    "retrievedAt": "2026-11-13",
+    "catalogUrl": "https://csrc.nist.gov/projects/olir/informative-reference-catalog",
+    "crosswalks": [
+      {
+        "id": "alpha",
+        "framework": "Alpha Controls v1",
+        "olirName": "Alpha-to-CSF",
+        "olirVersion": "1.0.0",
+        "developer": "Alpha Standards Body",
+        "releaseDate": "2025-03-01",
+        "sourceUrl": "https://csrc.nist.gov/media/alpha.xlsx",
+        "thirdParty": false,
+        "mappings": {
+          "GV.OC-01": [
+            "A-2",
+            "A-10"
+          ],
+          "GV.OC-02": [
+            "A-10"
+          ],
+          "GV.RM-01": [
+            "A-10"
+          ],
+          "PR.AA-01": [
+            "A-1",
+            "A-2"
+          ],
+          "GV.OV-01": [
+            "A-99"
+          ]
+        },
+        "categoryMappings": {
+          "PR.AA": [
+            "A-1",
+            "A-20"
+          ],
+          "ID.RA": [
+            "A-98"
+          ],
+          "RC.RP": [
+            "A-40"
+          ],
+          "ZZ.CU": [
+            "A-50"
+          ]
+        },
+        "functionMappings": {
+          "GV": [
+            "A-30"
+          ],
+          "ZZ": [
+            "A-60"
+          ]
+        }
+      },
+      {
+        "id": "beta",
+        "framework": "Beta Standard 2022",
+        "olirName": "Beta-CSF",
+        "olirVersion": "2.1",
+        "developer": "Independent Author Ltd",
+        "releaseDate": "2025-07-18",
+        "thirdParty": true,
+        "mappings": {
+          "DE.CM-01": [
+            "Clause: 4.2(a)"
+          ]
+        },
+        "categoryMappings": {},
+        "functionMappings": {}
+      },
+      {
+        "id": "gamma",
+        "framework": "Gamma Baseline",
+        "olirName": "Gamma-CSF",
+        "olirVersion": "3",
+        "developer": "Gamma Institute",
+        "releaseDate": "2024-01-15",
+        "thirdParty": false,
+        "mappings": {
+          "GV.OV-01": [
+            "G-1"
+          ]
+        },
+        "categoryMappings": {},
+        "functionMappings": {}
+      },
+      {
+        "id": "delta",
+        "framework": "Delta Guide",
+        "olirName": "Delta-CSF",
+        "olirVersion": "0.9",
+        "developer": "Delta Working Group",
+        "releaseDate": "2025-10-02",
+        "thirdParty": false,
+        "mappings": {},
+        "categoryMappings": {
+          "GV.OC": [
+            "D-1"
+          ],
+          "ID.AM": [
+            "D-2"
+          ]
+        },
+        "functionMappings": {}
+      }
+    ]
+  },
+  "scenarios": {
+    "rich": {
+      "assessments": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "old-handbook.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.OC-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.OC-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "old-handbook.md#c0",
+              "source_file": "old-handbook.md",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] Rationale text GV.OC-02.",
+          "needs_review": true,
+          "verifier_action": "downgraded_to_none_no_valid_quote",
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 0,
+            "downgraded": true
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "risk-register.xlsx.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.RM-01 (1).",
+              "verified": true
+            },
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.RM-01 (2): sensor 01 online; sensor 02 online; sensor 03 online; sensor 04 online; sensor 05 online; sensor 06 online; sensor 07 online; sensor 08 online; sensor 09 online; sensor 10 online; sensor 11 online; sensor 12 online; sensor 13 online; sensor 14 online; sensor 15 online; sensor 16 online; sensor 17 online; sensor 18 online; sensor 19 online; sensor 20 online; sensor 21 online; sensor 22 online; sensor 23 online; sensor 24 online;",
+              "verified": true
+            },
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.RM-01 (3).",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.RM-01, line 1.\n- line 2 (list item look-alike)\n# line 3 (heading look-alike)",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 3,
+            "quotes_verified": 3,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "risk-register.xlsx.md#c0",
+              "source_file": "risk-register.xlsx.md",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "asset-procedure.docx",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text ID.AM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ID.AM-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "asset-procedure.docx#c0",
+              "source_file": "asset-procedure.docx",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "access-standard.pdf",
+              "page": 2,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-01 (1).",
+              "verified": true
+            },
+            {
+              "source_file": "access-standard.pdf",
+              "page": 5,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-01 (2).",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 2,
+            "quotes_verified": 2,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "access-standard.pdf#c0",
+              "source_file": "access-standard.pdf",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-05.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-05.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-06": {
+          "subcategory_id": "PR.AA-06",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "Rationale text PR.AA-06.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 0,
+            "quotes_verified": 0,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": 3,
+              "score": 0.5,
+              "quote": "Quoted evidence text DE.CM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text DE.CM-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "RC.RP-01": {
+          "subcategory_id": "RC.RP-01",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "[Auto-downgraded: the claimed coverage had no verifiable verbatim quote in the retrieved evidence.] Rationale text RC.RP-01.",
+          "needs_review": true,
+          "verifier_action": "downgraded_to_none_no_valid_quote",
+          "verification": {
+            "quotes_checked": 2,
+            "quotes_verified": 0,
+            "downgraded": true
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "weird|name `x`.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text ZZ.CU-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ZZ.CU-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "weird|name `x`.md#c0",
+              "source_file": "weird|name `x`.md",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        }
+      },
+      "reviews": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": "Manual evidence check pending.",
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "decision": "override",
+          "final_coverage": "substantial",
+          "note": "Inventory export reviewed 2025-12-20.",
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": "Minutes requested.",
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "outdated-hash"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "decision": "override",
+          "final_coverage": "none",
+          "note": "Policy superseded 2025-11.",
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        }
+      },
+      "meta": {
+        "embedder_id": "mock",
+        "llm_id": "mock",
+        "engine_sig": "sig-a",
+        "index_id": "index-1",
+        "analyzed_index_id": "index-1",
+        "ingested_at": "2025-12-18T08:00:00.000Z",
+        "analyzed_at": "2025-12-19T12:30:00.000Z",
+        "ingest_report": {
+          "parsed": 7,
+          "skipped": 1,
+          "failed": 2
+        },
+        "documents": [
+          {
+            "source_file": "access-standard.pdf",
+            "path": "access-standard.pdf",
+            "chunks": 4
+          },
+          {
+            "source_file": "asset-procedure.docx",
+            "path": "asset-procedure.docx",
+            "chunks": 1
+          },
+          {
+            "source_file": "policy.md",
+            "path": "a/policy.md",
+            "chunks": 3
+          },
+          {
+            "source_file": "policy.md",
+            "path": "b/policy.md",
+            "chunks": 2
+          },
+          {
+            "source_file": "risk-register.xlsx.md",
+            "path": "risk-register.xlsx.md",
+            "chunks": 2
+          },
+          {
+            "source_file": "unused-memo.txt",
+            "path": "unused-memo.txt",
+            "chunks": 1
+          },
+          {
+            "source_file": "weird|name `x`.md",
+            "path": "weird|name `x`.md",
+            "chunks": 1
+          }
+        ]
+      },
+      "target": {
+        "schemaVersion": "1.0",
+        "createdAt": "2025-12-01T10:00:00.000Z",
+        "updatedAt": "2025-12-15T16:30:00.000Z",
+        "description": "Illustrative target profile;\nsecond line.",
+        "default": "substantial",
+        "categories": {
+          "PR.AA": "full"
+        },
+        "subcategories": {
+          "PR.AA-06": "not-applicable"
+        },
+        "priorities": {
+          "GV.OC": "high",
+          "RC": "low"
+        },
+        "notes": {
+          "PR.AA-06": "Remote organization; registered address solely.",
+          "GV.RM-01": "Board request 2025-10."
+        },
+        "plan": {
+          "PR.AA-01": {
+            "owner": "IT Operations Lead",
+            "due": "2026-06-30",
+            "status": "in-progress",
+            "milestones": "Pilot; rollout Q3."
+          },
+          "GV.RM-01": {
+            "owner": "Chief Risk Officer"
+          },
+          "GV.OC-01": {
+            "status": "done"
+          }
+        },
+        "tiers": {
+          "current": 2,
+          "target": 3,
+          "note": "Committee decision 2025-11."
+        }
+      },
+      "crosswalks": true
+    },
+    "rich-no-target": {
+      "extends": "rich",
+      "target": null,
+      "crosswalks": false,
+      "only": [
+        "gap-analysis.md",
+        "evidence-requests.md"
+      ]
+    },
+    "clean": {
+      "assessments": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": 4,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.OC-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.OC-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.OC-02.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.OC-02.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.RM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.RM-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text ID.AM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ID.AM-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-05.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-05.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-06": {
+          "subcategory_id": "PR.AA-06",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-06.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-06.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text DE.CM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text DE.CM-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "RC.RP-01": {
+          "subcategory_id": "RC.RP-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text RC.RP-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text RC.RP-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "policy.md#c0",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "annex.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text ZZ.CU-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ZZ.CU-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "retrieved": [
+            {
+              "chunk_id": "annex.md#c0",
+              "source_file": "annex.md",
+              "page": null,
+              "score": 0.4
+            },
+            {
+              "chunk_id": "policy.md#c1",
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.4
+            }
+          ],
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        }
+      },
+      "reviews": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-06": {
+          "subcategory_id": "PR.AA-06",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "RC.RP-01": {
+          "subcategory_id": "RC.RP-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        }
+      },
+      "meta": {
+        "embedder_id": "mock",
+        "llm_id": "mock",
+        "engine_sig": "sig-a",
+        "index_id": "index-1",
+        "analyzed_index_id": "index-1",
+        "ingested_at": "2025-12-18T08:00:00.000Z",
+        "analyzed_at": "2025-12-19T12:30:00.000Z",
+        "ingest_report": {
+          "parsed": 2,
+          "skipped": 0,
+          "failed": 0
+        },
+        "documents": [
+          {
+            "source_file": "annex.md",
+            "path": "annex.md",
+            "chunks": 1
+          },
+          {
+            "source_file": "policy.md",
+            "path": "policy.md",
+            "chunks": 5
+          }
+        ]
+      },
+      "target": null,
+      "crosswalks": false
+    },
+    "clean-target": {
+      "extends": "clean",
+      "target": {
+        "default": "partial"
+      },
+      "crosswalks": true,
+      "only": [
+        "gap-analysis.md",
+        "evidence-requests.md",
+        "remediation-plan.md",
+        "crosswalk.md"
+      ]
+    },
+    "clean-legacy": {
+      "extends": "clean",
+      "meta": {
+        "embedder_id": "mock",
+        "llm_id": "mock",
+        "analyzed_at": "2025-12-19T12:30:00.000Z"
+      },
+      "only": [
+        "evidence-by-document.md"
+      ]
+    },
+    "bare": {
+      "assessments": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "Automated fallback: provider timeout 504",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 0,
+            "quotes_verified": 0,
+            "downgraded": false
+          },
+          "assessed_at": "2025-12-19T12:30:00.000Z",
+          "fallback": true,
+          "fallback_reason": "provider timeout 504"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "Automated fallback: no evidence retrieved from the corpus.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 0,
+            "quotes_verified": 0,
+            "downgraded": false
+          },
+          "assessed_at": "2025-12-19T12:30:00.000Z",
+          "fallback": true,
+          "fallback_reason": "no evidence retrieved from the corpus"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "coverage": "none",
+          "confidence": 0.3,
+          "evidence": [],
+          "rationale": "Automated fallback: model output failed schema validation after one retry.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 0,
+            "quotes_verified": 0,
+            "downgraded": false
+          },
+          "assessed_at": "2025-12-19T12:30:00.000Z",
+          "fallback": true,
+          "fallback_reason": "model output failed schema validation after one retry"
+        }
+      },
+      "reviews": {},
+      "meta": {},
+      "target": {
+        "default": "full",
+        "tiers": {
+          "target": 4
+        }
+      },
+      "crosswalks": false,
+      "sample": true
+    },
+    "stale": {
+      "assessments": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.OC-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.OC-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-b",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.OC-02.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.OC-02.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text GV.RM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text GV.RM-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-b",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "retired-01.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-01.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-02.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-02.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-03.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-03.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-04.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-04.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-05.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-05.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-06.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-06.md.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ID.AM-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 6,
+            "quotes_verified": 6,
+            "downgraded": false
+          },
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "retired-07.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-07.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-08.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-08.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-09.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-09.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-10.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-10.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-11.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-11.md.",
+              "verified": true
+            },
+            {
+              "source_file": "retired-12.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text retired-12.md.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 6,
+            "quotes_verified": 6,
+            "downgraded": false
+          },
+          "engine_sig": "sig-b",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-05.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-05.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "PR.AA-06": {
+          "subcategory_id": "PR.AA-06",
+          "coverage": "substantial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text PR.AA-06.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text PR.AA-06.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-b",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text DE.CM-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text DE.CM-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "RC.RP-01": {
+          "subcategory_id": "RC.RP-01",
+          "coverage": "partial",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text RC.RP-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text RC.RP-01.",
+          "needs_review": true,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-b",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "coverage": "full",
+          "confidence": 0.72,
+          "evidence": [
+            {
+              "source_file": "policy.md",
+              "page": null,
+              "score": 0.5,
+              "quote": "Quoted evidence text ZZ.CU-01.",
+              "verified": true
+            }
+          ],
+          "rationale": "Rationale text ZZ.CU-01.",
+          "needs_review": false,
+          "verifier_action": null,
+          "verification": {
+            "quotes_checked": 1,
+            "quotes_verified": 1,
+            "downgraded": false
+          },
+          "engine_sig": "sig-a",
+          "assessed_at": "2025-12-19T12:30:00.000Z"
+        }
+      },
+      "reviews": {
+        "GV.OC-01": {
+          "subcategory_id": "GV.OC-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "GV.OC-02": {
+          "subcategory_id": "GV.OC-02",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "GV.RM-01": {
+          "subcategory_id": "GV.RM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ID.AM-01": {
+          "subcategory_id": "ID.AM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-01": {
+          "subcategory_id": "PR.AA-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-05": {
+          "subcategory_id": "PR.AA-05",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "PR.AA-06": {
+          "subcategory_id": "PR.AA-06",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "DE.CM-01": {
+          "subcategory_id": "DE.CM-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        },
+        "ZZ.CU-01": {
+          "subcategory_id": "ZZ.CU-01",
+          "decision": "accept",
+          "final_coverage": null,
+          "note": null,
+          "reviewed_by": "reviewer@example.org",
+          "reviewed_at": "2025-12-20T09:00:00.000Z",
+          "reviewed_against": "@current"
+        }
+      },
+      "meta": {
+        "embedder_id": "mock",
+        "llm_id": "mock",
+        "engine_sig": "sig-a",
+        "index_id": "index-2",
+        "analyzed_index_id": "index-1",
+        "ingested_at": "2025-12-21T08:00:00.000Z",
+        "analyzed_at": "2025-12-19T12:30:00.000Z",
+        "ingest_report": {
+          "parsed": 1,
+          "skipped": 0,
+          "failed": 0
+        },
+        "documents": [
+          {
+            "source_file": "policy.md",
+            "path": "policy.md",
+            "chunks": 5
+          }
+        ]
+      },
+      "target": {
+        "default": "substantial",
+        "subcategories": {
+          "ZZ.CU-01": "not-applicable",
+          "DE.CM-01": "not-applicable"
+        },
+        "tiers": {
+          "current": 1
+        }
+      },
+      "crosswalks": false
+    },
+    "stale-no-target": {
+      "extends": "stale",
+      "target": null,
+      "only": [
+        "gap-analysis.md",
+        "evidence-requests.md"
+      ]
+    }
+  },
+  "askResults": {
+    "one-quote": {
+      "question": "Question text?",
+      "supported": true,
+      "answer": "Model summary sentence.",
+      "evidence": [
+        {
+          "source_file": "access-standard.md",
+          "page": null,
+          "quote": "Quoted evidence text (1).",
+          "chunk_id": "access-standard.md#c0",
+          "score": 0.5
+        }
+      ],
+      "unsupported_reason": null,
+      "verifier_action": null,
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 1,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 6,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "several-quotes-one-dropped": {
+      "question": "  Question   text\nacross lines?  ",
+      "supported": true,
+      "answer": "Model summary sentence.",
+      "evidence": [
+        {
+          "source_file": "plan.pdf",
+          "page": 1,
+          "quote": "Quoted evidence text (1).",
+          "chunk_id": "plan.pdf#c0",
+          "score": 0.5
+        },
+        {
+          "source_file": "plan.pdf",
+          "page": 4,
+          "quote": "Quoted evidence\ntext (2).",
+          "chunk_id": "plan.pdf#c0",
+          "score": 0.5
+        },
+        {
+          "source_file": "weird\u001b[31mname.md",
+          "page": null,
+          "quote": "Quoted \u202eevidence text (3).",
+          "chunk_id": "weird\u001b[31mname.md#c0",
+          "score": 0.5
+        }
+      ],
+      "unsupported_reason": null,
+      "verifier_action": "dropped_1_unverifiable_quote",
+      "verification": {
+        "quotes_checked": 4,
+        "quotes_verified": 3,
+        "quotes_dropped": 1
+      },
+      "retrieved": [],
+      "passages_searched": 8,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "all-quotes-verified": {
+      "question": "Question text?",
+      "supported": true,
+      "answer": "Model summary sentence.",
+      "evidence": [
+        {
+          "source_file": "a.md",
+          "page": null,
+          "quote": "Quoted evidence text (1).",
+          "chunk_id": "a.md#c0",
+          "score": 0.5
+        },
+        {
+          "source_file": "b.md",
+          "page": null,
+          "quote": "Quoted evidence text (2).",
+          "chunk_id": "b.md#c0",
+          "score": 0.5
+        }
+      ],
+      "unsupported_reason": null,
+      "verifier_action": null,
+      "verification": {
+        "quotes_checked": 2,
+        "quotes_verified": 2,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 1,
+      "passages_indexed": 1,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "no-passages": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "no_passages_retrieved",
+      "verifier_action": null,
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 0,
+      "passages_indexed": 0,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "model-found-none": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "model_found_no_answer",
+      "verifier_action": null,
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 6,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "withheld-no-quote": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "answer_withheld_no_valid_quote",
+      "verifier_action": "answer_withheld_no_valid_quote",
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 6,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "withheld-one-quote": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "answer_withheld_no_valid_quote",
+      "verifier_action": "answer_withheld_no_valid_quote",
+      "verification": {
+        "quotes_checked": 1,
+        "quotes_verified": 0,
+        "quotes_dropped": 1
+      },
+      "retrieved": [],
+      "passages_searched": 6,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "withheld-three-quotes": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "answer_withheld_no_valid_quote",
+      "verifier_action": "answer_withheld_no_valid_quote",
+      "verification": {
+        "quotes_checked": 3,
+        "quotes_verified": 0,
+        "quotes_dropped": 3
+      },
+      "retrieved": [],
+      "passages_searched": 8,
+      "passages_indexed": 8,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    },
+    "invalid-output": {
+      "question": "Question text?",
+      "supported": false,
+      "answer": "No verifiable evidence in the ingested documents answers this question.",
+      "evidence": [],
+      "unsupported_reason": "model_output_invalid",
+      "verifier_action": null,
+      "verification": {
+        "quotes_checked": 0,
+        "quotes_verified": 0,
+        "quotes_dropped": 0
+      },
+      "retrieved": [],
+      "passages_searched": 2,
+      "passages_indexed": 2,
+      "top_k": 6,
+      "providers": {
+        "embeddings": "mock",
+        "llm": "mock"
+      }
+    }
+  }
+}

@@ -93,6 +93,14 @@ export function defaultConfig() {
       // in the array => every crosswalk); [] => none. Also via
       // --crosswalk <id,id|default|all|none>. List ids with `csf-tool crosswalk`.
       crosswalks: null,
+      // Language of the human-readable deliverables (the Markdown reports, the
+      // dashboard, the `ask` answer): "en" | "es". Also via --lang. Spanish
+      // reports show NIST's official Spanish text of the Core. The
+      // machine-readable files (JSON, CSV) and the CLI's own messages stay
+      // English. With a language other than "en" the model is also asked to
+      // write its rationale in it, so `analyze` recomputes assessments made
+      // under another language.
+      language: 'en',
     },
 
     // Opt-in pseudonymization of text sent to NON-local providers (also via

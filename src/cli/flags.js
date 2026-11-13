@@ -29,6 +29,7 @@ const OPTIONS = {
   'tier-current': { type: 'string' },
   'tier-target': { type: 'string' },
   crosswalk: { type: 'string' },
+  lang: { type: 'string' },
   redact: { type: 'boolean' },
   strict: { type: 'boolean' },
   critique: { type: 'boolean' },
@@ -89,6 +90,10 @@ export function parseCliArgs(argv) {
   if (values['tier-current'] !== undefined) set('tierCurrent', Number(values['tier-current']));
   if (values['tier-target'] !== undefined) set('tierTarget', Number(values['tier-target']));
   if (values.crosswalk !== undefined) set('report.crosswalks', parseCrosswalkSelection(values.crosswalk));
+  // Language codes are not case-sensitive ("ES" is "es"). Anything that is not
+  // a supported code is passed on as given: config validation reports it and
+  // falls back to English, so a mistyped language is never silently ignored.
+  if (values.lang !== undefined) set('report.language', String(values.lang).trim().toLowerCase());
   if (values.redact) set('privacy.redact', true);
   if (values.strict) set('analysis.strict', true);
   if (values.critique) set('analysis.critique', true);
@@ -175,6 +180,8 @@ KEY OPTIONS
   --crosswalk <ids>        Crosswalks to include in reports: comma-separated ids,
                            "default" (all except third-party mappings), "all"
                            (third-party mappings included), or "none"
+  --lang <en|es>           Language of the reports, the dashboard and the ask
+                           answer (default en); JSON and CSV files stay English
   --redact                 Pseudonymize identifiers before text is sent to a
                            non-local provider (restored locally in the result)
   --strict                 Refuse to emit the profile until all items reviewed

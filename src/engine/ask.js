@@ -95,9 +95,11 @@ export async function answerQuestion({ question, index, embedder, llm, config })
   // 2) Nothing retrieved => nothing to answer from. The model is not asked.
   if (hits.length === 0) return unsupported(question, hits, UNSUPPORTED_REASONS.NO_PASSAGES);
 
-  // 3) Prompt + parse + validate, retry once on malformed output.
+  // 3) Prompt + parse + validate, retry once on malformed output. For a report
+  //    language other than English the prompt also asks for the answer in it.
   const system = ASK_SYSTEM_PROMPT;
-  let user = buildAskPrompt(question, hits);
+  const promptOptions = { language: config.report?.language };
+  let user = buildAskPrompt(question, hits, promptOptions);
   let parsed = null;
   for (let attempt = 0; attempt < 2 && !parsed; attempt++) {
     // `meta` is structured context for the offline mock provider only.
@@ -108,7 +110,7 @@ export async function answerQuestion({ question, index, embedder, llm, config })
     } else if (attempt === 0) {
       // Retry once, telling the model exactly what was wrong.
       user =
-        buildAskPrompt(question, hits) +
+        buildAskPrompt(question, hits, promptOptions) +
         `\n\nYOUR PREVIOUS RESPONSE WAS REJECTED for these reasons:\n- ${result.errors.join('\n- ')}\n` +
         'Return ONLY the corrected single JSON object, nothing else.';
     }

@@ -1,0 +1,84 @@
+=== one-quote ===
+Question: Question text?
+
+Answer (AI-generated summary — check it against the quotes below):
+Model summary sentence.
+
+Verified quotes (1):
+  1. access-standard.md: "Quoted evidence text (1)."
+
+The quote returned by the model was verified verbatim against the ingested documents.
+Only the quotes are verified. The summary is the model's wording and is not itself verified.
+Searched the 6 most relevant of 8 passages of the index (retrieval.topK = 6).
+
+=== several-quotes-one-dropped ===
+Question: Question text across lines?
+
+Answer (AI-generated summary — check it against the quotes below):
+Model summary sentence.
+
+Verified quotes (3):
+  1. plan.pdf, p.1: "Quoted evidence text (1)."
+  2. plan.pdf, p.4: "Quoted evidence text (2)."
+  3. weird�[31mname.md: "Quoted �evidence text (3)."
+
+3 of 4 quotes returned by the model were verified verbatim against the ingested documents; the rest were removed.
+Only the quotes are verified. The summary is the model's wording and is not itself verified.
+Searched all 8 passages of the index.
+
+=== all-quotes-verified ===
+Question: Question text?
+
+Answer (AI-generated summary — check it against the quotes below):
+Model summary sentence.
+
+Verified quotes (2):
+  1. a.md: "Quoted evidence text (1)."
+  2. b.md: "Quoted evidence text (2)."
+
+All 2 quotes returned by the model were verified verbatim against the ingested documents.
+Only the quotes are verified. The summary is the model's wording and is not itself verified.
+Searched all 1 passage of the index.
+
+=== no-passages ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+The index returned no passages to search.
+
+=== model-found-none ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+Searched the 6 most relevant of 8 passages of the index (retrieval.topK = 6).
+Only those passages were read, so this means "not found there", not "the documents contain nothing on this".
+
+=== withheld-no-quote ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+The model proposed an answer without any quote, so the answer was withheld.
+Searched the 6 most relevant of 8 passages of the index (retrieval.topK = 6).
+Only those passages were read, so this means "not found there", not "the documents contain nothing on this".
+
+=== withheld-one-quote ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+The model proposed an answer, but its quote could not be verified verbatim, so the answer was withheld.
+Searched the 6 most relevant of 8 passages of the index (retrieval.topK = 6).
+Only those passages were read, so this means "not found there", not "the documents contain nothing on this".
+
+=== withheld-three-quotes ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+The model proposed an answer, but none of its 3 quotes could be verified verbatim, so the answer was withheld.
+Searched all 8 passages of the index.
+
+=== invalid-output ===
+Question: Question text?
+
+No verifiable evidence in the ingested documents answers this question.
+The model did not return a usable response, even after one retry, so there was no answer to verify.
+Searched all 2 passages of the index.

@@ -15,6 +15,12 @@
  * that the dashboard shares — and the evidence request list: what to ask and
  * collect for each outcome that could not be demonstrated.
  *
+ * REPORT LANGUAGE (`report.language`): the human-readable deliverables — the
+ * Markdown reports and the dashboard — are rendered through one report locale
+ * created here (src/i18n/locale.js). The machine-readable ones (the two
+ * profile JSON files and the three CSV files) are interfaces: they are built
+ * without it and are the same bytes in every language.
+ *
  * STRICT MODE (brief §6): when enabled, refuse to emit the final profile until
  * every subcategory is resolved by a human. We stop with a clear, actionable
  * message (a StrictModeError, caught and printed by the CLI) listing the
@@ -37,6 +43,7 @@ import { renderCrosswalkCsv } from './crosswalkCsv.js';
 import { renderCrosswalkMarkdown } from './crosswalkMarkdown.js';
 import { writeJsonAtomic, writeFileAtomic, removeIfExists } from '../util/fsx.js';
 import { StrictModeError } from '../core/errors.js';
+import { loadReportLocale } from '../i18n/locale.js';
 
 export async function renderReports(ctx, { csf, assessments, reviews, meta, targetSpec = null, crosswalks = null }) {
   const profile = buildProfile(ctx, { csf, assessments, reviews, meta });
@@ -61,9 +68,16 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   // Optional: the selected crosswalk data (null/empty => none selected or no data file).
   const crosswalkView = crosswalks?.crosswalks?.length ? buildCrosswalkView(profile, crosswalks) : null;
 
+  // The language of the human-readable deliverables. English is the locale
+  // every renderer uses by default, so an English run renders exactly as it
+  // did before reports could be translated. Loaded before anything is written:
+  // a malformed translation file stops the stage with nothing half-emitted.
+  const locale = await loadReportLocale(ctx.config.report?.language, ctx.logger);
+
   const md = renderGapMarkdown(profile, {
     evidenceQuoteMaxChars: ctx.config.report.evidenceQuoteMaxChars,
     targetView,
+    locale,
   });
   const csv = renderEvidenceCsv(profile);
   const documentView = buildDocumentView(profile, { assessments, meta });
@@ -73,13 +87,18 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
   await writeFileAtomic(ctx.paths.evidenceMap, csv);
   const dashboardExtras = { documentView };
   if (crosswalkView) dashboardExtras.crosswalk = crosswalkDashboardData(crosswalkView);
+  // Passed only for another language, so an English page embeds what it always did.
+  if (!locale.isEnglish) dashboardExtras.locale = locale;
   await writeFileAtomic(ctx.paths.dashboard, renderDashboardHtml(profile, targetView, dashboardExtras));
-  await writeFileAtomic(ctx.paths.evidenceByDocument, renderDocumentsMarkdown(profile, documentView));
-  await writeFileAtomic(ctx.paths.evidenceRequests, renderEvidenceRequestsMarkdown(profile, { csf, targetView }));
+  await writeFileAtomic(ctx.paths.evidenceByDocument, renderDocumentsMarkdown(profile, documentView, { locale }));
+  await writeFileAtomic(
+    ctx.paths.evidenceRequests,
+    renderEvidenceRequestsMarkdown(profile, { csf, targetView, locale }),
+  );
 
   if (targetView) {
     await writeJsonAtomic(ctx.paths.targetProfile, buildTargetProfile(profile, targetView));
-    await writeFileAtomic(ctx.paths.remediationPlan, renderRemediationMarkdown(profile, targetView));
+    await writeFileAtomic(ctx.paths.remediationPlan, renderRemediationMarkdown(profile, targetView, { locale }));
     await writeFileAtomic(ctx.paths.poam, renderPoamCsv(profile, targetView));
   } else {
     await removeIfExists(ctx.paths.targetProfile);
@@ -89,7 +108,7 @@ export async function renderReports(ctx, { csf, assessments, reviews, meta, targ
 
   if (crosswalkView) {
     await writeFileAtomic(ctx.paths.crosswalkCsv, renderCrosswalkCsv(crosswalkView));
-    await writeFileAtomic(ctx.paths.crosswalkReport, renderCrosswalkMarkdown(profile, crosswalkView));
+    await writeFileAtomic(ctx.paths.crosswalkReport, renderCrosswalkMarkdown(profile, crosswalkView, { locale }));
   } else {
     // Same rule as the target deliverables: a crosswalk left over from an
     // earlier run must not sit next to a report that no longer selects it.

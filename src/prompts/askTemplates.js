@@ -17,9 +17,14 @@
  * The evidence block is rendered by the SAME function the assessment prompt
  * uses, so chunk text reaches the model unmodified and the source_file labels
  * are the ones the verifier attributes quotes to.
+ *
+ * As with the assessment prompt, a report language other than English adds one
+ * delimited instruction at the end of the user message — write the answer in
+ * that language, quotes untouched (./language.js) — and nothing else changes.
  */
 
 import { renderEvidence } from './templates.js';
+import { answerLanguageSuffix } from './language.js';
 
 export const ASK_SYSTEM_PROMPT = `You answer ONE question about an organization's own documents, using ONLY the evidence chunks provided
 to you in the user message. You are one half of a checked process: you propose an answer together with
@@ -78,8 +83,9 @@ verified quote is withheld and never shown. Quoting honestly and exactly is in y
  * Build the user message for one question.
  * @param {string} question the question, as asked
  * @param {Array<{chunk:{source_file:string,page:number|null,id:string,text:string}}>} hits
+ * @param {{language?: string}} [options] report language; English when omitted
  */
-export function buildAskPrompt(question, hits) {
+export function buildAskPrompt(question, hits, options) {
   return `Answer ONE question using ONLY the evidence provided below.
 
 === QUESTION ===
@@ -112,5 +118,5 @@ markdown, no code fences):
   ]
 }
 If the evidence does not answer the question, or you cannot supply a verbatim quote, return exactly:
-{ "answer": "", "supported": false, "evidence": [] }`;
+{ "answer": "", "supported": false, "evidence": [] }${answerLanguageSuffix(options?.language)}`;
 }
